@@ -1,0 +1,40 @@
+<%- include('../partials/header') %>
+<style>
+  .message {
+    color: white;
+    margin-bottom: 15px;
+  }
+  .forgot-password {
+    margin-top: 15px;
+    text-align: center;
+  }
+  .forgot-password a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .forgot-password a:hover {
+    text-decoration: underline;
+  }
+</style>
+<div class="main-login">
+  <div class="content-main-login">
+    <h1>Área da Empresa</h1>
+    <div>
+      <% if (message) { %>
+        <p class="message"><%= message %></p>
+      <% } %>
+    </div>
+    
+    <form action="/auth/login_empresa" method="POST">
+      <input type="email" name="email" placeholder="E-mail" required>
+      <input type="password" name="senha" placeholder="Senha" required>
+      <button type="submit">Entrar</button>
+    </form>
+    <div class="forgot-password">
+      <a href="/auth/forgot-password-empresa">Esqueci minha senha</a>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

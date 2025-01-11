@@ -1,0 +1,41 @@
+<%- include('../partials/header') %>
+<style>
+  .content-main-login li {
+    color: red;
+    margin-bottom: 15px;
+  }
+  .message {
+    color: white;
+    margin-bottom: 15px;
+  }
+</style>
+<div class="main-login">
+  <div class="content-main-login">
+    <h1>Área do Candidato</h1>
+
+      <div>
+        <% if (message) { %>
+          <p class="message"><%= message %></p>
+        <% } %>
+
+        <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+          <ul>
+            <% errors.forEach(error => { %>
+              <li><%= error.msg %></li>
+            <% }) %>
+          </ul>
+        <% } %>
+      </div>
+    <form action="/auth/login_candidato" method="POST">
+      <input type="email" name="email" placeholder="E-mail" required>
+      <input type="password" name="senha" placeholder="Senha" required>
+      <button type="submit">Entrar</button>
+    </form>
+    <div class="forgot-password">
+      <a href="/auth/forgot-password-candidato">Esqueci minha senha</a>
+    </div>
+  </div>
+</div>
+
+
+<%- include('../partials/footer') %>

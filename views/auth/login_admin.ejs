@@ -1,0 +1,151 @@
+<%- include('../partials/header') %>
+<style>
+  .main-login {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
+  }
+
+  .content-main-login {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 40px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .admin-login-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .admin-login-header h1 {
+    color: white;
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+
+  .admin-icon {
+    font-size: 50px;
+    color: white;
+    margin-bottom: 20px;
+  }
+
+  .content-main-login form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .input-group {
+    position: relative;
+  }
+
+  .input-group i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #1a237e;
+  }
+
+  .content-main-login input {
+    width: 100%;
+    padding: 12px 15px 12px 45px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #1a237e;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+
+  .content-main-login input:focus {
+    outline: none;
+    background: white;
+    box-shadow: 0 0 0 2px #1a237e;
+  }
+
+  .content-main-login button {
+    background: #1a237e;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+  }
+
+  .content-main-login button:hover {
+    background: #0d47a1;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  .error-message {
+    color: #ff3d00;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  @media (max-width: 480px) {
+    .content-main-login {
+      margin: 20px;
+      padding: 30px;
+    }
+
+    .admin-login-header h1 {
+      font-size: 24px;
+    }
+  }
+</style>
+
+<!-- Adicione o link para o Font Awesome no header.ejs se ainda não tiver -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<div class="main-login">
+  <div class="content-main-login">
+    <div class="admin-login-header">
+      <i class="fas fa-user-shield admin-icon"></i>
+      <h1>Área Administrativa</h1>
+    </div>
+
+    <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+      <div class="error-message">
+        <% errors.forEach(error => { %>
+          <p><%= error.msg %></p>
+        <% }) %>
+      </div>
+    <% } %>
+
+    <form action="/auth/login_admin" method="POST">
+      <div class="input-group">
+        <i class="fas fa-envelope"></i>
+        <input type="email" name="email" placeholder="E-mail" required>
+      </div>
+      
+      <div class="input-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" name="senha" placeholder="Senha" required>
+      </div>
+
+      <button type="submit">
+        <i class="fas fa-sign-in-alt"></i> Entrar
+      </button>
+    </form>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>
