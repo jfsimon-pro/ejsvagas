@@ -1,0 +1,151 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Empresa {
+  id             String   @id @default(uuid())
+  razaoSocial    String
+  nomeFantasia   String?
+  cnpj           String   @unique
+  ie             String?
+  cep            String
+  logradouro     String
+  complemento    String? 
+  numero         String
+  bairro         String
+  cidade         String
+  uf             String
+  telefone       String
+  whatsapp       String
+  responsavel    String
+  email          String   @unique
+  senha          String
+  sobre          String? // Texto sobre a empresa
+  twitter        String? // Link do Twitter
+  instagram      String? // Link do Instagram
+  facebook       String? // Link do Facebook
+  linkedin       String? // Link do LinkedIn
+  logo           String? // Caminho da logo da empresa
+  vagas          Vaga[]
+  avaliacoes     Avaliacao[] // Relacionamento com Avaliacao
+  emailVerificado  Boolean  @default(false) // Campo adicionado
+  verificationToken String? // Token de verificação do email
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  resetPasswordToken    String?
+  resetPasswordExpires DateTime?
+}
+
+model Candidato {
+  id             String   @id @default(uuid())
+  nomeCompleto   String
+  cpf            String   @unique
+  telefone       String
+  email          String   @unique
+  senha          String
+  cep            String
+  logradouro     String
+  complemento    String
+  numero         String
+  bairro         String
+  cidade         String
+  uf             String
+  candidaturas   Candidatura[]
+  cursos         Curso[]
+  faixaSalarial String? // Opcional (se o campo pode ser nulo)
+  tipoContrato              String?  // Opcional
+  ocupacao                  String?  // Opcional
+  escolaridade              String?  // Opcional
+  disponibilidade           String?  // Opcional
+  idiomas                   String[] // Array para armazenar vários idiomas
+  experienciasProfissionais ExperienciaProfissional[]
+  avaliacoes     Avaliacao[] // Relacionamento com Avaliacao
+  emailVerificado   Boolean  @default(false)
+  verificationToken String?  // Token para verificar o e-mail
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  resetPasswordToken    String?
+  resetPasswordExpires DateTime?
+}
+
+model Vaga {
+  id             String         @id @default(uuid())
+  titulo         String
+  descricao      String
+  tags           String[]
+  cargo          String
+  faixaSalarial  String
+  tipoContrato   String
+  disponibilidade String?
+  horarioTrabalho String?
+  tipoTrabalho   String
+  escolaridade   String
+  idiomas        String[]
+  beneficios     String[]
+  empresaId      String
+  empresa        Empresa        @relation(fields: [empresaId], references: [id], onDelete: Cascade)
+  candidaturas   Candidatura[]
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+}
+
+model Candidatura {
+  id           String   @id @default(uuid())
+  candidatoId  String
+  vagaId       String
+  selecionado  Boolean  @default(false)
+  candidato    Candidato @relation(fields: [candidatoId], references: [id])
+  vaga         Vaga      @relation(fields: [vagaId], references: [id])
+  createdAt    DateTime  @default(now())
+
+  @@unique([candidatoId, vagaId]) // Define a chave única composta
+}
+
+
+model Admin {
+  id             String   @id @default(uuid())
+  nome           String
+  email          String   @unique
+  senha          String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+model Curso {
+  id             String     @id @default(uuid())
+  instituicao    String
+  curso          String
+  dataInicio     DateTime
+  dataConclusao  DateTime?
+  candidatoId    String
+  candidato      Candidato   @relation(fields: [candidatoId], references: [id], onDelete: Cascade)
+  createdAt      DateTime    @default(now())
+}
+
+model ExperienciaProfissional {
+  id             String     @id @default(uuid())
+  empresa        String
+  cargo          String
+  funcao         String
+  dataEntrada    DateTime
+  dataSaida      DateTime?
+  motivo         String?
+  candidatoId    String
+  candidato      Candidato   @relation(fields: [candidatoId], references: [id], onDelete: Cascade)
+  createdAt      DateTime    @default(now())
+}
+
+model Avaliacao {
+  id           String   @id @default(uuid())
+  candidatoId  String
+  candidato    Candidato @relation(fields: [candidatoId], references: [id])
+  empresaId    String
+  empresa      Empresa   @relation(fields: [empresaId], references: [id])
+  nota         Int       // Nota de 0 a 5
+  comentario   String?   // Comentário opcional
+  createdAt    DateTime  @default(now())
+}
