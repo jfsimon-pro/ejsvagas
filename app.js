@@ -35,7 +35,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 // Registro das rotas
-const authRoutes = require('./routes/auth');
+const authRoutes = require('./routes/auth')(prisma);
 const empresaRoutes = require('./routes/empresa')(prisma);
 const candidatoRoutes = require('./routes/candidato')(prisma);
 const adminRoutes = require('./routes/admin')(prisma);
