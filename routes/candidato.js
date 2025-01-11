@@ -708,5 +708,5 @@ router.get('/vagas/:vagaId/detalhes', verifyToken, async (req, res) => {
 
 
 
-module.exports = router;
+return router;
 };

@@ -954,5 +954,5 @@ router.post('/reset-password-candidato/:token', async (req, res) => {
   }
 });
 
-module.exports = router;
+return router;
 };

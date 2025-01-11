@@ -685,5 +685,5 @@ router.get('/vagas/:vagaId/candidatos', verifyToken, async (req, res) => {
 });
 
 
-module.exports = router;
+return router;
 };
