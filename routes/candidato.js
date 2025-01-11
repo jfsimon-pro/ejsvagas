@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { PrismaClient } = require('@prisma/client');
+
 const jwt = require('jsonwebtoken');
 
-const prisma = new PrismaClient();
 
 // Middleware de verificação de token
 const verifyToken = (req, res, next) => {
@@ -24,6 +23,9 @@ const verifyToken = (req, res, next) => {
     return res.redirect('/auth/login_candidato');
   }
 };
+
+
+module.exports = (prisma) => {
 router.get('/dashboard', verifyToken, async (req, res) => {
   try {
     const candidato = await prisma.candidato.findUnique({
@@ -75,60 +77,6 @@ router.get('/dashboard', verifyToken, async (req, res) => {
   }
 });
 
-/*
-router.get('/vagas', verifyToken, async (req, res) => {
-  const { busca, page = 1 } = req.query;
-  const perPage = 3; // Quantidade de vagas por página
-  const currentPage = parseInt(page, 10) || 1;
-
-  try {
-    const candidato = await prisma.candidato.findUnique({
-      where: { id: req.user.userId },
-      include: {
-        candidaturas: {
-          select: { vagaId: true }, // Apenas o ID das vagas candidatas
-        },
-      },
-    });
-
-    if (!candidato) {
-      return res.status(404).send('Candidato não encontrado.');
-    }
-
-    // Lista de IDs das vagas que o candidato já se candidatou
-    const vagasCandidatadasIds = candidato.candidaturas.map(c => c.vagaId);
-
-    const where = busca
-      ? {
-          OR: [
-            { titulo: { contains: busca, mode: 'insensitive' } },
-            { descricao: { contains: busca, mode: 'insensitive' } },
-            { cargo: { contains: busca, mode: 'insensitive' } },
-          ],
-        }
-      : {};
-
-    const totalVagas = await prisma.vaga.count({ where });
-    const vagasDisponiveis = await prisma.vaga.findMany({
-      where,
-      orderBy: { createdAt: 'desc' },
-      skip: (currentPage - 1) * perPage,
-      take: perPage,
-    });
-
-    res.render('candidato/vagas_disponiveis', {
-      vagasDisponiveis,
-      vagasCandidatadasIds, // Passar as vagas candidatas para a view
-      busca: busca || '',
-      currentPage,
-      totalPages: Math.ceil(totalVagas / perPage),
-    });
-  } catch (error) {
-    console.error('Erro ao carregar vagas disponíveis:', error);
-    res.status(500).send('Erro ao carregar vagas disponíveis.');
-  }
-});
-*/
 
 router.get('/vagas-candidatadas', verifyToken, async (req, res) => {
   try {
@@ -761,10 +709,4 @@ router.get('/vagas/:vagaId/detalhes', verifyToken, async (req, res) => {
 
 
 module.exports = router;
-
-
-
-
-
-
-
+};

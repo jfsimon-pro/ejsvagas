@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
-const { PrismaClient } = require('@prisma/client');
+
 const { body, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
 const path = require('path');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
-const prisma = new PrismaClient();
+
 const SALT_ROUNDS = 12;
 
 // Configuração do Nodemailer
@@ -57,6 +57,7 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({ storage, fileFilter });
 
 
+module.exports = (prisma) => {
 // Página de cadastro para empresa
 router.get('/register_empresa', (req, res) => {
   res.render('auth/register_empresa', { errors: [] });
@@ -954,3 +955,4 @@ router.post('/reset-password-candidato/:token', async (req, res) => {
 });
 
 module.exports = router;
+};

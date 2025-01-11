@@ -1,11 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { PrismaClient } = require('@prisma/client');
 const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
 const multer = require('multer');
 const path = require('path');
-const prisma = new PrismaClient();
 const { upload, compressImage } = require('../utils/upload'); // Já importado do utilitário
 
 
@@ -25,7 +23,7 @@ const verifyToken = (req, res, next) => {
     return res.redirect('/');
   }
 };
-
+module.exports = (prisma) => {
 // Rota para o dashboard da empresa
 router.get('/dashboard', verifyToken, async (req, res) => {
   try {
@@ -611,90 +609,6 @@ router.get('/perfil/:id', async (req, res) => {
 
 
 
-/*
-
-router.get('/vagas/:vagaId/candidatos', verifyToken, async (req, res) => {
-  const { vagaId } = req.params;
-  const { busca, page = 1 } = req.query;
-  const perPage = 10; // Exibe 10 candidatos por página
-
-  try {
-    const vaga = await prisma.vaga.findUnique({
-      where: { id: vagaId },
-      include: {
-        empresa: true,
-      },
-    });
-
-    if (!vaga || vaga.empresaId !== req.user.userId) {
-      return res.status(403).send('Acesso negado.');
-    }
-
-    // Melhoria na lógica de busca
-    const where = busca
-      ? {
-          AND: [
-            { vagaId },
-            {
-              OR: [
-                { candidato: { nomeCompleto: { contains: busca, mode: 'insensitive' } } },
-                { candidato: { cidade: { contains: busca, mode: 'insensitive' } } },
-                { candidato: { cursos: { some: { curso: { contains: busca, mode: 'insensitive' } } } } },
-                { candidato: { experienciasProfissionais: { some: { empresa: { contains: busca, mode: 'insensitive' } } } } },
-                { candidato: { experienciasProfissionais: { some: { funcao: { contains: busca, mode: 'insensitive' } } } } },
-                { candidato: { experienciasProfissionais: { some: { cargo: { contains: busca, mode: 'insensitive' } } } } },
-              ],
-            },
-          ],
-        }
-      : { vagaId };
-
-    // Contar o total de candidatos para a paginação
-    const totalCandidatos = await prisma.candidatura.count({ where });
-
-    // Buscar as candidaturas com os candidatos e aplicar paginação
-    const candidaturas = await prisma.candidatura.findMany({
-      where,
-      include: {
-        candidato: {
-          include: {
-            cursos: true,
-            experienciasProfissionais: true,
-          },
-        },
-      },
-      skip: (page - 1) * perPage,
-      take: perPage,
-      orderBy: { createdAt: 'desc' },
-    });
-
-    res.render('empresa/candidatos', {
-      vaga,
-      vagaId,
-      candidaturas,
-      busca: busca || '',
-      currentPage: parseInt(page, 10),
-      totalPages: Math.ceil(totalCandidatos / perPage),
-    });
-  } catch (error) {
-    console.error('Erro ao carregar candidatos:', error);
-    res.status(500).send('Erro ao carregar os candidatos.');
-  }
-});
-
-*/
-
-
-
-
-
-
-
-
-
-
-
-
 
 router.get('/vagas/:vagaId/candidatos', verifyToken, async (req, res) => {
   const { vagaId } = req.params;
@@ -772,3 +686,4 @@ router.get('/vagas/:vagaId/candidatos', verifyToken, async (req, res) => {
 
 
 module.exports = router;
+};

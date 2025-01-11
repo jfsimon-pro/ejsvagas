@@ -1,6 +1,6 @@
 const { PrismaClient } = require('@prisma/client');
 const bcrypt = require('bcrypt');
-
+require('dotenv').config(); // Carregar variáveis de ambiente
 const prisma = new PrismaClient();
 
 async function createAdmin() {
