@@ -2,7 +2,6 @@
 require('dotenv').config();
 const express = require('express');
 const cookieParser = require('cookie-parser');
-
 const helmet = require('helmet');
 const path = require('path');
 const { PrismaClient } = require('@prisma/client');
@@ -12,19 +11,18 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Configurações
-app.use(
-  helmet({
-    contentSecurityPolicy: {
-      directives: {
-        "default-src": ["'self'"],
-        "script-src": ["'self'"],
-        "connect-src": ["'self'", "https://viacep.com.br", "https://api-publica.speedio.com.br", "https://api.cnpjs.dev"], // Permite conexões à API do ViaCEP
-        "style-src": ["'self'", "'unsafe-inline'"],
-        "img-src": ["'self'"],
-      },
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      "default-src": ["'self'"],
+      "script-src": ["'self'"],
+      "connect-src": ["'self'", "https://viacep.com.br", "https://api-publica.speedio.com.br", "https://api.cnpjs.dev"],
+      "style-src": ["'self'", "'unsafe-inline'"],
+      "img-src": ["'self'"],
     },
-  })
-);
+  },
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -32,24 +30,27 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+// Importar rotas
+const authRouter = require('./routes/auth');
+const empresaRouter = require('./routes/empresa');
+const candidatoRouter = require('./routes/candidato');
+const adminRouter = require('./routes/admin');
 
+// Inicializar rotas com prisma
+const auth = authRouter(prisma);
+const empresa = empresaRouter(prisma);
+const candidato = candidatoRouter(prisma);
+const admin = adminRouter(prisma);
 
-// Registro das rotas
-const authRoutes = require('./routes/auth')(prisma);
-const empresaRoutes = require('./routes/empresa')(prisma);
-const candidatoRoutes = require('./routes/candidato')(prisma);
-const adminRoutes = require('./routes/admin')(prisma);
-
-app.use('/auth', authRoutes);
-app.use('/empresa', empresaRoutes);
-app.use('/candidato', candidatoRoutes);
-app.use('/admin', adminRoutes);
-
-
+// Usar rotas
+app.use('/auth', auth);
+app.use('/empresa', empresa);
+app.use('/candidato', candidato);
+app.use('/admin', admin);
 
 // Rota inicial
 app.get('/', (req, res) => {
-  res.render('home'); // Renderiza o arquivo home.ejs
+  res.render('home');
 });
 
 // Middleware de erro global

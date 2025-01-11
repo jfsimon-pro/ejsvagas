@@ -54,7 +54,7 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({ storage, fileFilter });
 
-module.exports = (prisma) => {
+module.exports = function(prisma) {
   // Página de login do candidato
   router.get('/login_candidato', (req, res) => {
     res.render('auth/login_candidato', { message: req.query.message });
