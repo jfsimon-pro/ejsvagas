@@ -9,6 +9,14 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const app = express();
 const PORT = process.env.PORT || 3000;
+const cors = require('cors');
+
+// Permitir acesso de outros domínios
+app.use(cors({
+    origin: ['http://vagas.shop', 'http://www.vagas.shop'], // URLs que podem acessar
+    methods: ['GET', 'POST'], // Métodos permitidos
+    credentials: true // Permitir envio de cookies ou autenticação
+}));
 
 // Configurações
 app.use(helmet({
