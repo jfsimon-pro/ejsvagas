@@ -61,5 +61,9 @@ app.use((err, req, res, next) => {
 
 // Iniciar o servidor
 app.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}`);
+  if (err) {
+    console.error("Erro ao iniciar o servidor:", err);
+  } else {
+    console.log("Servidor rodando em http://localhost:3000");
+  }
 });
