@@ -5,17 +5,17 @@ const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const path = require('path');
 const { PrismaClient } = require('@prisma/client');
+const cors = require('cors');
 
 const prisma = new PrismaClient();
 const app = express();
 const PORT = process.env.PORT || 3000;
-const cors = require('cors');
 
 // Permitir acesso de outros domínios
 app.use(cors({
-    origin: ['http://vagas.shop', 'http://www.vagas.shop'], // URLs que podem acessar
-    methods: ['GET', 'POST'], // Métodos permitidos
-    credentials: true // Permitir envio de cookies ou autenticação
+    origin: ['http://vagas.shop', 'http://www.vagas.shop'],
+    methods: ['GET', 'POST'],
+    credentials: true
 }));
 
 // Configurações
@@ -40,24 +40,17 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Importar rotas
 const authRouter = require('./routes/auth');
-const empresaRouter = require('./routes/empresa');
-const candidatoRouter = require('./routes/candidato');
-const adminRouter = require('./routes/admin');
-
-// Inicializar rotas com prisma
-const auth = authRouter(prisma);
-const empresa = empresaRouter(prisma);
-const candidato = candidatoRouter(prisma);
-const admin = adminRouter(prisma);
+const empresaRouter = require('./routes/empresa')(prisma);
+const candidatoRouter = require('./routes/candidato')(prisma);
+const adminRouter = require('./routes/admin')(prisma);
 
 // Usar rotas
-app.use('/auth', auth);
-app.use('/empresa', empresa);
-app.use('/candidato', candidato);
-app.use('/admin', admin);
+app.use('/auth', authRouter);
+app.use('/empresa', empresaRouter);
+app.use('/candidato', candidatoRouter);
+app.use('/admin', adminRouter);
 
-// Rota inicial.\
-
+// Rota inicial
 app.get('/', (req, res) => {
   res.render('home');
 });
@@ -68,7 +61,6 @@ app.use((err, req, res, next) => {
   res.status(500).send('Ocorreu um erro no servidor.');
 });
 
-// Iniciar o servidor
 // Iniciar o servidor
 const server = app.listen(PORT, (err) => {
   if (err) {
