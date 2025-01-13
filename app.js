@@ -48,11 +48,12 @@ app.use('/empresa', empresa);
 app.use('/candidato', candidato);
 app.use('/admin', admin);
 
-// Rota inicial
+// Rota inicial.\
+/*
 app.get('/', (req, res) => {
   res.render('home');
 });
-
+*/
 // Middleware de erro global
 app.use((err, req, res, next) => {
   console.error('Erro:', err);
@@ -60,10 +61,11 @@ app.use((err, req, res, next) => {
 });
 
 // Iniciar o servidor
-app.listen(PORT, (err) => {
+app.listen(PORT, () => {
+  console.log("Tentando iniciar o servidor na porta " + PORT);
   if (err) {
     console.error("Erro ao iniciar o servidor:", err);
-    return;
+  } else {
+    console.log("Servidor rodando em http://localhost:3000");
   }
-  console.log("Servidor rodando em http://localhost:3000");
 });
