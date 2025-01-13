@@ -49,11 +49,11 @@ app.use('/candidato', candidato);
 app.use('/admin', admin);
 
 // Rota inicial.\
-/*
+
 app.get('/', (req, res) => {
   res.render('home');
 });
-*/
+
 // Middleware de erro global
 app.use((err, req, res, next) => {
   console.error('Erro:', err);
