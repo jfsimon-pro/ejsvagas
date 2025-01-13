@@ -138,7 +138,7 @@ router.post(
         to: email,
         subject: 'Confirme seu e-mail',
         html: `<p>Clique no link para confirmar seu e-mail:</p>
-               <a href="http://localhost:3000/auth/verify-email?token=${verificationToken}">Verificar E-mail</a>`
+               <a href="https://vagas.shop/auth/verify-email?token=${verificationToken}">Verificar E-mail</a>`
       };
 
       await transporter.sendMail(mailOptions);
@@ -451,7 +451,7 @@ router.post(
       });
 
       // Enviar o e-mail de verificação
-      const verificationLink = `http://localhost:3000/auth/verify_candidato?token=${verificationToken}`;
+      const verificationLink = `https://vagas.shop/auth/verify_candidato?token=${verificationToken}`;
       await sendEmail(email, 'Confirmação de Cadastro', `
         <h1>Confirmação de Cadastro</h1>
         <p>Olá ${nomeCompleto},</p>
