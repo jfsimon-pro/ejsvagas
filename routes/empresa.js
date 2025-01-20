@@ -5,11 +5,11 @@ const { body, validationResult } = require('express-validator');
 const multer = require('multer');
 const path = require('path');
 const { upload, compressImage } = require('../utils/upload'); // Já importado do utilitário
-const { verifyToken } = require('../middlewares/auth');
+const verifyToken = require('../middlewares/auth').verifyToken;
 
 module.exports = (prisma) => {
   // Middleware de autenticação para todas as rotas
-  router.use((req, res, next) => verifyToken(req, res, next));
+  router.use(verifyToken);
 
   // Rota para o dashboard da empresa
   router.get('/dashboard', async (req, res) => {

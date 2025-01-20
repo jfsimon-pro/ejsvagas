@@ -1,5 +1,21 @@
 const jwt = require('jsonwebtoken');
 
+const verifyToken = (req, res, next) => {
+  const token = req.cookies.token;
+  if (!token) {
+    return res.redirect('/');
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded;
+    next();
+  } catch (error) {
+    console.error('Erro ao verificar o token:', error);
+    return res.redirect('/');
+  }
+};
+
 const authenticateAdmin = (req, res, next) => {
   const token = req.cookies.token;
 
@@ -43,6 +59,7 @@ const authenticate = (req, res, next) => {
 };
 
 module.exports = {
+  verifyToken,
   authenticateAdmin,
   authenticate
 }; 
