@@ -735,14 +735,13 @@ module.exports = (prisma) => {
           { email: { contains: busca, mode: 'insensitive' } },
           { telefone: { contains: busca, mode: 'insensitive' } },
           { cidade: { contains: busca, mode: 'insensitive' } },
-          { estado: { contains: busca, mode: 'insensitive' } },
           { ocupacao: { contains: busca, mode: 'insensitive' } },
           { sobre: { contains: busca, mode: 'insensitive' } },
           { faixaSalarial: { contains: busca, mode: 'insensitive' } },
           { tipoContrato: { contains: busca, mode: 'insensitive' } },
           { escolaridade: { contains: busca, mode: 'insensitive' } },
-          { idiomas: { hasSome: [busca] } },
-          { disponibilidade: { hasSome: [busca] } },
+          ...(busca ? [{ idiomas: { hasSome: [busca] } }] : []),
+          ...(busca ? [{ disponibilidade: { hasSome: [busca] } }] : []),
           { cursos: { 
             some: { 
               OR: [
@@ -761,8 +760,13 @@ module.exports = (prisma) => {
               ]
             } 
           }}
-        ]
+        ].filter(Boolean) // Remove condições undefined/null
       };
+
+      // Se não houver busca, retorna todos os candidatos
+      if (!busca) {
+        delete where.OR;
+      }
 
       // Buscar candidatos com paginação e filtros
       const totalCandidatos = await prisma.candidato.count({ where });
