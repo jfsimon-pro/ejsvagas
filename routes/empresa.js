@@ -684,8 +684,8 @@ router.get('/vagas/:vagaId/candidatos', verifyToken, async (req, res) => {
   }
 });
 
-// Rota para editar vaga (deve vir antes da rota com :vagaId)
-router.get('/vagas/editar/:id', verifyToken, async (req, res) => {
+// Rotas específicas primeiro
+router.get('/editar-vaga/:id', async (req, res) => {
   try {
     const vaga = await prisma.vaga.findUnique({
       where: { id: req.params.id },
@@ -703,8 +703,7 @@ router.get('/vagas/editar/:id', verifyToken, async (req, res) => {
   }
 });
 
-// Rota para processar a edição
-router.post('/vagas/editar/:id', verifyToken, async (req, res) => {
+router.post('/editar-vaga/:id', async (req, res) => {
   try {
     const vagaId = req.params.id;
     const {
