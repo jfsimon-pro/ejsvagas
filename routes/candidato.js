@@ -83,7 +83,7 @@ router.get('/vagas-candidatadas', verifyToken, async (req, res) => {
       include: {
         candidaturas: {
           include: {
-            vaga: true, // Inclui detalhes da vaga na candidatura
+            vaga: true,
           },
         },
       },
@@ -93,8 +93,11 @@ router.get('/vagas-candidatadas', verifyToken, async (req, res) => {
       return res.status(404).send('Candidato não encontrado.');
     }
 
-    // Extrai as vagas das candidaturas
-    const vagasCandidatadas = candidato.candidaturas.map(candidatura => candidatura.vaga);
+    // Extrai as vagas das candidaturas com o status
+    const vagasCandidatadas = candidato.candidaturas.map(candidatura => ({
+      ...candidatura.vaga,
+      selecionado: candidatura.selecionado
+    }));
 
     res.render('candidato/vagas_candidatadas', { vagasCandidatadas });
   } catch (error) {

@@ -118,31 +118,64 @@
         .vagas-aprovadas a {
             color: black;
         }
+
+        .status-candidatura {
+            margin: 15px 0;
+        }
+        
+        .status {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .status.aprovado {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .status.em-analise {
+            background-color: #ffc107;
+            color: #000;
+        }
+        
+        .status i {
+            font-size: 16px;
+        }
     </style>
     <section class="candidato-superior">
         <div class="main-dashboard-candidato">
             
             <div class="vagas-candidatadas">
                 <h2>Vagas Candidatadas</h2>
-                <% if (vagasCandidatadas.length> 0) { %>
-                    <ul>
-                        <% vagasCandidatadas.forEach(vaga=> { %>
-                            <li>
-                                <h3>
-                                    <%= vaga.titulo %>
-                                </h3>
-                                <p><strong>Descrição:</strong>
-                                    <%= vaga.descricao %>
-                                </p>
-                                <p><strong>Faixa Salarial:</strong>
-                                    <%= vaga.faixaSalarial %>
-                                </p>
-                            </li>
-                            <% }); %>
-                    </ul>
+                <div class="vagas-container">
+                    <% if (vagasCandidatadas.length > 0) { %>
+                        <% vagasCandidatadas.forEach(vaga => { %>
+                            <div class="vaga-card">
+                                <h3><%= vaga.titulo %></h3>
+                                <p><strong>Faixa Salarial:</strong> <%= vaga.faixaSalarial %></p>
+                                <p><strong>Tipo de Contrato:</strong> <%= vaga.tipoContrato %></p>
+                                <div class="status-candidatura">
+                                    <% if (vaga.selecionado) { %>
+                                        <span class="status aprovado">
+                                            <i class="fas fa-check-circle"></i> Aprovado
+                                        </span>
+                                    <% } else { %>
+                                        <span class="status em-analise">
+                                            <i class="fas fa-clock"></i> Em Análise
+                                        </span>
+                                    <% } %>
+                                </div>
+                                <a href="/candidato/vagas/<%= vaga.id %>/detalhes" class="btn btn-primary">Ver Detalhes</a>
+                            </div>
+                        <% }); %>
                     <% } else { %>
                         <p>Você ainda não se candidatou a nenhuma vaga.</p>
-                        <% } %>
+                    <% } %>
+                </div>
             </div>
         </div>
     </section>
