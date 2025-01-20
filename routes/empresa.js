@@ -641,14 +641,26 @@ module.exports = (prisma) => {
           ...(disponibilidade ? [{ candidato: { disponibilidade } }] : []),
           ...(escolaridade ? [{ candidato: { escolaridade } }] : []),
           ...(ocupacao ? [{ candidato: { ocupacao } }] : []),
-          ...(idiomas ? [{ candidato: { idiomas: { has: Array.isArray(idiomas) ? idiomas[0] : idiomas } } }] : [])
+          ...(idiomas ? [{ candidato: { idiomas: { hasEvery: Array.isArray(idiomas) ? idiomas : [idiomas] } } }] : [])
         ]
       };
 
+      // Debug logs
+      console.log('Busca:', busca);
+      console.log('Idiomas:', idiomas);
       console.log('Query where:', JSON.stringify(where, null, 2));
-      console.log('faixaSalarial:', faixaSalarial);
 
-      const totalCandidatos = await prisma.candidatura.count({ where });
+      const totalCandidatos = await prisma.candidatura.count({ 
+        where,
+        include: {
+          candidato: {
+            include: {
+              cursos: true,
+              experienciasProfissionais: true
+            }
+          }
+        }
+      });
 
       const candidaturas = await prisma.candidatura.findMany({
         where,
