@@ -156,13 +156,53 @@
         </h1>
 
         <!-- Formulário de Filtros -->
-        <div class="search-container">
-          <form action="/empresa/vagas/<%= vagaId %>/candidatos" method="GET" class="search-form">
-            <input type="text" name="busca" placeholder="Buscar candidatos..." value="<%= busca %>">
-            <button type="submit" class="search-button">Buscar</button>
+        <form action="/empresa/vagas/<%= vagaId %>/candidatos" method="GET" style="margin-bottom: 20px;">
+          <div style="display: flex; align-items: center; margin-bottom: 20px;">
+            <!-- Searchbar -->
+            <input type="text" name="busca" placeholder="Buscar candidaturas..." value="<%= busca || '' %>" />
+            <button type="submit" style="margin-left: 10px;">Buscar</button>
             <a href="/empresa/vagas" class="btn btn-secondary" style="margin-left: 10px;">Voltar</a>
-          </form>
-        </div>
+          </div>
+
+          <!-- Filtro de Faixa Salarial -->
+          <div class="alinhamento-filtros">
+            <select name="faixaSalarial">
+              <option value="">Selecione a faixa salarial</option>
+              <option value="Até 2.000" <%=faixaSalarial==='Até 2.000' ? 'selected' : '' %>>Até 2.000</option>
+              <!-- ... outras opções de faixa salarial ... -->
+            </select>
+            
+            <select name="tipoContrato">
+              <option value="">Selecione o tipo de contrato</option>
+              <option value="CLT" <%=tipoContrato==='CLT' ? 'selected' : '' %>>CLT</option>
+              <!-- ... outras opções de tipo de contrato ... -->
+            </select>
+            
+            <select name="disponibilidade">
+              <option value="">Selecione a disponibilidade</option>
+              <option value="manha" <%=disponibilidade==='manha' ? 'selected' : '' %>>Manhã</option>
+              <!-- ... outras opções de disponibilidade ... -->
+            </select>
+            
+            <select name="escolaridade">
+              <option value="">Selecione a escolaridade</option>
+              <option value="Indiferente" <%=escolaridade==='Indiferente' ? 'selected' : '' %>>Indiferente</option>
+              <!-- ... outras opções de escolaridade ... -->
+            </select>
+          </div>
+
+          <!-- Autocomplete para Ocupações -->
+          <input type="text" id="ocupacao" name="ocupacao" placeholder="Digite a ocupação"
+            value="<%= ocupacao || '' %>" />
+          <ul id="suggestions" class="suggestions"></ul>
+
+          <!-- Filtro de Idiomas -->
+          <select name="idiomas[]" class="idiomas">
+            <option value="Português" <%=idiomas && idiomas.includes('Português') ? 'selected' : '' %>>Português</option>
+            <option value="Inglês" <%=idiomas && idiomas.includes('Inglês') ? 'selected' : '' %>>Inglês</option>
+            <!-- ... outras opções de idiomas ... -->
+          </select>
+        </form>
 
         <% if (candidaturas.length> 0) { %>
          <div class="table-responsive">
