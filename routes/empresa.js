@@ -650,21 +650,18 @@ module.exports = (prisma) => {
       console.log('Idiomas:', idiomas);
       console.log('Query where:', JSON.stringify(where, null, 2));
 
-      const totalCandidatos = await prisma.candidatura.count({ 
+      const totalCandidatos = await prisma.candidatura.count({ where });
+
+      const candidaturas = await prisma.candidatura.findMany({
         where,
-        include: {
+        include: { 
           candidato: {
             include: {
               cursos: true,
               experienciasProfissionais: true
             }
-          }
-        }
-      });
-
-      const candidaturas = await prisma.candidatura.findMany({
-        where,
-        include: { candidato: true },
+          } 
+        },
         skip: (page - 1) * perPage,
         take: perPage,
         orderBy: { createdAt: 'desc' },
