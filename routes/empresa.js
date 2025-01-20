@@ -716,5 +716,78 @@ module.exports = (prisma) => {
     }
   });
 
+  // Rota para ver todos os candidatos
+  router.get('/todos-candidatos', async (req, res) => {
+    try {
+      const { 
+        busca,
+        faixaSalarial,
+        tipoContrato,
+        disponibilidade,
+        escolaridade,
+        ocupacao,
+        idiomas,
+        page = 1 
+      } = req.query;
+
+      const perPage = 10;
+      const skip = (page - 1) * perPage;
+
+      // Construir where clause para filtros
+      const where = {
+        AND: [
+          ...(busca
+            ? [
+                {
+                  OR: [
+                    { nomeCompleto: { contains: busca, mode: 'insensitive' } },
+                    { cidade: { contains: busca, mode: 'insensitive' } },
+                    { cursos: { some: { curso: { contains: busca, mode: 'insensitive' } } } },
+                    { experienciasProfissionais: { some: { empresa: { contains: busca, mode: 'insensitive' } } } },
+                  ],
+                },
+              ]
+            : []),
+          ...(faixaSalarial ? [{ faixaSalarial: { equals: faixaSalarial } }] : []),
+          ...(tipoContrato ? [{ tipoContrato: { equals: tipoContrato } }] : []),
+          ...(disponibilidade ? [{ disponibilidade: { equals: disponibilidade } }] : []),
+          ...(escolaridade ? [{ escolaridade: { equals: escolaridade } }] : []),
+          ...(ocupacao ? [{ ocupacao: { contains: ocupacao, mode: 'insensitive' } }] : []),
+          ...(idiomas && idiomas.length > 0 ? [{ idiomas: { hasSome: idiomas } }] : []),
+        ],
+      };
+
+      // Buscar candidatos com paginação e filtros
+      const totalCandidatos = await prisma.candidato.count({ where });
+      const candidatos = await prisma.candidato.findMany({
+        where,
+        skip,
+        take: perPage,
+        orderBy: { createdAt: 'desc' },
+        include: {
+          cursos: true,
+          experienciasProfissionais: true
+        }
+      });
+
+      res.render('empresa/todos-candidatos', {
+        candidatos,
+        busca: busca || '',
+        faixaSalarial: faixaSalarial || '',
+        tipoContrato: tipoContrato || '',
+        disponibilidade: disponibilidade || '',
+        escolaridade: escolaridade || '',
+        ocupacao: ocupacao || '',
+        idiomas: idiomas || [],
+        currentPage: parseInt(page, 10),
+        totalPages: Math.ceil(totalCandidatos / perPage)
+      });
+
+    } catch (error) {
+      console.error('Erro ao carregar candidatos:', error);
+      res.status(500).send('Erro ao carregar candidatos.');
+    }
+  });
+
   return router;
 };

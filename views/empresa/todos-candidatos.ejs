@@ -1,0 +1,88 @@
+<%- include('./header') %>
+<style>
+  /* Copiar todos os estilos de candidatos.ejs */
+  /* ... */
+</style>
+
+<div class="main-login">
+  <div class="content-main-login">
+    <div class="candidatos-container">
+      <h1>Todos os Currículos Cadastrados</h1>
+
+      <!-- Formulário de Filtros -->
+      <form action="/empresa/todos-candidatos" method="GET" style="margin-bottom: 20px;">
+        <div style="display: flex; align-items: center; margin-bottom: 20px;">
+          <input type="text" name="busca" placeholder="Buscar currículos..." value="<%= busca || '' %>" />
+          <button type="submit" style="margin-left: 10px;">Buscar</button>
+          <a href="/empresa/dashboard" class="btn btn-secondary" style="margin-left: 10px;">Voltar</a>
+        </div>
+
+        <!-- Mesmos filtros de candidatos.ejs -->
+        <div class="alinhamento-filtros">
+          <!-- ... copiar todos os selects de filtros ... -->
+        </div>
+
+        <!-- Autocomplete para Ocupações -->
+        <input type="text" id="ocupacao" name="ocupacao" placeholder="Digite a ocupação" value="<%= ocupacao || '' %>" />
+        <ul id="suggestions" class="suggestions"></ul>
+
+        <!-- Filtro de Idiomas -->
+        <select name="idiomas[]" class="idiomas">
+          <!-- ... copiar todas as opções de idiomas ... -->
+        </select>
+      </form>
+
+      <% if (candidatos.length > 0) { %>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Telefone</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% candidatos.forEach(candidato => { %>
+                <tr>
+                  <td><%= candidato.nomeCompleto %></td>
+                  <td><%= candidato.email %></td>
+                  <td>
+                    <a href="https://wa.me/55<%= candidato.telefone.replace(/\D/g, '') %>" 
+                       target="_blank" 
+                       class="whatsapp-button">
+                      <img src="/img/whatsapp.png" alt="WhatsApp" class="whatsapp-icon">
+                      <%= candidato.telefone %>
+                    </a>
+                  </td>
+                  <td>
+                    <a href="/empresa/candidatos/<%= candidato.id %>">Ver mais</a>
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Paginação -->
+        <nav>
+          <ul class="pagination">
+            <% for (let i = 1; i <= totalPages; i++) { %>
+              <li class="<%= i === currentPage ? 'active' : '' %>">
+                <a href="/empresa/todos-candidatos?page=<%= i %>&busca=<%= busca %>">
+                  <%= i %>
+                </a>
+              </li>
+            <% } %>
+          </ul>
+        </nav>
+      <% } else { %>
+        <p>Nenhum candidato encontrado.</p>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<script src="/js/autocompletebuscacandidato.js"></script>
+<%- include('../partials/footer') %> 
