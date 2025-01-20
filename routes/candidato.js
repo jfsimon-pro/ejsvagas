@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 const jwt = require('jsonwebtoken');
-const verifyToken = require('../middlewares/auth').verifyToken;
-
 
 // Middleware de verificação de token
 const verifyToken = (req, res, next) => {
@@ -24,7 +22,6 @@ const verifyToken = (req, res, next) => {
     return res.redirect('/auth/login_candidato');
   }
 };
-
 
 module.exports = (prisma) => {
 router.get('/dashboard', verifyToken, async (req, res) => {
@@ -708,7 +705,7 @@ router.get('/vagas/:vagaId/detalhes', verifyToken, async (req, res) => {
 });
 
 // Rota para ver próprio perfil detalhado
-router.get('/meu-perfil', verifyToken, async (req, res) => {
+router.get('/meu-perfil', async (req, res) => {
   try {
     const candidato = await prisma.candidato.findUnique({
       where: { id: req.user.userId },
