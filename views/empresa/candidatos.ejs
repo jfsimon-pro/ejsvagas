@@ -169,25 +169,55 @@
             <select name="faixaSalarial">
               <option value="">Selecione a faixa salarial</option>
               <option value="Até 2.000" <%=faixaSalarial==='Até 2.000' ? 'selected' : '' %>>Até 2.000</option>
-              <!-- ... outras opções de faixa salarial ... -->
+              <option value="A partir de R$ 2.000,00" <%=faixaSalarial==='A partir de R$ 2.000,00' ? 'selected' : '' %>>A partir de R$ 2.000,00</option>
+              <option value="A partir de R$ 3.000,00" <%=faixaSalarial==='A partir de R$ 3.000,00' ? 'selected' : '' %>>A partir de R$ 3.000,00</option>
+              <option value="A partir de R$ 4.000,00" <%=faixaSalarial==='A partir de R$ 4.000,00' ? 'selected' : '' %>>A partir de R$ 4.000,00</option>
+              <option value="A partir de R$ 5.000,00" <%=faixaSalarial==='A partir de R$ 5.000,00' ? 'selected' : '' %>>A partir de R$ 5.000,00</option>
+              <option value="A partir de R$ 6.000,00" <%=faixaSalarial==='A partir de R$ 6.000,00' ? 'selected' : '' %>>A partir de R$ 6.000,00</option>
+              <option value="A partir de R$ 7.000,00" <%=faixaSalarial==='A partir de R$ 7.000,00' ? 'selected' : '' %>>A partir de R$ 7.000,00</option>
+              <option value="A partir de R$ 8.000,00" <%=faixaSalarial==='A partir de R$ 8.000,00' ? 'selected' : '' %>>A partir de R$ 8.000,00</option>
+              <option value="A partir de R$ 9.000,00" <%=faixaSalarial==='A partir de R$ 9.000,00' ? 'selected' : '' %>>A partir de R$ 9.000,00</option>
+              <option value="A partir de R$ 10.000,00" <%=faixaSalarial==='A partir de R$ 10.000,00' ? 'selected' : '' %>>A partir de R$ 10.000,00</option>
             </select>
             
             <select name="tipoContrato">
               <option value="">Selecione o tipo de contrato</option>
               <option value="CLT" <%=tipoContrato==='CLT' ? 'selected' : '' %>>CLT</option>
-              <!-- ... outras opções de tipo de contrato ... -->
+              <option value="PJ" <%=tipoContrato==='PJ' ? 'selected' : '' %>>PJ</option>
+              <option value="Temporário" <%=tipoContrato==='Temporário' ? 'selected' : '' %>>Temporário</option>
+              <option value="Autônomo" <%=tipoContrato==='Autônomo' ? 'selected' : '' %>>Autônomo</option>
+              <option value="Estágio" <%=tipoContrato==='Estágio' ? 'selected' : '' %>>Estágio</option>
+              <option value="Freelancer" <%=tipoContrato==='Freelancer' ? 'selected' : '' %>>Freelancer</option>
+              <option value="Aprendiz" <%=tipoContrato==='Aprendiz' ? 'selected' : '' %>>Aprendiz</option>
             </select>
             
             <select name="disponibilidade">
               <option value="">Selecione a disponibilidade</option>
               <option value="manha" <%=disponibilidade==='manha' ? 'selected' : '' %>>Manhã</option>
-              <!-- ... outras opções de disponibilidade ... -->
+              <option value="tarde" <%=disponibilidade==='tarde' ? 'selected' : '' %>>Tarde</option>
+              <option value="noite" <%=disponibilidade==='noite' ? 'selected' : '' %>>Noite</option>
+              <option value="madrugada" <%=disponibilidade==='madrugada' ? 'selected' : '' %>>Madrugada</option>
+              <option value="finais_de_semana" <%=disponibilidade==='finais_de_semana' ? 'selected' : '' %>>Finais de Semana</option>
+              <option value="feriados" <%=disponibilidade==='feriados' ? 'selected' : '' %>>Feriados</option>
+              <option value="viajar" <%=disponibilidade==='viajar' ? 'selected' : '' %>>Viajar</option>
             </select>
             
             <select name="escolaridade">
               <option value="">Selecione a escolaridade</option>
               <option value="Indiferente" <%=escolaridade==='Indiferente' ? 'selected' : '' %>>Indiferente</option>
-              <!-- ... outras opções de escolaridade ... -->
+              <option value="Alfabetizado" <%=escolaridade==='Alfabetizado' ? 'selected' : '' %>>Alfabetizado</option>
+              <option value="Ensino fundamental incompleto" <%=escolaridade==='Ensino fundamental incompleto' ? 'selected' : '' %>>Ensino fundamental incompleto</option>
+              <option value="Ensino fundamental completo" <%=escolaridade==='Ensino fundamental completo' ? 'selected' : '' %>>Ensino fundamental completo</option>
+              <option value="Ensino médio incompleto" <%=escolaridade==='Ensino médio incompleto' ? 'selected' : '' %>>Ensino médio incompleto</option>
+              <option value="Ensino médio completo" <%=escolaridade==='Ensino médio completo' ? 'selected' : '' %>>Ensino médio completo</option>
+              <option value="Ensino técnico incompleto" <%=escolaridade==='Ensino técnico incompleto' ? 'selected' : '' %>>Ensino técnico incompleto</option>
+              <option value="Ensino técnico completo" <%=escolaridade==='Ensino técnico completo' ? 'selected' : '' %>>Ensino técnico completo</option>
+              <option value="Ensino superior incompleto" <%=escolaridade==='Ensino superior incompleto' ? 'selected' : '' %>>Ensino superior incompleto</option>
+              <option value="Ensino superior completo" <%=escolaridade==='Ensino superior completo' ? 'selected' : '' %>>Ensino superior completo</option>
+              <option value="Pós-graduação incompleta" <%=escolaridade==='Pós-graduação incompleta' ? 'selected' : '' %>>Pós-graduação incompleta</option>
+              <option value="Pós-graduação completa" <%=escolaridade==='Pós-graduação completa' ? 'selected' : '' %>>Pós-graduação completa</option>
+              <option value="Mestrado" <%=escolaridade==='Mestrado' ? 'selected' : '' %>>Mestrado</option>
+              <option value="Doutorado" <%=escolaridade==='Doutorado' ? 'selected' : '' %>>Doutorado</option>
             </select>
           </div>
 
@@ -200,7 +230,13 @@
           <select name="idiomas[]" class="idiomas">
             <option value="Português" <%=idiomas && idiomas.includes('Português') ? 'selected' : '' %>>Português</option>
             <option value="Inglês" <%=idiomas && idiomas.includes('Inglês') ? 'selected' : '' %>>Inglês</option>
-            <!-- ... outras opções de idiomas ... -->
+            <option value="Espanhol" <%=idiomas && idiomas.includes('Espanhol') ? 'selected' : '' %>>Espanhol</option>
+            <option value="Francês" <%=idiomas && idiomas.includes('Francês') ? 'selected' : '' %>>Francês</option>
+            <option value="Alemão" <%=idiomas && idiomas.includes('Alemão') ? 'selected' : '' %>>Alemão</option>
+            <option value="Mandarim" <%=idiomas && idiomas.includes('Mandarim') ? 'selected' : '' %>>Mandarim</option>
+            <option value="Japonês" <%=idiomas && idiomas.includes('Japonês') ? 'selected' : '' %>>Japonês</option>
+            <option value="Italiano" <%=idiomas && idiomas.includes('Italiano') ? 'selected' : '' %>>Italiano</option>
+            <option value="Russo" <%=idiomas && idiomas.includes('Russo') ? 'selected' : '' %>>Russo</option>
           </select>
         </form>
 
