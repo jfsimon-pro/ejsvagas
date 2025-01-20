@@ -211,11 +211,17 @@ module.exports = (prisma) => {
         return res.status(403).send('Acesso negado.');
       }
 
+      // Primeiro, excluir todas as candidaturas relacionadas à vaga
+      await prisma.candidatura.deleteMany({
+        where: { vagaId: id }
+      });
+
+      // Depois, excluir a vaga
       await prisma.vaga.delete({
         where: { id },
       });
 
-      res.redirect('/empresa/vagas'); // Redireciona para a lista de vagas
+      res.redirect('/empresa/vagas');
     } catch (error) {
       console.error('Erro ao excluir vaga:', error);
       res.status(500).send('Erro ao excluir vaga.');
