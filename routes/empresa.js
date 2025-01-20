@@ -595,38 +595,27 @@ module.exports = (prisma) => {
       }
 
       // Construir where clause para filtros
-      const where = busca ? {
-        OR: [
-          { nomeCompleto: { contains: busca, mode: 'insensitive' } },
-          { cidade: { contains: busca, mode: 'insensitive' } },
-          { bairro: { contains: busca, mode: 'insensitive' } },
-          { uf: { contains: busca, mode: 'insensitive' } },
-          { faixaSalarial: { contains: busca, mode: 'insensitive' } },
-          { tipoContrato: { contains: busca, mode: 'insensitive' } },
-          { ocupacao: { contains: busca, mode: 'insensitive' } },
-          { escolaridade: { contains: busca, mode: 'insensitive' } },
-          { disponibilidade: { contains: busca, mode: 'insensitive' } },
-          { idiomas: { has: busca } },
-          { cursos: { 
-            some: { 
+      const where = {
+        vagaId,
+        AND: [
+          ...(busca ? [{
+            candidato: {
               OR: [
-                { curso: { contains: busca, mode: 'insensitive' } },
-                { instituicao: { contains: busca, mode: 'insensitive' } }
+                { nomeCompleto: { contains: busca, mode: 'insensitive' } },
+                { cidade: { contains: busca, mode: 'insensitive' } },
+                { cursos: { some: { curso: { contains: busca, mode: 'insensitive' } } } },
+                { experienciasProfissionais: { some: { empresa: { contains: busca, mode: 'insensitive' } } } }
               ]
-            } 
-          }},
-          { experienciasProfissionais: { 
-            some: { 
-              OR: [
-                { empresa: { contains: busca, mode: 'insensitive' } },
-                { cargo: { contains: busca, mode: 'insensitive' } },
-                { funcao: { contains: busca, mode: 'insensitive' } },
-                { motivo: { contains: busca, mode: 'insensitive' } }
-              ]
-            } 
-          }}
+            }
+          }] : []),
+          ...(faixaSalarial ? [{ candidato: { faixaSalarial: { equals: faixaSalarial } } }] : []),
+          ...(tipoContrato ? [{ candidato: { tipoContrato: { equals: tipoContrato } } }] : []),
+          ...(disponibilidade ? [{ candidato: { disponibilidade: { equals: disponibilidade } } }] : []),
+          ...(escolaridade ? [{ candidato: { escolaridade: { equals: escolaridade } } }] : []),
+          ...(ocupacao ? [{ candidato: { ocupacao: { contains: ocupacao, mode: 'insensitive' } } }] : []),
+          ...(idiomas && idiomas.length > 0 ? [{ candidato: { idiomas: { hasSome: idiomas } } }] : [])
         ]
-      } : {};
+      };
 
       console.log('Query where:', JSON.stringify(where, null, 2));
       console.log('faixaSalarial:', faixaSalarial);
