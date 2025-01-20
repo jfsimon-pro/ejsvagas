@@ -742,18 +742,18 @@ module.exports = (prisma) => {
                   OR: [
                     { nomeCompleto: { contains: busca, mode: 'insensitive' } },
                     { cidade: { contains: busca, mode: 'insensitive' } },
-                    { cursos: { some: { curso: { contains: busca, mode: 'insensitive' } } } },
-                    { experienciasProfissionais: { some: { empresa: { contains: busca, mode: 'insensitive' } } } },
+                    { ocupacao: { contains: busca, mode: 'insensitive' } }
                   ],
                 },
               ]
             : []),
-          ...(faixaSalarial ? [{ faixaSalarial: { equals: faixaSalarial } }] : []),
-          ...(tipoContrato ? [{ tipoContrato: { equals: tipoContrato } }] : []),
-          ...(disponibilidade ? [{ disponibilidade: { equals: disponibilidade } }] : []),
+          ...(faixaSalarial ? [{ pretensaoSalarial: { equals: faixaSalarial } }] : []),
+          ...(tipoContrato ? [{ tipoContratoDesejado: { equals: tipoContrato } }] : []),
+          ...(disponibilidade ? [{ disponibilidade: { hasSome: [disponibilidade] } }] : []),
           ...(escolaridade ? [{ escolaridade: { equals: escolaridade } }] : []),
           ...(ocupacao ? [{ ocupacao: { contains: ocupacao, mode: 'insensitive' } }] : []),
-          ...(idiomas && idiomas.length > 0 ? [{ idiomas: { hasSome: idiomas } }] : []),
+          ...(idiomas && !Array.isArray(idiomas) ? [{ idiomas: { hasSome: [idiomas] } }] : []),
+          ...(idiomas && Array.isArray(idiomas) ? [{ idiomas: { hasSome: idiomas } }] : []),
         ],
       };
 
@@ -764,10 +764,6 @@ module.exports = (prisma) => {
         skip,
         take: perPage,
         orderBy: { createdAt: 'desc' },
-        include: {
-          cursos: true,
-          experienciasProfissionais: true
-        }
       });
 
       res.render('empresa/todos-candidatos', {
