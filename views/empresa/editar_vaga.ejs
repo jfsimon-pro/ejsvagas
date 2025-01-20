@@ -8,7 +8,7 @@
     <div class="content-main-login">
       <h1>Editar Vaga</h1>
       
-      <form action="/empresa/editar-vaga/<%= vaga.id %>" method="POST">
+      <form action="/empresa/vagas/<%= vaga.id %>/editar" method="POST">
         <label for="titulo">Título da Vaga:</label>
         <input type="text" id="titulo" name="titulo" value="<%= vaga.titulo %>" required>
         
