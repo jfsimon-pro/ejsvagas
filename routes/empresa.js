@@ -518,8 +518,14 @@ module.exports = (prisma) => {
       // Criar link do WhatsApp
       const whatsappLink = `https://wa.me/55${candidato.telefone.replace(/\D/g, '')}?text=${encodeURIComponent(mensagem)}`;
       
-      // Redirecionar para o WhatsApp
-      return res.redirect(whatsappLink);
+      // Redirecionar para o WhatsApp em uma nova aba e depois voltar para a página de candidatos
+      res.send(`
+        <script>
+          window.open('${whatsappLink}', '_blank');
+          window.location.href = '/empresa/vagas/${vagaId}/candidatos';
+        </script>
+      `);
+
     } catch (error) {
       console.error('Erro ao selecionar candidato:', error);
       res.status(500).send('Erro ao selecionar candidato.');
