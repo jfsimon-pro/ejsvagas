@@ -610,7 +610,12 @@ module.exports = (prisma) => {
                 },
               ]
             : []),
-          ...(faixaSalarial ? [{ candidato: { faixaSalarial: { equals: faixaSalarial } } }] : []),
+          ...(faixaSalarial ? [{
+            OR: [
+              { pretensaoSalarial: { equals: faixaSalarial } },
+              { faixaSalarial: { equals: faixaSalarial } }
+            ]
+          }] : []),
           ...(tipoContrato ? [{ candidato: { tipoContrato: { equals: tipoContrato } } }] : []),
           ...(disponibilidade ? [{ candidato: { disponibilidade: { equals: disponibilidade } } }] : []),
           ...(escolaridade ? [{ candidato: { escolaridade: { equals: escolaridade } } }] : []),
@@ -621,7 +626,8 @@ module.exports = (prisma) => {
         ],
       };
 
-      
+      console.log('Query where:', JSON.stringify(where, null, 2));
+      console.log('faixaSalarial:', faixaSalarial);
 
       const totalCandidatos = await prisma.candidatura.count({ where });
 
@@ -632,6 +638,8 @@ module.exports = (prisma) => {
         take: perPage,
         orderBy: { createdAt: 'desc' },
       });
+
+      console.log('Total de candidatos encontrados:', totalCandidatos);
 
       res.render('empresa/candidatos', {
         vaga,
@@ -747,7 +755,12 @@ module.exports = (prisma) => {
                 },
               ]
             : []),
-          ...(faixaSalarial ? [{ faixaSalarial: { equals: faixaSalarial } }] : []),
+          ...(faixaSalarial ? [{
+            OR: [
+              { pretensaoSalarial: { equals: faixaSalarial } },
+              { faixaSalarial: { equals: faixaSalarial } }
+            ]
+          }] : []),
           ...(tipoContrato ? [{ tipoContrato: { equals: tipoContrato } }] : []),
           ...(disponibilidade ? [{ disponibilidade: { hasSome: [disponibilidade] } }] : []),
           ...(escolaridade ? [{ escolaridade: { equals: escolaridade } }] : []),
