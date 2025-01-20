@@ -594,32 +594,39 @@ module.exports = (prisma) => {
         return res.status(403).send('Acesso negado.');
       }
 
-      // Construir o filtro dinamicamente
-      const where = {
-        vagaId,
-        AND: [
-          ...(busca
-            ? [
-                {
-                  OR: [
-                    { candidato: { nomeCompleto: { contains: busca, mode: 'insensitive' } } },
-                    { candidato: { cidade: { contains: busca, mode: 'insensitive' } } },
-                    { candidato: { cursos: { some: { curso: { contains: busca, mode: 'insensitive' } } } } },
-                    { candidato: { experienciasProfissionais: { some: { empresa: { contains: busca, mode: 'insensitive' } } } } },
-                  ],
-                },
+      // Construir where clause para filtros
+      const where = busca ? {
+        OR: [
+          { nomeCompleto: { contains: busca, mode: 'insensitive' } },
+          { email: { contains: busca, mode: 'insensitive' } },
+          { telefone: { contains: busca, mode: 'insensitive' } },
+          { cidade: { contains: busca, mode: 'insensitive' } },
+          { ocupacao: { contains: busca, mode: 'insensitive' } },
+          { faixaSalarial: { contains: busca, mode: 'insensitive' } },
+          { tipoContrato: { contains: busca, mode: 'insensitive' } },
+          { escolaridade: { contains: busca, mode: 'insensitive' } },
+          { idiomas: { has: busca } },
+          { disponibilidade: { has: busca } },
+          { cursos: { 
+            some: { 
+              OR: [
+                { curso: { contains: busca, mode: 'insensitive' } },
+                { instituicao: { contains: busca, mode: 'insensitive' } },
+                { descricao: { contains: busca, mode: 'insensitive' } }
               ]
-            : []),
-          ...(faixaSalarial ? [{ faixaSalarial: { equals: faixaSalarial } }] : []),
-          ...(tipoContrato ? [{ candidato: { tipoContrato: { equals: tipoContrato } } }] : []),
-          ...(disponibilidade ? [{ candidato: { disponibilidade: { equals: disponibilidade } } }] : []),
-          ...(escolaridade ? [{ candidato: { escolaridade: { equals: escolaridade } } }] : []),
-          ...(ocupacao ? [{ candidato: { ocupacao: { contains: ocupacao, mode: 'insensitive' } } }] : []),
-          ...(idiomas && idiomas.length > 0
-            ? [{ candidato: { idiomas: { hasSome: idiomas } } }]
-            : []),
-        ],
-      };
+            } 
+          }},
+          { experienciasProfissionais: { 
+            some: { 
+              OR: [
+                { empresa: { contains: busca, mode: 'insensitive' } },
+                { cargo: { contains: busca, mode: 'insensitive' } },
+                { descricao: { contains: busca, mode: 'insensitive' } }
+              ]
+            } 
+          }}
+        ]
+      } : {};
 
       console.log('Query where:', JSON.stringify(where, null, 2));
       console.log('faixaSalarial:', faixaSalarial);
@@ -729,7 +736,7 @@ module.exports = (prisma) => {
       const perPage = 10;
 
       // Construir where clause para filtros
-      const where = {
+      const where = busca ? {
         OR: [
           { nomeCompleto: { contains: busca, mode: 'insensitive' } },
           { email: { contains: busca, mode: 'insensitive' } },
@@ -739,8 +746,8 @@ module.exports = (prisma) => {
           { faixaSalarial: { contains: busca, mode: 'insensitive' } },
           { tipoContrato: { contains: busca, mode: 'insensitive' } },
           { escolaridade: { contains: busca, mode: 'insensitive' } },
-          ...(busca ? [{ idiomas: { hasSome: [busca] } }] : []),
-          ...(busca ? [{ disponibilidade: { hasSome: [busca] } }] : []),
+          { idiomas: { has: busca } },
+          { disponibilidade: { has: busca } },
           { cursos: { 
             some: { 
               OR: [
@@ -759,8 +766,8 @@ module.exports = (prisma) => {
               ]
             } 
           }}
-        ].filter(Boolean)
-      };
+        ]
+      } : {};
 
       // Se não houver busca, retorna todos os candidatos
       if (!busca) {
