@@ -9,7 +9,7 @@ const { verifyToken } = require('../middlewares/auth');
 
 module.exports = (prisma) => {
   // Middleware de autenticação para todas as rotas
-  router.use(verifyToken);
+  router.use((req, res, next) => verifyToken(req, res, next));
 
   // Rota para o dashboard da empresa
   router.get('/dashboard', async (req, res) => {
