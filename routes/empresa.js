@@ -481,44 +481,45 @@ module.exports = (prisma) => {
     }
   });
 
+  // Rota para selecionar um candidato
   router.post('/vagas/:vagaId/candidatos/:candidatoId/selecionar', async (req, res) => {
     const { vagaId, candidatoId } = req.params;
 
     try {
-      console.log(`Recebido vagaId: ${vagaId}, candidatoId: ${candidatoId}`);
-
-      // Verificar se a vaga pertence à empresa logada
+      // Verificar se a vaga pertence à empresa
       const vaga = await prisma.vaga.findUnique({
         where: { id: vagaId },
-        select: { empresaId: true },
+        include: { empresa: true }
       });
 
-      if (!vaga) {
-        console.log('Vaga não encontrada.');
-        return res.status(404).send('Vaga não encontrada.');
-      }
-
-      if (vaga.empresaId !== req.user.userId) {
-        console.log('Acesso negado. Esta vaga não pertence à empresa logada.');
+      if (!vaga || vaga.empresaId !== req.user.userId) {
         return res.status(403).send('Acesso negado.');
       }
 
-      console.log('Vaga verificada com sucesso.');
-
       // Atualizar o status da candidatura
-      const resultado = await prisma.candidatura.updateMany({
+      await prisma.candidatura.update({
         where: {
-          vagaId,
-          candidatoId,
+          candidatoId_vagaId: {
+            candidatoId,
+            vagaId
+          }
         },
-        data: {
-          selecionado: true,
-        },
+        data: { selecionado: true }
       });
 
-      console.log(`Resultado da atualização: ${JSON.stringify(resultado)}`);
+      // Buscar dados do candidato
+      const candidato = await prisma.candidato.findUnique({
+        where: { id: candidatoId }
+      });
 
-      res.redirect(`/empresa/vagas/${vagaId}/candidatos`);
+      // Preparar mensagem do WhatsApp
+      const mensagem = `Parabéns! Você foi selecionado para a vaga de ${vaga.titulo} da empresa ${vaga.empresa.nomeFantasia || vaga.empresa.razaoSocial}. Entre em contato conosco pelo WhatsApp ${vaga.empresa.whatsapp} ou email ${vaga.empresa.email}. Veja mais detalhes da vaga em: https://vagas.shop/candidato/vagas/${vaga.id}/detalhes`;
+      
+      // Criar link do WhatsApp
+      const whatsappLink = `https://wa.me/55${candidato.telefone.replace(/\D/g, '')}?text=${encodeURIComponent(mensagem)}`;
+      
+      // Redirecionar para o WhatsApp
+      return res.redirect(whatsappLink);
     } catch (error) {
       console.error('Erro ao selecionar candidato:', error);
       res.status(500).send('Erro ao selecionar candidato.');
