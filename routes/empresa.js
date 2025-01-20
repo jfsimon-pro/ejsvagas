@@ -732,9 +732,7 @@ module.exports = (prisma) => {
         idiomas,
         page = 1 
       } = req.query;
-
       const perPage = 10;
-      const skip = (page - 1) * perPage;
 
       // Construir where clause para filtros
       const where = {
@@ -745,18 +743,18 @@ module.exports = (prisma) => {
                   OR: [
                     { nomeCompleto: { contains: busca, mode: 'insensitive' } },
                     { cidade: { contains: busca, mode: 'insensitive' } },
-                    { ocupacao: { contains: busca, mode: 'insensitive' } }
+                    { cursos: { some: { curso: { contains: busca, mode: 'insensitive' } } } },
+                    { experienciasProfissionais: { some: { empresa: { contains: busca, mode: 'insensitive' } } } },
                   ],
                 },
               ]
             : []),
           ...(faixaSalarial ? [{ faixaSalarial: { equals: faixaSalarial } }] : []),
           ...(tipoContrato ? [{ tipoContrato: { equals: tipoContrato } }] : []),
-          ...(disponibilidade ? [{ disponibilidade: { hasSome: [disponibilidade] } }] : []),
+          ...(disponibilidade ? [{ disponibilidade: { equals: disponibilidade } }] : []),
           ...(escolaridade ? [{ escolaridade: { equals: escolaridade } }] : []),
           ...(ocupacao ? [{ ocupacao: { contains: ocupacao, mode: 'insensitive' } }] : []),
-          ...(idiomas && !Array.isArray(idiomas) ? [{ idiomas: { hasSome: [idiomas] } }] : []),
-          ...(idiomas && Array.isArray(idiomas) ? [{ idiomas: { hasSome: idiomas } }] : []),
+          ...(idiomas && idiomas.length > 0 ? [{ idiomas: { hasSome: idiomas } }] : []),
         ],
       };
 
@@ -775,25 +773,14 @@ module.exports = (prisma) => {
       const totalCandidatos = await prisma.candidato.count({ where });
       const candidatos = await prisma.candidato.findMany({
         where,
-        skip,
+        skip: (page - 1) * perPage,
         take: perPage,
         orderBy: { createdAt: 'desc' },
+        include: {
+          cursos: true,
+          experienciasProfissionais: true
+        }
       });
-
-      // Log do resultado
-      console.log('Total de candidatos encontrados:', totalCandidatos);
-      if (totalCandidatos === 0) {
-        // Fazer uma consulta sem filtros para debug
-        const todosOsCandidatos = await prisma.candidato.findMany({
-          select: {
-            id: true,
-            nomeCompleto: true,
-            faixaSalarial: true,
-            idiomas: true
-          }
-        });
-        console.log('Todos os candidatos no sistema:', todosOsCandidatos);
-      }
 
       res.render('empresa/todos-candidatos', {
         candidatos,
