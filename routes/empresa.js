@@ -647,17 +647,25 @@ module.exports = (prisma) => {
   });
 
   // Rotas específicas primeiro
-  router.get('/editar-vaga/:id', async (req, res) => {
+  console.log('Definindo rota GET /vagas/:id/editar');
+  router.get('/vagas/:id/editar', async (req, res) => {
     try {
+      console.log('Acessando rota de edição, ID:', req.params.id);
       const vaga = await prisma.vaga.findUnique({
         where: { id: req.params.id },
         include: { empresa: true }
       });
 
+      console.log('Vaga encontrada:', vaga ? 'Sim' : 'Não');
+      console.log('ID da empresa da vaga:', vaga?.empresaId);
+      console.log('ID do usuário logado:', req.user.userId);
+
       if (!vaga || vaga.empresaId !== req.user.userId) {
+        console.log('Redirecionando - vaga não encontrada ou não pertence à empresa');
         return res.redirect('/empresa/vagas');
       }
 
+      console.log('Renderizando view de edição');
       res.render('empresa/editar_vaga', { vaga });
     } catch (error) {
       console.error('Erro ao carregar vaga para edição:', error);
