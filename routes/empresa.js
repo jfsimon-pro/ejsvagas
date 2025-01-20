@@ -723,51 +723,46 @@ module.exports = (prisma) => {
   router.get('/todos-candidatos', async (req, res) => {
     try {
       const { 
-        busca,
-        faixaSalarial,
-        tipoContrato,
-        disponibilidade,
-        escolaridade,
-        ocupacao,
-        idiomas,
+        busca = '',
         page = 1 
       } = req.query;
       const perPage = 10;
 
       // Construir where clause para filtros
       const where = {
-        AND: [
-          ...(busca
-            ? [
-                {
-                  OR: [
-                    { nomeCompleto: { contains: busca, mode: 'insensitive' } },
-                    { cidade: { contains: busca, mode: 'insensitive' } },
-                    { cursos: { some: { curso: { contains: busca, mode: 'insensitive' } } } },
-                    { experienciasProfissionais: { some: { empresa: { contains: busca, mode: 'insensitive' } } } },
-                  ],
-                },
+        OR: [
+          { nomeCompleto: { contains: busca, mode: 'insensitive' } },
+          { email: { contains: busca, mode: 'insensitive' } },
+          { telefone: { contains: busca, mode: 'insensitive' } },
+          { cidade: { contains: busca, mode: 'insensitive' } },
+          { estado: { contains: busca, mode: 'insensitive' } },
+          { ocupacao: { contains: busca, mode: 'insensitive' } },
+          { sobre: { contains: busca, mode: 'insensitive' } },
+          { faixaSalarial: { contains: busca, mode: 'insensitive' } },
+          { tipoContrato: { contains: busca, mode: 'insensitive' } },
+          { escolaridade: { contains: busca, mode: 'insensitive' } },
+          { idiomas: { hasSome: [busca] } },
+          { disponibilidade: { hasSome: [busca] } },
+          { cursos: { 
+            some: { 
+              OR: [
+                { curso: { contains: busca, mode: 'insensitive' } },
+                { instituicao: { contains: busca, mode: 'insensitive' } },
+                { descricao: { contains: busca, mode: 'insensitive' } }
               ]
-            : []),
-          ...(faixaSalarial ? [{ faixaSalarial: { equals: faixaSalarial } }] : []),
-          ...(tipoContrato ? [{ tipoContrato: { equals: tipoContrato } }] : []),
-          ...(disponibilidade ? [{ disponibilidade: { equals: disponibilidade } }] : []),
-          ...(escolaridade ? [{ escolaridade: { equals: escolaridade } }] : []),
-          ...(ocupacao ? [{ ocupacao: { contains: ocupacao, mode: 'insensitive' } }] : []),
-          ...(idiomas && idiomas.length > 0 ? [{ idiomas: { hasSome: idiomas } }] : []),
-        ],
+            } 
+          }},
+          { experienciasProfissionais: { 
+            some: { 
+              OR: [
+                { empresa: { contains: busca, mode: 'insensitive' } },
+                { cargo: { contains: busca, mode: 'insensitive' } },
+                { descricao: { contains: busca, mode: 'insensitive' } }
+              ]
+            } 
+          }}
+        ]
       };
-
-      // Debug logs
-      console.log('Filtros aplicados:', {
-        faixaSalarial,
-        tipoContrato,
-        disponibilidade,
-        escolaridade,
-        ocupacao,
-        idiomas
-      });
-      console.log('Query where:', JSON.stringify(where, null, 2));
 
       // Buscar candidatos com paginação e filtros
       const totalCandidatos = await prisma.candidato.count({ where });
@@ -785,12 +780,6 @@ module.exports = (prisma) => {
       res.render('empresa/todos-candidatos', {
         candidatos,
         busca: busca || '',
-        faixaSalarial: faixaSalarial || '',
-        tipoContrato: tipoContrato || '',
-        disponibilidade: disponibilidade || '',
-        escolaridade: escolaridade || '',
-        ocupacao: ocupacao || '',
-        idiomas: idiomas || [],
         currentPage: parseInt(page, 10),
         totalPages: Math.ceil(totalCandidatos / perPage)
       });
