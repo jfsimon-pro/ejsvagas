@@ -262,7 +262,7 @@
                   </td>
                   <td>
                     <% 
-                      const mensagem = `Olá, você se candidatou a nossa vaga de "${vaga.titulo}" no site ${process.env.BASE_URL}/vagas/${vaga.id}`;
+                      const mensagem = `Olá, você se candidatou a nossa vaga de "${vaga.titulo}" no site https://vagas.shop/vagas/${vaga.id}`;
                       const whatsappLink = `https://wa.me/${candidatura.candidato.telefone.replace(/\D/g, '')}?text=${encodeURIComponent(mensagem)}`;
                     %>
                     <a href="<%= whatsappLink %>" 
