@@ -140,7 +140,12 @@
           </div>
         </div>
   
-        <a href="/empresa/vagas" class="btn">Voltar para vagas</a>
+        <!-- Botão Voltar -->
+        <% if (typeof isCandidato !== 'undefined' && isCandidato) { %>
+          <a href="/candidato/dashboard" class="btn btn-secondary">Voltar para Dashboard</a>
+        <% } else { %>
+          <a href="javascript:history.back()" class="btn btn-secondary">Voltar</a>
+        <% } %>
       </div>
     </div>
   </div>

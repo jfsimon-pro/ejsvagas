@@ -706,7 +706,31 @@ router.get('/vagas/:vagaId/detalhes', verifyToken, async (req, res) => {
   }
 });
 
+// Rota para ver próprio perfil detalhado
+router.get('/meu-perfil', async (req, res) => {
+  try {
+    const candidato = await prisma.candidato.findUnique({
+      where: { id: req.user.userId },
+      include: {
+        cursos: true,
+        experienciasProfissionais: true,
+      },
+    });
 
+    if (!candidato) {
+      return res.status(404).send('Candidato não encontrado.');
+    }
+
+    // Usar a mesma view que a empresa usa para ver os detalhes
+    res.render('empresa/detalhes_candidato', { 
+      candidato,
+      isCandidato: true // Flag para identificar que é o próprio candidato vendo
+    });
+  } catch (error) {
+    console.error('Erro ao carregar perfil:', error);
+    res.status(500).send('Erro ao carregar perfil.');
+  }
+});
 
 return router;
 };
