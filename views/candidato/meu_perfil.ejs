@@ -1,7 +1,7 @@
 <%- include('../partials/header') %>
 
 <style>
-  .main-login {
+  .perfil-candidato-container {
     display: flex;
     justify-content: center;
     padding: 20px;
@@ -9,7 +9,7 @@
     background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
   }
 
-  .content-main-login {
+  .perfil-candidato-content {
     background: white;
     padding: 30px;
     border-radius: 8px;
@@ -19,20 +19,20 @@
     margin: 20px;
   }
 
-  .profile-header {
+  .perfil-candidato-header {
     text-align: center;
     margin-bottom: 30px;
     padding-bottom: 20px;
     border-bottom: 2px solid #F78E0F;
   }
 
-  .profile-header h1 {
+  .perfil-candidato-header h1 {
     color: #2c3e50;
     font-size: 2rem;
     margin-bottom: 10px;
   }
 
-  .detalhes-pessoais, .detalhes-adicionais, .cursos-do-candidato, .exp-do-candidato {
+  .perfil-candidato-section {
     margin-bottom: 30px;
     background: #f8f9fa;
     padding: 20px;
@@ -40,7 +40,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   }
 
-  h2 {
+  .perfil-candidato-section h2 {
     color: #333;
     margin-bottom: 20px;
     font-size: 1.5rem;
@@ -49,16 +49,16 @@
     gap: 10px;
   }
 
-  h2 i {
+  .perfil-candidato-section h2 i {
     color: #F78E0F;
   }
 
-  .espacadiv {
+  .perfil-candidato-item {
     margin-bottom: 10px;
     padding: 5px 0;
   }
 
-  ul {
+  .perfil-candidato-lista {
     list-style: none;
     padding: 0;
     display: grid;
@@ -66,7 +66,7 @@
     gap: 15px;
   }
 
-  li {
+  .perfil-candidato-lista-item {
     background: #f9f9f9;
     padding: 15px;
     margin-bottom: 10px;
@@ -75,11 +75,11 @@
     transition: transform 0.2s ease;
   }
 
-  li:hover {
+  .perfil-candidato-lista-item:hover {
     transform: translateX(5px);
   }
 
-  .info-item {
+  .perfil-candidato-info-item {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -87,12 +87,12 @@
     border-bottom: 1px solid #eee;
   }
 
-  .info-item i {
+  .perfil-candidato-info-item i {
     color: #F78E0F;
     width: 20px;
   }
 
-  .btn-secondary {
+  .perfil-candidato-btn-voltar {
     background-color: #F78E0F;
     color: white;
     padding: 8px 16px;
@@ -105,7 +105,7 @@
     font-weight: 500;
   }
 
-  .btn-secondary:hover {
+  .perfil-candidato-btn-voltar:hover {
     background-color: #e07d0d;
     text-decoration: none;
     color: white;
@@ -115,46 +115,46 @@
 
   /* Responsividade */
   @media (max-width: 768px) {
-    .content-main-login {
+    .perfil-candidato-content {
       margin: 10px;
       padding: 20px;
     }
 
-    ul {
+    .perfil-candidato-lista {
       grid-template-columns: 1fr;
     }
 
-    .profile-header h1 {
+    .perfil-candidato-header h1 {
       font-size: 1.5rem;
     }
   }
 </style>
 
-<div class="main-login">
-  <div class="content-main-login">
-    <div class="profile-header">
+<div class="perfil-candidato-container">
+  <div class="perfil-candidato-content">
+    <div class="perfil-candidato-header">
       <h1>Meu Perfil</h1>
     </div>
 
-    <div class="detalhes-pessoais">
+    <div class="perfil-candidato-section">
       <h2><i class="fas fa-user"></i> Detalhes Pessoais</h2>
-      <div class="info-item">
+      <div class="perfil-candidato-info-item">
         <i class="fas fa-id-card"></i>
         <p><strong>Nome:</strong> <%= candidato.nomeCompleto %></p>
       </div>
-      <div class="info-item">
+      <div class="perfil-candidato-info-item">
         <i class="fas fa-fingerprint"></i>
         <p><strong>CPF:</strong> <%= candidato.cpf %></p>
       </div>
-      <div class="info-item">
+      <div class="perfil-candidato-info-item">
         <i class="fas fa-envelope"></i>
         <p><strong>E-mail:</strong> <%= candidato.email %></p>
       </div>
-      <div class="info-item">
+      <div class="perfil-candidato-info-item">
         <i class="fas fa-phone"></i>
         <p><strong>Telefone:</strong> <%= candidato.telefone %></p>
       </div>
-      <div class="info-item">
+      <div class="perfil-candidato-info-item">
         <i class="fas fa-map-marker-alt"></i>
         <p><strong>Endereço:</strong>
           <%= candidato.logradouro %>, <%= candidato.complemento %>, <%= candidato.numero %>, 
@@ -164,7 +164,7 @@
       </div>
     </div>
 
-    <div class="detalhes-adicionais">
+    <div class="perfil-candidato-section">
       <h2><i class="fas fa-info-circle"></i> Informações Adicionais</h2>
       <p><strong>Idiomas:</strong> 
         <% if (candidato.idiomas && candidato.idiomas.length > 0) { %>
@@ -180,16 +180,19 @@
       <p><strong>Faixa Salarial:</strong> <%= candidato.faixaSalarial || 'Não informado' %></p>
     </div>
 
-    <div class="cursos-do-candidato">
+    <div class="perfil-candidato-section">
       <h2><i class="fas fa-graduation-cap"></i> Cursos</h2>
       <% if (candidato.cursos && candidato.cursos.length > 0) { %>
-        <ul>
+        <ul class="perfil-candidato-lista">
           <% candidato.cursos.forEach(curso => { %>
-            <li>
-              <div class="espacadiv"><strong>Instituição:</strong> <%= curso.instituicao %></div>
-              <div class="espacadiv"><strong>Curso:</strong> <%= curso.curso %></div>
-              <div class="espacadiv"><strong>Data de Início:</strong> <%= curso.dataInicio.toLocaleDateString() %></div>
-              <div class="espacadiv">
+            <li class="perfil-candidato-lista-item">
+              <div class="perfil-candidato-item">
+                <strong>Instituição:</strong> <%= curso.instituicao %></div>
+              <div class="perfil-candidato-item">
+                <strong>Curso:</strong> <%= curso.curso %></div>
+              <div class="perfil-candidato-item">
+                <strong>Data de Início:</strong> <%= curso.dataInicio.toLocaleDateString() %></div>
+              <div class="perfil-candidato-item">
                 <% if (curso.dataConclusao) { %>
                   <strong>Data de Conclusão:</strong> <%= curso.dataConclusao.toLocaleDateString() %>
                 <% } else { %>
@@ -204,7 +207,7 @@
       <% } %>
     </div>
 
-    <div class="exp-do-candidato">
+    <div class="perfil-candidato-section">
       <h2><i class="fas fa-briefcase"></i> Experiências Profissionais</h2>
       <% if (candidato.experienciasProfissionais && candidato.experienciasProfissionais.length > 0) { %>
         <ul>
@@ -228,7 +231,7 @@
       <% } %>
     </div>
 
-    <a href="/candidato/dashboard" class="btn btn-secondary">
+    <a href="/candidato/dashboard" class="perfil-candidato-btn-voltar">
       <i class="fas fa-arrow-left"></i> Voltar para Dashboard
     </a>
   </div>
