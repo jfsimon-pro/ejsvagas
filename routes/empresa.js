@@ -513,12 +513,12 @@ module.exports = (prisma) => {
       });
 
       // Preparar mensagem do WhatsApp
-      const mensagem = `Parabéns! Você foi selecionado para a vaga de ${vaga.titulo} da empresa ${vaga.empresa.nomeFantasia || vaga.empresa.razaoSocial}. Entre em contato conosco pelo WhatsApp ${vaga.empresa.whatsapp} ou email ${vaga.empresa.email}. Veja mais detalhes da vaga em: https://vagas.shop/candidato/vagas/${vaga.id}/detalhes`;
+      const mensagem = `Parabéns! Você foi selecionado para a vaga de ${vaga.titulo}! Por favor, entre em contato conosco para prosseguirmos com o processo. Veja mais detalhes da vaga em: https://vagas.shop/candidato/vagas/${vaga.id}/detalhes`;
       
       // Criar link do WhatsApp
       const whatsappLink = `https://wa.me/55${candidato.telefone.replace(/\D/g, '')}?text=${encodeURIComponent(mensagem)}`;
       
-      // Redirecionar para o WhatsApp em uma nova aba e depois voltar para a página de candidatos
+      // Enviar resposta com script para abrir WhatsApp em nova aba e redirecionar
       res.send(`
         <script>
           window.open('${whatsappLink}', '_blank');
