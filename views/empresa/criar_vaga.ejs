@@ -57,6 +57,24 @@
   font-weight: normal;
 }
 
+.checkbox-group.required {
+  border: 1px solid transparent;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.checkbox-group.required.error {
+  border-color: #ff0000;
+  background-color: rgba(255, 0, 0, 0.05);
+}
+
+/* Estilo para campos obrigatórios não preenchidos */
+select:invalid,
+input:invalid,
+textarea:invalid {
+  border-color: #ff0000;
+}
+
 </style>
   <div class="main-login">
     
@@ -70,7 +88,7 @@
         <textarea id="descricao" name="descricao" required></textarea>
       
         <label for="tags">Tags (separadas por vírgula):</label>
-        <input type="text" id="tags" name="tags">
+        <input type="text" id="tags" name="tags" required>
       
         <label for="cargo">Cargo/Função:</label>
         <input type="text" id="cargo" name="cargo" placeholder="Digite o cargo ou função" required>
@@ -79,6 +97,7 @@
       
         <label for="faixaSalarial">Faixa Salarial:</label>
         <select id="faixaSalarial" name="faixaSalarial" required>
+          <option value="">Selecione uma faixa salarial</option>
           <option value="Até 2.000">Até 2.000</option>
           <option value="A partir de R$ 2.000,00">A partir de R$ 2.000,00</option>
           <option value="A partir de R$ 3.000,00">A partir de R$ 3.000,00</option>
@@ -95,6 +114,7 @@
       
         <label for="tipoContrato">Tipo de Contrato:</label>
         <select id="tipoContrato" name="tipoContrato" required>
+          <option value="">Selecione o tipo de contrato</option>
           <option value="CLT">CLT</option>
           <option value="PJ">PJ</option>
           <option value="Temporário">Temporário</option>
@@ -105,7 +125,7 @@
         </select>
       
         <label>Tipo de Trabalho:</label>
-        <div class="checkbox-group">
+        <div class="checkbox-group required">
           <div class="checkbox-item">
             <input type="checkbox" id="tipoTrabalho-presencial" name="tipoTrabalho[]" value="Presencial">
             <label for="tipoTrabalho-presencial">Presencial</label>
@@ -121,7 +141,7 @@
         </div>
 
         <label>Disponibilidade:</label>
-        <div class="checkbox-group">
+        <div class="checkbox-group required">
           <div class="checkbox-item">
             <input type="checkbox" id="disponibilidade-manha" name="disponibilidade[]" value="Manhã">
             <label for="disponibilidade-manha">Manhã</label>
@@ -157,6 +177,7 @@
       
         <label for="escolaridade">Escolaridade:</label>
         <select id="escolaridade" name="escolaridade" required>
+          <option value="">Selecione a escolaridade</option>
           <option value="Indiferente">Indiferente</option>
           <option value="Alfabetizado">Alfabetizado</option>
           <option value="Ensino fundamental incompleto">Ensino fundamental incompleto</option>
@@ -174,7 +195,7 @@
         </select>
       
         <label for="idiomas">Idiomas:</label>
-        <div class="checkbox-group">
+        <div class="checkbox-group required">
           <div class="checkbox-item">
             <input type="checkbox" id="idioma-portugues" name="idiomas[]" value="Português">
             <label for="idioma-portugues">Português</label>
@@ -214,7 +235,7 @@
         </div>
       
         <label for="beneficios">Benefícios:</label>
-        <div class="checkbox-group">
+        <div class="checkbox-group required">
           <div class="checkbox-item">
             <input type="checkbox" id="beneficio-va" name="beneficios[]" value="Vale alimentação">
             <label for="beneficio-va">Vale alimentação</label>
@@ -279,4 +300,29 @@
     </div>
   </div>
   <script src="/js/autocompleteempresa.js"></script>
+  <script>
+    document.querySelector('form').addEventListener('submit', function(e) {
+      // Verificar checkboxes
+      const checkboxGroups = document.querySelectorAll('.checkbox-group.required');
+      let isValid = true;
+
+      checkboxGroups.forEach(group => {
+        const checkboxes = group.querySelectorAll('input[type="checkbox"]');
+        const checked = Array.from(checkboxes).some(cb => cb.checked);
+        
+        if (!checked) {
+          isValid = false;
+          // Adicionar classe de erro ao grupo
+          group.classList.add('error');
+        } else {
+          group.classList.remove('error');
+        }
+      });
+
+      if (!isValid) {
+        e.preventDefault();
+        alert('Por favor, selecione pelo menos uma opção em cada grupo de checkboxes.');
+      }
+    });
+  </script>
   <%- include('../partials/footer') %>
