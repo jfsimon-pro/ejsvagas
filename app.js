@@ -38,16 +38,17 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-console.log('Registrando rotas...');
-// Rotas
-app.use('/', require('./routes/auth'));
-console.log('Rota auth registrada');
-app.use('/admin', require('./routes/admin')(prisma));
-console.log('Rota admin registrada');
-app.use('/empresa', require('./routes/empresa')(prisma));
-console.log('Rota empresa registrada');
-app.use('/candidato', require('./routes/candidato')(prisma));
-console.log('Rota candidato registrada');
+// Importar rotas
+const authRouter = require('./routes/auth');
+const empresaRouter = require('./routes/empresa')(prisma);
+const candidatoRouter = require('./routes/candidato')(prisma);
+const adminRouter = require('./routes/admin')(prisma);
+
+// Usar rotas
+app.use('/auth', authRouter);
+app.use('/empresa', empresaRouter);
+app.use('/candidato', candidatoRouter);
+app.use('/admin', adminRouter);
 
 // Rota inicial
 app.get('/', (req, res) => {
