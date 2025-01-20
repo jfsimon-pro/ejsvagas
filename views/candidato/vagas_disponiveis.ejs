@@ -229,9 +229,7 @@
                                 <h3>
                                     <%= vaga.titulo %>
                                 </h3>
-                                <p><strong>Descrição:</strong>
-                                    <%= vaga.descricao %>
-                                </p>
+                                <p class="vaga-descrita"><%- vaga.descricao.replace(/\n/g, '<br>') %></p>
                                 <p><strong>Cargo/Função:</strong>
                                     <%= vaga.cargo %>
                                 </p>
