@@ -5,6 +5,8 @@
     display: flex;
     justify-content: center;
     padding: 20px;
+    min-height: calc(100vh - 100px);
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
   }
 
   .content-main-login {
@@ -13,26 +15,55 @@
     border-radius: 8px;
     max-width: 800px;
     width: 100%;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+  }
+
+  .profile-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #F78E0F;
+  }
+
+  .profile-header h1 {
+    color: #2c3e50;
+    font-size: 2rem;
+    margin-bottom: 10px;
   }
 
   .detalhes-pessoais, .detalhes-adicionais, .cursos-do-candidato, .exp-do-candidato {
     margin-bottom: 30px;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   }
 
   h2 {
     color: #333;
     margin-bottom: 20px;
-    border-bottom: 2px solid #F78E0F;
-    padding-bottom: 10px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  h2 i {
+    color: #F78E0F;
   }
 
   .espacadiv {
     margin-bottom: 10px;
+    padding: 5px 0;
   }
 
   ul {
     list-style: none;
     padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px;
   }
 
   li {
@@ -40,42 +71,101 @@
     padding: 15px;
     margin-bottom: 10px;
     border-radius: 5px;
+    border-left: 4px solid #F78E0F;
+    transition: transform 0.2s ease;
+  }
+
+  li:hover {
+    transform: translateX(5px);
+  }
+
+  .info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .info-item i {
+    color: #F78E0F;
+    width: 20px;
   }
 
   .btn-secondary {
-    background-color: #6c757d;
+    background-color: #F78E0F;
     color: white;
     padding: 8px 16px;
     border-radius: 4px;
     text-decoration: none;
     display: inline-block;
     margin-top: 20px;
+    transition: all 0.3s ease;
+    border: none;
+    font-weight: 500;
   }
 
   .btn-secondary:hover {
-    background-color: #5a6268;
+    background-color: #e07d0d;
     text-decoration: none;
     color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .content-main-login {
+      margin: 10px;
+      padding: 20px;
+    }
+
+    ul {
+      grid-template-columns: 1fr;
+    }
+
+    .profile-header h1 {
+      font-size: 1.5rem;
+    }
   }
 </style>
 
 <div class="main-login">
   <div class="content-main-login">
+    <div class="profile-header">
+      <h1>Meu Perfil</h1>
+    </div>
+
     <div class="detalhes-pessoais">
-      <h2>Detalhes Pessoais</h2>
-      <p><strong>Nome:</strong> <%= candidato.nomeCompleto %></p>
-      <p><strong>CPF:</strong> <%= candidato.cpf %></p>
-      <p><strong>E-mail:</strong> <%= candidato.email %></p>
-      <p><strong>Telefone:</strong> <%= candidato.telefone %></p>
-      <p><strong>Endereço:</strong>
-        <%= candidato.logradouro %>, <%= candidato.complemento %>, <%= candidato.numero %>, 
-        <%= candidato.bairro %> - <%= candidato.cidade %> / <%= candidato.uf %>, 
-        CEP: <%= candidato.cep %>
-      </p>
+      <h2><i class="fas fa-user"></i> Detalhes Pessoais</h2>
+      <div class="info-item">
+        <i class="fas fa-id-card"></i>
+        <p><strong>Nome:</strong> <%= candidato.nomeCompleto %></p>
+      </div>
+      <div class="info-item">
+        <i class="fas fa-fingerprint"></i>
+        <p><strong>CPF:</strong> <%= candidato.cpf %></p>
+      </div>
+      <div class="info-item">
+        <i class="fas fa-envelope"></i>
+        <p><strong>E-mail:</strong> <%= candidato.email %></p>
+      </div>
+      <div class="info-item">
+        <i class="fas fa-phone"></i>
+        <p><strong>Telefone:</strong> <%= candidato.telefone %></p>
+      </div>
+      <div class="info-item">
+        <i class="fas fa-map-marker-alt"></i>
+        <p><strong>Endereço:</strong>
+          <%= candidato.logradouro %>, <%= candidato.complemento %>, <%= candidato.numero %>, 
+          <%= candidato.bairro %> - <%= candidato.cidade %> / <%= candidato.uf %>, 
+          CEP: <%= candidato.cep %>
+        </p>
+      </div>
     </div>
 
     <div class="detalhes-adicionais">
-      <h2>Informações Adicionais</h2>
+      <h2><i class="fas fa-info-circle"></i> Informações Adicionais</h2>
       <p><strong>Idiomas:</strong> 
         <% if (candidato.idiomas && candidato.idiomas.length > 0) { %>
           <%= candidato.idiomas.join(', ') %>
@@ -91,7 +181,7 @@
     </div>
 
     <div class="cursos-do-candidato">
-      <h2>Cursos</h2>
+      <h2><i class="fas fa-graduation-cap"></i> Cursos</h2>
       <% if (candidato.cursos && candidato.cursos.length > 0) { %>
         <ul>
           <% candidato.cursos.forEach(curso => { %>
@@ -115,7 +205,7 @@
     </div>
 
     <div class="exp-do-candidato">
-      <h2>Experiências Profissionais</h2>
+      <h2><i class="fas fa-briefcase"></i> Experiências Profissionais</h2>
       <% if (candidato.experienciasProfissionais && candidato.experienciasProfissionais.length > 0) { %>
         <ul>
           <% candidato.experienciasProfissionais.forEach(exp => { %>
@@ -138,7 +228,9 @@
       <% } %>
     </div>
 
-    <a href="/candidato/dashboard" class="btn btn-secondary">Voltar para Dashboard</a>
+    <a href="/candidato/dashboard" class="btn btn-secondary">
+      <i class="fas fa-arrow-left"></i> Voltar para Dashboard
+    </a>
   </div>
 </div>
 
