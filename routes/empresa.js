@@ -747,8 +747,8 @@ module.exports = (prisma) => {
                 },
               ]
             : []),
-          ...(faixaSalarial ? [{ pretensaoSalarial: { equals: faixaSalarial } }] : []),
-          ...(tipoContrato ? [{ tipoContratoDesejado: { equals: tipoContrato } }] : []),
+          ...(faixaSalarial ? [{ faixaSalarial: { equals: faixaSalarial } }] : []),
+          ...(tipoContrato ? [{ tipoContrato: { equals: tipoContrato } }] : []),
           ...(disponibilidade ? [{ disponibilidade: { hasSome: [disponibilidade] } }] : []),
           ...(escolaridade ? [{ escolaridade: { equals: escolaridade } }] : []),
           ...(ocupacao ? [{ ocupacao: { contains: ocupacao, mode: 'insensitive' } }] : []),

@@ -229,7 +229,7 @@ router.post('/login', [
 
     // Criar token JWT
     const token = jwt.sign({ userId: user.id, role: 'empresa' }, process.env.JWT_SECRET, {
-      expiresIn: '1h'
+      expiresIn: '24h'
     });
 
     // Armazenar o token em um cookie seguro
@@ -289,9 +289,11 @@ router.post('/login_empresa', [
       return res.status(400).render('auth/login_empresa', { errors: [{ msg: 'E-mail ou senha incorretos.' }], message: '' });
     }
 
-    const token = jwt.sign({ userId: empresa.id, role: 'empresa' }, process.env.JWT_SECRET, {
-      expiresIn: '1h'
-    });
+    const token = jwt.sign(
+      { userId: empresa.id, tipo: 'empresa' },
+      process.env.JWT_SECRET,
+      { expiresIn: '24h' }
+    );
 
     res.cookie('token', token, {
       httpOnly: true,
@@ -543,7 +545,7 @@ router.post(
         });
       }
 
-      const token = jwt.sign({ userId: candidato.id, role: 'candidato' }, process.env.JWT_SECRET, { expiresIn: '1h' });
+      const token = jwt.sign({ userId: candidato.id, role: 'candidato' }, process.env.JWT_SECRET, { expiresIn: '24h' });
 
       res.cookie('token', token, {
         httpOnly: true,
