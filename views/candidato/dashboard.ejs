@@ -149,6 +149,31 @@
     flex-wrap: wrap;
     gap: 10px;
     }
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      margin: 20px 0;
+    }
+    
+    .action-buttons .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: 500;
+    }
+    
+    .action-buttons .btn-primary {
+      background-color: #007bff;
+      color: white;
+      border: none;
+    }
+    
+    .action-buttons .btn-primary:hover {
+      background-color: #0056b3;
+      text-decoration: none;
+    }
   </style>
   <section class="candidato-superior">
     <div class="main-dashboard-candidato">
@@ -196,7 +221,7 @@
                 <p><strong>Faixa Salarial:</strong> <%= vaga.faixaSalarial %></p>
                 <p><strong>Empresa:</strong> <%= vaga.empresa.nomeFantasia %></p>
                 <div class="buttons-aprovado">
-                  <a href="/empresa/perfil/<%= vaga.empresa.id %>" class="btn btn-info">Ver perfil da empresa</a>
+                  <a href="/empresa/perfil/<%= vaga.empresa.id %>" class="btn btn-info">perfil da empresa</a>
                   <% if (vaga.jaAvaliada) { %>
                     <button disabled class="btn btn-secondary">Avaliação enviada</button>
                   <% } else { %>
@@ -213,4 +238,23 @@
       
     </div>
   </section>
+  <div class="main-login">
+    <div class="content-main-login">
+      <section class="dashboard-container">
+        <h1>Dashboard do Candidato</h1>
+
+        <!-- Botão Ver sobre mim -->
+        <div class="action-buttons" style="margin: 20px 0;">
+          <a href="/candidato/meu-perfil" class="btn btn-primary">
+            <i class="fas fa-user"></i> Ver sobre mim
+          </a>
+        </div>
+
+        <div class="minhas-candidaturas">
+          <h2>Minhas Candidaturas</h2>
+          <!-- ... resto do conteúdo existente ... -->
+        </div>
+      </section>
+    </div>
+  </div>
   <%- include('../partials/footer') %>
