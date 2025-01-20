@@ -315,7 +315,7 @@ justify-content: center;
 }
 .vaga-descrita {
   white-space: pre-line;
-  line-height: 1.5;
+  line-height: 10px;
   margin: 10px 0;
 }
 .botoes-gerenciar-vagas button {
