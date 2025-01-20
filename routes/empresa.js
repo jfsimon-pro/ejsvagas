@@ -684,6 +684,68 @@ router.get('/vagas/:vagaId/candidatos', verifyToken, async (req, res) => {
   }
 });
 
+// Rota para exibir o formulário de edição
+router.get('/vagas/editar/:id', verifyToken, async (req, res) => {
+  try {
+    const vaga = await prisma.vaga.findUnique({
+      where: { id: req.params.id },
+      include: { empresa: true }
+    });
+
+    if (!vaga || vaga.empresaId !== req.user.userId) {
+      return res.redirect('/empresa/vagas');
+    }
+
+    res.render('empresa/editar_vaga', { vaga });
+  } catch (error) {
+    console.error('Erro ao carregar vaga para edição:', error);
+    res.status(500).send('Erro ao carregar vaga para edição');
+  }
+});
+
+// Rota para processar a edição
+router.post('/vagas/editar/:id', verifyToken, async (req, res) => {
+  try {
+    const vagaId = req.params.id;
+    const {
+      titulo, descricao, cargo, faixaSalarial, tipoContrato,
+      disponibilidade, horarioTrabalho, tipoTrabalho, escolaridade,
+      idiomas, beneficios
+    } = req.body;
+
+    // Verificar se a vaga pertence à empresa
+    const vaga = await prisma.vaga.findUnique({
+      where: { id: vagaId }
+    });
+
+    if (!vaga || vaga.empresaId !== req.user.userId) {
+      return res.redirect('/empresa/vagas');
+    }
+
+    // Atualizar a vaga
+    await prisma.vaga.update({
+      where: { id: vagaId },
+      data: {
+        titulo,
+        descricao,
+        cargo,
+        faixaSalarial,
+        tipoContrato,
+        disponibilidade,
+        horarioTrabalho,
+        tipoTrabalho,
+        escolaridade,
+        idiomas: Array.isArray(idiomas) ? idiomas : [idiomas],
+        beneficios: Array.isArray(beneficios) ? beneficios : [beneficios]
+      }
+    });
+
+    res.redirect('/empresa/vagas');
+  } catch (error) {
+    console.error('Erro ao atualizar vaga:', error);
+    res.status(500).send('Erro ao atualizar vaga');
+  }
+});
 
 return router;
 };
