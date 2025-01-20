@@ -641,7 +641,7 @@ module.exports = (prisma) => {
           ...(disponibilidade ? [{ candidato: { disponibilidade } }] : []),
           ...(escolaridade ? [{ candidato: { escolaridade } }] : []),
           ...(ocupacao ? [{ candidato: { ocupacao } }] : []),
-          ...(idiomas && idiomas.length > 0 ? [{ candidato: { idiomas: { hasEvery: idiomas } } }] : [])
+          ...(idiomas ? [{ candidato: { idiomas: { has: Array.isArray(idiomas) ? idiomas[0] : idiomas } } }] : [])
         ]
       };
 
