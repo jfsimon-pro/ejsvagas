@@ -684,7 +684,7 @@ router.get('/vagas/:vagaId/candidatos', verifyToken, async (req, res) => {
   }
 });
 
-// Rota para exibir o formulário de edição (deve vir antes da rota de candidatos)
+// Rota para editar vaga (deve vir antes da rota com :vagaId)
 router.get('/vagas/editar/:id', verifyToken, async (req, res) => {
   try {
     const vaga = await prisma.vaga.findUnique({
