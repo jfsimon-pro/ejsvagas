@@ -1,0 +1,145 @@
+<%- include('../partials/header') %>
+
+<style>
+  .main-login {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .content-main-login {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 800px;
+    width: 100%;
+  }
+
+  .detalhes-pessoais, .detalhes-adicionais, .cursos-do-candidato, .exp-do-candidato {
+    margin-bottom: 30px;
+  }
+
+  h2 {
+    color: #333;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #F78E0F;
+    padding-bottom: 10px;
+  }
+
+  .espacadiv {
+    margin-bottom: 10px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    background: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+  }
+
+  .btn-secondary:hover {
+    background-color: #5a6268;
+    text-decoration: none;
+    color: white;
+  }
+</style>
+
+<div class="main-login">
+  <div class="content-main-login">
+    <div class="detalhes-pessoais">
+      <h2>Detalhes Pessoais</h2>
+      <p><strong>Nome:</strong> <%= candidato.nomeCompleto %></p>
+      <p><strong>CPF:</strong> <%= candidato.cpf %></p>
+      <p><strong>E-mail:</strong> <%= candidato.email %></p>
+      <p><strong>Telefone:</strong> <%= candidato.telefone %></p>
+      <p><strong>Endereço:</strong>
+        <%= candidato.logradouro %>, <%= candidato.complemento %>, <%= candidato.numero %>, 
+        <%= candidato.bairro %> - <%= candidato.cidade %> / <%= candidato.uf %>, 
+        CEP: <%= candidato.cep %>
+      </p>
+    </div>
+
+    <div class="detalhes-adicionais">
+      <h2>Informações Adicionais</h2>
+      <p><strong>Idiomas:</strong> 
+        <% if (candidato.idiomas && candidato.idiomas.length > 0) { %>
+          <%= candidato.idiomas.join(', ') %>
+        <% } else { %>
+          Nenhum idioma registrado.
+        <% } %>
+      </p>
+      <p><strong>Escolaridade:</strong> <%= candidato.escolaridade || 'Não informado' %></p>
+      <p><strong>Disponibilidade:</strong> <%= candidato.disponibilidade || 'Não informado' %></p>
+      <p><strong>Ocupação:</strong> <%= candidato.ocupacao || 'Não informado' %></p>
+      <p><strong>Tipo de Contrato:</strong> <%= candidato.tipoContrato || 'Não informado' %></p>
+      <p><strong>Faixa Salarial:</strong> <%= candidato.faixaSalarial || 'Não informado' %></p>
+    </div>
+
+    <div class="cursos-do-candidato">
+      <h2>Cursos</h2>
+      <% if (candidato.cursos && candidato.cursos.length > 0) { %>
+        <ul>
+          <% candidato.cursos.forEach(curso => { %>
+            <li>
+              <div class="espacadiv"><strong>Instituição:</strong> <%= curso.instituicao %></div>
+              <div class="espacadiv"><strong>Curso:</strong> <%= curso.curso %></div>
+              <div class="espacadiv"><strong>Data de Início:</strong> <%= curso.dataInicio.toLocaleDateString() %></div>
+              <div class="espacadiv">
+                <% if (curso.dataConclusao) { %>
+                  <strong>Data de Conclusão:</strong> <%= curso.dataConclusao.toLocaleDateString() %>
+                <% } else { %>
+                  <strong>Data de Conclusão:</strong> Em andamento
+                <% } %>
+              </div>
+            </li>
+          <% }); %>
+        </ul>
+      <% } else { %>
+        <p>Sem cursos cadastrados.</p>
+      <% } %>
+    </div>
+
+    <div class="exp-do-candidato">
+      <h2>Experiências Profissionais</h2>
+      <% if (candidato.experienciasProfissionais && candidato.experienciasProfissionais.length > 0) { %>
+        <ul>
+          <% candidato.experienciasProfissionais.forEach(exp => { %>
+            <li>
+              <strong>Empresa:</strong> <%= exp.empresa %><br>
+              <strong>Cargo:</strong> <%= exp.cargo %><br>
+              <strong>Função:</strong> <%= exp.funcao %><br>
+              <strong>Data de Entrada:</strong> <%= exp.dataEntrada.toLocaleDateString() %><br>
+              <% if (exp.dataSaida) { %>
+                <strong>Data de Saída:</strong> <%= exp.dataSaida.toLocaleDateString() %><br>
+              <% } else { %>
+                <strong>Data de Saída:</strong> Atualmente trabalhando<br>
+              <% } %>
+              <strong>Motivo de Saída:</strong> <%= exp.motivo %>
+            </li>
+          <% }); %>
+        </ul>
+      <% } else { %>
+        <p>Sem experiências profissionais cadastradas.</p>
+      <% } %>
+    </div>
+
+    <a href="/candidato/dashboard" class="btn btn-secondary">Voltar para Dashboard</a>
+  </div>
+</div>
+
+<%- include('../partials/footer') %> 

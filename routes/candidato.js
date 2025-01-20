@@ -705,7 +705,7 @@ router.get('/vagas/:vagaId/detalhes', verifyToken, async (req, res) => {
 });
 
 // Rota para ver próprio perfil detalhado
-router.get('/meu-perfil', async (req, res) => {
+router.get('/meu-perfil', verifyToken, async (req, res) => {
   try {
     const candidato = await prisma.candidato.findUnique({
       where: { id: req.user.userId },
@@ -719,10 +719,8 @@ router.get('/meu-perfil', async (req, res) => {
       return res.status(404).send('Candidato não encontrado.');
     }
 
-    // Usar a mesma view que a empresa usa para ver os detalhes
-    res.render('empresa/detalhes_candidato', { 
+    res.render('candidato/meu_perfil', { 
       candidato,
-      isCandidato: true // Flag para identificar que é o próprio candidato vendo
     });
   } catch (error) {
     console.error('Erro ao carregar perfil:', error);
