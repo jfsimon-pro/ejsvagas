@@ -276,9 +276,12 @@
                   </td>
                   <td>
                     <% if (candidatura.selecionado) { %>
-                      <span class="badge badge-success">Selecionado</span>
+                      <form action="/empresa/vagas/<%= vagaId %>/candidatos/<%= candidatura.candidato.id %>/toggle-selecao"
+                            method="POST">
+                        <button type="submit" class="btn btn-danger btnselecionar">Cancelar Seleção</button>
+                      </form>
                     <% } else { %>
-                      <form action="/empresa/vagas/<%= vagaId %>/candidatos/<%= candidatura.candidato.id %>/selecionar"
+                      <form action="/empresa/vagas/<%= vagaId %>/candidatos/<%= candidatura.candidato.id %>/toggle-selecao"
                             method="POST">
                         <button type="submit" class="btn btn-success btnselecionar">Selecionar</button>
                       </form>

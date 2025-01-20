@@ -6,6 +6,16 @@ const multer = require('multer');
 const path = require('path');
 const { upload, compressImage } = require('../utils/upload'); // Já importado do utilitário
 const verifyToken = require('../middlewares/auth').verifyToken;
+const nodemailer = require('nodemailer');
+
+// Configuração do nodemailer
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD
+  }
+});
 
 module.exports = (prisma) => {
   // Middleware de autenticação para todas as rotas
@@ -481,8 +491,8 @@ module.exports = (prisma) => {
     }
   });
 
-  // Rota para selecionar um candidato
-  router.post('/vagas/:vagaId/candidatos/:candidatoId/selecionar', async (req, res) => {
+  // Rota para selecionar/cancelar seleção de candidato
+  router.post('/vagas/:vagaId/candidatos/:candidatoId/toggle-selecao', async (req, res) => {
     const { vagaId, candidatoId } = req.params;
 
     try {
@@ -496,6 +506,21 @@ module.exports = (prisma) => {
         return res.status(403).send('Acesso negado.');
       }
 
+      // Buscar candidatura atual
+      const candidatura = await prisma.candidatura.findUnique({
+        where: {
+          candidatoId_vagaId: {
+            candidatoId,
+            vagaId
+          }
+        },
+        include: {
+          candidato: true
+        }
+      });
+
+      const novoStatus = !candidatura.selecionado;
+
       // Atualizar o status da candidatura
       await prisma.candidatura.update({
         where: {
@@ -504,31 +529,29 @@ module.exports = (prisma) => {
             vagaId
           }
         },
-        data: { selecionado: true }
+        data: { selecionado: novoStatus }
       });
 
-      // Buscar dados do candidato
-      const candidato = await prisma.candidato.findUnique({
-        where: { id: candidatoId }
-      });
+      // Se foi selecionado, enviar email
+      if (novoStatus) {
+        const emailHtml = `
+          <h2>Parabéns! Você foi selecionado para uma vaga!</h2>
+          <p>Você foi selecionado para a vaga de <strong>${vaga.titulo}</strong>.</p>
+          <p>Veja mais detalhes da vaga em: <a href="https://vagas.shop/candidato/vagas/${vaga.id}/detalhes">https://vagas.shop/candidato/vagas/${vaga.id}/detalhes</a></p>
+        `;
 
-      // Preparar mensagem do WhatsApp
-      const mensagem = `Parabéns! Você foi selecionado para a vaga de ${vaga.titulo}! Por favor, entre em contato conosco para prosseguirmos com o processo. Veja mais detalhes da vaga em: https://vagas.shop/candidato/vagas/${vaga.id}/detalhes`;
-      
-      // Criar link do WhatsApp
-      const whatsappLink = `https://wa.me/55${candidato.telefone.replace(/\D/g, '')}?text=${encodeURIComponent(mensagem)}`;
-      
-      // Enviar resposta com script para abrir WhatsApp em nova aba e redirecionar
-      res.send(`
-        <script>
-          window.open('${whatsappLink}', '_blank');
-          window.location.href = '/empresa/vagas/${vagaId}/candidatos';
-        </script>
-      `);
+        await transporter.sendMail({
+          from: process.env.EMAIL_USER,
+          to: candidatura.candidato.email,
+          subject: `Você foi selecionado para a vaga de ${vaga.titulo}!`,
+          html: emailHtml
+        });
+      }
 
+      res.redirect(`/empresa/vagas/${vagaId}/candidatos`);
     } catch (error) {
-      console.error('Erro ao selecionar candidato:', error);
-      res.status(500).send('Erro ao selecionar candidato.');
+      console.error('Erro ao atualizar seleção do candidato:', error);
+      res.status(500).send('Erro ao atualizar seleção do candidato.');
     }
   });
 
