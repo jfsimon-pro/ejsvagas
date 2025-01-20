@@ -23,7 +23,7 @@
             <p><strong>Cargo/Função:</strong> <%= vaga.cargo %></p>
             <p><strong>Tipo de Contrato:</strong> <%= vaga.tipoContrato %></p>
             <p><strong>Disponibilidade:</strong> <%= vaga.disponibilidade || 'Não especificado' %></p>
-            <p><strong>Horário de Trabalho:</strong> <%= vaga.horarioTrabalho || 'Não especificado' %></p>
+            <p><strong>Horário de Trabalho:</strong> <span class="vaga-descrita"><%- (vaga.horarioTrabalho || 'Não especificado').replace(/\n/g, '<br>') %></span></p>
             <p><strong>Tipo de Trabalho:</strong> <%= vaga.tipoTrabalho %></p>
             <p><strong>Escolaridade:</strong> <%= vaga.escolaridade %></p>
             <p><strong>Idiomas:</strong> <%= vaga.idiomas.length > 0 ? vaga.idiomas.join(', ') : 'Não especificado' %></p>

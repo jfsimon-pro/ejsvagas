@@ -59,7 +59,7 @@
   <p><strong>Faixa Salarial:</strong> <%= vaga.faixaSalarial %></p>
   <p><strong>Tipo de Contrato:</strong> <%= vaga.tipoContrato %></p>
   <p><strong>Disponibilidade:</strong> <%= vaga.disponibilidade %></p>
-  <p><strong>Horário de Trabalho:</strong> <%= vaga.horarioTrabalho %></p>
+  <p><strong>Horário de Trabalho:</strong> <span class="vaga-descrita"><%- vaga.horarioTrabalho.replace(/\n/g, '<br>') %></span></p>
   <p><strong>Tipo de Trabalho:</strong> <%= vaga.tipoTrabalho %></p>
   <p><strong>Escolaridade:</strong> <%= vaga.escolaridade %></p>
   <p><strong>Idiomas Requeridos:</strong> <%= vaga.idiomas.join(', ') %></p>

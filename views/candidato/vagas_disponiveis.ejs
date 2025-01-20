@@ -233,6 +233,7 @@
                                 <p><strong>Cargo/Função:</strong>
                                     <%= vaga.cargo %>
                                 </p>
+                                <p><strong>Horário de Trabalho:</strong> <span class="vaga-descrita"><%- (vaga.horarioTrabalho || 'Não especificado').replace(/\n/g, '<br>') %></span></p>
                                 <p><strong>Salário:</strong>
                                     <%= vaga.faixaSalarial %>
                                 </p>
