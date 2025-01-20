@@ -598,21 +598,20 @@ module.exports = (prisma) => {
       const where = busca ? {
         OR: [
           { nomeCompleto: { contains: busca, mode: 'insensitive' } },
-          { email: { contains: busca, mode: 'insensitive' } },
-          { telefone: { contains: busca, mode: 'insensitive' } },
           { cidade: { contains: busca, mode: 'insensitive' } },
-          { ocupacao: { contains: busca, mode: 'insensitive' } },
+          { bairro: { contains: busca, mode: 'insensitive' } },
+          { uf: { contains: busca, mode: 'insensitive' } },
           { faixaSalarial: { contains: busca, mode: 'insensitive' } },
           { tipoContrato: { contains: busca, mode: 'insensitive' } },
+          { ocupacao: { contains: busca, mode: 'insensitive' } },
           { escolaridade: { contains: busca, mode: 'insensitive' } },
+          { disponibilidade: { contains: busca, mode: 'insensitive' } },
           { idiomas: { has: busca } },
-          { disponibilidade: { has: busca } },
           { cursos: { 
             some: { 
               OR: [
                 { curso: { contains: busca, mode: 'insensitive' } },
-                { instituicao: { contains: busca, mode: 'insensitive' } },
-                { descricao: { contains: busca, mode: 'insensitive' } }
+                { instituicao: { contains: busca, mode: 'insensitive' } }
               ]
             } 
           }},
@@ -621,7 +620,8 @@ module.exports = (prisma) => {
               OR: [
                 { empresa: { contains: busca, mode: 'insensitive' } },
                 { cargo: { contains: busca, mode: 'insensitive' } },
-                { descricao: { contains: busca, mode: 'insensitive' } }
+                { funcao: { contains: busca, mode: 'insensitive' } },
+                { motivo: { contains: busca, mode: 'insensitive' } }
               ]
             } 
           }}
@@ -740,8 +740,32 @@ module.exports = (prisma) => {
         OR: [
           { nomeCompleto: { contains: busca, mode: 'insensitive' } },
           { cidade: { contains: busca, mode: 'insensitive' } },
-          { cursos: { some: { curso: { contains: busca, mode: 'insensitive' } } } },
-          { experienciasProfissionais: { some: { empresa: { contains: busca, mode: 'insensitive' } } } }
+          { bairro: { contains: busca, mode: 'insensitive' } },
+          { uf: { contains: busca, mode: 'insensitive' } },
+          { faixaSalarial: { contains: busca, mode: 'insensitive' } },
+          { tipoContrato: { contains: busca, mode: 'insensitive' } },
+          { ocupacao: { contains: busca, mode: 'insensitive' } },
+          { escolaridade: { contains: busca, mode: 'insensitive' } },
+          { disponibilidade: { contains: busca, mode: 'insensitive' } },
+          { idiomas: { has: busca } },
+          { cursos: { 
+            some: { 
+              OR: [
+                { curso: { contains: busca, mode: 'insensitive' } },
+                { instituicao: { contains: busca, mode: 'insensitive' } }
+              ]
+            } 
+          }},
+          { experienciasProfissionais: { 
+            some: { 
+              OR: [
+                { empresa: { contains: busca, mode: 'insensitive' } },
+                { cargo: { contains: busca, mode: 'insensitive' } },
+                { funcao: { contains: busca, mode: 'insensitive' } },
+                { motivo: { contains: busca, mode: 'insensitive' } }
+              ]
+            } 
+          }}
         ]
       } : {};
 
