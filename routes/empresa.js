@@ -736,7 +736,6 @@ module.exports = (prisma) => {
           { telefone: { contains: busca, mode: 'insensitive' } },
           { cidade: { contains: busca, mode: 'insensitive' } },
           { ocupacao: { contains: busca, mode: 'insensitive' } },
-          { sobre: { contains: busca, mode: 'insensitive' } },
           { faixaSalarial: { contains: busca, mode: 'insensitive' } },
           { tipoContrato: { contains: busca, mode: 'insensitive' } },
           { escolaridade: { contains: busca, mode: 'insensitive' } },
@@ -760,13 +759,17 @@ module.exports = (prisma) => {
               ]
             } 
           }}
-        ].filter(Boolean) // Remove condições undefined/null
+        ].filter(Boolean)
       };
 
       // Se não houver busca, retorna todos os candidatos
       if (!busca) {
         delete where.OR;
       }
+
+      // Debug logs
+      console.log('Busca:', busca);
+      console.log('Query where:', JSON.stringify(where, null, 2));
 
       // Buscar candidatos com paginação e filtros
       const totalCandidatos = await prisma.candidato.count({ where });
@@ -780,6 +783,9 @@ module.exports = (prisma) => {
           experienciasProfissionais: true
         }
       });
+
+      // Debug log
+      console.log('Total de candidatos encontrados:', totalCandidatos);
 
       res.render('empresa/todos-candidatos', {
         candidatos,
