@@ -581,7 +581,16 @@ module.exports = (prisma) => {
 
   router.get('/vagas/:vagaId/candidatos', async (req, res) => {
     const { vagaId } = req.params;
-    const { busca, faixaSalarial, tipoContrato, disponibilidade, escolaridade, ocupacao, idiomas, page = 1 } = req.query;
+    const { 
+      busca,
+      faixaSalarial,
+      tipoContrato,
+      disponibilidade,
+      escolaridade,
+      ocupacao,
+      idiomas,
+      page = 1 
+    } = req.query;
     const perPage = 10;
 
     try {
@@ -598,22 +607,41 @@ module.exports = (prisma) => {
       const where = {
         vagaId,
         AND: [
+          // Busca em texto livre
           ...(busca ? [{
             candidato: {
               OR: [
                 { nomeCompleto: { contains: busca, mode: 'insensitive' } },
                 { cidade: { contains: busca, mode: 'insensitive' } },
-                { cursos: { some: { curso: { contains: busca, mode: 'insensitive' } } } },
-                { experienciasProfissionais: { some: { empresa: { contains: busca, mode: 'insensitive' } } } }
+                { bairro: { contains: busca, mode: 'insensitive' } },
+                { uf: { contains: busca, mode: 'insensitive' } },
+                { cursos: { 
+                  some: { 
+                    OR: [
+                      { curso: { contains: busca, mode: 'insensitive' } },
+                      { instituicao: { contains: busca, mode: 'insensitive' } }
+                    ]
+                  }
+                }},
+                { experienciasProfissionais: { 
+                  some: { 
+                    OR: [
+                      { empresa: { contains: busca, mode: 'insensitive' } },
+                      { cargo: { contains: busca, mode: 'insensitive' } },
+                      { funcao: { contains: busca, mode: 'insensitive' } }
+                    ]
+                  }
+                }}
               ]
             }
           }] : []),
-          ...(faixaSalarial ? [{ candidato: { faixaSalarial: { equals: faixaSalarial } } }] : []),
-          ...(tipoContrato ? [{ candidato: { tipoContrato: { equals: tipoContrato } } }] : []),
-          ...(disponibilidade ? [{ candidato: { disponibilidade: { equals: disponibilidade } } }] : []),
-          ...(escolaridade ? [{ candidato: { escolaridade: { equals: escolaridade } } }] : []),
-          ...(ocupacao ? [{ candidato: { ocupacao: { contains: ocupacao, mode: 'insensitive' } } }] : []),
-          ...(idiomas && idiomas.length > 0 ? [{ candidato: { idiomas: { hasSome: idiomas } } }] : [])
+          // Filtros específicos
+          ...(faixaSalarial ? [{ candidato: { faixaSalarial } }] : []),
+          ...(tipoContrato ? [{ candidato: { tipoContrato } }] : []),
+          ...(disponibilidade ? [{ candidato: { disponibilidade } }] : []),
+          ...(escolaridade ? [{ candidato: { escolaridade } }] : []),
+          ...(ocupacao ? [{ candidato: { ocupacao } }] : []),
+          ...(idiomas && idiomas.length > 0 ? [{ candidato: { idiomas: { hasEvery: idiomas } } }] : [])
         ]
       };
 
