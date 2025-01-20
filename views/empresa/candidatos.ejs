@@ -109,6 +109,22 @@
       height: 20px;
       object-fit: contain;
     }
+
+    .btn-secondary {
+      background-color: #6c757d;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 4px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-secondary:hover {
+      background-color: #5a6268;
+      color: white;
+      text-decoration: none;
+    }
   </style>
 <style>
       .table-responsive {
@@ -140,100 +156,13 @@
         </h1>
 
         <!-- Formulário de Filtros -->
-        <form action="/empresa/vagas/<%= vagaId %>/candidatos" method="GET" style="margin-bottom: 20px;">
-          <!-- Searchbar -->
-          <input type="text" name="busca" placeholder="Buscar candidaturas..." value="<%= busca || '' %>" />
-
-          <!-- Filtro de Faixa Salarial -->
-          
-          <div class="alinhamento-filtros">
-            <select name="faixaSalarial">
-              <option value="">Selecione a faixa salarial</option>
-              <option value="Até 2.000" <%=faixaSalarial==='Até 2.000' ? 'selected' : '' %>>Até 2.000</option>
-              <option value="A partir de R$ 2.000,00" <%=faixaSalarial==='A partir de R$ 2.000,00' ? 'selected' : '' %>>A partir de R$ 2.000,00</option>
-              <option value="A partir de R$ 3.000,00" <%=faixaSalarial==='A partir de R$ 3.000,00' ? 'selected' : '' %>>A partir de R$ 3.000,00</option>
-              <option value="A partir de R$ 4.000,00" <%=faixaSalarial==='A partir de R$ 4.000,00' ? 'selected' : '' %>>A partir de R$ 4.000,00</option>
-              <option value="A partir de R$ 5.000,00" <%=faixaSalarial==='A partir de R$ 5.000,00' ? 'selected' : '' %>>A partir de R$ 5.000,00</option>
-              <option value="A partir de R$ 6.000,00" <%=faixaSalarial==='A partir de R$ 6.000,00' ? 'selected' : '' %>>A partir de R$ 6.000,00</option>
-              <option value="A partir de R$ 7.000,00" <%=faixaSalarial==='A partir de R$ 7.000,00' ? 'selected' : '' %>>A partir de R$ 7.000,00</option>
-              <option value="A partir de R$ 8.000,00" <%=faixaSalarial==='A partir de R$ 8.000,00' ? 'selected' : '' %>>A partir de R$ 8.000,00</option>
-              <option value="A partir de R$ 9.000,00" <%=faixaSalarial==='A partir de R$ 9.000,00' ? 'selected' : '' %>>A partir de R$ 9.000,00</option>
-              <option value="A partir de R$ 10.000,00" <%=faixaSalarial==='A partir de R$ 10.000,00' ? 'selected' : '' %>>A partir de R$ 10.000,00</option>
-              <option value="A partir de R$ 15.000,00" <%=faixaSalarial==='A partir de R$ 15.000,00' ? 'selected' : '' %>>A partir de R$ 15.000,00</option>
-              <option value="A partir de R$ 20.000,00" <%=faixaSalarial==='A partir de R$ 20.000,00' ? 'selected' : '' %>>A partir de R$ 20.000,00</option>
-              <!-- Continue com as demais opções -->
-            </select>
-            <select name="tipoContrato">
-              <option value="">Selecione o tipo de contrato</option>
-              <option value="CLT" <%=tipoContrato==='CLT' ? 'selected' : '' %>>CLT</option>
-              <option value="PJ" <%=tipoContrato==='PJ' ? 'selected' : '' %>>PJ</option>
-              <option value="Temporário" <%=tipoContrato==='Temporário' ? 'selected' : '' %>>Temporário</option>
-              <option value="Autônomo" <%=tipoContrato==='Autônomo' ? 'selected' : '' %>>Autônomo</option>
-              <option value="Estágio" <%=tipoContrato==='Estágio' ? 'selected' : '' %>>Estágio</option>
-              <option value="Freelancer" <%=tipoContrato==='Freelancer' ? 'selected' : '' %>>Freelancer</option>
-              <option value="Aprendiz" <%=tipoContrato==='Aprendiz' ? 'selected' : '' %>>Aprendiz</option>
-              <!-- Continue com as opções -->
-            </select>
-            <select name="disponibilidade">
-              <option value="">Selecione a disponibilidade</option>
-              <option value="manha" <%=disponibilidade==='manha' ? 'selected' : '' %>>Manhã</option>
-              <option value="tarde" <%=disponibilidade==='tarde' ? 'selected' : '' %>>Tarde</option>
-              <option value="Noite" <%=disponibilidade==='Noite' ? 'selected' : '' %>>Noite</option>
-              <option value="Madrugada" <%=disponibilidade==='Madrugada' ? 'selected' : '' %>>Madrugada</option>
-              <option value="Finais de Semana" <%=disponibilidade==='Finais de Semana' ? 'selected' : '' %>>Finais de Semana</option>
-              <option value="Feriados" <%=disponibilidade==='Feriados' ? 'selected' : '' %>>Feriados</option>
-              <option value="Viajar" <%=disponibilidade==='Viajar' ? 'selected' : '' %>>Viajar</option>
-              <!-- Continue com as opções -->
-            </select>
-            <select name="escolaridade">
-              <option value="">Selecione a escolaridade</option>
-              <option value="Indiferente" <%=escolaridade==='Indiferente' ? 'selected' : '' %>>Indiferente</option>
-              <option value="Alfabetizado" <%=escolaridade==='Alfabetizado' ? 'selected' : '' %>>Alfabetizado</option>        
-                <option value="Ensino fundamental incompleto" <%=escolaridade==='Ensino fundamental incompleto' ? 'selected' : '' %>>Ensino fundamental incompleto</option>
-                <option value="Ensino fundamental completo" <%=escolaridade==='Ensino fundamental completo' ? 'selected' : '' %>>Ensino fundamental completo</option>
-                <option value="Ensino médio incompleto" <%=escolaridade==='Ensino médio incompleto' ? 'selected' : '' %>>Ensino médio incompleto</option>
-                <option value="Ensino médio completo" <%=escolaridade==='Ensino médio completo' ? 'selected' : '' %>>Ensino médio completo</option>
-                <option value="Ensino técnico ou profissionalizante incompleto" <%=escolaridade==='Ensino técnico ou profissionalizante incompleto' ? 'selected' : '' %>>Ensino técnico ou profissionalizante incompleto</option>
-                <option value="Ensino técnico ou profissionalizante completo" <%=escolaridade==='Ensino técnico ou profissionalizante completo' ? 'selected' : '' %>>Ensino técnico ou profissionalizante completo</option>
-                <option value="Ensino tecnólogo incompleto" <%=escolaridade==='Ensino tecnólogo incompleto' ? 'selected' : '' %>>Ensino tecnólogo incompleto</option>
-                <option value="Ensino tecnólogo completo" <%=escolaridade==='Ensino tecnólogo completo' ? 'selected' : '' %>>Ensino tecnólogo completo</option>
-                <option value="Ensino superior incompleto" <%=escolaridade==='Ensino superior incompleto' ? 'selected' : '' %>>Ensino superior incompleto</option>
-                <option value="Ensino superior completo" <%=escolaridade==='Ensino superior completo' ? 'selected' : '' %>>Ensino superior completo</option>
-                <option value="Pós graduação incompleta" <%=escolaridade==='Pós graduação incompleta' ? 'selected' : '' %>>Pós graduação incompleta</option>
-                <option value="Pós graduação completa" <%=escolaridade==='Pós graduação completa' ? 'selected' : '' %>>Pós graduação completa</option>
-              <!-- Continue com as opções -->
-            </select>
-          </div>
-          <!-- Filtro de Tipo de Contrato -->
-          
-
-          <!-- Autocomplete para Ocupações -->
-          <input type="text" id="ocupacao" name="ocupacao" placeholder="Digite a ocupação"
-            value="<%= ocupacao || '' %>" />
-          <ul id="suggestions" class="suggestions"></ul>
-
-          <!-- Filtro de Escolaridade -->
-          
-
-          <!-- Filtro de Disponibilidade -->
-          
-
-          <!-- Filtro de Idiomas -->
-          <select name="idiomas[]" class="idiomas">
-            <option value="Português" <%=idiomas && idiomas.includes('Português') ? 'selected' : '' %>>Português
-            </option>
-            <option value="Inglês" <%=idiomas && idiomas.includes('Inglês') ? 'selected' : '' %>>Inglês</option>
-            <option value="Mandarim" <%=idiomas && idiomas.includes('Mandarim') ? 'selected' : '' %>>Mandarim</option>
-            <option value="Espanhol" <%=idiomas && idiomas.includes('Espanhol') ? 'selected' : '' %>>Espanhol</option>
-            <option value="Francês" <%=idiomas && idiomas.includes('Francês') ? 'selected' : '' %>>Francês</option>
-            <option value="Árabe" <%=idiomas && idiomas.includes('Árabe') ? 'selected' : '' %>>Árabe</option>
-            <option value="Outro" <%=idiomas && idiomas.includes('Outro') ? 'selected' : '' %>>Outro</option>
-            <!-- Continue com as opções -->
-          </select>
-
-          <!-- Botão de Buscar -->
-          <button type="submit">Buscar</button>
-        </form>
+        <div class="search-container">
+          <form action="/empresa/vagas/<%= vagaId %>/candidatos" method="GET" class="search-form">
+            <input type="text" name="busca" placeholder="Buscar candidatos..." value="<%= busca %>">
+            <button type="submit" class="search-button">Buscar</button>
+            <a href="/empresa/vagas" class="btn btn-secondary" style="margin-left: 10px;">Voltar</a>
+          </form>
+        </div>
 
         <% if (candidaturas.length> 0) { %>
          <div class="table-responsive">
