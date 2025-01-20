@@ -682,6 +682,7 @@ module.exports = (prisma) => {
         idiomas: idiomas || [],
         currentPage: parseInt(page, 10),
         totalPages: Math.ceil(totalCandidatos / perPage),
+        baseUrl: process.env.BASE_URL || `http://${req.get('host')}`
       });
     } catch (error) {
       console.error('Erro ao carregar candidatos:', error);

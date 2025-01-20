@@ -261,11 +261,14 @@
                     <%= candidatura.candidato.email %>
                   </td>
                   <td>
-                    <a href="https://wa.me/55<%= candidatura.candidato.telefone.replace(/\D/g, '') %>" 
+                    <% 
+                      const mensagem = `Olá, você se candidatou a nossa vaga de "${vaga.titulo}" no site ${process.env.BASE_URL}/vagas/${vaga.id}`;
+                      const whatsappLink = `https://wa.me/${candidatura.candidato.telefone.replace(/\D/g, '')}?text=${encodeURIComponent(mensagem)}`;
+                    %>
+                    <a href="<%= whatsappLink %>" 
                        target="_blank" 
-                       class="whatsapp-button">
-                      <img src="/img/whatsapp.png" alt="WhatsApp" class="whatsapp-icon">
-                      <%= candidatura.candidato.telefone %>
+                       class="btn btn-success btn-sm">
+                      <i class="fas fa-phone"></i> WhatsApp
                     </a>
                   </td>
                   <td>
