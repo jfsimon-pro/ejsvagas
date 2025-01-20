@@ -81,9 +81,9 @@ model Vaga {
   cargo          String
   faixaSalarial  String
   tipoContrato   String
-  disponibilidade String?
+  disponibilidade String[]
   horarioTrabalho String?
-  tipoTrabalho   String
+  tipoTrabalho   String[]
   escolaridade   String
   idiomas        String[]
   beneficios     String[]
@@ -92,6 +92,8 @@ model Vaga {
   candidaturas   Candidatura[]
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
+
+  @@map("vagas")
 }
 
 model Candidatura {

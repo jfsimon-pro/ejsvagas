@@ -104,12 +104,12 @@ module.exports = (prisma) => {
           cargo,
           faixaSalarial,
           tipoContrato,
-          disponibilidade: Array.isArray(disponibilidade) ? disponibilidade : [disponibilidade],
+          disponibilidade: Array.isArray(disponibilidade) ? disponibilidade : disponibilidade ? [disponibilidade] : [],
           horarioTrabalho,
-          tipoTrabalho,
+          tipoTrabalho: Array.isArray(tipoTrabalho) ? tipoTrabalho : tipoTrabalho ? [tipoTrabalho] : [],
           escolaridade,
-          idiomas: Array.isArray(idiomas) ? idiomas : [],
-          beneficios: Array.isArray(beneficios) ? beneficios : [],
+          idiomas: Array.isArray(idiomas) ? idiomas : idiomas ? [idiomas] : [],
+          beneficios: Array.isArray(beneficios) ? beneficios : beneficios ? [beneficios] : [],
           empresaId: req.user.userId,
         },
       });
@@ -203,6 +203,7 @@ module.exports = (prisma) => {
     const { id } = req.params;
 
     try {
+      // Verificar se a vaga pertence à empresa
       const vaga = await prisma.vaga.findUnique({
         where: { id },
       });
