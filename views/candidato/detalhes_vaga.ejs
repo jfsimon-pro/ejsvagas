@@ -44,11 +44,16 @@
     align-items: center;
     gap: 20px;
   }
+  .vaga-descrita {
+    white-space: pre-line;
+    line-height: 1.5;
+    margin: 10px 0;
+  }
 </style>
 <div class="detalhes-vaga-container">
   <h1>Detalhes da Vaga</h1>
   <p><strong>Título:</strong> <%= vaga.titulo %></p>
-  <p><strong>Descrição:</strong> <%= vaga.descricao %></p>
+  <p><strong>Descrição:</strong> <span class="vaga-descrita"><%= vaga.descricao %></span></p>
   <p><strong>Tags:</strong> <%= vaga.tags.join(', ') %></p>
   <p><strong>Cargo/Função:</strong> <%= vaga.cargo %></p>
   <p><strong>Faixa Salarial:</strong> <%= vaga.faixaSalarial %></p>

@@ -314,7 +314,9 @@ justify-content: center;
   font-weight: bold;
 }
 .vaga-descrita {
-  margin-bottom: 25px !important;
+  white-space: pre-line;
+  line-height: 1.5;
+  margin: 10px 0;
 }
 .botoes-gerenciar-vagas button {
   border: none;

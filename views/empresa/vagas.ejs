@@ -18,7 +18,7 @@
           <li>
             <h2><%= vaga.titulo %></h2>
             <p><strong>Descrição:</strong></p>
-            <p class="vaga-descrita"><%= vaga.descricao %></p>
+            <p class="vaga-descrita"><%- vaga.descricao.replace(/\n/g, '<br>') %></p>
             <p><strong>Faixa Salarial:</strong> <%= vaga.faixaSalarial %></p>
             <p><strong>Cargo/Função:</strong> <%= vaga.cargo %></p>
             <p><strong>Tipo de Contrato:</strong> <%= vaga.tipoContrato %></p>
