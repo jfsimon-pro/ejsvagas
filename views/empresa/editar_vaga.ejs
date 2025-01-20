@@ -3,97 +3,181 @@
   .main-login {
     background: #01162a;
   }
+
+  .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    min-width: 150px;
+  }
+
+  .checkbox-item input[type="checkbox"] {
+    width: auto;
+    margin-right: 5px;
+  }
+
+  .checkbox-item label {
+    margin: 0;
+    font-weight: normal;
+  }
 </style>
-  <div class="main-login">
-    <div class="content-main-login">
-      <h1>Editar Vaga</h1>
-      
-      <form action="/empresa/vagas/<%= vaga.id %>/editar" method="POST">
-        <label for="titulo">Título da Vaga:</label>
-        <input type="text" id="titulo" name="titulo" value="<%= vaga.titulo %>" required>
-        
-        <label for="descricao">Descrição:</label>
-        <textarea id="descricao" name="descricao" required><%= vaga.descricao %></textarea>
-        
-        <label for="cargo">Cargo/Função:</label>
-        <input type="text" id="cargo" name="cargo" value="<%= vaga.cargo %>" required>
-        
-        <label for="faixaSalarial">Faixa Salarial:</label>
-        <select id="faixaSalarial" name="faixaSalarial" required>
-          <option value="Até 2.000" <%= vaga.faixaSalarial === 'Até 2.000' ? 'selected' : '' %>>Até 2.000</option>
-          <option value="A partir de R$ 2.000,00" <%= vaga.faixaSalarial === 'A partir de R$ 2.000,00' ? 'selected' : '' %>>A partir de R$ 2.000,00</option>
-          <option value="A partir de R$ 3.000,00" <%= vaga.faixaSalarial === 'A partir de R$ 3.000,00' ? 'selected' : '' %>>A partir de R$ 3.000,00</option>
-          <option value="A partir de R$ 4.000,00" <%= vaga.faixaSalarial === 'A partir de R$ 4.000,00' ? 'selected' : '' %>>A partir de R$ 4.000,00</option>
-          <option value="A partir de R$ 5.000,00" <%= vaga.faixaSalarial === 'A partir de R$ 5.000,00' ? 'selected' : '' %>>A partir de R$ 5.000,00</option>
-          <option value="A partir de R$ 6.000,00" <%= vaga.faixaSalarial === 'A partir de R$ 6.000,00' ? 'selected' : '' %>>A partir de R$ 6.000,00</option>
-          <option value="A partir de R$ 7.000,00" <%= vaga.faixaSalarial === 'A partir de R$ 7.000,00' ? 'selected' : '' %>>A partir de R$ 7.000,00</option>
-          <option value="A partir de R$ 8.000,00" <%= vaga.faixaSalarial === 'A partir de R$ 8.000,00' ? 'selected' : '' %>>A partir de R$ 8.000,00</option>
-          <option value="A partir de R$ 9.000,00" <%= vaga.faixaSalarial === 'A partir de R$ 9.000,00' ? 'selected' : '' %>>A partir de R$ 9.000,00</option>
-          <option value="A partir de R$ 10.000,00" <%= vaga.faixaSalarial === 'A partir de R$ 10.000,00' ? 'selected' : '' %>>A partir de R$ 10.000,00</option>
-        </select>
 
-        <label for="tipoContrato">Tipo de Contrato:</label>
-        <select id="tipoContrato" name="tipoContrato" required>
-          <option value="CLT" <%= vaga.tipoContrato === 'CLT' ? 'selected' : '' %>>CLT</option>
-          <option value="PJ" <%= vaga.tipoContrato === 'PJ' ? 'selected' : '' %>>PJ</option>
-          <option value="Temporário" <%= vaga.tipoContrato === 'Temporário' ? 'selected' : '' %>>Temporário</option>
-          <option value="Estágio" <%= vaga.tipoContrato === 'Estágio' ? 'selected' : '' %>>Estágio</option>
-          <option value="Freelancer" <%= vaga.tipoContrato === 'Freelancer' ? 'selected' : '' %>>Freelancer</option>
-        </select>
+<div class="main-login">
+  <div class="content-main-login">
+    <h1>Editar Vaga</h1>
+    <form action="/empresa/vagas/<%= vaga.id %>/editar" method="POST">
+      <label for="titulo">Título da Vaga:</label>
+      <input type="text" id="titulo" name="titulo" value="<%= vaga.titulo %>" required>
+    
+      <label for="descricao">Descrição:</label>
+      <textarea id="descricao" name="descricao" required><%= vaga.descricao %></textarea>
+    
+      <label for="tags">Tags (separadas por vírgula):</label>
+      <input type="text" id="tags" name="tags" value="<%= vaga.tags.join(', ') %>">
+    
+      <label for="cargo">Cargo/Função:</label>
+      <input type="text" id="cargo" name="cargo" value="<%= vaga.cargo %>" required>
+    
+      <label for="faixaSalarial">Faixa Salarial:</label>
+      <select id="faixaSalarial" name="faixaSalarial" required>
+        <% const faixas = [
+          "Até 2.000",
+          "A partir de R$ 2.000,00",
+          "A partir de R$ 3.000,00",
+          "A partir de R$ 4.000,00",
+          "A partir de R$ 5.000,00",
+          "A partir de R$ 6.000,00",
+          "A partir de R$ 7.000,00",
+          "A partir de R$ 8.000,00",
+          "A partir de R$ 9.000,00",
+          "A partir de R$ 10.000,00",
+          "A partir de R$ 15.000,00",
+          "A partir de R$ 20.000,00"
+        ] %>
+        <% faixas.forEach(faixa => { %>
+          <option value="<%= faixa %>" <%= vaga.faixaSalarial === faixa ? 'selected' : '' %>><%= faixa %></option>
+        <% }) %>
+      </select>
+    
+      <label for="tipoContrato">Tipo de Contrato:</label>
+      <select id="tipoContrato" name="tipoContrato" required>
+        <% const tiposContrato = ["CLT", "PJ", "Temporário", "Autônomo", "Estágio", "Freelancer", "Aprendiz"] %>
+        <% tiposContrato.forEach(tipo => { %>
+          <option value="<%= tipo %>" <%= vaga.tipoContrato === tipo ? 'selected' : '' %>><%= tipo %></option>
+        <% }) %>
+      </select>
+    
+      <label>Tipo de Trabalho:</label>
+      <div class="checkbox-group">
+        <% const tiposTrabalho = ["Presencial", "Home Office", "Híbrido"] %>
+        <% tiposTrabalho.forEach(tipo => { %>
+          <div class="checkbox-item">
+            <input type="checkbox" 
+                   id="tipoTrabalho-<%= tipo.toLowerCase() %>" 
+                   name="tipoTrabalho[]" 
+                   value="<%= tipo %>"
+                   <%= vaga.tipoTrabalho.includes(tipo) ? 'checked' : '' %>>
+            <label for="tipoTrabalho-<%= tipo.toLowerCase() %>"><%= tipo %></label>
+          </div>
+        <% }) %>
+      </div>
 
-        <label for="disponibilidade">Disponibilidade:</label>
-        <select id="disponibilidade" name="disponibilidade" required>
-          <option value="Imediata" <%= vaga.disponibilidade === 'Imediata' ? 'selected' : '' %>>Imediata</option>
-          <option value="15 dias" <%= vaga.disponibilidade === '15 dias' ? 'selected' : '' %>>15 dias</option>
-          <option value="30 dias" <%= vaga.disponibilidade === '30 dias' ? 'selected' : '' %>>30 dias</option>
-        </select>
-
-        <label for="horarioTrabalho">Horário de Trabalho:</label>
-        <textarea id="horarioTrabalho" name="horarioTrabalho" required><%= vaga.horarioTrabalho %></textarea>
-
-        <label for="tipoTrabalho">Tipo de Trabalho:</label>
-        <select id="tipoTrabalho" name="tipoTrabalho" required>
-          <option value="Presencial" <%= vaga.tipoTrabalho === 'Presencial' ? 'selected' : '' %>>Presencial</option>
-          <option value="Híbrido" <%= vaga.tipoTrabalho === 'Híbrido' ? 'selected' : '' %>>Híbrido</option>
-          <option value="Remoto" <%= vaga.tipoTrabalho === 'Remoto' ? 'selected' : '' %>>Remoto</option>
-        </select>
-
-        <label for="escolaridade">Escolaridade:</label>
-        <select id="escolaridade" name="escolaridade" required>
-          <option value="Ensino fundamental" <%= vaga.escolaridade === 'Ensino fundamental' ? 'selected' : '' %>>Ensino fundamental</option>
-          <option value="Ensino médio" <%= vaga.escolaridade === 'Ensino médio' ? 'selected' : '' %>>Ensino médio</option>
-          <option value="Ensino técnico" <%= vaga.escolaridade === 'Ensino técnico' ? 'selected' : '' %>>Ensino técnico</option>
-          <option value="Ensino superior" <%= vaga.escolaridade === 'Ensino superior' ? 'selected' : '' %>>Ensino superior</option>
-          <option value="Pós-graduação" <%= vaga.escolaridade === 'Pós-graduação' ? 'selected' : '' %>>Pós-graduação</option>
-        </select>
-
-        <label for="idiomas">Idiomas:</label>
-        <select id="idiomas" name="idiomas[]" multiple>
-          <option value="Português" <%= vaga.idiomas.includes('Português') ? 'selected' : '' %>>Português</option>
-          <option value="Inglês" <%= vaga.idiomas.includes('Inglês') ? 'selected' : '' %>>Inglês</option>
-          <option value="Espanhol" <%= vaga.idiomas.includes('Espanhol') ? 'selected' : '' %>>Espanhol</option>
-          <option value="Francês" <%= vaga.idiomas.includes('Francês') ? 'selected' : '' %>>Francês</option>
-          <option value="Alemão" <%= vaga.idiomas.includes('Alemão') ? 'selected' : '' %>>Alemão</option>
-          <option value="Italiano" <%= vaga.idiomas.includes('Italiano') ? 'selected' : '' %>>Italiano</option>
-          <option value="Mandarim" <%= vaga.idiomas.includes('Mandarim') ? 'selected' : '' %>>Mandarim</option>
-          <option value="Japonês" <%= vaga.idiomas.includes('Japonês') ? 'selected' : '' %>>Japonês</option>
-          <option value="Árabe" <%= vaga.idiomas.includes('Árabe') ? 'selected' : '' %>>Árabe</option>
-        </select>
-
-        <label for="beneficios">Benefícios:</label>
-        <select id="beneficios" name="beneficios[]" multiple required>
-          <option value="Vale alimentação" <%= vaga.beneficios.includes('Vale alimentação') ? 'selected' : '' %>>Vale alimentação</option>
-          <option value="Vale refeição" <%= vaga.beneficios.includes('Vale refeição') ? 'selected' : '' %>>Vale refeição</option>
-          <option value="Plano médico" <%= vaga.beneficios.includes('Plano médico') ? 'selected' : '' %>>Plano médico</option>
-          <option value="Plano odontológico" <%= vaga.beneficios.includes('Plano odontológico') ? 'selected' : '' %>>Plano odontológico</option>
-          <option value="Vale transporte" <%= vaga.beneficios.includes('Vale transporte') ? 'selected' : '' %>>Vale transporte</option>
-          <option value="Seguro de vida" <%= vaga.beneficios.includes('Seguro de vida') ? 'selected' : '' %>>Seguro de vida</option>
-          <option value="Auxílio creche" <%= vaga.beneficios.includes('Auxílio creche') ? 'selected' : '' %>>Auxílio creche</option>
-          <option value="Participação nos lucros" <%= vaga.beneficios.includes('Participação nos lucros') ? 'selected' : '' %>>Participação nos lucros</option>
-        </select>
-
-        <button type="submit">Salvar Alterações</button>
-      </form>
-    </div>
+      <label>Disponibilidade:</label>
+      <div class="checkbox-group">
+        <% const disponibilidades = ["Manhã", "Tarde", "Noite", "Madrugada", "Finais de Semana", "Feriados", "Viajar"] %>
+        <% disponibilidades.forEach(disp => { %>
+          <div class="checkbox-item">
+            <input type="checkbox" 
+                   id="disponibilidade-<%= disp.toLowerCase().replace(/ /g, '-') %>" 
+                   name="disponibilidade[]" 
+                   value="<%= disp %>"
+                   <%= vaga.disponibilidade.includes(disp) ? 'checked' : '' %>>
+            <label for="disponibilidade-<%= disp.toLowerCase().replace(/ /g, '-') %>"><%= disp %></label>
+          </div>
+        <% }) %>
+      </div>
+    
+      <label for="horarioTrabalho">Horário de Trabalho:</label>
+      <input type="text" id="horarioTrabalho" name="horarioTrabalho" value="<%= vaga.horarioTrabalho %>" required>
+    
+      <label for="escolaridade">Escolaridade:</label>
+      <select id="escolaridade" name="escolaridade" required>
+        <% const escolaridades = [
+          "Indiferente",
+          "Alfabetizado",
+          "Ensino fundamental incompleto",
+          "Ensino fundamental completo",
+          "Ensino médio incompleto",
+          "Ensino médio completo",
+          "Ensino técnico incompleto",
+          "Ensino técnico completo",
+          "Ensino superior incompleto",
+          "Ensino superior completo",
+          "Pós-graduação incompleta",
+          "Pós-graduação completa",
+          "Mestrado",
+          "Doutorado"
+        ] %>
+        <% escolaridades.forEach(esc => { %>
+          <option value="<%= esc %>" <%= vaga.escolaridade === esc ? 'selected' : '' %>><%= esc %></option>
+        <% }) %>
+      </select>
+    
+      <label>Idiomas:</label>
+      <div class="checkbox-group">
+        <% const idiomas = ["Português", "Inglês", "Espanhol", "Francês", "Alemão", "Mandarim", "Japonês", "Italiano", "Russo"] %>
+        <% idiomas.forEach(idioma => { %>
+          <div class="checkbox-item">
+            <input type="checkbox" 
+                   id="idioma-<%= idioma.toLowerCase() %>" 
+                   name="idiomas[]" 
+                   value="<%= idioma %>"
+                   <%= vaga.idiomas.includes(idioma) ? 'checked' : '' %>>
+            <label for="idioma-<%= idioma.toLowerCase() %>"><%= idioma %></label>
+          </div>
+        <% }) %>
+      </div>
+    
+      <label>Benefícios:</label>
+      <div class="checkbox-group">
+        <% const beneficios = [
+          "Vale alimentação",
+          "Vale refeição",
+          "Vale transporte",
+          "Plano médico",
+          "Plano odontológico",
+          "Seguro de vida",
+          "Auxílio creche",
+          "Participação nos lucros",
+          "Gym pass",
+          "Auxílio educação",
+          "Bônus por desempenho",
+          "Day off no aniversário",
+          "Cesta básica",
+          "Desconto em produtos"
+        ] %>
+        <% beneficios.forEach(beneficio => { %>
+          <div class="checkbox-item">
+            <input type="checkbox" 
+                   id="beneficio-<%= beneficio.toLowerCase().replace(/ /g, '-') %>" 
+                   name="beneficios[]" 
+                   value="<%= beneficio %>"
+                   <%= vaga.beneficios.includes(beneficio) ? 'checked' : '' %>>
+            <label for="beneficio-<%= beneficio.toLowerCase().replace(/ /g, '-') %>"><%= beneficio %></label>
+          </div>
+        <% }) %>
+      </div>
+    
+      <button type="submit">Salvar Alterações</button>
+    </form>
   </div>
-  <%- include('../partials/footer') %> 
+</div>
+
+<%- include('../partials/footer') %> 
