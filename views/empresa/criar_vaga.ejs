@@ -33,6 +33,30 @@
     background: #01162a;
   }
 
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 150px;
+}
+
+.checkbox-item input[type="checkbox"] {
+  width: auto;
+  margin-right: 5px;
+}
+
+.checkbox-item label {
+  margin: 0;
+  font-weight: normal;
+}
+
 </style>
   <div class="main-login">
     
@@ -55,8 +79,7 @@
       
         <label for="faixaSalarial">Faixa Salarial:</label>
         <select id="faixaSalarial" name="faixaSalarial" required>
-          <option value="">Selecione</option>
-          <option value="Até 2.000">Até 2.000"</option>
+          <option value="Até 2.000">Até 2.000</option>
           <option value="A partir de R$ 2.000,00">A partir de R$ 2.000,00</option>
           <option value="A partir de R$ 3.000,00">A partir de R$ 3.000,00</option>
           <option value="A partir de R$ 4.000,00">A partir de R$ 4.000,00</option>
@@ -68,99 +91,187 @@
           <option value="A partir de R$ 10.000,00">A partir de R$ 10.000,00</option>
           <option value="A partir de R$ 15.000,00">A partir de R$ 15.000,00</option>
           <option value="A partir de R$ 20.000,00">A partir de R$ 20.000,00</option>
-          <!-- Adicione mais opções conforme necessário -->
         </select>
       
         <label for="tipoContrato">Tipo de Contrato:</label>
         <select id="tipoContrato" name="tipoContrato" required>
-          <option value="">Selecione</option>
           <option value="CLT">CLT</option>
           <option value="PJ">PJ</option>
           <option value="Temporário">Temporário</option>
           <option value="Autônomo">Autônomo</option>
           <option value="Estágio">Estágio</option>
           <option value="Freelancer">Freelancer</option>
-          <option value="Aprendiz">Aprendiz</option>      
+          <option value="Aprendiz">Aprendiz</option>
         </select>
       
-        <label for="disponibilidade">Disponibilidade:</label>
-        <select id="disponibilidade" name="disponibilidade">
-          <option value="manha">Manhã</option>
-          <option value="tarde">Tarde</option>
-          <option value="noite">Noite</option>
-          <option value="madrugada">Madrugada</option>
-          <option value="finais_de_semana">Finais de Semana</option>
-          <option value="feriados">Feriados</option>
-          <option value="viajar">Viajar</option>
-        </select>
+        <label>Tipo de Trabalho:</label>
+        <div class="checkbox-group">
+          <div class="checkbox-item">
+            <input type="checkbox" id="tipoTrabalho-presencial" name="tipoTrabalho[]" value="Presencial">
+            <label for="tipoTrabalho-presencial">Presencial</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="tipoTrabalho-remoto" name="tipoTrabalho[]" value="Home Office">
+            <label for="tipoTrabalho-remoto">Home Office</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="tipoTrabalho-hibrido" name="tipoTrabalho[]" value="Híbrido">
+            <label for="tipoTrabalho-hibrido">Híbrido</label>
+          </div>
+        </div>
 
+        <label>Disponibilidade:</label>
+        <div class="checkbox-group">
+          <div class="checkbox-item">
+            <input type="checkbox" id="disponibilidade-manha" name="disponibilidade[]" value="Manhã">
+            <label for="disponibilidade-manha">Manhã</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="disponibilidade-tarde" name="disponibilidade[]" value="Tarde">
+            <label for="disponibilidade-tarde">Tarde</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="disponibilidade-noite" name="disponibilidade[]" value="Noite">
+            <label for="disponibilidade-noite">Noite</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="disponibilidade-madrugada" name="disponibilidade[]" value="Madrugada">
+            <label for="disponibilidade-madrugada">Madrugada</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="disponibilidade-fds" name="disponibilidade[]" value="Finais de Semana">
+            <label for="disponibilidade-fds">Finais de Semana</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="disponibilidade-feriados" name="disponibilidade[]" value="Feriados">
+            <label for="disponibilidade-feriados">Feriados</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="disponibilidade-viajar" name="disponibilidade[]" value="Viajar">
+            <label for="disponibilidade-viajar">Viajar</label>
+          </div>
+        </div>
       
         <label for="horarioTrabalho">Horário de Trabalho:</label>
-        <input type="text" id="horarioTrabalho" name="horarioTrabalho">
-      
-        <label for="tipoTrabalho">Tipo de Trabalho:</label>
-        <select id="tipoTrabalho" name="tipoTrabalho" required>
-          <option value="">Selecione</option>
-          <option value="Presencial">Presencial</option>
-          <option value="Remoto">Home Office</option>
-          <option value="Híbrido">Híbrido</option>
-        </select>
+        <input type="text" id="horarioTrabalho" name="horarioTrabalho" required>
       
         <label for="escolaridade">Escolaridade:</label>
         <select id="escolaridade" name="escolaridade" required>
-          <option value="">Selecione</option>
           <option value="Indiferente">Indiferente</option>
           <option value="Alfabetizado">Alfabetizado</option>
           <option value="Ensino fundamental incompleto">Ensino fundamental incompleto</option>
           <option value="Ensino fundamental completo">Ensino fundamental completo</option>
           <option value="Ensino médio incompleto">Ensino médio incompleto</option>
           <option value="Ensino médio completo">Ensino médio completo</option>
-          <option value="Ensino técnico ou profissionalizante incompleto">Ensino técnico ou profissionalizante incompleto</option>
-          <option value="Ensino técnico ou profissionalizante completo">Ensino técnico ou profissionalizante completo</option>
-          <option value="Ensino tecnólogo incompleto">Ensino tecnólogo incompleto</option>
-          <option value="Ensino tecnólogo completo">Ensino tecnólogo completo</option>
+          <option value="Ensino técnico incompleto">Ensino técnico incompleto</option>
+          <option value="Ensino técnico completo">Ensino técnico completo</option>
           <option value="Ensino superior incompleto">Ensino superior incompleto</option>
           <option value="Ensino superior completo">Ensino superior completo</option>
-          <option value="Pós graduação incompleta">Pós graduação incompleta</option>
-          <option value="Pós graduação completa">Pós graduação completa</option>
-          <!-- Continue com as demais opções -->
+          <option value="Pós-graduação incompleta">Pós-graduação incompleta</option>
+          <option value="Pós-graduação completa">Pós-graduação completa</option>
+          <option value="Mestrado">Mestrado</option>
+          <option value="Doutorado">Doutorado</option>
         </select>
       
         <label for="idiomas">Idiomas:</label>
-        <select id="idiomas" name="idiomas[]" multiple required>
-          <option value="Português">Português</option>
-          <option value="Inglês">Inglês</option>
-          <option value="Mandarim">Mandarim</option>
-          <option value="Espanhol">Espanhol</option>
-          <option value="Francês">Francês</option>
-          <option value="Árabe">Árabe</option>
-          <option value="Outros">Outros</option>          
-        </select>
+        <div class="checkbox-group">
+          <div class="checkbox-item">
+            <input type="checkbox" id="idioma-portugues" name="idiomas[]" value="Português">
+            <label for="idioma-portugues">Português</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="idioma-ingles" name="idiomas[]" value="Inglês">
+            <label for="idioma-ingles">Inglês</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="idioma-espanhol" name="idiomas[]" value="Espanhol">
+            <label for="idioma-espanhol">Espanhol</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="idioma-frances" name="idiomas[]" value="Francês">
+            <label for="idioma-frances">Francês</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="idioma-alemao" name="idiomas[]" value="Alemão">
+            <label for="idioma-alemao">Alemão</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="idioma-mandarim" name="idiomas[]" value="Mandarim">
+            <label for="idioma-mandarim">Mandarim</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="idioma-japones" name="idiomas[]" value="Japonês">
+            <label for="idioma-japones">Japonês</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="idioma-italiano" name="idiomas[]" value="Italiano">
+            <label for="idioma-italiano">Italiano</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="idioma-russo" name="idiomas[]" value="Russo">
+            <label for="idioma-russo">Russo</label>
+          </div>
+        </div>
       
         <label for="beneficios">Benefícios:</label>
-        <select id="beneficios" name="beneficios[]" multiple required>
-          <option value="Vale alimentação">Vale alimentação</option>
-          <option value="Vale refeição">Vale refeição</option>
-          <option value="Plano médico">Plano médico</option>
-          <option value="Plano odontológico">Plano odontológico</option>
-          <option value="Gym pass ou convênio academia">Gym pass ou convênio academia</option>
-          <option value="Vale transporte">Vale transporte</option>
-          <option value="Seguro de vida">Seguro de vida</option>
-          <option value="Reembolso educacional">Reembolso educacional</option>
-          <option value="Plano de carreira">Plano de carreira</option>
-          <option value="Plataformas de educação">Plataformas de educação</option>
-          <option value="Bônus por desempenho">Bônus por desempenho</option>
-          <option value="Participação nos lucros">Participação nos lucros</option>
-          <option value="Desconto em produtos ou serviços">Desconto em produtos ou serviços</option>
-          <option value="Empréstimos corporativos">Empréstimos corporativos</option>
-          <option value="Day off no aniversário">Day off no aniversário</option>
-          <option value="Auxílio creche">Auxílio creche</option>
-          <option value="Programa de reconhecimento de talentos">Programa de reconhecimento de talentos</option>
-          <option value="Benefícios de lazer e viagem">Benefícios de lazer e viagem</option>
-          <option value="Cesta básica">Cesta básica</option>
-          <option value="Presente de datas comemorativas">Presente de datas comemorativas</option>
-          
-        </select>
+        <div class="checkbox-group">
+          <div class="checkbox-item">
+            <input type="checkbox" id="beneficio-va" name="beneficios[]" value="Vale alimentação">
+            <label for="beneficio-va">Vale alimentação</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="beneficio-vr" name="beneficios[]" value="Vale refeição">
+            <label for="beneficio-vr">Vale refeição</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="beneficio-vt" name="beneficios[]" value="Vale transporte">
+            <label for="beneficio-vt">Vale transporte</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="beneficio-plano-medico" name="beneficios[]" value="Plano médico">
+            <label for="beneficio-plano-medico">Plano médico</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="beneficio-plano-odonto" name="beneficios[]" value="Plano odontológico">
+            <label for="beneficio-plano-odonto">Plano odontológico</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="beneficio-seguro" name="beneficios[]" value="Seguro de vida">
+            <label for="beneficio-seguro">Seguro de vida</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="beneficio-creche" name="beneficios[]" value="Auxílio creche">
+            <label for="beneficio-creche">Auxílio creche</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="beneficio-plr" name="beneficios[]" value="Participação nos lucros">
+            <label for="beneficio-plr">Participação nos lucros</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="beneficio-gympass" name="beneficios[]" value="Gym pass">
+            <label for="beneficio-gympass">Gym pass</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="beneficio-educacao" name="beneficios[]" value="Auxílio educação">
+            <label for="beneficio-educacao">Auxílio educação</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="beneficio-bonus" name="beneficios[]" value="Bônus por desempenho">
+            <label for="beneficio-bonus">Bônus por desempenho</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="beneficio-dayoff" name="beneficios[]" value="Day off no aniversário">
+            <label for="beneficio-dayoff">Day off no aniversário</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="beneficio-cesta" name="beneficios[]" value="Cesta básica">
+            <label for="beneficio-cesta">Cesta básica</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="beneficio-desconto" name="beneficios[]" value="Desconto em produtos">
+            <label for="beneficio-desconto">Desconto em produtos</label>
+          </div>
+        </div>
       
         <button type="submit">Criar Vaga</button>
       </form>
