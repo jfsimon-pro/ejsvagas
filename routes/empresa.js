@@ -106,7 +106,12 @@ module.exports = (prisma) => {
     } = req.body;
 
     try {
-      await prisma.vaga.create({
+      // Converter o valor único do radio em um array
+      const tipoTrabalho = Array.isArray(req.body['tipoTrabalho[]']) 
+        ? req.body['tipoTrabalho[]'] 
+        : [req.body['tipoTrabalho[]']];
+
+      const vaga = await prisma.vaga.create({
         data: {
           titulo,
           descricao,
@@ -116,7 +121,7 @@ module.exports = (prisma) => {
           tipoContrato,
           disponibilidade: disponibilidade || [],
           horarioTrabalho,
-          tipoTrabalho: tipoTrabalho || [],
+          tipoTrabalho,
           escolaridade,
           idiomas: idiomas || [],
           beneficios: beneficios || [],
