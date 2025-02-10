@@ -519,6 +519,7 @@ router.get('/vagas', verifyToken, async (req, res) => {
         const faixaSalarial = req.query.faixaSalarial || '';
         const tipoContrato = req.query.tipoContrato || '';
         const vagaPcd = req.query.vagaPcd || '';
+        const uf = req.query.uf || '';
 
         // Pegar o ID do candidato logado
         const candidatoId = req.user.userId;
@@ -562,6 +563,10 @@ router.get('/vagas', verifyToken, async (req, res) => {
             where.vagaPcd = vagaPcd;
         }
 
+        if (uf) {
+            where.uf = uf;
+        }
+
         // Buscar vagas com paginação
         const vagas = await prisma.vaga.findMany({
             skip,
@@ -585,6 +590,7 @@ router.get('/vagas', verifyToken, async (req, res) => {
             faixaSalarial,
             tipoContrato,
             vagaPcd,
+            uf,
             currentDate: new Date() // Passa a data atual para o template
         });
 
