@@ -128,6 +128,25 @@
       font-size: 1.5rem;
     }
   }
+
+  .experiencia-item {
+    background: #f5f5f5;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border-left: 4px solid #F78E0F;
+  }
+  
+  .experiencia-item p {
+    margin: 5px 0;
+  }
+  
+  h3 {
+    margin-top: 20px;
+    color: #333;
+    border-bottom: 2px solid #F78E0F;
+    padding-bottom: 5px;
+  }
 </style>
 
 <div class="perfil-candidato-container">
@@ -166,13 +185,9 @@
 
     <div class="perfil-candidato-section">
       <h2><i class="fas fa-info-circle"></i> Informações Adicionais</h2>
-      <p><strong>Idiomas:</strong> 
-        <% if (candidato.idiomas && candidato.idiomas.length > 0) { %>
-          <%= candidato.idiomas.join(', ') %>
-        <% } else { %>
-          Nenhum idioma registrado.
-        <% } %>
-      </p>
+      <% if (candidato.idiomas && candidato.idiomas.length > 0) { %>
+        <p><strong>Idiomas:</strong> <%= candidato.idiomas.join(', ') %></p>
+      <% } %>
       <p><strong>Escolaridade:</strong> <%= candidato.escolaridade || 'Não informado' %></p>
       <p><strong>Disponibilidade:</strong> <%= candidato.disponibilidade || 'Não informado' %></p>
       <p><strong>Ocupação:</strong> <%= candidato.ocupacao || 'Não informado' %></p>
@@ -209,25 +224,23 @@
 
     <div class="perfil-candidato-section">
       <h2><i class="fas fa-briefcase"></i> Experiências Profissionais</h2>
-      <% if (candidato.experienciasProfissionais && candidato.experienciasProfissionais.length > 0) { %>
-        <ul>
-          <% candidato.experienciasProfissionais.forEach(exp => { %>
-            <li>
-              <strong>Empresa:</strong> <%= exp.empresa %><br>
-              <strong>Cargo:</strong> <%= exp.cargo %><br>
-              <strong>Função:</strong> <%= exp.funcao %><br>
-              <strong>Data de Entrada:</strong> <%= exp.dataEntrada.toLocaleDateString() %><br>
-              <% if (exp.dataSaida) { %>
-                <strong>Data de Saída:</strong> <%= exp.dataSaida.toLocaleDateString() %><br>
-              <% } else { %>
-                <strong>Data de Saída:</strong> Atualmente trabalhando<br>
-              <% } %>
-              <strong>Motivo de Saída:</strong> <%= exp.motivo %>
-            </li>
-          <% }); %>
-        </ul>
+      <% if (candidato.experiencias && candidato.experiencias.length > 0) { %>
+        <% candidato.experiencias.forEach(exp => { %>
+          <div class="experiencia-item">
+            <p><strong>Empresa:</strong> <%= exp.empresa %></p>
+            <p><strong>Cargo:</strong> <%= exp.cargo %></p>
+            <p><strong>Função:</strong> <%= exp.funcao %></p>
+            <p><strong>Período:</strong> 
+              <%= new Date(exp.dataEntrada).toLocaleDateString('pt-BR') %> - 
+              <%= exp.dataSaida ? new Date(exp.dataSaida).toLocaleDateString('pt-BR') : 'Atual' %>
+            </p>
+            <% if (exp.motivo) { %>
+              <p><strong>Motivo da Saída:</strong> <%= exp.motivo %></p>
+            <% } %>
+          </div>
+        <% }); %>
       <% } else { %>
-        <p>Sem experiências profissionais cadastradas.</p>
+        <p>Nenhuma experiência profissional cadastrada.</p>
       <% } %>
     </div>
 
