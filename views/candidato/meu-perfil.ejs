@@ -1,0 +1,8 @@
+        <p><strong>Cidade:</strong> <%= candidato.cidade %></p>
+        <p><strong>UF:</strong> <%= candidato.uf %></p>
+        <p><strong>CNH:</strong> <%= candidato.cnh || 'Não tenho' %></p>
+        <p><strong>PCD:</strong> <%= candidato.pcd || 'Não' %></p>
+
+        <% if (candidato.idiomas && candidato.idiomas.length > 0) { %>
+          <p><strong>Idiomas:</strong> <%= candidato.idiomas.join(', ') %></p>
+        <% } %> 

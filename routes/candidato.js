@@ -726,7 +726,12 @@ router.get('/meu-perfil', verifyToken, async (req, res) => {
       where: { id: req.user.userId },
       include: {
         cursos: true,
-        experienciasProfissionais: true,
+        experiencias: true,
+        candidaturas: {
+          include: {
+            vaga: true
+          }
+        }
       },
     });
 
