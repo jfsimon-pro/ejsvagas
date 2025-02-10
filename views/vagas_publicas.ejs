@@ -161,6 +161,48 @@
       width: 90%;
     }
   }
+
+  .autocomplete-suggestions {
+    position: absolute;
+    background: white;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 0 0 8px 8px;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+
+  .suggestion {
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .suggestion:hover {
+    background: #f0f0f0;
+  }
+
+  .search-section form {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  #busca {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+
+  #busca:focus {
+    border-color: #F78E0F;
+    outline: none;
+  }
 </style>
 
 <div class="vagas-publicas">
@@ -250,6 +292,6 @@
   </div>
 </div>
 
-<script src="/js/autocomplete.js"></script>
+<script src="/js/autocomplete_vagas_publicas.js"></script>
 
 <%- include('partials/footer') %> 
