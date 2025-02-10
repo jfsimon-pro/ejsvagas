@@ -540,6 +540,40 @@ input[type="date"]:focus {
         >
 
         <div class="label-info">
+          <label>Precisa de CNH?</label>
+          <div class="info-icon">
+            Informação
+            <span class="tooltip">Selecione as categorias de CNH necessárias para a vaga. Se não precisar, marque "Não precisa".</span>
+          </div>
+        </div>
+        <div class="checkbox-group required cnh-group">
+          <div class="checkbox-item">
+            <input type="checkbox" id="cnh-a" name="cnh[]" value="A" class="cnh-option">
+            <label for="cnh-a">A</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="cnh-b" name="cnh[]" value="B" class="cnh-option">
+            <label for="cnh-b">B</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="cnh-c" name="cnh[]" value="C" class="cnh-option">
+            <label for="cnh-c">C</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="cnh-d" name="cnh[]" value="D" class="cnh-option">
+            <label for="cnh-d">D</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="cnh-e" name="cnh[]" value="E" class="cnh-option">
+            <label for="cnh-e">E</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="cnh-nao" name="cnh[]" value="Não precisa" class="cnh-nao">
+            <label for="cnh-nao">Não precisa</label>
+          </div>
+        </div>
+
+        <div class="label-info">
           <label for="dataLimite">Aceitando candidaturas até:</label>
           <div class="info-icon">
             Informação
@@ -561,6 +595,30 @@ input[type="date"]:focus {
   </div>
   <script src="/js/autocompleteempresa.js"></script>
   <script>
+    // Lógica para os checkboxes de CNH
+    document.addEventListener('DOMContentLoaded', function() {
+      const cnhOptions = document.querySelectorAll('.cnh-option');
+      const cnhNao = document.querySelector('.cnh-nao');
+
+      // Quando "Não precisa" é marcado, desmarca as outras opções
+      cnhNao.addEventListener('change', function() {
+        if (this.checked) {
+          cnhOptions.forEach(option => {
+            option.checked = false;
+          });
+        }
+      });
+
+      // Quando qualquer outra opção é marcada, desmarca "Não precisa"
+      cnhOptions.forEach(option => {
+        option.addEventListener('change', function() {
+          if (this.checked) {
+            cnhNao.checked = false;
+          }
+        });
+      });
+    });
+
     document.querySelector('form').addEventListener('submit', function(e) {
       // Verificar checkboxes
       const checkboxGroups = document.querySelectorAll('.checkbox-group.required');
