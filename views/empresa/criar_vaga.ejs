@@ -130,6 +130,43 @@ textarea:invalid {
   opacity: 1;
 }
 
+.whatsapp-support {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.whatsapp-support p {
+  color: #fff;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.whatsapp-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #25D366;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(37, 211, 102, 0.2);
+}
+
+.whatsapp-button:hover {
+  background: #1fa855;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-button:active {
+  transform: translateY(0);
+}
+
 </style>
   <div class="main-login">
     
@@ -400,6 +437,12 @@ textarea:invalid {
         <button type="submit">Criar Vaga</button>
       </form>
       
+      <div class="whatsapp-support">
+        <p>Está tendo problemas em criar sua vaga?</p>
+        <a href="https://wa.me/554135423456" target="_blank" class="whatsapp-button">
+          Nos chame no WhatsApp
+        </a>
+      </div>
     </div>
   </div>
   <script src="/js/autocompleteempresa.js"></script>
