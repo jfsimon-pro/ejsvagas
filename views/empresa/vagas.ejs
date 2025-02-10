@@ -16,12 +16,26 @@
       <% } else { %>
         <% vagas.forEach(vaga => { %>
           <li>
-            <h2><%= vaga.titulo %></h2>
+            <div class="vaga-card">
+              <h3><%= vaga.titulo %></h3>
+              <div class="vaga-info">
+                <div class="vaga-status">
+                  <% if (vaga.vagaPcd === 'Sim') { %>
+                    <span class="badge pcd">Vaga PCD</span>
+                  <% } %>
+                  <span class="badge location"><i class="fas fa-map-marker-alt"></i> <%= vaga.cidade %>/<%= vaga.uf %></span>
+                </div>
+                <p><strong>Cargo:</strong> <%= vaga.cargo %></p>
+                <p><strong>Tipo de Contrato:</strong> <%= vaga.tipoContrato %></p>
+                <p><strong>Faixa Salarial:</strong> <%= vaga.faixaSalarial %></p>
+                <p><strong>Localização:</strong> <%= vaga.cidade %>/<%= vaga.uf %></p>
+                <p><strong>Vaga PCD:</strong> <%= vaga.vagaPcd %></p>
+                <p><strong>Data Limite:</strong> <%= new Date(vaga.dataLimite).toLocaleDateString('pt-BR') %></p>
+                <p><strong>Candidaturas:</strong> <%= vaga.candidaturas ? vaga.candidaturas.length : 0 %></p>
+              </div>
+            </div>
             <p><strong>Descrição:</strong></p>
             <p class="vaga-descrita"><%- vaga.descricao.replace(/\n/g, '<br>') %></p>
-            <p><strong>Faixa Salarial:</strong> <%= vaga.faixaSalarial %></p>
-            <p><strong>Cargo/Função:</strong> <%= vaga.cargo %></p>
-            <p><strong>Tipo de Contrato:</strong> <%= vaga.tipoContrato %></p>
             <p><strong>Disponibilidade:</strong> <%= vaga.disponibilidade || 'Não especificado' %></p>
             <p><strong>Horário de Trabalho:</strong> <span class="vaga-descrita"><%- (vaga.horarioTrabalho || 'Não especificado').replace(/\n/g, '<br>') %></span></p>
             <p><strong>Tipo de Trabalho:</strong> <%= vaga.tipoTrabalho %></p>
@@ -59,3 +73,39 @@
   </div>
 </div>
 <%- include('../partials/footer') %>
+
+<style>
+  .vaga-status {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .badge {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .badge.pcd {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  .badge.location {
+    background-color: #2196F3;
+    color: white;
+  }
+
+  .vaga-info p {
+    margin: 8px 0;
+    color: #666;
+  }
+
+  .vaga-info strong {
+    color: #333;
+  }
+
+  // ... resto dos estilos existentes ...
+</style>
