@@ -75,27 +75,108 @@ textarea:invalid {
   border-color: #ff0000;
 }
 
+.label-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.info-icon {
+  position: relative;
+  color: #F78E0F;
+  cursor: help;
+  font-size: 16px;
+}
+
+.info-icon .tooltip {
+  visibility: hidden;
+  width: 250px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.4;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.info-icon .tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+.info-icon:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
 </style>
   <div class="main-login">
     
     <div class="content-main-login">
       <h1>Criar Nova Vaga</h1>
       <form action="/empresa/vagas/criar" method="POST">
-        <label for="titulo">Título da Vaga:</label>
+        <div class="label-info">
+          <label for="titulo">Título da Vaga:</label>
+          <div class="info-icon">
+            <i class="fas fa-info-circle"></i>
+            <span class="tooltip">Escolha um título claro e objetivo que descreva bem a posição. Ex: "Desenvolvedor Full Stack Senior" ou "Analista Financeiro Jr".</span>
+          </div>
+        </div>
         <input type="text" id="titulo" name="titulo" required>
       
-        <label for="descricao">Descrição:</label>
+        <div class="label-info">
+          <label for="descricao">Descrição:</label>
+          <div class="info-icon">
+            <i class="fas fa-info-circle"></i>
+            <span class="tooltip">Detalhe as principais responsabilidades, requisitos e o que você espera do candidato. Seja específico e claro.</span>
+          </div>
+        </div>
         <textarea id="descricao" name="descricao" required></textarea>
       
-        <label for="tags">Tags (separadas por vírgula):</label>
+        <div class="label-info">
+          <label for="tags">Tags (separadas por vírgula):</label>
+          <div class="info-icon">
+            <i class="fas fa-info-circle"></i>
+            <span class="tooltip">Adicione palavras-chave relevantes para ajudar na busca por vagas.</span>
+          </div>
+        </div>
         <input type="text" id="tags" name="tags" required>
       
-        <label for="cargo">Cargo/Função:</label>
+        <div class="label-info">
+          <label for="cargo">Cargo/Função:</label>
+          <div class="info-icon">
+            <i class="fas fa-info-circle"></i>
+            <span class="tooltip">Digite o cargo específico da vaga. Comece a digitar para ver sugestões de cargos padronizados.</span>
+          </div>
+        </div>
         <input type="text" id="cargo" name="cargo" placeholder="Digite o cargo ou função" required>
         <div id="suggestions" class="autocomplete-suggestions"></div>
 
       
-        <label for="faixaSalarial">Faixa Salarial:</label>
+        <div class="label-info">
+          <label for="faixaSalarial">Faixa Salarial:</label>
+          <div class="info-icon">
+            <i class="fas fa-info-circle"></i>
+            <span class="tooltip">Selecione a faixa salarial adequada para a posição. Seja transparente para atrair os candidatos certos.</span>
+          </div>
+        </div>
         <select id="faixaSalarial" name="faixaSalarial" required>
           <option value="">Selecione uma faixa salarial</option>
           <option value="Até 2.000">Até 2.000</option>
@@ -112,7 +193,13 @@ textarea:invalid {
           <option value="A partir de R$ 20.000,00">A partir de R$ 20.000,00</option>
         </select>
       
-        <label for="tipoContrato">Tipo de Contrato:</label>
+        <div class="label-info">
+          <label for="tipoContrato">Tipo de Contrato:</label>
+          <div class="info-icon">
+            <i class="fas fa-info-circle"></i>
+            <span class="tooltip">Escolha o tipo de contratação. Isso ajuda os candidatos a entenderem a natureza do vínculo profissional.</span>
+          </div>
+        </div>
         <select id="tipoContrato" name="tipoContrato" required>
           <option value="">Selecione o tipo de contrato</option>
           <option value="CLT">CLT</option>
@@ -140,7 +227,13 @@ textarea:invalid {
           </div>
         </div>
 
-        <label>Disponibilidade:</label>
+        <div class="label-info">
+          <label for="disponibilidade">Disponibilidade:</label>
+          <div class="info-icon">
+            <i class="fas fa-info-circle"></i>
+            <span class="tooltip">Indique se a vaga é para início imediato ou futuro. Seja claro sobre as expectativas de disponibilidade.</span>
+          </div>
+        </div>
         <div class="checkbox-group required">
           <div class="checkbox-item">
             <input type="checkbox" id="disponibilidade-manha" name="disponibilidade[]" value="Manhã">
@@ -172,7 +265,13 @@ textarea:invalid {
           </div>
         </div>
       
-        <label for="horarioTrabalho">Horário de Trabalho:</label>
+        <div class="label-info">
+          <label for="horarioTrabalho">Horário de Trabalho:</label>
+          <div class="info-icon">
+            <i class="fas fa-info-circle"></i>
+            <span class="tooltip">Especifique o horário de trabalho, incluindo turnos, flexibilidade e carga horária semanal.</span>
+          </div>
+        </div>
         <input type="text" id="horarioTrabalho" name="horarioTrabalho" required>
       
         <label for="escolaridade">Escolaridade:</label>
