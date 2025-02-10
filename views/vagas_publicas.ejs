@@ -30,6 +30,7 @@
     border-radius: 8px;
     font-size: 16px;
     transition: border-color 0.3s ease;
+    margin-bottom: 10px;
   }
 
   .search-input:focus {
@@ -73,6 +74,9 @@
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   .vaga-card:hover {
@@ -88,11 +92,13 @@
 
   .vaga-info {
     margin-bottom: 15px;
+    flex-grow: 1;
   }
 
   .vaga-info p {
     margin-bottom: 8px;
     color: #666;
+    line-height: 1.4;
   }
 
   .vaga-info strong {
@@ -183,6 +189,15 @@
               <p><strong>Cargo:</strong> <%= vaga.cargo %></p>
               <p><strong>Salário:</strong> <%= vaga.faixaSalarial %></p>
               <p><strong>Tipo de Contrato:</strong> <%= vaga.tipoContrato %></p>
+              <p><strong>Disponibilidade:</strong> <%= vaga.disponibilidade %></p>
+              <p><strong>Tipo de Trabalho:</strong> <%= vaga.tipoTrabalho %></p>
+              <p><strong>Escolaridade:</strong> <%= vaga.escolaridade %></p>
+              <% if (vaga.tags && vaga.tags.length > 0) { %>
+                <p><strong>Tags:</strong> <%= vaga.tags.join(', ') %></p>
+              <% } %>
+              <% if (vaga.beneficios && vaga.beneficios.length > 0) { %>
+                <p><strong>Benefícios:</strong> <%= vaga.beneficios.join(', ') %></p>
+              <% } %>
             </div>
             <a href="/auth/register_candidato" class="btn-candidatar">Candidate-se</a>
           </div>

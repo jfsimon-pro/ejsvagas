@@ -84,13 +84,20 @@ app.get('/vagas', async (req, res) => {
     const busca = req.query.busca || '';
 
     // Construir where clause baseado na busca
-    const where = busca ? {
-      OR: [
+    const where = {};
+    if (busca) {
+      where.OR = [
         { titulo: { contains: busca, mode: 'insensitive' } },
         { cargo: { contains: busca, mode: 'insensitive' } },
+        { descricao: { contains: busca, mode: 'insensitive' } },
+        { empresa: { nomeFantasia: { contains: busca, mode: 'insensitive' } } },
+        { empresa: { cidade: { contains: busca, mode: 'insensitive' } } },
+        { empresa: { uf: { contains: busca, mode: 'insensitive' } } },
+        { tipoContrato: { contains: busca, mode: 'insensitive' } },
+        { faixaSalarial: { contains: busca, mode: 'insensitive' } },
         { tags: { hasSome: [busca] } }
-      ]
-    } : {};
+      ];
+    }
 
     // Buscar vagas com paginação
     const vagas = await prisma.vaga.findMany({
@@ -99,13 +106,7 @@ app.get('/vagas', async (req, res) => {
       take: perPage,
       orderBy: { createdAt: 'desc' },
       include: {
-        empresa: {
-          select: {
-            nomeFantasia: true,
-            cidade: true,
-            uf: true
-          }
-        }
+        empresa: true
       }
     });
 
