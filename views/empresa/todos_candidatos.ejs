@@ -1,1 +1,136 @@
- 
+<%- include('./header') %>
+
+<style>
+  .candidatos-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+  }
+
+  .candidato-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .candidato-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  .candidato-info {
+    margin-bottom: 15px;
+  }
+
+  .candidato-info p {
+    margin: 5px 0;
+  }
+
+  .experiencias, .cursos {
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+
+  .experiencia-item, .curso-item {
+    margin: 10px 0;
+    padding: 10px;
+    border-left: 3px solid #F78E0F;
+  }
+
+  h2 {
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    color: #F78E0F;
+    margin-bottom: 10px;
+  }
+
+  h4 {
+    color: #555;
+    margin: 10px 0;
+  }
+
+  .tag {
+    background: #F78E0F;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.9em;
+    margin-right: 5px;
+  }
+</style>
+
+<div class="candidatos-container">
+  <h2>Todos os Candidatos</h2>
+
+  <% if (candidatos && candidatos.length > 0) { %>
+    <% candidatos.forEach(candidato => { %>
+      <div class="candidato-card">
+        <div class="candidato-header">
+          <h3><%= candidato.nomeCompleto %></h3>
+        </div>
+
+        <div class="candidato-info">
+          <p><strong>Email:</strong> <%= candidato.email %></p>
+          <p><strong>Telefone:</strong> <%= candidato.telefone %></p>
+          <p><strong>Localização:</strong> <%= candidato.cidade %>/<%= candidato.uf %></p>
+          <% if (candidato.escolaridade) { %>
+            <p><strong>Escolaridade:</strong> <%= candidato.escolaridade %></p>
+          <% } %>
+          <% if (candidato.idiomas && candidato.idiomas.length > 0) { %>
+            <p><strong>Idiomas:</strong> <%= candidato.idiomas.join(', ') %></p>
+          <% } %>
+          <p><strong>PCD:</strong> <%= candidato.pcd || 'Não' %></p>
+          <% if (candidato.cnh && candidato.cnh.length > 0) { %>
+            <p><strong>CNH:</strong> <%= candidato.cnh.join(', ') %></p>
+          <% } %>
+        </div>
+
+        <% if (candidato.experiencias && candidato.experiencias.length > 0) { %>
+          <div class="experiencias">
+            <h4>Experiências Profissionais</h4>
+            <% candidato.experiencias.forEach(exp => { %>
+              <div class="experiencia-item">
+                <p><strong>Empresa:</strong> <%= exp.empresa %></p>
+                <p><strong>Cargo:</strong> <%= exp.cargo %></p>
+                <p><strong>Função:</strong> <%= exp.funcao %></p>
+                <p><strong>Período:</strong> 
+                  <%= new Date(exp.dataEntrada).toLocaleDateString('pt-BR') %> - 
+                  <%= exp.dataSaida ? new Date(exp.dataSaida).toLocaleDateString('pt-BR') : 'Atual' %>
+                </p>
+              </div>
+            <% }); %>
+          </div>
+        <% } %>
+
+        <% if (candidato.cursos && candidato.cursos.length > 0) { %>
+          <div class="cursos">
+            <h4>Cursos</h4>
+            <% candidato.cursos.forEach(curso => { %>
+              <div class="curso-item">
+                <p><strong>Curso:</strong> <%= curso.curso %></p>
+                <p><strong>Instituição:</strong> <%= curso.instituicao %></p>
+                <p><strong>Período:</strong> 
+                  <%= new Date(curso.dataInicio).toLocaleDateString('pt-BR') %> - 
+                  <%= curso.dataConclusao ? new Date(curso.dataConclusao).toLocaleDateString('pt-BR') : 'Em andamento' %>
+                </p>
+              </div>
+            <% }); %>
+          </div>
+        <% } %>
+      </div>
+    <% }); %>
+  <% } else { %>
+    <p>Nenhum candidato encontrado.</p>
+  <% } %>
+</div>
+
+<%- include('../partials/footer') %> 
