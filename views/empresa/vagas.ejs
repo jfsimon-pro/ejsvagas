@@ -37,7 +37,10 @@
             <p><strong>Descrição:</strong></p>
             <p class="vaga-descrita"><%- vaga.descricao.replace(/\n/g, '<br>') %></p>
             <p><strong>Disponibilidade:</strong> <%= vaga.disponibilidade || 'Não especificado' %></p>
-            <p><strong>Horário de Trabalho:</strong> <span class="vaga-descrita"><%- (vaga.horarioTrabalho || 'Não especificado').replace(/\n/g, '<br>') %></span></p>
+            <div class="horario-trabalho">
+              <strong>Horário de Trabalho:</strong>
+              <span><%- (vaga.horarioTrabalho || 'Não especificado').replace(/\n/g, '<br>') %></span>
+            </div>
             <p><strong>Tipo de Trabalho:</strong> <%= vaga.tipoTrabalho %></p>
             <p><strong>Escolaridade:</strong> <%= vaga.escolaridade %></p>
             <p><strong>Idiomas:</strong> <%= vaga.idiomas.length > 0 ? vaga.idiomas.join(', ') : 'Não especificado' %></p>
@@ -272,5 +275,26 @@
     .botoes-gerenciar-vagas {
       flex-direction: column;
     }
+  }
+
+  /* Estilização específica do horário de trabalho */
+  .horario-trabalho {
+    background: #404040;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px 0;
+    color: #ccc;
+  }
+
+  .horario-trabalho strong {
+    color: #fff;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .horario-trabalho span {
+    display: block;
+    line-height: 1.6;
+    color: #ccc;
   }
 </style>
