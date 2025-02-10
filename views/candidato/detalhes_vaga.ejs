@@ -58,11 +58,19 @@
   <p><strong>Cargo/Função:</strong> <%= vaga.cargo %></p>
   <p><strong>Faixa Salarial:</strong> <%= vaga.faixaSalarial %></p>
   <p><strong>Tipo de Contrato:</strong> <%= vaga.tipoContrato %></p>
+  <p><strong>Cidade/UF:</strong> <%= vaga.cidade %>/<%= vaga.uf %></p>
+  <p><strong>Vaga PCD:</strong> <%= vaga.vagaPcd || 'Não' %></p>
+  <% if (vaga.cnh && vaga.cnh.length > 0) { %>
+    <p><strong>CNH Necessária:</strong> <%= vaga.cnh.join(', ') %></p>
+  <% } %>
+  <p><strong>Data Limite:</strong> <%= new Date(vaga.dataLimite).toLocaleDateString('pt-BR') %></p>
   <p><strong>Disponibilidade:</strong> <%= vaga.disponibilidade %></p>
   <p><strong>Horário de Trabalho:</strong> <span class="vaga-descrita"><%- vaga.horarioTrabalho.replace(/\n/g, '<br>') %></span></p>
   <p><strong>Tipo de Trabalho:</strong> <%= vaga.tipoTrabalho %></p>
   <p><strong>Escolaridade:</strong> <%= vaga.escolaridade %></p>
-  <p><strong>Idiomas Requeridos:</strong> <%= vaga.idiomas.join(', ') %></p>
+  <% if (vaga.idiomas && vaga.idiomas.length > 0) { %>
+    <p><strong>Idiomas:</strong> <%= vaga.idiomas.join(', ') %></p>
+  <% } %>
   <p><strong>Benefícios:</strong> <%= vaga.beneficios.join(', ') %></p>
   <h2>Informações da Empresa</h2>
   <p><strong>Empresa:</strong> <%= vaga.empresa.nomeFantasia %></p>
