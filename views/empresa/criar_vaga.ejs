@@ -166,7 +166,9 @@ textarea:invalid {
 .whatsapp-button:active {
   transform: translateY(0);
 }
-
+.whatsapp-support {
+  width: 100%;
+}
 </style>
   <div class="main-login">
     
@@ -255,15 +257,15 @@ textarea:invalid {
         <label>Tipo de Trabalho:</label>
         <div class="checkbox-group required">
           <div class="checkbox-item">
-            <input type="checkbox" id="tipoTrabalho-presencial" name="tipoTrabalho[]" value="Presencial">
+            <input type="radio" id="tipoTrabalho-presencial" name="tipoTrabalho" value="Presencial" required>
             <label for="tipoTrabalho-presencial">Presencial</label>
           </div>
           <div class="checkbox-item">
-            <input type="checkbox" id="tipoTrabalho-remoto" name="tipoTrabalho[]" value="Home Office">
+            <input type="radio" id="tipoTrabalho-remoto" name="tipoTrabalho" value="Home Office">
             <label for="tipoTrabalho-remoto">Home Office</label>
           </div>
           <div class="checkbox-item">
-            <input type="checkbox" id="tipoTrabalho-hibrido" name="tipoTrabalho[]" value="Híbrido">
+            <input type="radio" id="tipoTrabalho-hibrido" name="tipoTrabalho" value="Híbrido">
             <label for="tipoTrabalho-hibrido">Híbrido</label>
           </div>
         </div>
@@ -313,7 +315,13 @@ textarea:invalid {
             <span class="tooltip">Especifique o horário de trabalho, incluindo turnos, flexibilidade e carga horária semanal.</span>
           </div>
         </div>
-        <input type="text" id="horarioTrabalho" name="horarioTrabalho" required>
+        <textarea 
+          id="horarioTrabalho" 
+          name="horarioTrabalho" 
+          required
+          placeholder="Ex: Segunda a Sexta, das 9h às 18h, com 1h de almoço. Possibilidade de horário flexível."
+          rows="4"
+        ></textarea>
       
         <label for="escolaridade">Escolaridade:</label>
         <select id="escolaridade" name="escolaridade" required>
