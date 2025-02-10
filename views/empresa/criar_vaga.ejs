@@ -524,6 +524,22 @@ input[type="date"]:focus {
         </div>
 
         <div class="label-info">
+          <label for="quantidadeVagas">Quantidade de Vagas:</label>
+          <div class="info-icon">
+            Informação
+            <span class="tooltip">Informe quantas vagas estão disponíveis para esta posição. Se houver apenas uma vaga, deixe o valor padrão 1.</span>
+          </div>
+        </div>
+        <input 
+          type="number" 
+          id="quantidadeVagas" 
+          name="quantidadeVagas" 
+          min="1" 
+          value="1" 
+          required
+        >
+
+        <div class="label-info">
           <label for="dataLimite">Aceitando candidaturas até:</label>
           <div class="info-icon">
             Informação

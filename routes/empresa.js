@@ -106,7 +106,8 @@ module.exports = (prisma) => {
       vagaPcd,
       cidade,
       uf,
-      dataLimite
+      dataLimite,
+      quantidadeVagas
     } = req.body;
 
     try {
@@ -125,6 +126,7 @@ module.exports = (prisma) => {
           cidade,
           uf,
           dataLimite: new Date(dataLimite),
+          quantidadeVagas: parseInt(quantidadeVagas) || 1,
           disponibilidade: disponibilidade || [],
           horarioTrabalho,
           tipoTrabalho,

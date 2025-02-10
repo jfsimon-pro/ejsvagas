@@ -31,6 +31,7 @@
                 <p><strong>Localização:</strong> <%= vaga.cidade %>/<%= vaga.uf %></p>
                 <p><strong>Vaga PCD:</strong> <%= vaga.vagaPcd %></p>
                 <p><strong>Data Limite:</strong> <%= new Date(vaga.dataLimite).toLocaleDateString('pt-BR') %></p>
+                <p><strong>Quantidade de Vagas:</strong> <%= vaga.quantidadeVagas %></p>
                 <p><strong>Candidaturas:</strong> <%= vaga.candidaturas ? vaga.candidaturas.length : 0 %></p>
                 <p><strong>Visualizações:</strong> <span class="visualizacoes"><i class="fas fa-eye"></i> <%= vaga.visualizacoes %></span></p>
               </div>
