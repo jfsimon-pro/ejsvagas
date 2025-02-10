@@ -802,77 +802,23 @@ module.exports = (prisma) => {
   });
 
   // Rota para ver todos os candidatos
-  router.get('/todos-candidatos', async (req, res) => {
+  router.get('/todos-candidatos', verifyToken, async (req, res) => {
     try {
-      const { 
-        busca = '',
-        page = 1 
-      } = req.query;
-      const perPage = 10;
-
-      // Construir where clause para filtros
-      const where = busca ? {
-        OR: [
-          { nomeCompleto: { contains: busca, mode: 'insensitive' } },
-          { cidade: { contains: busca, mode: 'insensitive' } },
-          { bairro: { contains: busca, mode: 'insensitive' } },
-          { uf: { contains: busca, mode: 'insensitive' } },
-          { faixaSalarial: { contains: busca, mode: 'insensitive' } },
-          { tipoContrato: { contains: busca, mode: 'insensitive' } },
-          { ocupacao: { contains: busca, mode: 'insensitive' } },
-          { escolaridade: { contains: busca, mode: 'insensitive' } },
-          { disponibilidade: { contains: busca, mode: 'insensitive' } },
-          { idiomas: { has: busca } },
-          { cursos: { 
-            some: { 
-              OR: [
-                { curso: { contains: busca, mode: 'insensitive' } },
-                { instituicao: { contains: busca, mode: 'insensitive' } }
-              ]
-            } 
-          }},
-          { experienciasProfissionais: { 
-            some: { 
-              OR: [
-                { empresa: { contains: busca, mode: 'insensitive' } },
-                { cargo: { contains: busca, mode: 'insensitive' } },
-                { funcao: { contains: busca, mode: 'insensitive' } },
-                { motivo: { contains: busca, mode: 'insensitive' } }
-              ]
-            } 
-          }}
-        ]
-      } : {};
-
-      // Debug logs
-      console.log('Busca:', busca);
-      console.log('Query where:', JSON.stringify(where, null, 2));
-
-      // Buscar candidatos com paginação e filtros
-      const totalCandidatos = await prisma.candidato.count({ where });
       const candidatos = await prisma.candidato.findMany({
-        where,
-        skip: (page - 1) * perPage,
-        take: perPage,
-        orderBy: { createdAt: 'desc' },
         include: {
           cursos: true,
-          experienciasProfissionais: true
+          experiencias: true,
+          candidaturas: {
+            include: {
+              vaga: true
+            }
+          }
         }
       });
 
-      // Debug log
-      console.log('Total de candidatos encontrados:', totalCandidatos);
-
-      res.render('empresa/todos-candidatos', {
-        candidatos,
-        busca: busca || '',
-        currentPage: parseInt(page, 10),
-        totalPages: Math.ceil(totalCandidatos / perPage)
-      });
-
+      res.render('empresa/todos_candidatos', { candidatos });
     } catch (error) {
-      console.error('Erro ao carregar candidatos:', error);
+      console.error('Erro ao buscar candidatos:', error);
       res.status(500).send('Erro ao carregar candidatos.');
     }
   });
