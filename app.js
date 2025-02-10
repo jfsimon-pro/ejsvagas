@@ -51,8 +51,29 @@ app.use('/candidato', candidatoRouter);
 app.use('/admin', adminRouter);
 
 // Rota inicial
-app.get('/', (req, res) => {
-  res.render('home');
+app.get('/', async (req, res) => {
+  try {
+    const ultimasVagas = await prisma.vaga.findMany({
+      take: 5,
+      orderBy: {
+        createdAt: 'desc'
+      },
+      include: {
+        empresa: {
+          select: {
+            nomeFantasia: true,
+            cidade: true,
+            uf: true
+          }
+        }
+      }
+    });
+    
+    res.render('home', { ultimasVagas });
+  } catch (error) {
+    console.error('Erro ao buscar últimas vagas:', error);
+    res.render('home', { ultimasVagas: [] });
+  }
 });
 
 // Middleware de erro global
