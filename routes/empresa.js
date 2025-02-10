@@ -64,8 +64,7 @@ module.exports = (prisma) => {
       const vagas = await prisma.vaga.findMany({
         where: { empresaId: req.user.userId },
         include: {
-          candidaturas: true,
-          cnh: true
+          candidaturas: true
         },
         orderBy: { createdAt: 'desc' }, // Ordena por data de criação
         skip: (currentPage - 1) * perPage,

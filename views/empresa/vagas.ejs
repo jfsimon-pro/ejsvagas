@@ -32,7 +32,7 @@
                 <p><strong>Vaga PCD:</strong> <%= vaga.vagaPcd %></p>
                 <p><strong>Data Limite:</strong> <%= new Date(vaga.dataLimite).toLocaleDateString('pt-BR') %></p>
                 <p><strong>Quantidade de Vagas:</strong> <%= vaga.quantidadeVagas %></p>
-                <p><strong>CNH Necessária:</strong> <%= vaga.cnh && vaga.cnh.length > 0 ? vaga.cnh.join(', ') : 'Não informado' %></p>
+                <p><strong>CNH Necessária:</strong> <%= Array.isArray(vaga.cnh) && vaga.cnh.length > 0 ? vaga.cnh.join(', ') : 'Não informado' %></p>
                 <p><strong>Candidaturas:</strong> <%= vaga.candidaturas ? vaga.candidaturas.length : 0 %></p>
                 <p><strong>Visualizações:</strong> <span class="visualizacoes"><i class="fas fa-eye"></i> <%= vaga.visualizacoes %></span></p>
               </div>
