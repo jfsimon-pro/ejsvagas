@@ -35,6 +35,9 @@
           <p class="no-vagas">Nenhuma vaga disponível no momento.</p>
         <% } %>
       </div>
+      <div class="ver-mais-vagas">
+        <a href="/vagas" class="btn-ver-mais">Ver mais vagas</a>
+      </div>
     </div>
   </section>
 
@@ -82,7 +85,7 @@
 
   .vagas-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 30px;
     padding: 20px;
   }
@@ -146,6 +149,36 @@
     .vaga-card {
       margin-bottom: 20px;
     }
+  }
+
+  .ver-mais-vagas {
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  .btn-ver-mais {
+    display: inline-block;
+    background: #F78E0F;
+    color: white;
+    padding: 15px 40px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .btn-ver-mais:hover {
+    background: #e07d0e;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn-ver-mais:active {
+    transform: translateY(0);
   }
   </style>
 

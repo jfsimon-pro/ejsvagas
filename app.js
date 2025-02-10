@@ -54,7 +54,7 @@ app.use('/admin', adminRouter);
 app.get('/', async (req, res) => {
   try {
     const ultimasVagas = await prisma.vaga.findMany({
-      take: 5,
+      take: 6,
       orderBy: {
         createdAt: 'desc'
       },
