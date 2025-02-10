@@ -131,7 +131,7 @@ module.exports = (prisma) => {
           uf,
           dataLimite: new Date(dataLimite),
           quantidadeVagas: parseInt(quantidadeVagas) || 1,
-          cnh: cnh || [],
+          cnh: Array.isArray(cnh) ? cnh : [],
           disponibilidade: disponibilidade || [],
           horarioTrabalho,
           tipoTrabalho,

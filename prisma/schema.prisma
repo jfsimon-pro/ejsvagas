@@ -96,6 +96,7 @@ model Vaga {
   dataLimite     DateTime
   visualizacoes   Int           @default(0)
   quantidadeVagas Int           @default(1)
+  cnh            String[]       @default([])
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
 
