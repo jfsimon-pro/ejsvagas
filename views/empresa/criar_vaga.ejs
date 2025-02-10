@@ -169,6 +169,34 @@ textarea:invalid {
 .whatsapp-support {
   width: 100%;
 }
+
+.cidade-estado-group {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.cidade-estado-group input,
+.cidade-estado-group select {
+  margin: 0;
+}
+
+input[type="date"] {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #333;
+  background-color: white;
+}
+
+input[type="date"]:focus {
+  border-color: #F78E0F;
+  outline: none;
+}
 </style>
   <div class="main-login">
     
@@ -267,6 +295,18 @@ textarea:invalid {
           <div class="checkbox-item">
             <input type="radio" id="tipoTrabalho-hibrido" name="tipoTrabalho" value="Híbrido">
             <label for="tipoTrabalho-hibrido">Híbrido</label>
+          </div>
+        </div>
+
+        <label>Vaga Exclusiva PCD?</label>
+        <div class="checkbox-group required">
+          <div class="checkbox-item">
+            <input type="radio" id="pcd-sim" name="vagaPcd" value="Sim" required>
+            <label for="pcd-sim">Sim</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="radio" id="pcd-nao" name="vagaPcd" value="Não">
+            <label for="pcd-nao">Não</label>
           </div>
         </div>
 
@@ -441,6 +481,56 @@ textarea:invalid {
             <label for="beneficio-desconto">Desconto em produtos</label>
           </div>
         </div>
+      
+        <div class="label-info">
+          <label for="localVaga">Cidade/Estado da Vaga:</label>
+          <div class="info-icon">
+            Informação
+            <span class="tooltip">Informe a cidade e estado onde a vaga está disponível. Para vagas remotas, você pode indicar "Remoto - Brasil" ou similar.</span>
+          </div>
+        </div>
+        <div class="cidade-estado-group">
+          <input type="text" id="cidade" name="cidade" placeholder="Cidade" required>
+          <select id="uf" name="uf" required>
+            <option value="">UF</option>
+            <option value="AC">AC</option>
+            <option value="AL">AL</option>
+            <option value="AP">AP</option>
+            <option value="AM">AM</option>
+            <option value="BA">BA</option>
+            <option value="CE">CE</option>
+            <option value="DF">DF</option>
+            <option value="ES">ES</option>
+            <option value="GO">GO</option>
+            <option value="MA">MA</option>
+            <option value="MT">MT</option>
+            <option value="MS">MS</option>
+            <option value="MG">MG</option>
+            <option value="PA">PA</option>
+            <option value="PB">PB</option>
+            <option value="PR">PR</option>
+            <option value="PE">PE</option>
+            <option value="PI">PI</option>
+            <option value="RJ">RJ</option>
+            <option value="RN">RN</option>
+            <option value="RS">RS</option>
+            <option value="RO">RO</option>
+            <option value="RR">RR</option>
+            <option value="SC">SC</option>
+            <option value="SP">SP</option>
+            <option value="SE">SE</option>
+            <option value="TO">TO</option>
+          </select>
+        </div>
+
+        <div class="label-info">
+          <label for="dataLimite">Aceitando candidaturas até:</label>
+          <div class="info-icon">
+            Informação
+            <span class="tooltip">Defina uma data limite para receber candidaturas. Após esta data, a vaga não aceitará mais inscrições.</span>
+          </div>
+        </div>
+        <input type="date" id="dataLimite" name="dataLimite" required>
       
         <button type="submit">Criar Vaga</button>
       </form>

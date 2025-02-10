@@ -92,6 +92,10 @@ model Vaga {
   candidaturas   Candidatura[]
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
+  vagaPcd         String?
+  cidade         String
+  uf             String
+  dataLimite     DateTime
 
   @@map("vagas")
 }

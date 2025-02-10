@@ -102,7 +102,11 @@ module.exports = (prisma) => {
       tipoTrabalho,
       escolaridade,
       idiomas,
-      beneficios
+      beneficios,
+      vagaPcd,
+      cidade,
+      uf,
+      dataLimite
     } = req.body;
 
     try {
@@ -117,6 +121,10 @@ module.exports = (prisma) => {
           cargo,
           faixaSalarial,
           tipoContrato,
+          vagaPcd,
+          cidade,
+          uf,
+          dataLimite: new Date(dataLimite),
           disponibilidade: disponibilidade || [],
           horarioTrabalho,
           tipoTrabalho,
