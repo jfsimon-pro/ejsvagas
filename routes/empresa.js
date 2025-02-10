@@ -804,7 +804,55 @@ module.exports = (prisma) => {
   // Rota para ver todos os candidatos
   router.get('/todos-candidatos', verifyToken, async (req, res) => {
     try {
+      const { 
+        page = 1, 
+        busca = '', 
+        pcd = '', 
+        uf = '',
+        escolaridade = '',
+        idioma = '',
+        cnh = ''
+      } = req.query;
+      const perPage = 5;
+      const skip = (parseInt(page) - 1) * perPage;
+
+      let where = {};
+
+      if (busca) {
+        where.nomeCompleto = { contains: busca, mode: 'insensitive' };
+      }
+
+      if (pcd) {
+        where.pcd = pcd;
+      }
+
+      if (uf) {
+        where.uf = uf;
+      }
+
+      if (escolaridade) {
+        where.escolaridade = escolaridade;
+      }
+
+      if (idioma) {
+        where.idiomas = {
+          has: idioma
+        };
+      }
+
+      if (cnh) {
+        where.cnh = {
+          has: cnh
+        };
+      }
+
+      const totalCandidatos = await prisma.candidato.count({ where });
+      const totalPages = Math.ceil(totalCandidatos / perPage);
+
       const candidatos = await prisma.candidato.findMany({
+        where,
+        skip,
+        take: perPage,
         include: {
           cursos: true,
           experiencias: true,
@@ -813,10 +861,21 @@ module.exports = (prisma) => {
               vaga: true
             }
           }
-        }
+        },
+        orderBy: { createdAt: 'desc' }
       });
 
-      res.render('empresa/todos_candidatos', { candidatos });
+      res.render('empresa/todos_candidatos', {
+        candidatos,
+        currentPage: parseInt(page),
+        totalPages,
+        busca,
+        pcd,
+        uf,
+        escolaridade,
+        idioma,
+        cnh
+      });
     } catch (error) {
       console.error('Erro ao buscar candidatos:', error);
       res.status(500).send('Erro ao carregar candidatos.');
