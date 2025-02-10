@@ -304,7 +304,9 @@ router.post('/editar-dados', verifyToken, async (req, res) => {
     cidade,
     uf,
     pcd,
-    cnh
+    cnh,
+    idiomas,
+    escolaridade
   } = req.body;
 
   try {
@@ -318,7 +320,9 @@ router.post('/editar-dados', verifyToken, async (req, res) => {
         cidade,
         uf,
         pcd: pcd || 'Não',
-        cnh: cnh || 'Não tenho'
+        cnh: cnh || 'Não tenho',
+        idiomas: Array.isArray(idiomas) ? idiomas : [],
+        escolaridade: escolaridade || null
       },
     });
 
