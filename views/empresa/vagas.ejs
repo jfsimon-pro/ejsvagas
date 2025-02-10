@@ -75,37 +75,194 @@
 <%- include('../partials/footer') %>
 
 <style>
-  .vaga-status {
+  .pai-vagas {
+    background: #f8f9fa;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+
+  .main-vagas {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .vagas-cabecalho {
     display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
 
-  .badge {
-    padding: 5px 10px;
-    border-radius: 15px;
-    font-size: 12px;
+  .vagas-cabecalho h1 {
+    color: #062A4E;
+    margin: 0;
+    font-size: 28px;
+  }
+
+  .btn-vagas-criadas {
+    display: flex;
+    gap: 15px;
+  }
+
+  .btn-vagas-criadas a {
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
     font-weight: 500;
+    transition: all 0.3s ease;
   }
 
-  .badge.pcd {
-    background-color: #4CAF50;
+  .btn-vagas-criadas a:first-child {
+    background: #F78E0F;
     color: white;
   }
 
-  .badge.location {
-    background-color: #2196F3;
+  .btn-vagas-criadas a:last-child {
+    background: #062A4E;
     color: white;
   }
 
-  .vaga-info p {
-    margin: 8px 0;
+  .btn-vagas-criadas a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+  }
+
+  li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+
+  .vaga-card {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+  }
+
+  .vaga-card h3 {
+    color: #062A4E;
+    font-size: 24px;
+    margin: 0 0 15px 0;
+  }
+
+  .vaga-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+  }
+
+  .vaga-descrita {
     color: #666;
+    line-height: 1.6;
+    margin: 15px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
   }
 
-  .vaga-info strong {
-    color: #333;
+  .botoes-gerenciar-vagas {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
   }
 
-  // ... resto dos estilos existentes ...
+  .botoes-gerenciar-vagas a,
+  .botoes-gerenciar-vagas button {
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .botoes-gerenciar-vagas a:first-child {
+    background: #4CAF50;
+    color: white;
+  }
+
+  .botoes-gerenciar-vagas a:nth-child(2) {
+    background: #2196F3;
+    color: white;
+  }
+
+  .botoes-gerenciar-vagas button {
+    background: #f44336;
+    color: white;
+  }
+
+  .botoes-gerenciar-vagas a:hover,
+  .botoes-gerenciar-vagas button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+  }
+
+  .pagination a {
+    padding: 8px 16px;
+    border-radius: 6px;
+    background: white;
+    color: #062A4E;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .pagination a.active {
+    background: #F78E0F;
+    color: white;
+  }
+
+  .pagination a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+
+  @media (max-width: 768px) {
+    .vagas-cabecalho {
+      flex-direction: column;
+      gap: 15px;
+      text-align: center;
+    }
+
+    .btn-vagas-criadas {
+      flex-direction: column;
+    }
+
+    .vaga-info {
+      grid-template-columns: 1fr;
+    }
+
+    .botoes-gerenciar-vagas {
+      flex-direction: column;
+    }
+  }
 </style>
