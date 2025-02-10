@@ -166,16 +166,44 @@
 <div class="vagas-publicas">
   <div class="vagas-container">
     <div class="search-section">
-      <div class="search-box">
-        <input 
-          type="text" 
-          id="busca" 
-          class="search-input" 
-          placeholder="Busque por cargo ou palavra-chave"
-          value="<%= busca %>"
-        >
-        <div id="suggestions"></div>
-      </div>
+      <form action="/vagas" method="GET" style="margin-bottom: 20px;">
+        <!-- Barra de busca por palavra-chave -->
+        <input type="text" id="busca" name="busca" placeholder="Buscar vagas..." value="<%= busca || '' %>">
+        <div id="suggestions" class="autocomplete-suggestions"></div>
+
+    
+        <!-- Filtro de faixa salarial -->
+        <select name="faixaSalarial">
+            <option value="">Selecione a faixa salarial</option>
+            <option value="Até 2.000" <%= faixaSalarial === 'Até 2.000' ? 'selected' : '' %>>Até 2.000</option>
+            <option value="A partir de R$ 2.000,00" <%= faixaSalarial === 'A partir de R$ 2.000,00' ? 'selected' : '' %>>A partir de R$ 2.000,00</option>
+            <option value="A partir de R$ 3.000,00" <%= faixaSalarial === 'A partir de R$ 3.000,00' ? 'selected' : '' %>>A partir de R$ 3.000,00</option>
+            <option value="A partir de R$ 4.000,00" <%= faixaSalarial === 'A partir de R$ 4.000,00' ? 'selected' : '' %>>A partir de R$ 4.000,00</option>
+            <option value="A partir de R$ 5.000,00" <%= faixaSalarial === 'A partir de R$ 5.000,00' ? 'selected' : '' %>>A partir de R$ 5.000,00</option>
+            <option value="A partir de R$ 6.000,00" <%= faixaSalarial === 'A partir de R$ 6.000,00' ? 'selected' : '' %>>A partir de R$ 6.000,00</option>
+            <option value="A partir de R$ 7.000,00" <%= faixaSalarial === 'A partir de R$ 7.000,00' ? 'selected' : '' %>>A partir de R$ 7.000,00</option>
+            <option value="A partir de R$ 8.000,00" <%= faixaSalarial === 'A partir de R$ 8.000,00' ? 'selected' : '' %>>A partir de R$ 8.000,00</option>
+            <option value="A partir de R$ 9.000,00" <%= faixaSalarial === 'A partir de R$ 9.000,00' ? 'selected' : '' %>>A partir de R$ 9.000,00</option>
+            <option value="A partir de R$ 10.000,00" <%= faixaSalarial === 'A partir de R$ 10.000,00' ? 'selected' : '' %>>A partir de R$ 10.000,00</option>
+            <option value="A partir de R$ 15.000,00" <%= faixaSalarial === 'A partir de R$ 15.000,00' ? 'selected' : '' %>>A partir de R$ 15.000,00</option>
+            <option value="A partir de R$ 20.000,00" <%= faixaSalarial === 'A partir de R$ 20.000,00' ? 'selected' : '' %>>A partir de R$ 20.000,00</option>
+        </select>
+    
+        <!-- Filtro de tipo de contrato -->
+        <select name="tipoContrato">
+            <option value="">Selecione o tipo de contrato</option>
+            <option value="CLT" <%= tipoContrato === 'CLT' ? 'selected' : '' %>>CLT</option>
+            <option value="PJ" <%= tipoContrato === 'PJ' ? 'selected' : '' %>>PJ</option>
+            <option value="Estágio" <%= tipoContrato === 'Estágio' ? 'selected' : '' %>>Estágio</option>
+            <option value="Temporário" <%= tipoContrato === 'Temporário' ? 'selected' : '' %>>Temporário</option>
+            <option value="Autônomo" <%= tipoContrato === 'Autônomo' ? 'selected' : '' %>>Autônomo</option>
+            <option value="Freelancer" <%= tipoContrato === 'Freelancer' ? 'selected' : '' %>>Freelancer</option>
+            <option value="Aprendiz" <%= tipoContrato === 'Aprendiz' ? 'selected' : '' %>>Aprendiz</option>
+        </select>
+    
+        <!-- Botão de buscar -->
+        <button type="submit">Buscar</button>
+    </form>
     </div>
 
     <div class="vagas-grid">
@@ -211,7 +239,7 @@
       <div class="pagination">
         <% for (let i = 1; i <= totalPages; i++) { %>
           <a 
-            href="/vagas?page=<%= i %>&busca=<%= busca %>" 
+            href="/vagas?page=<%= i %>&busca=<%= busca %>&faixaSalarial=<%= faixaSalarial %>&tipoContrato=<%= tipoContrato %>" 
             class="<%= i === currentPage ? 'active' : '' %>"
           >
             <%= i %>

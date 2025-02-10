@@ -82,21 +82,37 @@ app.get('/vagas', async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const perPage = 10;
     const busca = req.query.busca || '';
+    const faixaSalarial = req.query.faixaSalarial || '';
+    const tipoContrato = req.query.tipoContrato || '';
 
-    // Construir where clause baseado na busca
+    // Construir where clause baseado nos filtros
     const where = {};
-    if (busca) {
-      where.OR = [
-        { titulo: { contains: busca, mode: 'insensitive' } },
-        { cargo: { contains: busca, mode: 'insensitive' } },
-        { descricao: { contains: busca, mode: 'insensitive' } },
-        { empresa: { nomeFantasia: { contains: busca, mode: 'insensitive' } } },
-        { empresa: { cidade: { contains: busca, mode: 'insensitive' } } },
-        { empresa: { uf: { contains: busca, mode: 'insensitive' } } },
-        { tipoContrato: { contains: busca, mode: 'insensitive' } },
-        { faixaSalarial: { contains: busca, mode: 'insensitive' } },
-        { tags: { hasSome: [busca] } }
-      ];
+    
+    // Adicionar condições de busca
+    if (busca || faixaSalarial || tipoContrato) {
+      where.AND = [];
+      
+      if (busca) {
+        where.AND.push({
+          OR: [
+            { titulo: { contains: busca, mode: 'insensitive' } },
+            { cargo: { contains: busca, mode: 'insensitive' } },
+            { descricao: { contains: busca, mode: 'insensitive' } },
+            { empresa: { nomeFantasia: { contains: busca, mode: 'insensitive' } } },
+            { empresa: { cidade: { contains: busca, mode: 'insensitive' } } },
+            { empresa: { uf: { contains: busca, mode: 'insensitive' } } },
+            { tags: { hasSome: [busca] } }
+          ]
+        });
+      }
+
+      if (faixaSalarial) {
+        where.AND.push({ faixaSalarial: faixaSalarial });
+      }
+
+      if (tipoContrato) {
+        where.AND.push({ tipoContrato: tipoContrato });
+      }
     }
 
     // Buscar vagas com paginação
@@ -117,6 +133,8 @@ app.get('/vagas', async (req, res) => {
     res.render('vagas_publicas', {
       vagas,
       busca,
+      faixaSalarial,
+      tipoContrato,
       currentPage: page,
       totalPages,
       totalVagas
