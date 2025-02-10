@@ -106,10 +106,8 @@ module.exports = (prisma) => {
     } = req.body;
 
     try {
-      // Converter o valor único do radio em um array
-      const tipoTrabalho = Array.isArray(req.body['tipoTrabalho[]']) 
-        ? req.body['tipoTrabalho[]'] 
-        : [req.body['tipoTrabalho[]']];
+      // Converter o valor do radio em array com um único item
+      const tipoTrabalho = req.body.tipoTrabalho ? [req.body.tipoTrabalho] : [];
 
       const vaga = await prisma.vaga.create({
         data: {
