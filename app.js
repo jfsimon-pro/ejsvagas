@@ -76,6 +76,57 @@ app.get('/', async (req, res) => {
   }
 });
 
+// Rota pública para vagas
+app.get('/vagas', async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const perPage = 10;
+    const busca = req.query.busca || '';
+
+    // Construir where clause baseado na busca
+    const where = busca ? {
+      OR: [
+        { titulo: { contains: busca, mode: 'insensitive' } },
+        { cargo: { contains: busca, mode: 'insensitive' } },
+        { tags: { hasSome: [busca] } }
+      ]
+    } : {};
+
+    // Buscar vagas com paginação
+    const vagas = await prisma.vaga.findMany({
+      where,
+      skip: (page - 1) * perPage,
+      take: perPage,
+      orderBy: { createdAt: 'desc' },
+      include: {
+        empresa: {
+          select: {
+            nomeFantasia: true,
+            cidade: true,
+            uf: true
+          }
+        }
+      }
+    });
+
+    // Contar total de vagas para paginação
+    const totalVagas = await prisma.vaga.count({ where });
+    const totalPages = Math.ceil(totalVagas / perPage);
+
+    res.render('vagas_publicas', {
+      vagas,
+      busca,
+      currentPage: page,
+      totalPages,
+      totalVagas
+    });
+
+  } catch (error) {
+    console.error('Erro ao buscar vagas:', error);
+    res.status(500).send('Erro ao carregar vagas');
+  }
+});
+
 // Middleware de erro global
 app.use((err, req, res, next) => {
   console.error('Erro:', err);

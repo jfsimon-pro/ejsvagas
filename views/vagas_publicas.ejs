@@ -1,0 +1,212 @@
+<%- include('partials/header') %>
+
+<style>
+  .vagas-publicas {
+    padding: 40px 20px;
+    background: #f8f9fa;
+    min-height: calc(100vh - 80px);
+  }
+
+  .vagas-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .search-section {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .search-box {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+
+  .search-input:focus {
+    border-color: #F78E0F;
+    outline: none;
+  }
+
+  #suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 0 0 8px 8px;
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  .suggestion {
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .suggestion:hover {
+    background: #f0f0f0;
+  }
+
+  .vagas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .vaga-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .vaga-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .vaga-titulo {
+    color: #062A4E;
+    font-size: 20px;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+
+  .vaga-info {
+    margin-bottom: 15px;
+  }
+
+  .vaga-info p {
+    margin-bottom: 8px;
+    color: #666;
+  }
+
+  .vaga-info strong {
+    color: #333;
+  }
+
+  .btn-candidatar {
+    display: inline-block;
+    background: #F78E0F;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+    text-align: center;
+  }
+
+  .btn-candidatar:hover {
+    background: #e07d0e;
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+  }
+
+  .pagination a {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .pagination a:hover {
+    background: #f0f0f0;
+  }
+
+  .pagination .active {
+    background: #F78E0F;
+    color: white;
+    border-color: #F78E0F;
+  }
+
+  .no-vagas {
+    text-align: center;
+    color: #666;
+    padding: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .vagas-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .search-box {
+      width: 90%;
+    }
+  }
+</style>
+
+<div class="vagas-publicas">
+  <div class="vagas-container">
+    <div class="search-section">
+      <div class="search-box">
+        <input 
+          type="text" 
+          id="busca" 
+          class="search-input" 
+          placeholder="Busque por cargo ou palavra-chave"
+          value="<%= busca %>"
+        >
+        <div id="suggestions"></div>
+      </div>
+    </div>
+
+    <div class="vagas-grid">
+      <% if (vagas && vagas.length > 0) { %>
+        <% vagas.forEach(vaga => { %>
+          <div class="vaga-card">
+            <h3 class="vaga-titulo"><%= vaga.titulo %></h3>
+            <div class="vaga-info">
+              <p><strong>Empresa:</strong> <%= vaga.empresa.nomeFantasia %></p>
+              <p><strong>Localização:</strong> <%= vaga.empresa.cidade %>/<%= vaga.empresa.uf %></p>
+              <p><strong>Cargo:</strong> <%= vaga.cargo %></p>
+              <p><strong>Salário:</strong> <%= vaga.faixaSalarial %></p>
+              <p><strong>Tipo de Contrato:</strong> <%= vaga.tipoContrato %></p>
+            </div>
+            <a href="/auth/register_candidato" class="btn-candidatar">Candidate-se</a>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <p class="no-vagas">Nenhuma vaga encontrada com os critérios especificados.</p>
+      <% } %>
+    </div>
+
+    <% if (totalPages > 1) { %>
+      <div class="pagination">
+        <% for (let i = 1; i <= totalPages; i++) { %>
+          <a 
+            href="/vagas?page=<%= i %>&busca=<%= busca %>" 
+            class="<%= i === currentPage ? 'active' : '' %>"
+          >
+            <%= i %>
+          </a>
+        <% } %>
+      </div>
+    <% } %>
+  </div>
+</div>
+
+<script src="/js/autocomplete.js"></script>
+
+<%- include('partials/footer') %> 
