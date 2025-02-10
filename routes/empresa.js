@@ -63,6 +63,10 @@ module.exports = (prisma) => {
       // Busca as vagas paginadas
       const vagas = await prisma.vaga.findMany({
         where: { empresaId: req.user.userId },
+        include: {
+          candidaturas: true,
+          cnh: true
+        },
         orderBy: { createdAt: 'desc' }, // Ordena por data de criação
         skip: (currentPage - 1) * perPage,
         take: perPage,
