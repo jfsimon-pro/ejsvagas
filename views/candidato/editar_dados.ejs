@@ -119,64 +119,64 @@
 
     <div class="form-group">
       <label>Minha CNH:</label>
-      <div class="radio-group cnh-group">
+      <div class="checkbox-group cnh-group">
         <div class="radio-item">
           <input 
-            type="radio" 
+            type="checkbox" 
             id="cnh-nao" 
-            name="cnh" 
+            name="cnh[]" 
             value="Não tenho"
-            <%= !candidato.cnh || candidato.cnh === 'Não tenho' ? 'checked' : '' %>
+            <%= !candidato.cnh || candidato.cnh.includes('Não tenho') ? 'checked' : '' %>
           >
           <label for="cnh-nao">Não tenho</label>
         </div>
         <div class="radio-item">
           <input 
-            type="radio" 
+            type="checkbox" 
             id="cnh-a" 
-            name="cnh" 
+            name="cnh[]" 
             value="A"
-            <%= candidato.cnh === 'A' ? 'checked' : '' %>
+            <%= candidato.cnh && candidato.cnh.includes('A') ? 'checked' : '' %>
           >
           <label for="cnh-a">A</label>
         </div>
         <div class="radio-item">
           <input 
-            type="radio" 
+            type="checkbox" 
             id="cnh-b" 
-            name="cnh" 
+            name="cnh[]" 
             value="B"
-            <%= candidato.cnh === 'B' ? 'checked' : '' %>
+            <%= candidato.cnh && candidato.cnh.includes('B') ? 'checked' : '' %>
           >
           <label for="cnh-b">B</label>
         </div>
         <div class="radio-item">
           <input 
-            type="radio" 
+            type="checkbox" 
             id="cnh-c" 
-            name="cnh" 
+            name="cnh[]" 
             value="C"
-            <%= candidato.cnh === 'C' ? 'checked' : '' %>
+            <%= candidato.cnh && candidato.cnh.includes('C') ? 'checked' : '' %>
           >
           <label for="cnh-c">C</label>
         </div>
         <div class="radio-item">
           <input 
-            type="radio" 
+            type="checkbox" 
             id="cnh-d" 
-            name="cnh" 
+            name="cnh[]" 
             value="D"
-            <%= candidato.cnh === 'D' ? 'checked' : '' %>
+            <%= candidato.cnh && candidato.cnh.includes('D') ? 'checked' : '' %>
           >
           <label for="cnh-d">D</label>
         </div>
         <div class="radio-item">
           <input 
-            type="radio" 
+            type="checkbox" 
             id="cnh-e" 
-            name="cnh" 
+            name="cnh[]" 
             value="E"
-            <%= candidato.cnh === 'E' ? 'checked' : '' %>
+            <%= candidato.cnh && candidato.cnh.includes('E') ? 'checked' : '' %>
           >
           <label for="cnh-e">E</label>
         </div>
@@ -215,3 +215,29 @@
     font-weight: normal;
   }
 </style>
+
+<script>
+  // Lógica para os checkboxes de CNH
+  document.addEventListener('DOMContentLoaded', function() {
+    const cnhOptions = document.querySelectorAll('input[name="cnh[]"]:not(#cnh-nao)');
+    const cnhNao = document.querySelector('#cnh-nao');
+
+    // Quando "Não tenho" é marcado, desmarca as outras opções
+    cnhNao.addEventListener('change', function() {
+      if (this.checked) {
+        cnhOptions.forEach(option => {
+          option.checked = false;
+        });
+      }
+    });
+
+    // Quando qualquer outra opção é marcada, desmarca "Não tenho"
+    cnhOptions.forEach(option => {
+      option.addEventListener('change', function() {
+        if (this.checked) {
+          cnhNao.checked = false;
+        }
+      });
+    });
+  });
+</script>
