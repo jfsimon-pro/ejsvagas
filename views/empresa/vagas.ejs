@@ -32,6 +32,7 @@
                 <p><strong>Vaga PCD:</strong> <%= vaga.vagaPcd %></p>
                 <p><strong>Data Limite:</strong> <%= new Date(vaga.dataLimite).toLocaleDateString('pt-BR') %></p>
                 <p><strong>Candidaturas:</strong> <%= vaga.candidaturas ? vaga.candidaturas.length : 0 %></p>
+                <p><strong>Visualizações:</strong> <span class="visualizacoes"><i class="fas fa-eye"></i> <%= vaga.visualizacoes %></span></p>
               </div>
             </div>
             <p><strong>Descrição:</strong></p>
@@ -139,10 +140,6 @@
     padding: 0;
     margin: 0;
   }
-
- 
-
-  
 
   .vaga-card {
     border-bottom: 1px solid #404040;
@@ -294,5 +291,15 @@
   }
   .badge {
     color: white;
+  }
+
+  .visualizacoes {
+    color: #ccc;
+    font-size: 14px;
+  }
+
+  .visualizacoes i {
+    margin-right: 5px;
+    color: #F78E0F;
   }
 </style>

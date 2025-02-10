@@ -693,10 +693,16 @@ router.get('/vagas/:vagaId/detalhes', verifyToken, async (req, res) => {
   const { vagaId } = req.params;
 
   try {
+    // Incrementar o contador de visualizações
+    await prisma.vaga.update({
+      where: { id: vagaId },
+      data: { visualizacoes: { increment: 1 } }
+    });
+
     const vaga = await prisma.vaga.findUnique({
       where: { id: vagaId },
       include: {
-        empresa: true, // Inclui informações da empresa que criou a vaga
+        empresa: true,
       },
     });
 
