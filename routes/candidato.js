@@ -515,67 +515,81 @@ router.post('/vagas/:vagaId/avaliar', verifyToken, async (req, res) => {
 
 
 router.get('/vagas', verifyToken, async (req, res) => {
-  const { busca, faixaSalarial, tipoContrato, page = 1 } = req.query;
-  const perPage = 3; // Quantidade de vagas por página
-  const currentPage = parseInt(page, 10) || 1;
+    try {
+        const page = parseInt(req.query.page) || 1;
+        const perPage = 10;
+        const skip = (page - 1) * perPage;
+        const busca = req.query.busca || '';
+        const faixaSalarial = req.query.faixaSalarial || '';
+        const tipoContrato = req.query.tipoContrato || '';
 
-  try {
-    // Buscar IDs das vagas já candidatadas pelo candidato
-    const candidaturas = await prisma.candidatura.findMany({
-      where: { candidatoId: req.user.userId },
-      select: { vagaId: true },
-    });
+        // Pegar o ID do candidato logado
+        const candidatoId = req.user.userId;
 
-    const vagasCandidatadasIds = candidaturas.map((candidatura) => candidatura.vagaId);
+        // Buscar as vagas que o candidato já se candidatou
+        const candidaturas = await prisma.candidatura.findMany({
+            where: {
+                candidatoId: candidatoId
+            },
+            select: {
+                vagaId: true
+            }
+        });
 
-    // Montar condições de busca
-    const where = {
-      AND: [
-        ...(busca
-          ? [
-              {
-                OR: [
-                  { titulo: { contains: busca, mode: 'insensitive' } },
-                  { descricao: { contains: busca, mode: 'insensitive' } },
-                  { cargo: { contains: busca, mode: 'insensitive' } },
-                ],
-              },
-            ]
-          : []),
-        ...(faixaSalarial
-          ? [{ faixaSalarial: { equals: faixaSalarial } }]
-          : []),
-        ...(tipoContrato
-          ? [{ tipoContrato: { equals: tipoContrato } }]
-          : []),
-      ],
-    };
+        const vagasCandidatadasIds = candidaturas.map(c => c.vagaId);
 
-    // Total de vagas
-    const totalVagas = await prisma.vaga.count({ where });
+        // Construir o objeto where para a busca
+        let where = {
+            dataLimite: {
+                gt: new Date() // Filtra apenas vagas com data limite maior que hoje
+            }
+        };
 
-    // Buscar vagas com paginação
-    const vagasDisponiveis = await prisma.vaga.findMany({
-      where,
-      orderBy: { createdAt: 'desc' },
-      skip: (currentPage - 1) * perPage,
-      take: perPage,
-    });
+        if (busca) {
+            where.OR = [
+                { titulo: { contains: busca, mode: 'insensitive' } },
+                { descricao: { contains: busca, mode: 'insensitive' } },
+                { cargo: { contains: busca, mode: 'insensitive' } }
+            ];
+        }
 
-    // Renderizar a página com as vagas filtradas
-    res.render('candidato/vagas_disponiveis', {
-      vagasDisponiveis,
-      vagasCandidatadasIds, // Passar os IDs das vagas já candidatadas
-      busca: busca || '',
-      faixaSalarial: faixaSalarial || '',
-      tipoContrato: tipoContrato || '',
-      currentPage,
-      totalPages: Math.ceil(totalVagas / perPage),
-    });
-  } catch (error) {
-    console.error('Erro ao carregar vagas disponíveis:', error);
-    res.status(500).send('Erro ao carregar vagas disponíveis.');
-  }
+        if (faixaSalarial) {
+            where.faixaSalarial = faixaSalarial;
+        }
+
+        if (tipoContrato) {
+            where.tipoContrato = tipoContrato;
+        }
+
+        // Buscar vagas com paginação
+        const vagas = await prisma.vaga.findMany({
+            skip,
+            take: perPage,
+            where,
+            include: {
+                empresa: true
+            }
+        });
+
+        // Contar total de vagas para paginação
+        const totalVagas = await prisma.vaga.count({ where });
+        const totalPages = Math.ceil(totalVagas / perPage);
+
+        res.render('candidato/vagas_disponiveis', {
+            vagasDisponiveis: vagas,
+            vagasCandidatadasIds,
+            currentPage: page,
+            totalPages,
+            busca,
+            faixaSalarial,
+            tipoContrato,
+            currentDate: new Date() // Passa a data atual para o template
+        });
+
+    } catch (error) {
+        console.error('Erro ao buscar vagas:', error);
+        res.status(500).send('Erro ao carregar vagas disponíveis.');
+    }
 });
 
 
