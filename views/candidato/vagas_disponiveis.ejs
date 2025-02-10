@@ -133,6 +133,40 @@
             border: none;
             cursor: not-allowed;
         }
+
+        .prazo-info {
+            margin-top: 10px;
+        }
+
+        .prazo {
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .prazo.normal {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .prazo.urgente {
+            background: #e74c3c;
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
     </style>
     <style>
         .autocomplete-suggestions {
@@ -225,6 +259,8 @@
                 <% if (vagasDisponiveis.length> 0) { %>
                     <ul class="listavagas">
                         <% vagasDisponiveis.forEach(vaga=> { %>
+                            <% const dataLimite = new Date(vaga.dataLimite); %>
+                            <% const diasRestantes = Math.ceil((dataLimite - currentDate) / (1000 * 60 * 60 * 24)); %>
                             <li>
                                 <h3>
                                     <%= vaga.titulo %>
@@ -247,6 +283,15 @@
                                         <% } %>
                                       </form>
                                       <a href="/candidato/vagas/<%= vaga.id %>/detalhes" class="btn btn-info">Ver mais detalhes</a>
+                                </div>
+                                <div class="prazo-info">
+                                    <% if (diasRestantes > 7) { %>
+                                        <span class="prazo normal">Prazo: <%= dataLimite.toLocaleDateString('pt-BR') %></span>
+                                    <% } else if (diasRestantes > 1) { %>
+                                        <span class="prazo urgente">Últimos <%= diasRestantes %> dias para se candidatar!</span>
+                                    <% } else if (diasRestantes === 1) { %>
+                                        <span class="prazo urgente">Último dia para se candidatar!</span>
+                                    <% } %>
                                 </div>
                             </li>
                             <% }); %>
