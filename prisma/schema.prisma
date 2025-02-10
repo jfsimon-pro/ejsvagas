@@ -55,6 +55,8 @@ model Candidato {
   bairro         String
   cidade         String
   uf             String
+  dataNascimento DateTime?
+  genero         String?
   candidaturas   Candidatura[]
   cursos         Curso[]
   faixaSalarial  String?

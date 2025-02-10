@@ -297,30 +297,28 @@ router.get('/editar-dados', verifyToken, async (req, res) => {
 // Rota para processar a edição de dados
 router.post('/editar-dados', verifyToken, async (req, res) => {
   const {
-    nome,
+    nomeCompleto,
     email,
     telefone,
     cpf,
-    dataNascimento,
-    genero,
     cidade,
     uf,
-    pcd
+    pcd,
+    cnh
   } = req.body;
 
   try {
     await prisma.candidato.update({
       where: { id: req.user.userId },
       data: {
-        nome,
+        nomeCompleto,
         email,
         telefone,
         cpf,
-        dataNascimento: dataNascimento ? new Date(dataNascimento) : null,
-        genero,
         cidade,
         uf,
-        pcd: pcd || 'Não'
+        pcd: pcd || 'Não',
+        cnh: cnh || 'Não tenho'
       },
     });
 
