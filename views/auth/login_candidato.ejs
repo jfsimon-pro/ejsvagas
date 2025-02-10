@@ -8,6 +8,24 @@
     color: white;
     margin-bottom: 15px;
   }
+  
+  .forgot-password {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+    padding-top: 20px;
+  }
+  .forgot-password a {
+    text-decoration: white;
+  }
+  @media (max-width: 980px) {
+    .forgot-password {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
 </style>
 <div class="main-login">
   <div class="content-main-login">
@@ -33,6 +51,7 @@
     </form>
     <div class="forgot-password">
       <a href="/auth/forgot-password-candidato">Esqueci minha senha</a>
+      <a href="/auth/register_candidato">Criar Conta</a>
     </div>
   </div>
 </div>

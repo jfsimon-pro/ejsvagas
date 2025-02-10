@@ -118,43 +118,51 @@
     .vagas-aprovadas a {
       color: black;
     }
+
     .lancar-cursos {
       margin: 35px 0px;
 
     }
-    .lancar-cursos a, .vagas-aprovadas a {
+
+    .lancar-cursos a,
+    .vagas-aprovadas a {
       background: #F78E0F;
-    color: white;
-    border: none;
-    font-size: 16px;
-    padding: 10px 20px;
-    text-decoration: none;
+      color: white;
+      border: none;
+      font-size: 16px;
+      padding: 10px 20px;
+      text-decoration: none;
     }
+
     .dashboard-buttons a {
       background-color: #F7AD0F;
       color: white;
-    border: none;
-    font-size: 16px;
-    padding: 10px 20px;
-    text-decoration: none;
+      border: none;
+      font-size: 16px;
+      padding: 10px 20px;
+      text-decoration: none;
     }
+
     .buttons-aprovado {
       margin-top: 25px;
     }
+
     .vagas-aprovadas ul p {
       color: black;
     }
+
     .buttons-aprovado {
       display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+      flex-wrap: wrap;
+      gap: 10px;
     }
+
     .action-buttons {
       display: flex;
       gap: 10px;
       margin: 20px 0;
     }
-    
+
     .action-buttons .btn {
       display: inline-flex;
       align-items: center;
@@ -163,16 +171,29 @@
       border-radius: 5px;
       font-weight: 500;
     }
-    
+
     .action-buttons .btn-primary {
       background-color: #007bff;
       color: white;
       border: none;
     }
-    
+
     .action-buttons .btn-primary:hover {
       background-color: #0056b3;
       text-decoration: none;
+    }
+
+    @media (max-width: 980px) {
+
+      .lancar-cursos,
+      .dashboard-buttons {
+        flex-wrap: wrap;
+        display: flex;
+        gap: 20px;
+        flex-direction: column;
+        max-width: 200px;
+        text-align: center;
+      }
     }
   </style>
   <section class="candidato-superior">
@@ -198,7 +219,7 @@
           <%= candidato.logradouro %>, <%= candidato.complemento %>, <%= candidato.numero %>, <%= candidato.bairro %> -
                   <%= candidato.cep %>, <%= candidato.cidade %> / <%= candidato.uf %>
         </p>
-        
+
         <div class="lancar-cursos">
           <a href="/candidato/lancar-experiencia">Lançar Experiência</a>
           <a href="/candidato/lancar-curso">Lançar Curso</a>
@@ -211,33 +232,39 @@
         </div>
       </div>
 
-      
+
       <div class="vagas-aprovadas">
         <h2>Vagas em que você foi aprovado</h2>
-        <% if (vagasAprovadas.length > 0) { %>
+        <% if (vagasAprovadas.length> 0) { %>
           <ul>
-            <% vagasAprovadas.forEach(vaga => { %>
+            <% vagasAprovadas.forEach(vaga=> { %>
               <li>
-                <h3><%= vaga.titulo %></h3>
-                <p><strong>Faixa Salarial:</strong> <%= vaga.faixaSalarial %></p>
-                <p><strong>Empresa:</strong> <%= vaga.empresa.nomeFantasia %></p>
+                <h3>
+                  <%= vaga.titulo %>
+                </h3>
+                <p><strong>Faixa Salarial:</strong>
+                  <%= vaga.faixaSalarial %>
+                </p>
+                <p><strong>Empresa:</strong>
+                  <%= vaga.empresa.nomeFantasia %>
+                </p>
                 <div class="buttons-aprovado">
                   <a href="/empresa/perfil/<%= vaga.empresa.id %>" class="btn btn-info">perfil da empresa</a>
                   <% if (vaga.jaAvaliada) { %>
                     <button disabled class="btn btn-secondary">Avaliação enviada</button>
-                  <% } else { %>
-                    <a href="/candidato/vagas/<%= vaga.id %>/avaliar" class="btn btn-success">Avaliar Empresa</a>
-                  <% } %>
+                    <% } else { %>
+                      <a href="/candidato/vagas/<%= vaga.id %>/avaliar" class="btn btn-success">Avaliar Empresa</a>
+                      <% } %>
                 </div>
               </li>
-            <% }); %>
+              <% }); %>
           </ul>
-        <% } else { %>
-          <p>Você ainda não foi aprovado em nenhuma vaga.</p>
-        <% } %>
+          <% } else { %>
+            <p>Você ainda não foi aprovado em nenhuma vaga.</p>
+            <% } %>
       </div>
-      
+
     </div>
   </section>
-  
+
   <%- include('../partials/footer') %>
