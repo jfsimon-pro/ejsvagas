@@ -57,20 +57,22 @@ model Candidato {
   uf             String
   candidaturas   Candidatura[]
   cursos         Curso[]
-  faixaSalarial String? // Opcional (se o campo pode ser nulo)
-  tipoContrato              String?  // Opcional
-  ocupacao                  String?  // Opcional
-  escolaridade              String?  // Opcional
-  disponibilidade           String?  // Opcional
-  idiomas                   String[] // Array para armazenar vários idiomas
-  experienciasProfissionais ExperienciaProfissional[]
-  avaliacoes     Avaliacao[] // Relacionamento com Avaliacao
-  emailVerificado   Boolean  @default(false)
-  verificationToken String?  // Token para verificar o e-mail
+  faixaSalarial  String?
+  tipoContrato   String?
+  ocupacao       String?
+  escolaridade   String?
+  disponibilidade String?
+  idiomas        String[]
+  experiencias   ExperienciaProfissional[]
+  avaliacoes     Avaliacao[]
+  emailVerificado Boolean  @default(false)
+  verificationToken String?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
   resetPasswordToken    String?
   resetPasswordExpires DateTime?
+  pcd            String?   @default("Não")
+  cnh            String?   @default("Não tenho")
 }
 
 model Vaga {

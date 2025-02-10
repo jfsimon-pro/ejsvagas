@@ -36,7 +36,36 @@
     <input type="text" id="cidade" name="cidade" value="<%= candidato.cidade %>" required>
   
     <label for="uf">UF:</label>
-    <input type="text" id="uf" name="uf" value="<%= candidato.uf %>" required>
+    <select id="uf" name="uf" required>
+      <option value="" <%= candidato.uf === '' ? 'selected' : '' %>>Selecione</option>
+      <option value="AC" <%= candidato.uf === 'AC' ? 'selected' : '' %>>AC</option>
+      <option value="AL" <%= candidato.uf === 'AL' ? 'selected' : '' %>>AL</option>
+      <option value="AM" <%= candidato.uf === 'AM' ? 'selected' : '' %>>AM</option>
+      <option value="AP" <%= candidato.uf === 'AP' ? 'selected' : '' %>>AP</option>
+      <option value="BA" <%= candidato.uf === 'BA' ? 'selected' : '' %>>BA</option>
+      <option value="CE" <%= candidato.uf === 'CE' ? 'selected' : '' %>>CE</option>
+      <option value="DF" <%= candidato.uf === 'DF' ? 'selected' : '' %>>DF</option>
+      <option value="ES" <%= candidato.uf === 'ES' ? 'selected' : '' %>>ES</option>
+      <option value="GO" <%= candidato.uf === 'GO' ? 'selected' : '' %>>GO</option>
+      <option value="MA" <%= candidato.uf === 'MA' ? 'selected' : '' %>>MA</option>
+      <option value="MG" <%= candidato.uf === 'MG' ? 'selected' : '' %>>MG</option>
+      <option value="MS" <%= candidato.uf === 'MS' ? 'selected' : '' %>>MS</option>
+      <option value="MT" <%= candidato.uf === 'MT' ? 'selected' : '' %>>MT</option>
+      <option value="PA" <%= candidato.uf === 'PA' ? 'selected' : '' %>>PA</option>
+      <option value="PB" <%= candidato.uf === 'PB' ? 'selected' : '' %>>PB</option>
+      <option value="PE" <%= candidato.uf === 'PE' ? 'selected' : '' %>>PE</option>
+      <option value="PI" <%= candidato.uf === 'PI' ? 'selected' : '' %>>PI</option>
+      <option value="PR" <%= candidato.uf === 'PR' ? 'selected' : '' %>>PR</option>
+      <option value="RJ" <%= candidato.uf === 'RJ' ? 'selected' : '' %>>RJ</option>
+      <option value="RN" <%= candidato.uf === 'RN' ? 'selected' : '' %>>RN</option>
+      <option value="RO" <%= candidato.uf === 'RO' ? 'selected' : '' %>>RO</option>
+      <option value="RR" <%= candidato.uf === 'RR' ? 'selected' : '' %>>RR</option>
+      <option value="RS" <%= candidato.uf === 'RS' ? 'selected' : '' %>>RS</option>
+      <option value="SC" <%= candidato.uf === 'SC' ? 'selected' : '' %>>SC</option>
+      <option value="SE" <%= candidato.uf === 'SE' ? 'selected' : '' %>>SE</option>
+      <option value="SP" <%= candidato.uf === 'SP' ? 'selected' : '' %>>SP</option>
+      <option value="TO" <%= candidato.uf === 'TO' ? 'selected' : '' %>>TO</option>
+    </select>
 
     <label for="idiomas">Idiomas:</label>
         <select id="idiomas" name="idiomas[]" multiple>
@@ -62,7 +91,98 @@
           <option value="Pós graduação completa" <%= candidato.escolaridade === 'Pós graduação completa' ? 'selected' : '' %>>Pós-graduação completa</option>
         </select>
     
-  
+    <div class="form-group">
+      <label>Sou PCD:</label>
+      <div class="radio-group">
+        <div class="radio-item">
+          <input 
+            type="radio" 
+            id="pcd-sim" 
+            name="pcd" 
+            value="Sim"
+            <%= candidato.pcd === 'Sim' ? 'checked' : '' %>
+          >
+          <label for="pcd-sim">Sim</label>
+        </div>
+        <div class="radio-item">
+          <input 
+            type="radio" 
+            id="pcd-nao" 
+            name="pcd" 
+            value="Não"
+            <%= candidato.pcd === 'Não' ? 'checked' : '' %>
+          >
+          <label for="pcd-nao">Não</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Minha CNH:</label>
+      <div class="radio-group cnh-group">
+        <div class="radio-item">
+          <input 
+            type="radio" 
+            id="cnh-nao" 
+            name="cnh" 
+            value="Não tenho"
+            <%= !candidato.cnh || candidato.cnh === 'Não tenho' ? 'checked' : '' %>
+          >
+          <label for="cnh-nao">Não tenho</label>
+        </div>
+        <div class="radio-item">
+          <input 
+            type="radio" 
+            id="cnh-a" 
+            name="cnh" 
+            value="A"
+            <%= candidato.cnh === 'A' ? 'checked' : '' %>
+          >
+          <label for="cnh-a">A</label>
+        </div>
+        <div class="radio-item">
+          <input 
+            type="radio" 
+            id="cnh-b" 
+            name="cnh" 
+            value="B"
+            <%= candidato.cnh === 'B' ? 'checked' : '' %>
+          >
+          <label for="cnh-b">B</label>
+        </div>
+        <div class="radio-item">
+          <input 
+            type="radio" 
+            id="cnh-c" 
+            name="cnh" 
+            value="C"
+            <%= candidato.cnh === 'C' ? 'checked' : '' %>
+          >
+          <label for="cnh-c">C</label>
+        </div>
+        <div class="radio-item">
+          <input 
+            type="radio" 
+            id="cnh-d" 
+            name="cnh" 
+            value="D"
+            <%= candidato.cnh === 'D' ? 'checked' : '' %>
+          >
+          <label for="cnh-d">D</label>
+        </div>
+        <div class="radio-item">
+          <input 
+            type="radio" 
+            id="cnh-e" 
+            name="cnh" 
+            value="E"
+            <%= candidato.cnh === 'E' ? 'checked' : '' %>
+          >
+          <label for="cnh-e">E</label>
+        </div>
+      </div>
+    </div>
+
     <button type="submit">Salvar Alterações</button>
   </form>
   
@@ -70,3 +190,28 @@
 </div>
 </div>
 <%- include('../partials/footer') %>
+
+<style>
+  .radio-group {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  .radio-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .radio-item input[type="radio"] {
+    width: auto;
+    margin: 0;
+  }
+
+  .radio-item label {
+    margin: 0;
+    color: #333;
+    font-weight: normal;
+  }
+</style>
