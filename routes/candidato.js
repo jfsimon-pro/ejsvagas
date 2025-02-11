@@ -728,7 +728,11 @@ router.get('/vagas/:vagaId/detalhes', verifyToken, async (req, res) => {
 
     const jaCandidatado = !!candidaturaExistente;
 
-    res.render('candidato/detalhes_vaga', { vaga, jaCandidatado });
+    res.render('candidato/detalhes_vaga', { 
+      vaga, 
+      jaCandidatado,
+      baseUrl: process.env.BASE_URL || `http://${req.get('host')}`
+    });
   } catch (error) {
     console.error('Erro ao carregar detalhes da vaga:', error);
     res.status(500).send('Erro ao carregar os detalhes da vaga.');
