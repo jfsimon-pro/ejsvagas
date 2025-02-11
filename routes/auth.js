@@ -740,7 +740,7 @@ router.get('/reset-password-empresa', async (req, res) => {
   const { token } = req.query;
   
   if (!token) {
-    return res.redirect('/auth/login-empresa');
+    return res.redirect('/auth/login_empresa');
   }
   
   try {
@@ -762,7 +762,7 @@ router.get('/reset-password-empresa', async (req, res) => {
     res.render('auth/reset_password_empresa', { token });
   } catch (error) {
     console.error('Erro ao verificar token:', error);
-    res.redirect('/auth/login-empresa');
+    res.redirect('/auth/login_empresa');
   }
 });
 
@@ -800,7 +800,7 @@ router.post('/reset-password-empresa', async (req, res) => {
       }
     });
     
-    res.redirect('/auth/login-empresa?message=Senha alterada com sucesso');
+    res.redirect('/auth/login_empresa?message=Senha alterada com sucesso');
   } catch (error) {
     console.error('Erro ao redefinir senha:', error);
     res.render('auth/reset_password_empresa', {
@@ -882,7 +882,7 @@ router.get('/reset-password-candidato', async (req, res) => {
   const { token } = req.query;
   
   if (!token) {
-    return res.redirect('/auth/login-candidato');
+    return res.redirect('/auth/login_candidato');
   }
   
   try {
@@ -904,7 +904,7 @@ router.get('/reset-password-candidato', async (req, res) => {
     res.render('auth/reset_password_candidato', { token });
   } catch (error) {
     console.error('Erro ao verificar token:', error);
-    res.redirect('/auth/login-candidato');
+    res.redirect('/auth/login_candidato');
   }
 });
 
@@ -942,7 +942,7 @@ router.post('/reset-password-candidato', async (req, res) => {
       }
     });
     
-    res.redirect('/auth/login-candidato?message=Senha alterada com sucesso');
+    res.redirect('/auth/login_candidato?message=Senha alterada com sucesso');
   } catch (error) {
     console.error('Erro ao redefinir senha:', error);
     res.render('auth/reset_password_candidato', {
