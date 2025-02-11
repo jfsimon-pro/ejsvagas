@@ -77,6 +77,8 @@ model Candidato {
   resetPasswordExpires DateTime?
   pcd            String?   @default("Não")
   cnh            String[]  @default([])
+  resetToken       String?
+  resetTokenExpiry DateTime?
 }
 
 model Vaga {

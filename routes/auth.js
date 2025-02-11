@@ -810,4 +810,146 @@ router.post('/reset-password-empresa', async (req, res) => {
   }
 });
 
+// Rota para exibir o formulário de esqueci senha do candidato
+router.get('/forgot-password-candidato', (req, res) => {
+  res.render('auth/forgot_password_candidato');
+});
+
+// Rota para processar a solicitação de redefinição de senha do candidato
+router.post('/forgot-password-candidato', async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    // Verificar se o candidato existe
+    const candidato = await prisma.candidato.findUnique({
+      where: { email }
+    });
+
+    if (!candidato) {
+      return res.render('auth/forgot_password_candidato', {
+        error: 'Email não encontrado.'
+      });
+    }
+
+    // Gerar token de redefinição de senha
+    const resetToken = crypto.randomBytes(32).toString('hex');
+    const resetTokenExpiry = new Date(Date.now() + 3600000); // 1 hora
+
+    // Salvar token no banco
+    await prisma.candidato.update({
+      where: { email },
+      data: {
+        resetToken,
+        resetTokenExpiry
+      }
+    });
+
+    // Criar o link de redefinição
+    const resetLink = `${process.env.BASE_URL}/auth/reset-password-candidato?token=${resetToken}`;
+
+    // Configurar o email
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: 'Redefinição de Senha - EJS Vagas',
+      html: `
+        <h1>Redefinição de Senha</h1>
+        <p>Você solicitou a redefinição de senha da sua conta no EJS Vagas.</p>
+        <p>Clique no link abaixo para redefinir sua senha:</p>
+        <a href="${resetLink}">Redefinir Senha</a>
+        <p>Este link é válido por 1 hora.</p>
+        <p>Se você não solicitou esta redefinição, ignore este email.</p>
+      `
+    };
+
+    // Enviar o email
+    await transporter.sendMail(mailOptions);
+
+    res.render('auth/forgot_password_candidato', {
+      success: 'Instruções para redefinição de senha foram enviadas para seu email.'
+    });
+
+  } catch (error) {
+    console.error('Erro ao processar esqueci senha:', error);
+    res.render('auth/forgot_password_candidato', {
+      error: 'Erro ao processar sua solicitação.'
+    });
+  }
+});
+
+// Rota para exibir o formulário de redefinição de senha do candidato
+router.get('/reset-password-candidato', async (req, res) => {
+  const { token } = req.query;
+  
+  if (!token) {
+    return res.redirect('/auth/login-candidato');
+  }
+  
+  try {
+    const candidato = await prisma.candidato.findFirst({
+      where: {
+        resetToken: token,
+        resetTokenExpiry: {
+          gt: new Date()
+        }
+      }
+    });
+    
+    if (!candidato) {
+      return res.render('auth/forgot_password_candidato', {
+        error: 'Token inválido ou expirado.'
+      });
+    }
+    
+    res.render('auth/reset_password_candidato', { token });
+  } catch (error) {
+    console.error('Erro ao verificar token:', error);
+    res.redirect('/auth/login-candidato');
+  }
+});
+
+// Rota para processar a redefinição de senha do candidato
+router.post('/reset-password-candidato', async (req, res) => {
+  const { token, password } = req.body;
+  
+  try {
+    const candidato = await prisma.candidato.findFirst({
+      where: {
+        resetToken: token,
+        resetTokenExpiry: {
+          gt: new Date()
+        }
+      }
+    });
+    
+    if (!candidato) {
+      return res.render('auth/reset_password_candidato', {
+        error: 'Token inválido ou expirado.',
+        token
+      });
+    }
+    
+    // Hash da nova senha
+    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+    
+    // Atualizar senha e limpar tokens
+    await prisma.candidato.update({
+      where: { id: candidato.id },
+      data: {
+        senha: hashedPassword,
+        resetToken: null,
+        resetTokenExpiry: null
+      }
+    });
+    
+    res.redirect('/auth/login-candidato?message=Senha alterada com sucesso');
+  } catch (error) {
+    console.error('Erro ao redefinir senha:', error);
+    res.render('auth/reset_password_candidato', {
+      error: 'Erro ao redefinir senha.',
+      token
+    });
+  }
+});
+
 module.exports = router;
