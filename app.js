@@ -84,12 +84,13 @@ app.get('/vagas', async (req, res) => {
     const busca = req.query.busca || '';
     const faixaSalarial = req.query.faixaSalarial || '';
     const tipoContrato = req.query.tipoContrato || '';
+    const uf = req.query.uf || '';
 
     // Construir where clause baseado nos filtros
     const where = {};
     
     // Adicionar condições de busca
-    if (busca || faixaSalarial || tipoContrato) {
+    if (busca || faixaSalarial || tipoContrato || uf) {
       where.AND = [];
       
       if (busca) {
@@ -113,6 +114,14 @@ app.get('/vagas', async (req, res) => {
       if (tipoContrato) {
         where.AND.push({ tipoContrato: tipoContrato });
       }
+
+      if (uf) {
+        where.AND.push({
+          empresa: {
+            uf: uf
+          }
+        });
+      }
     }
 
     // Buscar vagas com paginação
@@ -135,6 +144,7 @@ app.get('/vagas', async (req, res) => {
       busca,
       faixaSalarial,
       tipoContrato,
+      uf,
       currentPage: page,
       totalPages,
       totalVagas
