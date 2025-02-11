@@ -664,6 +664,15 @@ router.get('/forgot-password-empresa', (req, res) => {
   res.render('auth/forgot_password_empresa');
 });
 
+// Configuração do transporter do nodemailer
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
+  }
+});
+
 // Rota para processar a solicitação de redefinição de senha
 router.post('/forgot-password-empresa', async (req, res) => {
   const { email } = req.body;
@@ -693,8 +702,27 @@ router.post('/forgot-password-empresa', async (req, res) => {
       }
     });
 
-    // Enviar email com link de redefinição (implementar depois)
-    // Por enquanto, apenas redireciona com mensagem de sucesso
+    // Criar o link de redefinição
+    const resetLink = `${process.env.BASE_URL}/auth/reset-password-empresa?token=${resetToken}`;
+
+    // Configurar o email
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: 'Redefinição de Senha - EJS Vagas',
+      html: `
+        <h1>Redefinição de Senha</h1>
+        <p>Você solicitou a redefinição de senha da sua conta no EJS Vagas.</p>
+        <p>Clique no link abaixo para redefinir sua senha:</p>
+        <a href="${resetLink}">Redefinir Senha</a>
+        <p>Este link é válido por 1 hora.</p>
+        <p>Se você não solicitou esta redefinição, ignore este email.</p>
+      `
+    };
+
+    // Enviar o email
+    await transporter.sendMail(mailOptions);
+
     res.render('auth/forgot_password_empresa', {
       success: 'Instruções para redefinição de senha foram enviadas para seu email.'
     });
@@ -703,6 +731,81 @@ router.post('/forgot-password-empresa', async (req, res) => {
     console.error('Erro ao processar esqueci senha:', error);
     res.render('auth/forgot_password_empresa', {
       error: 'Erro ao processar sua solicitação.'
+    });
+  }
+});
+
+// Rota para exibir o formulário de redefinição de senha
+router.get('/reset-password-empresa', async (req, res) => {
+  const { token } = req.query;
+  
+  if (!token) {
+    return res.redirect('/auth/login-empresa');
+  }
+  
+  try {
+    const empresa = await prisma.empresa.findFirst({
+      where: {
+        resetToken: token,
+        resetTokenExpiry: {
+          gt: new Date()
+        }
+      }
+    });
+    
+    if (!empresa) {
+      return res.render('auth/forgot_password_empresa', {
+        error: 'Token inválido ou expirado.'
+      });
+    }
+    
+    res.render('auth/reset_password_empresa', { token });
+  } catch (error) {
+    console.error('Erro ao verificar token:', error);
+    res.redirect('/auth/login-empresa');
+  }
+});
+
+// Rota para processar a redefinição de senha
+router.post('/reset-password-empresa', async (req, res) => {
+  const { token, password } = req.body;
+  
+  try {
+    const empresa = await prisma.empresa.findFirst({
+      where: {
+        resetToken: token,
+        resetTokenExpiry: {
+          gt: new Date()
+        }
+      }
+    });
+    
+    if (!empresa) {
+      return res.render('auth/reset_password_empresa', {
+        error: 'Token inválido ou expirado.',
+        token
+      });
+    }
+    
+    // Hash da nova senha
+    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+    
+    // Atualizar senha e limpar tokens
+    await prisma.empresa.update({
+      where: { id: empresa.id },
+      data: {
+        senha: hashedPassword,
+        resetToken: null,
+        resetTokenExpiry: null
+      }
+    });
+    
+    res.redirect('/auth/login-empresa?message=Senha alterada com sucesso');
+  } catch (error) {
+    console.error('Erro ao redefinir senha:', error);
+    res.render('auth/reset_password_empresa', {
+      error: 'Erro ao redefinir senha.',
+      token
     });
   }
 });
