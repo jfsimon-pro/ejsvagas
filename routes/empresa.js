@@ -706,7 +706,7 @@ module.exports = (prisma) => {
           candidato: {
             include: {
               cursos: true,
-              experienciasProfissionais: true
+              experiencias: true
             }
           } 
         },
@@ -879,6 +879,39 @@ module.exports = (prisma) => {
     } catch (error) {
       console.error('Erro ao buscar candidatos:', error);
       res.status(500).send('Erro ao carregar candidatos.');
+    }
+  });
+
+  // Rota para ver candidatos de uma vaga específica
+  router.get('/vagas/:id/candidatos', verifyToken, async (req, res) => {
+    try {
+      const vaga = await prisma.vaga.findUnique({
+        where: { id: req.params.id },
+        include: {
+          candidaturas: {
+            include: {
+              candidato: {
+                include: {
+                  cursos: true,
+                  experiencias: true
+                }
+              }
+            }
+          }
+        }
+      });
+
+      if (!vaga || vaga.empresaId !== req.user.userId) {
+        return res.redirect('/empresa/vagas');
+      }
+
+      res.render('empresa/candidatos_vaga', { 
+        vaga,
+        candidaturas: vaga.candidaturas 
+      });
+    } catch (error) {
+      console.error('Erro ao carregar candidatos da vaga:', error);
+      res.status(500).send('Erro ao carregar candidatos da vaga.');
     }
   });
 
