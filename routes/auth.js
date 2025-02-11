@@ -9,6 +9,7 @@ const path = require('path');
 const prisma = new PrismaClient();
 const SALT_ROUNDS = 12;
 const nodemailer = require('nodemailer');
+const crypto = require('crypto');
 
 // Configuração do multer
 const storage = multer.diskStorage({
@@ -658,5 +659,52 @@ router.post('/login_admin', async (req, res) => {
   }
 });
 
+// Rota para exibir o formulário de esqueci senha da empresa
+router.get('/forgot-password-empresa', (req, res) => {
+  res.render('auth/forgot_password_empresa');
+});
+
+// Rota para processar a solicitação de redefinição de senha
+router.post('/forgot-password-empresa', async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    // Verificar se a empresa existe
+    const empresa = await prisma.empresa.findUnique({
+      where: { email }
+    });
+
+    if (!empresa) {
+      return res.render('auth/forgot_password_empresa', {
+        error: 'Email não encontrado.'
+      });
+    }
+
+    // Gerar token de redefinição de senha
+    const resetToken = crypto.randomBytes(32).toString('hex');
+    const resetTokenExpiry = new Date(Date.now() + 3600000); // 1 hora
+
+    // Salvar token no banco
+    await prisma.empresa.update({
+      where: { email },
+      data: {
+        resetToken,
+        resetTokenExpiry
+      }
+    });
+
+    // Enviar email com link de redefinição (implementar depois)
+    // Por enquanto, apenas redireciona com mensagem de sucesso
+    res.render('auth/forgot_password_empresa', {
+      success: 'Instruções para redefinição de senha foram enviadas para seu email.'
+    });
+
+  } catch (error) {
+    console.error('Erro ao processar esqueci senha:', error);
+    res.render('auth/forgot_password_empresa', {
+      error: 'Erro ao processar sua solicitação.'
+    });
+  }
+});
 
 module.exports = router;

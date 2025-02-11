@@ -39,6 +39,8 @@ model Empresa {
   updatedAt      DateTime @updatedAt
   resetPasswordToken    String?
   resetPasswordExpires DateTime?
+  resetToken       String?
+  resetTokenExpiry DateTime?
 }
 
 model Candidato {
