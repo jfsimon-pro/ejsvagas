@@ -193,14 +193,39 @@
         <i class="fas fa-wheelchair"></i>
         <p><strong>PCD:</strong> <%= candidato.pcd || 'Não' %></p>
       </div>
-      <% if (candidato.idiomas && candidato.idiomas.length > 0) { %>
-        <p><strong>Idiomas:</strong> <%= candidato.idiomas.join(', ') %></p>
-      <% } %>
-      <p><strong>Escolaridade:</strong> <%= candidato.escolaridade || 'Não informado' %></p>
-      <p><strong>Disponibilidade:</strong> <%= candidato.disponibilidade || 'Não informado' %></p>
-      <p><strong>Ocupação:</strong> <%= candidato.ocupacao || 'Não informado' %></p>
-      <p><strong>Tipo de Contrato:</strong> <%= candidato.tipoContrato || 'Não informado' %></p>
-      <p><strong>Faixa Salarial:</strong> <%= candidato.faixaSalarial || 'Não informado' %></p>
+      <div class="perfil-candidato-info-item">
+        <i class="fas fa-id-card-alt"></i>
+        <% if (candidato.idiomas && candidato.idiomas.length > 0) { %>
+          <p><strong>Idiomas:</strong> <%= candidato.idiomas.join(', ') %></p>
+        <% } %>
+      </div>
+      <div class="perfil-candidato-info-item">
+        <i class="fas fa-id-card-alt"></i>
+        <p><strong>Escolaridade:</strong> <%= candidato.escolaridade || 'Não informado' %></p>
+      </div>
+      <div class="perfil-candidato-info-item">
+        <i class="fas fa-id-card-alt"></i>
+        <p><strong>Disponibilidade:</strong> <%= candidato.disponibilidade || 'Não informado' %></p>
+      </div>
+      <div class="perfil-candidato-info-item">
+        <i class="fas fa-id-card-alt"></i>
+        <p><strong>Ocupação:</strong> <%= candidato.ocupacao || 'Não informado' %></p>
+      </div>
+      <div class="perfil-candidato-info-item">
+        <i class="fas fa-id-card-alt"></i>
+        <p><strong>Tipo de Contrato:</strong> <%= candidato.tipoContrato || 'Não informado' %></p>
+      </div>
+      <div class="perfil-candidato-info-item">
+        <i class="fas fa-id-card-alt"></i>
+        <p><strong>Faixa Salarial:</strong> <%= candidato.faixaSalarial || 'Não informado' %></p>
+      </div>
+     
+      
+      
+      
+      
+      
+      
     </div>
 
     <div class="perfil-candidato-section">
