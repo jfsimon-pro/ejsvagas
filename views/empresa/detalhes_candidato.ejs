@@ -55,97 +55,122 @@
     .detalhes-adicionais p {
       margin-bottom: 5px;
     }
+    .candidato-container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 20px;
+    }
+
+    .candidato-card {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .candidato-info {
+      margin-bottom: 15px;
+    }
+
+    .candidato-info p {
+      margin: 5px 0;
+    }
+
+    .experiencias, .cursos {
+      background: #f5f5f5;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+
+    .experiencia-item, .curso-item {
+      margin: 10px 0;
+      padding: 10px;
+      border-left: 3px solid #F78E0F;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      color: #F78E0F;
+      margin-bottom: 10px;
+    }
+
+    h4 {
+      color: #555;
+      margin: 10px 0;
+    }
     </style>
    <div class="main-login">
     <div class="content-main-login">
-      <div class="detalhes-candidato-container">
-        <h1>Detalhes do Candidato</h1>
-        <div class="detalhes-pessoais">
-          <p><strong>Nome:</strong> <%= candidato.nomeCompleto %></p>
-          <p><strong>CPF:</strong> <%= candidato.cpf %></p>
-          <p><strong>E-mail:</strong> <%= candidato.email %></p>
-          <p><strong>Telefone:</strong> <%= candidato.telefone %></p>
-          <p><strong>Endereço:</strong>
-            <%= candidato.logradouro %>, <%= candidato.complemento %>, <%= candidato.numero %>, 
-            <%= candidato.bairro %> - <%= candidato.cidade %> / <%= candidato.uf %>, 
-            CEP: <%= candidato.cep %>
-          </p>
-        </div>
-  
-        <div class="detalhes-adicionais">
-          <h2><strong>Informações Adicionais</strong></h2>
-          <p><strong>Idiomas:</strong> 
-            <% if (candidato.idiomas.length > 0) { %>
-              <%= candidato.idiomas.join(', ') %>
-            <% } else { %>
-              Nenhum idioma registrado.
+      <div class="candidato-container">
+        <h2>Detalhes do Candidato</h2>
+        <div class="candidato-card">
+          <h3><%= candidato.nomeCompleto %></h3>
+          <div class="candidato-info">
+            <p><strong>Email:</strong> <%= candidato.email %></p>
+            <p><strong>Telefone:</strong> <%= candidato.telefone %></p>
+            <p><strong>CPF:</strong> <%= candidato.cpf %></p>
+            <p><strong>Localização:</strong> <%= candidato.cidade %>/<%= candidato.uf %></p>
+            <% if (candidato.escolaridade) { %>
+              <p><strong>Escolaridade:</strong> <%= candidato.escolaridade %></p>
             <% } %>
-          </p>
-          <p><strong>Escolaridade:</strong> <%= candidato.escolaridade || 'Não informado' %></p>
-          <p><strong>Disponibilidade:</strong> <%= candidato.disponibilidade || 'Não informado' %></p>
-          <p><strong>Ocupação:</strong> <%= candidato.ocupacao || 'Não informado' %></p>
-          <p><strong>Tipo de Contrato:</strong> <%= candidato.tipoContrato || 'Não informado' %></p>
-          <p><strong>Faixa Salarial:</strong> <%= candidato.faixaSalarial || 'Não informado' %></p>
-        </div>
-  
-        <div class="detalhes-academicos">
-          
-  
-          <div class="cursos-do-candidato">
-            <h2>Cursos</h2>
-            <% if (candidato.cursos.length > 0) { %>
-              <ul>
-                <% candidato.cursos.forEach(curso => { %>
-                  <li>
-                    <div class="espacadiv"><strong>Instituição:</strong> <%= curso.instituicao %></div>
-                    <div class="espacadiv"><strong>Curso:</strong> <%= curso.curso %></div>
-                    <div class="espacadiv"><strong>Data de Início:</strong> <%= curso.dataInicio.toLocaleDateString() %></div>
-                    <div class="espacadiv">
-                      <% if (curso.dataConclusao) { %>
-                        <strong>Data de Conclusão:</strong> <%= curso.dataConclusao.toLocaleDateString() %>
-                      <% } else { %>
-                        <strong>Data de Conclusão:</strong> Em andamento
-                      <% } %>
-                    </div>
-                  </li>
-                <% }); %>
-              </ul>
-            <% } else { %>
-              <p>Sem cursos cadastrados.</p>
+            <% if (candidato.idiomas && candidato.idiomas.length > 0) { %>
+              <p><strong>Idiomas:</strong> <%= candidato.idiomas.join(', ') %></p>
+            <% } %>
+            <p><strong>PCD:</strong> <%= candidato.pcd || 'Não' %></p>
+            <% if (candidato.cnh && candidato.cnh.length > 0) { %>
+              <p><strong>CNH:</strong> <%= candidato.cnh.join(', ') %></p>
             <% } %>
           </div>
-  
-          <div class="exp-do-candidato">
-            <h2>Experiências Profissionais</h2>
-            <% if (candidato.experienciasProfissionais.length > 0) { %>
-              <ul>
-                <% candidato.experienciasProfissionais.forEach(exp => { %>
-                  <li>
-                    <strong>Empresa:</strong> <%= exp.empresa %><br>
-                    <strong>Cargo:</strong> <%= exp.cargo %><br>
-                    <strong>Função:</strong> <%= exp.funcao %><br>
-                    <strong>Data de Entrada:</strong> <%= exp.dataEntrada.toLocaleDateString() %><br>
-                    <% if (exp.dataSaida) { %>
-                      <strong>Data de Saída:</strong> <%= exp.dataSaida.toLocaleDateString() %><br>
-                    <% } else { %>
-                      <strong>Data de Saída:</strong> Atualmente trabalhando<br>
-                    <% } %>
-                    <strong>Motivo de Saída:</strong> <%= exp.motivo %>
-                  </li>
-                <% }); %>
-              </ul>
-            <% } else { %>
-              <p>Sem experiências profissionais cadastradas.</p>
-            <% } %>
-          </div>
+          <% if (candidato.experiencias && candidato.experiencias.length > 0) { %>
+            <div class="experiencias">
+              <h4>Experiências Profissionais</h4>
+              <% candidato.experiencias.forEach(exp => { %>
+                <div class="experiencia-item">
+                  <p><strong>Empresa:</strong> <%= exp.empresa %></p>
+                  <p><strong>Cargo:</strong> <%= exp.cargo %></p>
+                  <p><strong>Função:</strong> <%= exp.funcao %></p>
+                  <p><strong>Período:</strong> 
+                    <%= new Date(exp.dataEntrada).toLocaleDateString('pt-BR') %> - 
+                    <%= exp.dataSaida ? new Date(exp.dataSaida).toLocaleDateString('pt-BR') : 'Atual' %>
+                  </p>
+                </div>
+              <% }); %>
+            </div>
+          <% } %>
+          <% if (candidato.cursos && candidato.cursos.length > 0) { %>
+            <div class="cursos">
+              <h4>Cursos</h4>
+              <% candidato.cursos.forEach(curso => { %>
+                <div class="curso-item">
+                  <p><strong>Curso:</strong> <%= curso.curso %></p>
+                  <p><strong>Instituição:</strong> <%= curso.instituicao %></p>
+                  <p><strong>Período:</strong> 
+                    <%= new Date(curso.dataInicio).toLocaleDateString('pt-BR') %> - 
+                    <%= curso.dataConclusao ? new Date(curso.dataConclusao).toLocaleDateString('pt-BR') : 'Em andamento' %>
+                  </p>
+                </div>
+              <% }); %>
+            </div>
+          <% } %>
+          <% if (candidato.candidaturas && candidato.candidaturas.length > 0) { %>
+            <div class="candidaturas">
+              <h4>Vagas que se Candidatou</h4>
+              <% candidato.candidaturas.forEach(candidatura => { %>
+                <div class="candidatura-item">
+                  <p><strong>Vaga:</strong> <%= candidatura.vaga.titulo %></p>
+                  <p><strong>Data da Candidatura:</strong> <%= new Date(candidatura.createdAt).toLocaleDateString('pt-BR') %></p>
+                </div>
+              <% }); %>
+            </div>
+          <% } %>
         </div>
-  
-        <!-- Botão Voltar -->
-        <% if (typeof isCandidato !== 'undefined' && isCandidato) { %>
-          <a href="/candidato/dashboard" class="btn btn-secondary">Voltar para Dashboard</a>
-        <% } else { %>
-          <a href="javascript:history.back()" class="btn btn-secondary">Voltar</a>
-        <% } %>
+        <a href="javascript:history.back()" class="btn btn-voltar">Voltar</a>
       </div>
     </div>
   </div>
