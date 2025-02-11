@@ -258,16 +258,19 @@ module.exports = (prisma) => {
   });
 
   // Rota para exibir os detalhes de um candidato específico
-  router.get('/candidatos/:candidatoId', async (req, res) => {
-    const { candidatoId } = req.params;
-
+  router.get('/candidatos/:id', verifyToken, async (req, res) => {
     try {
       const candidato = await prisma.candidato.findUnique({
-        where: { id: candidatoId },
+        where: { id: req.params.id },
         include: {
           cursos: true,
-          experienciasProfissionais: true,
-        },
+          experiencias: true,
+          candidaturas: {
+            include: {
+              vaga: true
+            }
+          }
+        }
       });
 
       if (!candidato) {
