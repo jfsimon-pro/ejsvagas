@@ -641,7 +641,21 @@ justify-content: center;
   text-decoration: none;
   font-size: 18px;
 }
+@media (min-width: 769px) {
+  .nav-links, .itens-menu {
+    width: 100%;
+  }
+  .itens-menu {
+    justify-content: space-between;
+  }
+  .logo{
+    display: none;
+  }
+}
 @media (max-width: 768px) {
+  .logo-desk {
+    display: block;
+  }
   .img-logo {
     max-width: 120px;
   }
