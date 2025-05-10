@@ -77,7 +77,8 @@
     text-align: center;
   }
   .hero {
-    background: url("../img/bgcolor.png");
+    background-color: black;
+    background-image: url("../img/bgcolor.png");
     background-repeat: no-repeat;
     background-size: cover;
     height: 685px;
