@@ -148,6 +148,34 @@
   padding: 20px;
   overflow: scroll;
 }
+.area-empresa-menu {
+  background: linear-gradient(to right, #000000, #A53D06);
+  color: #F2F2F2;
+  border-radius: 9999px;
+  border: none;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 400;
+  width: 183px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.area-aluno-menu {
+  background: #FF5E00;
+  color: white;
+  border-radius: 9999px;
+  border: none;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 400;
+  width: 183px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .content-sobre {
   max-width: 1200px;
   margin: auto;
