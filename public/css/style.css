@@ -24,15 +24,18 @@
     gap: 20px;
   }
   
-  .nav-links ul li a {
-    font-size: 1rem;
+  .links-menu a {
+    font-size: 16px;
     transition: color 0.3s;
-    color: #062A4E;
+    color: #131313;
     text-decoration: none;
   }
   
-  .nav-links ul li a:hover {
-    color: #F78E0F;
+  .links-menu a:hover {
+    color: #FF5E00;
+    background-color: #E5E5E5;
+    padding: 20px 8px;
+    border-radius: 120;
   }
   
   /* Mobile styles */
