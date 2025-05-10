@@ -28,7 +28,7 @@
   }
   .links-menu {
     width: 382px;
-    display: fl
+    display: flex;
   }
 
   .links-menu a {
@@ -47,7 +47,7 @@
     color: #FF5E00;
     background-color: #E5E5E5;
     padding: 20px 8px;
-    border-radius: 120;
+    border-radius: 40px;
   }
   .botoes-menu {
     width: 389px;
