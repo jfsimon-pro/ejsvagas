@@ -83,18 +83,7 @@
     background-size: cover;
     height: 685px;
   }
-  .content-hero {
-    background-image: url("../img/heronovo.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
-    height: inherit;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  
   .content-hero h1 {
     color: white;
     font-size: 40px;
