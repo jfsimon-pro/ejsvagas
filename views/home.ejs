@@ -47,18 +47,17 @@
       <div class="vagas-grid">
         <% if (ultimasVagas && ultimasVagas.length > 0) { %>
           <% ultimasVagas.forEach(vaga => { %>
+            <a href="/auth/register_candidato" class="btn-saiba-mais"></a>
             <div class="vaga-card">
               <h3><%= vaga.titulo %></h3>
-              <div class="vaga-info">
-                <p><strong>Empresa:</strong> <%= vaga.empresa.nomeFantasia %></p>
-                <p><strong>Localização:</strong> <%= vaga.empresa.cidade %>/<%= vaga.empresa.uf %></p>
-                <p><strong>Cargo:</strong> <%= vaga.cargo %></p>
+              <div class="vaga-info">                
+                <p><strong>Escolaridade:</strong> <%= vaga.escolaridade %></p>
                 <p><strong>Salário:</strong> <%= vaga.faixaSalarial %></p>
                 <p><strong>Inscritos:</strong> <%= vaga.inscritos || 0 %></p>
-                <p><strong>Escolaridade:</strong> <%= vaga.escolaridade %></p>
+                <p><strong>Localização:</strong> <%= vaga.empresa.cidade %>/<%= vaga.empresa.uf %></p>
               </div>
-              <a href="/auth/register_candidato" class="btn-saiba-mais">Saiba mais</a>
-            </div>
+              
+            </div></a>
           <% }); %>
         <% } else { %>
           <p class="no-vagas">Nenhuma vaga disponível no momento.</p>
