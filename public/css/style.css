@@ -642,9 +642,7 @@ justify-content: center;
 .content-hero img {
   max-width: 100%;
 }
-.mostra-mobile {
-  display: none;
-}
+
 .search-bar {
   width: 100%;
   max-width: 1400px;
@@ -768,6 +766,9 @@ justify-content: center;
     align-items: center;
   }
   .logo{
+    display: none;
+  }
+  .mostra-mobile {
     display: none;
   }
 }
