@@ -14,7 +14,7 @@
             <button type="submit">Procurar</button>
             <div class="filters">
                 <div class="filter" tabindex="0" id="filter-tipo">
-                    <span>Tipo</span> <span class="arrow">▼</span>
+                    <span>Tipo</span> <span class="arrow">v</span>
                     <ul class="dropdown" id="dropdown-tipo">
                         <li>CLT</li>
                         <li>Estágio</li>
@@ -23,7 +23,7 @@
                     </ul>
                 </div>
                 <div class="filter" tabindex="0" id="filter-local">
-                    <span>Local</span> <span class="arrow">▼</span>
+                    <span>Local</span> <span class="arrow">v</span>
                     <ul class="dropdown" id="dropdown-local">
                         <li>Remoto</li>
                         <li>São Paulo</li>
@@ -32,7 +32,7 @@
                     </ul>
                 </div>
                 <div class="filter" tabindex="0" id="filter-educacao">
-                    <span>Educação</span> <span class="arrow">▼</span>
+                    <span>Educação</span> <span class="arrow">v</span>
                     <ul class="dropdown" id="dropdown-educacao">
                         <li>Ensino Médio</li>
                         <li>Graduação</li>
@@ -54,6 +54,8 @@
                 <p><strong>Localização:</strong> <%= vaga.empresa.cidade %>/<%= vaga.empresa.uf %></p>
                 <p><strong>Cargo:</strong> <%= vaga.cargo %></p>
                 <p><strong>Salário:</strong> <%= vaga.faixaSalarial %></p>
+                <p><strong>Inscritos:</strong> <%= vaga.inscritos || 0 %></p>
+                <p><strong>Escolaridade:</strong> <%= vaga.escolaridade %></p>
               </div>
               <a href="/auth/register_candidato" class="btn-saiba-mais">Saiba mais</a>
             </div>
