@@ -387,7 +387,8 @@ justify-content: center;
 }
 .alinha-card-info-home {
   display: flex;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 5px;
 }
 .alinha-card-info-home .cardinfo-home {
   border: 1px solid #E5E5E5;
