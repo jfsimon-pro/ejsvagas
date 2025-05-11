@@ -1,10 +1,16 @@
 /* Navbar */
 .navbar {
-    background-color: #f8f9fa;
+    background-color: transparent;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 10px 20px;
+    position: fixed;
+    width: 100%;
   }
-  
+  .navbar .container {
+        background: white;
+    padding: 10px 40px;
+    border-radius: 120px;
+  }
   .container {
     display: flex;
     align-items: center;
