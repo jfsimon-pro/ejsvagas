@@ -778,6 +778,9 @@ justify-content: center;
   }
 }
 @media (max-width: 768px) {
+  .navbar .container {
+    border-radius: 0px;
+  }
   .ultimas-vagas {
         padding-top: 17px;
     background: white;
@@ -807,7 +810,7 @@ justify-content: center;
     flex-direction: column;
     gap: 10px;
     padding: 18px 10px;
-    width: 98vw;
+    width: unset;
   }
   .filters {
     justify-content: center;
