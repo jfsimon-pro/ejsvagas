@@ -1,7 +1,6 @@
 /* Navbar */
 .navbar {
     background-color: transparent;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 10px 20px;
     position: fixed;
     width: 100%;
@@ -779,6 +778,28 @@ justify-content: center;
   }
 }
 @media (max-width: 768px) {
+  .ultimas-vagas {
+        padding-top: 17px;
+    background: white;
+  }
+  .search-bar {
+        width: unset;
+    border-radius: 0px;
+    margin-top: 0px;
+  }
+  .content-ultimas-vagas .filters {
+        flex-direction: column;
+  }
+  .content-ultimas-vagas .filter {
+        justify-content: space-between;
+  }
+  .navbar {
+    box-shadow: none;
+    padding: 0px 0px;
+  }
+  .nav-links {
+    background: white;
+  }
     .mostra-desktop{
       display: none;
     }
