@@ -159,10 +159,31 @@
   }
   #numeros-home {
     background: url("../img/bg-vagas.png");
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: left;
+  }
+  .numeros-home-2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   .content-numeros-home {
     max-width: 1200px;
     margin: auto;
+    padding: 200px 0px;
+  }
+  .numeros-home-col-2 {
+    display: flex;
+    gap: 30px;
+  }
+  .numero-com-info p {
+    font-size: 36px;
+    font-weight: 200;
+  }
+  .numero-com-info strong {
+    font-size: 16px;
+    font-weight: 200;
   }
 .content-parceiros {
   max-width: 1200px;
