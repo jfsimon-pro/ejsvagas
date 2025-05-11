@@ -51,10 +51,12 @@
             <div class="vaga-card">
               <h3><%= vaga.titulo %></h3>
               <div class="vaga-info">                
-                <p><strong><img src="/img/ensino.png" alt=""></strong> <%= vaga.escolaridade %></p>
-                <p><strong><img src="/img/carteira.png" alt=""></strong> <%= vaga.faixaSalarial %></p>
-                <p><strong>Inscritos</strong> <%= vaga.inscritos || 0 %></p>
-                <p><strong><img src="/img/pin.png" alt=""></strong> <%= vaga.empresa.cidade %>/<%= vaga.empresa.uf %></p>
+                <div class="alinha-card-info-home">
+                  <p class="cardinfo-home"><strong><img src="/img/ensino.png" alt=""></strong> <%= vaga.escolaridade %></p>
+                  <p class="cardinfo-home"><strong><img src="/img/carteira.png" alt=""></strong> <%= vaga.faixaSalarial %></p>
+                </div>
+                <p class="cardinfo-home"><strong>Inscritos</strong> <%= vaga.inscritos || 0 %></p>
+                <p class="cardinfo-home"><strong><img src="/img/pin.png" alt=""></strong> <%= vaga.empresa.cidade %>/<%= vaga.empresa.uf %></p>
               </div>
               
             </div></a>
