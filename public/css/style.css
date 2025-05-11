@@ -385,7 +385,7 @@ justify-content: center;
 .botoes-gerenciar-vagas form:nth-child(2) > button {
   background: red;
 }
-.cardinfo-home {
+.alinha-card-info-home {
   display: flex;
   gap: 10px;
 }
