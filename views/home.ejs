@@ -8,6 +8,66 @@
   <!-- Nova seção de últimas vagas -->
   <section id="ultimas-vagas">
     <div class="content-ultimas-vagas">
+      <form class="search-bar">
+            <input type="text" placeholder="Digite a vaga procurada">
+            <button type="submit">Procurar</button>
+            <div class="filters">
+                <div class="filter" tabindex="0" id="filter-tipo">
+                    <span>Tipo</span> <span class="arrow">▼</span>
+                    <ul class="dropdown" id="dropdown-tipo">
+                        <li>CLT</li>
+                        <li>Estágio</li>
+                        <li>Freelancer</li>
+                        <li>PJ</li>
+                    </ul>
+                </div>
+                <div class="filter" tabindex="0" id="filter-local">
+                    <span>Local</span> <span class="arrow">▼</span>
+                    <ul class="dropdown" id="dropdown-local">
+                        <li>Remoto</li>
+                        <li>São Paulo</li>
+                        <li>Rio de Janeiro</li>
+                        <li>Belo Horizonte</li>
+                    </ul>
+                </div>
+                <div class="filter" tabindex="0" id="filter-educacao">
+                    <span>Educação</span> <span class="arrow">▼</span>
+                    <ul class="dropdown" id="dropdown-educacao">
+                        <li>Ensino Médio</li>
+                        <li>Graduação</li>
+                        <li>Pós-graduação</li>
+                        <li>Técnico</li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+        <script>
+    // Dropdown logic
+    function setupDropdown(filterId, dropdownId) {
+        const filter = document.getElementById(filterId);
+        const dropdown = document.getElementById(dropdownId);
+        filter.addEventListener('click', function(e) {
+            e.stopPropagation();
+            dropdown.classList.toggle('show');
+        });
+        filter.addEventListener('blur', function() {
+            setTimeout(() => dropdown.classList.remove('show'), 100);
+        });
+        dropdown.querySelectorAll('li').forEach(option => {
+            option.addEventListener('click', function(e) {
+                e.stopPropagation();
+                filter.querySelector('span').textContent = this.textContent;
+                dropdown.classList.remove('show');
+            });
+        });
+    }
+    setupDropdown('filter-tipo', 'dropdown-tipo');
+    setupDropdown('filter-local', 'dropdown-local');
+    setupDropdown('filter-educacao', 'dropdown-educacao');
+    document.addEventListener('click', function() {
+        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('show'));
+    });
+    </script>
       <h2>Últimas Vagas</h2>
       <div class="vagas-grid">
         <% if (ultimasVagas && ultimasVagas.length > 0) { %>
