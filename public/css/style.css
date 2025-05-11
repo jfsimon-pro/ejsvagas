@@ -81,7 +81,12 @@
     background-image: url("../img/bgcolor.png");
     background-repeat: no-repeat;
     background-size: cover;
-    height: 685px;
+
+    height: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0px 0px 80px 80px;
   }
   
   .content-hero h1 {
