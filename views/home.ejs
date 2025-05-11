@@ -60,7 +60,7 @@
                 
                 
               </div>
-              <p class="cardinfo-home"><strong><img src="/img/pin.png" alt=""></strong> <%= vaga.empresa.cidade %>/<%= vaga.empresa.uf %></p>
+              <p class="cardinfo-home-2"><strong><img src="/img/pin.png" alt=""></strong> <%= vaga.empresa.cidade %>/<%= vaga.empresa.uf %></p>
             </div></a>
           <% }); %>
         <% } else { %>
@@ -126,12 +126,17 @@
   }
 
   .vaga-card {
+    min-height: 200px;
     background: white;
     border-radius: 10px;
     padding: 20px;
     padding-bottom: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 20px;
   }
 
   .vaga-card:hover {

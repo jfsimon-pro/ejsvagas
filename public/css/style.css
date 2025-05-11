@@ -379,6 +379,18 @@ justify-content: center;
     padding: 5px 20px;
     cursor: pointer;
 }
+.cardinfo-home-2{
+      border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    padding: 8px 20px;
+    gap: 7px;
+    color: #0B0E13;
+    font-size: 14px;
+    font-weight: 500;
+}
 .botoes-gerenciar-vagas button:hover {
   filter: brightness(90%);
 }
