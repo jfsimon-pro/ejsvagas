@@ -639,7 +639,12 @@ justify-content: center;
   text-decoration: none;
   font-size: 18px;
 }
-
+.content-hero img {
+  max-width: 100%;
+}
+.mostra-mobile {
+  display: none;
+}
 .search-bar {
   width: 100%;
   max-width: 1400px;
@@ -767,6 +772,9 @@ justify-content: center;
   }
 }
 @media (max-width: 768px) {
+    .mostra-desktop{
+      display: none;
+    }
     .search-bar {
     flex-direction: column;
     gap: 10px;
