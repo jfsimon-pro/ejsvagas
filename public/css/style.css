@@ -141,6 +141,13 @@
     display: flex;
     gap: 20px;
   }
+  .parceiro-dot {
+    display: flex;
+        gap: 5px;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 23px;
+  }
 .content-parceiros {
   max-width: 1200px;
   margin: auto;
@@ -149,7 +156,12 @@
   justify-content: space-around;
   gap: 20px;
   padding: 20px;
-  overflow: scroll;
+  overflow: auto;
+}
+#parceiros {
+  text-align: center;
+  padding: 70px 0px;
+  background: #F6F6F6;
 }
 .area-empresa-menu {
   background: linear-gradient(to right, #000000, #A53D06);
