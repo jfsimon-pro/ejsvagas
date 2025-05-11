@@ -157,6 +157,9 @@
     font-weight: 200;
     color: #808080;
   }
+  .numeros-home {
+    background-color: url("../img/bg-vagas.png");
+  }
 .content-parceiros {
   max-width: 1200px;
   margin: auto;
