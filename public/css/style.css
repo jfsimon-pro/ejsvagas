@@ -148,6 +148,15 @@
         justify-content: center;
         margin-bottom: 23px;
   }
+  .trabalhe {
+    margin-bottom: 50px;
+    font-size: 47px;
+    font-weight: 200;
+  }
+  .trabalhe span {
+    font-weight: 200;
+    color: #808080;
+  }
 .content-parceiros {
   max-width: 1200px;
   margin: auto;
