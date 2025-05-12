@@ -69,10 +69,22 @@ app.get('/', async (req, res) => {
       }
     });
     
-    res.render('home', { ultimasVagas });
+    res.render('home', { 
+      ultimasVagas,
+      busca: req.query.busca || '',
+      tipoContrato: req.query.tipoContrato || '',
+      uf: req.query.uf || '',
+      escolaridade: req.query.escolaridade || ''
+    });
   } catch (error) {
     console.error('Erro ao buscar últimas vagas:', error);
-    res.render('home', { ultimasVagas: [] });
+    res.render('home', { 
+      ultimasVagas: [],
+      busca: '',
+      tipoContrato: '',
+      uf: '',
+      escolaridade: ''
+    });
   }
 });
 
