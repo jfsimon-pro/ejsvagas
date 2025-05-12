@@ -175,6 +175,11 @@
     align-items: center;
     justify-content: center;
   }
+  .descubra {
+    color: #7D7D7D;
+    font-size: 16px;
+    text-align: center;
+  }
   .content-numeros-home {
     max-width: 1200px;
     margin: auto;
@@ -264,6 +269,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.card-depoimento {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 25px;
+  border-radius: 24px;
+  border: 1px solid #7D7D7D;
 }
 .content-main-login {
   /* From https://css.glass */
