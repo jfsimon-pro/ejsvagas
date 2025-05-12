@@ -74,12 +74,13 @@
     max-width: 200px;
   }
   #footer {
-    background: #062A4E;
-    padding: 50px;
+    background: #131313;
+    padding: 120px 20px;
   }
-  #footer p {
-    color: #F78E0F;
-    text-align: center;
+  .content-footer {
+    max-width: 1400px;
+    margin: auto;
+    display: flex;
   }
   .hero {
     background-color: black;
@@ -161,7 +162,7 @@
     background: url("../img/bg-vagas.png");
     background-repeat: no-repeat;
     background-size: auto;
-    background-position: left;
+    background-position: 0% 75%;
   }
   .numeros-home-2 {
     display: flex;
