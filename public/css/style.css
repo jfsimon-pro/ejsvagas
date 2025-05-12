@@ -243,7 +243,7 @@
 .content-sobre {
   max-width: 1200px;
   margin: auto;
-  padding: 80px 20px;
+  padding: 120px 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -313,6 +313,12 @@
       align-items: center;
       justify-content: space-evenly;
       padding-top: 50px;
+}
+#sobre {
+  background: black;
+  background-image: url("../img/bg-sobre.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .content-main-login {
   /* From https://css.glass */
