@@ -285,6 +285,9 @@
   background: linear-gradient(to top right, #000000, #5a2300);
   color: #ffffff; /* Opcional: para o texto ficar visível no fundo escuro */
 }
+.card-depoimento:hover .nome-pessoa {
+  color: #ffffff;
+}
 .depoimento-sec-home {
   display: flex;
       align-items: center;
