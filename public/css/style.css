@@ -279,6 +279,11 @@
   padding: 25px;
   border-radius: 24px;
   border: 1px solid #7D7D7D;
+  transition: background 0.3s ease;
+}
+.card-depoimento:hover {
+  background: linear-gradient(to top right, #000000, #5a2300);
+  color: #ffffff; /* Opcional: para o texto ficar visível no fundo escuro */
 }
 .depoimento-sec-home {
   display: flex;
