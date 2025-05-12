@@ -251,6 +251,15 @@
 
 }
 .sobre-2 h2 {
+  color: white;
+}
+.sobre-2 .parceiro-dot {
+  justify-content: flex-start;
+}
+.sobre-2 .parceiro-dot p{
+  color: white;
+}
+.sobre-2 h2 {
   font-size: 48px;
   color: #062A4E;
   margin-bottom: 20px;
