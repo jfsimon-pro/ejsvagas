@@ -9,38 +9,41 @@
   <!-- Nova seção de últimas vagas -->
   <section id="ultimas-vagas">
     <div class="content-ultimas-vagas">
-      <form class="search-bar">
-            <input type="text" placeholder="Digite a vaga procurada">
+      <form class="search-bar" action="/vagas" method="GET">
+            <input type="text" name="busca" placeholder="Digite a vaga procurada" value="<%= busca || '' %>">
             <button type="submit">Procurar</button>
             <div class="filters">
                 <div class="filter" tabindex="0" id="filter-tipo">
                     <span>Tipo</span> <span class="arrow"><img src="/img/setinha.png"></span>
                     <ul class="dropdown" id="dropdown-tipo">
-                        <li>CLT</li>
-                        <li>Estágio</li>
-                        <li>Freelancer</li>
-                        <li>PJ</li>
+                        <li data-value="CLT">CLT</li>
+                        <li data-value="Estágio">Estágio</li>
+                        <li data-value="Freelancer">Freelancer</li>
+                        <li data-value="PJ">PJ</li>
                     </ul>
                 </div>
                 <div class="filter" tabindex="0" id="filter-local">
                     <span>Local</span> <span class="arrow"><img src="/img/setinha.png"></span>
                     <ul class="dropdown" id="dropdown-local">
-                        <li>Remoto</li>
-                        <li>São Paulo</li>
-                        <li>Rio de Janeiro</li>
-                        <li>Belo Horizonte</li>
+                        <li data-value="Remoto">Remoto</li>
+                        <li data-value="SP">São Paulo</li>
+                        <li data-value="RJ">Rio de Janeiro</li>
+                        <li data-value="MG">Belo Horizonte</li>
                     </ul>
                 </div>
                 <div class="filter" tabindex="0" id="filter-educacao">
                     <span>Educação</span> <span class="arrow"><img src="/img/setinha.png"></span>
                     <ul class="dropdown" id="dropdown-educacao">
-                        <li>Ensino Médio</li>
-                        <li>Graduação</li>
-                        <li>Pós-graduação</li>
-                        <li>Técnico</li>
+                        <li data-value="Ensino Médio">Ensino Médio</li>
+                        <li data-value="Graduação">Graduação</li>
+                        <li data-value="Pós-graduação">Pós-graduação</li>
+                        <li data-value="Técnico">Técnico</li>
                     </ul>
                 </div>
             </div>
+            <input type="hidden" name="tipoContrato" id="tipoContrato" value="<%= tipoContrato || '' %>">
+            <input type="hidden" name="uf" id="uf" value="<%= uf || '' %>">
+            <input type="hidden" name="escolaridade" id="escolaridade" value="<%= escolaridade || '' %>">
         </form>
         
       
@@ -141,9 +144,9 @@
         <div class="depoimento-home-col-2">
           <div class="depoimentos-internos">
             <div class="card-depoimento">
-              <p>”Great experience working with
+              <p>"Great experience working with
                 Realty Group, especially as a first
-                time buyer!”</p>
+                time buyer!"</p>
                 <div class="depoimento-sec-home">
                   <img src="/img/pessoa.png">
                   <div class="sobre-pessoa-depoimento">
@@ -153,9 +156,9 @@
                 </div>
             </div>
             <div class="card-depoimento">
-              <p>”Great experience working with
+              <p>"Great experience working with
                 Realty Group, especially as a first
-                time buyer!”</p>
+                time buyer!"</p>
                 <div class="depoimento-sec-home">
                   <img src="/img/pessoa.png">
                   <div class="sobre-pessoa-depoimento">
@@ -165,9 +168,9 @@
                 </div>
             </div>
             <div class="card-depoimento">
-              <p>”Great experience working with
+              <p>"Great experience working with
                 Realty Group, especially as a first
-                time buyer!”</p>
+                time buyer!"</p>
                 <div class="depoimento-sec-home">
                   <img src="/img/pessoa.png">
                   <div class="sobre-pessoa-depoimento">
@@ -177,9 +180,9 @@
                 </div>
             </div>
             <div class="card-depoimento">
-              <p>”Great experience working with
+              <p>"Great experience working with
                 Realty Group, especially as a first
-                time buyer!”</p>
+                time buyer!"</p>
                 <div class="depoimento-sec-home">
                   <img src="/img/pessoa.png">
                   <div class="sobre-pessoa-depoimento">
@@ -376,5 +379,42 @@
     transform: translateY(0);
   }
   </style>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+      // Função para lidar com a seleção dos filtros
+      function handleFilterSelection(filterId, inputId) {
+          const filter = document.getElementById(filterId);
+          const input = document.getElementById(inputId);
+          const dropdown = filter.querySelector('.dropdown');
+          const items = dropdown.querySelectorAll('li');
+
+          items.forEach(item => {
+              item.addEventListener('click', function() {
+                  const value = this.getAttribute('data-value');
+                  input.value = value;
+                  filter.querySelector('span:first-child').textContent = this.textContent;
+                  dropdown.style.display = 'none';
+              });
+          });
+
+          // Toggle dropdown on click
+          filter.addEventListener('click', function(e) {
+              e.stopPropagation();
+              dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+          });
+
+          // Close dropdown when clicking outside
+          document.addEventListener('click', function() {
+              dropdown.style.display = 'none';
+          });
+      }
+
+      // Inicializar os filtros
+      handleFilterSelection('filter-tipo', 'tipoContrato');
+      handleFilterSelection('filter-local', 'uf');
+      handleFilterSelection('filter-educacao', 'escolaridade');
+  });
+  </script>
 
   <%- include('partials/footer') %>
