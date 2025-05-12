@@ -271,14 +271,35 @@
   justify-content: center;
 }
 .card-depoimento {
-  width: 370px;
-  min-height: 400px;
+  width: 270px;
+  min-height: 310px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 25px;
   border-radius: 24px;
   border: 1px solid #7D7D7D;
+}
+.depoimento-sec-home {
+  display: flex;
+      align-items: center;
+      gap: 8px;
+}
+.nome-pessoa {
+  font-size: 20px;
+  color: black;
+  margin-bottom: 5px;
+}
+.sobre-pessoa {
+  font-size: 16px;
+    color: #7D7D7D;
+}
+.depoimentos-internos {
+  display: flex;
+  flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-evenly;
+      padding-top: 50px;
 }
 .content-main-login {
   /* From https://css.glass */
