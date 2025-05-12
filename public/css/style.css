@@ -82,6 +82,27 @@
     margin: auto;
     display: flex;
   }
+  .paginas-footer {
+        display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .paginas-footer a {
+    text-decoration: none;
+    color: #808080;
+    font-weight: 500;
+    font-size: 16px;
+  }
+  .contato-footer p {
+color: #808080;
+    font-weight: 200;
+    font-size: 16px;
+  }
+  .contato-footer strong {
+        color: white;
+    font-weight: 800;
+    font-size: 16px;
+  }
   .hero {
     background-color: black;
     background-image: url("../img/bgcolor.png");
