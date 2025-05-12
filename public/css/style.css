@@ -81,6 +81,8 @@
     max-width: 1400px;
     margin: auto;
     display: flex;
+        justify-content: space-between;
+    flex-wrap: wrap;
   }
   .paginas-footer {
         display: flex;
@@ -102,6 +104,23 @@ color: #808080;
         color: white;
     font-weight: 800;
     font-size: 16px;
+  }
+  .contato-footer {
+        display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .logo-footer {
+    margin-bottom: 32px;
+  }
+  .redes-sociais-footer {
+        display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .colunas-info-footer {
+        display: flex;
+    gap: 70px;
   }
   .hero {
     background-color: black;
