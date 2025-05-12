@@ -262,7 +262,7 @@
 .sobre-2 h2 {
   font-size: 48px;
   font-weight: 200;
-  margin-bottom: 20px;
+  margin-bottom: 70px;
 }
 .item-lista-sobre {
   display: flex;
@@ -271,10 +271,17 @@
     gap: 15px;
 }
 .texto-lista-sobre p {
-  color: A7A7A7;
+  color: #A7A7A7;
+  font-weight: 200;
 }
 .texto-lista-sobre strong {
   color: white;
+  font-weight: 700;
+}
+.lista-sobre {
+  display: flex;
+      flex-direction: column;
+      gap: 30px;
 }
 .sobre-2 p {
   font-size: 20px;
