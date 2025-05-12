@@ -288,6 +288,10 @@
 .card-depoimento:hover .nome-pessoa {
   color: #ffffff;
 }
+.card-depoimento p {
+
+  line-height: 22px;
+}
 .depoimento-sec-home {
   display: flex;
       align-items: center;
@@ -305,6 +309,7 @@
 .depoimentos-internos {
   display: flex;
   flex-wrap: wrap;
+  gap: 10px;
       align-items: center;
       justify-content: space-evenly;
       padding-top: 50px;
