@@ -264,6 +264,18 @@
   font-weight: 200;
   margin-bottom: 20px;
 }
+.item-lista-sobre {
+  display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 15px;
+}
+.texto-lista-sobre p {
+  color: A7A7A7;
+}
+.texto-lista-sobre strong {
+  color: white;
+}
 .sobre-2 p {
   font-size: 20px;
   color: #062A4E;
