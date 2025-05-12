@@ -287,6 +287,9 @@
   font-size: 20px;
   line-height: 28px;
 }
+.depoimento-home {
+  padding: 80px 20px;
+}
 .main-login {
   padding: 35px 0px;
   min-height: 74vh;
