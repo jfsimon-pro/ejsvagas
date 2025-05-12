@@ -271,6 +271,8 @@
   justify-content: center;
 }
 .card-depoimento {
+  width: 370px;
+  min-height: 400px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -382,6 +384,20 @@ justify-content: center;
 }
 .opcoes {
   margin-bottom: 35px;
+}
+.depoimento-home-col-1 .trabalhe {
+  margin-bottom: 25px;
+}
+.descubra {
+  text-align: center;
+  max-width: 590px;
+  line-height: 20px;
+}
+.depoimento-home-col-1 {
+  display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
 }
 .pai-vagas {
   padding: 35px 0px;
