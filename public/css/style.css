@@ -693,10 +693,26 @@ justify-content: center;
 }
 
 @media (max-width: 900px) {
+  .newsletter-form button {
+    font-size: 14px;
+    padding: 7px 10px;
+  }
+  .content-numeros-home {
+        padding: 120px 10px;
+  }
+  .numeros-home-3 {
+    margin-top: 25px;
+  }
+  .numeros-home-2 {
+    flex-direction: column;
+  }
+  .trabalhe {
+    text-align: center;
+  }
   .numeros-home-col-2 {
         flex-direction: column;
   }
-  .numeros-home-3 {
+  #numeros-home-3 {
     background: white;
   }
   .newsletter-banner {
