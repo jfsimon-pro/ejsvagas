@@ -24,7 +24,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const escolaridadeSelect = filterEducacao.querySelector('select');
 
     if (filterEducacao && escolaridadeSelect) {
+        console.log('Select de escolaridade encontrado:', escolaridadeSelect.value);
         escolaridadeSelect.addEventListener('change', function() {
+            console.log('Escolaridade alterada para:', this.value);
             filterEducacao.querySelector('span:first-child').textContent = this.options[this.selectedIndex].text;
         });
     }
