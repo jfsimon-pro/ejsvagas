@@ -362,7 +362,7 @@
                 </div>
                 <div class="filter" tabindex="0" id="filter-local">
                     <span>Local</span> <span class="arrow"><img src="/img/setinha.png"></span>
-                    <select name="uf" id="uf">
+                    <select name="uf">
                         <option value="">Estado</option>
                         <option value="AC" <%= uf === 'AC' ? 'selected' : '' %>>Acre</option>
                         <option value="AL" <%= uf === 'AL' ? 'selected' : '' %>>Alagoas</option>
@@ -413,8 +413,6 @@
                     </ul>
                 </div>
             </div>
-            <input type="hidden" name="tipoContrato" id="tipoContrato">
-            <input type="hidden" name="uf" id="uf">
             <input type="hidden" name="escolaridade" id="escolaridade">
         </form>
     </div>

@@ -31,24 +31,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Manipulação do dropdown de tipo de contrato
     const filterTipo = document.getElementById('filter-tipo');
-    const tipoContratoInput = document.getElementById('tipoContrato');
     const tipoContratoSelect = filterTipo.querySelector('select');
 
     if (filterTipo && tipoContratoSelect) {
         tipoContratoSelect.addEventListener('change', function() {
-            tipoContratoInput.value = this.value;
             filterTipo.querySelector('span:first-child').textContent = this.options[this.selectedIndex].text;
         });
     }
 
     // Manipulação do dropdown de UF
     const filterLocal = document.getElementById('filter-local');
-    const ufInput = document.getElementById('uf');
     const ufSelect = filterLocal.querySelector('select');
 
     if (filterLocal && ufSelect) {
         ufSelect.addEventListener('change', function() {
-            ufInput.value = this.value;
             filterLocal.querySelector('span:first-child').textContent = this.options[this.selectedIndex].text;
         });
     }
