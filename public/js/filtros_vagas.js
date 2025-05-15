@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (e.target.tagName === 'LI') {
                 const value = e.target.getAttribute('data-value');
                 escolaridadeInput.value = value;
+                console.log('Escolaridade selecionada:', value);
                 filterEducacao.querySelector('span:first-child').textContent = e.target.textContent;
                 dropdownEducacao.style.display = 'none';
             }

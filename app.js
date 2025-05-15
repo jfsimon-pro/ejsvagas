@@ -87,6 +87,8 @@ app.get('/vagas', async (req, res) => {
     const uf = req.query.uf || '';
     const escolaridade = req.query.escolaridade || '';
 
+    console.log('Filtros recebidos:', { busca, faixaSalarial, tipoContrato, uf, escolaridade }); // Debug
+
     // Construir where clause baseado nos filtros
     const where = {};
     
@@ -128,6 +130,8 @@ app.get('/vagas', async (req, res) => {
         where.AND.push({ escolaridade: escolaridade });
       }
     }
+
+    console.log('Where clause:', JSON.stringify(where, null, 2)); // Debug
 
     // Buscar vagas com paginação
     const vagas = await prisma.vaga.findMany({
