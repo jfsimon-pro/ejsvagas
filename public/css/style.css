@@ -718,6 +718,11 @@ justify-content: center;
   .redes-sociais-footer {
     margin-bottom: 25px;
   }
+  .degrade-header {
+    background: linear-gradient(to top right, #0d0b0a, #2c1b17, #5a1e12);
+    height: 350px;
+    width: 100%;
+  }
   .newsletter-banner {
     flex-direction: column;
     align-items: flex-start;
