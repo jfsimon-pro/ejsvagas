@@ -715,6 +715,9 @@ justify-content: center;
   #numeros-home {
     background: white;
   }
+  .redes-sociais-footer {
+    margin-bottom: 25px;
+  }
   .newsletter-banner {
     flex-direction: column;
     align-items: flex-start;
