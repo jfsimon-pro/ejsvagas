@@ -712,7 +712,7 @@ justify-content: center;
   .numeros-home-col-2 {
         flex-direction: column;
   }
-  #numeros-home-3 {
+  #numeros-home {
     background: white;
   }
   .newsletter-banner {
