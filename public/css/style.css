@@ -222,6 +222,9 @@ color: #808080;
     font-size: 16px;
     text-align: center;
   }
+  .numeros-home-3 img {
+    max-width: 100%;
+  }
   .content-numeros-home {
     max-width: 1200px;
     margin: auto;
@@ -690,6 +693,12 @@ justify-content: center;
 }
 
 @media (max-width: 900px) {
+  .numeros-home-col-2 {
+        flex-direction: column;
+  }
+  .numeros-home-3 {
+    background: white;
+  }
   .newsletter-banner {
     flex-direction: column;
     align-items: flex-start;
