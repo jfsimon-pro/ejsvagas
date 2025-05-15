@@ -28,6 +28,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 dropdownEducacao.style.display = 'none';
             }
         });
+
+        // Adicionar evento de submit ao formulário para debug
+        const form = document.querySelector('form.search-bar');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                console.log('Valor da escolaridade sendo enviado:', escolaridadeInput.value);
+                // Garantir que o valor da escolaridade seja enviado
+                if (!escolaridadeInput.value) {
+                    escolaridadeInput.value = '';
+                }
+            });
+        }
     }
 
     // Manipulação do dropdown de tipo de contrato

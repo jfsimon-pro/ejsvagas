@@ -148,17 +148,20 @@ app.get('/vagas', async (req, res) => {
     const totalVagas = await prisma.vaga.count({ where });
     const totalPages = Math.ceil(totalVagas / perPage);
 
-    res.render('vagas_publicas', {
+    // Garantir que todas as variáveis necessárias sejam passadas para o template
+    const templateData = {
       vagas,
-      busca,
-      faixaSalarial,
-      tipoContrato,
-      uf,
-      escolaridade,
+      busca: busca || '',
+      faixaSalarial: faixaSalarial || '',
+      tipoContrato: tipoContrato || '',
+      uf: uf || '',
+      escolaridade: escolaridade || '',
       currentPage: page,
       totalPages,
       totalVagas
-    });
+    };
+
+    res.render('vagas_publicas', templateData);
 
   } catch (error) {
     console.error('Erro ao buscar vagas:', error);
