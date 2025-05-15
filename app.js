@@ -128,11 +128,12 @@ app.get('/vagas', async (req, res) => {
       }
 
       if (escolaridade) {
-        console.log('Aplicando filtro de escolaridade:', escolaridade);
-        console.log('Valor exato do filtro:', JSON.stringify(escolaridade));
-        console.log('Tipo do valor:', typeof escolaridade);
-        console.log('Comprimento do valor:', escolaridade.length);
-        console.log('Códigos dos caracteres:', Array.from(escolaridade).map(c => c.charCodeAt(0)));
+        console.log('\n=== DEBUG FILTRO ESCOLARIDADE ===');
+        console.log('1. Parâmetros recebidos:');
+        console.log('- escolaridade:', escolaridade);
+        console.log('- tipo:', typeof escolaridade);
+        console.log('- comprimento:', escolaridade.length);
+        console.log('- caracteres:', Array.from(escolaridade).map(c => `${c}(${c.charCodeAt(0)})`).join(', '));
         
         where.AND.push({ 
           escolaridade: { 
@@ -140,6 +141,9 @@ app.get('/vagas', async (req, res) => {
             mode: 'insensitive'
           } 
         });
+        
+        console.log('\n2. Where clause após adicionar filtro:');
+        console.log(JSON.stringify(where, null, 2));
         
         // Log da primeira vaga encontrada para comparação
         const primeiraVaga = await prisma.vaga.findFirst({
@@ -151,16 +155,18 @@ app.get('/vagas', async (req, res) => {
           }
         });
         
+        console.log('\n3. Resultado da busca:');
         if (primeiraVaga) {
-          console.log('Exemplo de vaga encontrada:');
-          console.log('Título:', primeiraVaga.titulo);
-          console.log('Escolaridade:', primeiraVaga.escolaridade);
-          console.log('Tipo da escolaridade:', typeof primeiraVaga.escolaridade);
-          console.log('Comprimento da escolaridade:', primeiraVaga.escolaridade.length);
-          console.log('Códigos dos caracteres:', Array.from(primeiraVaga.escolaridade).map(c => c.charCodeAt(0)));
+          console.log('Vaga encontrada:');
+          console.log('- Título:', primeiraVaga.titulo);
+          console.log('- Escolaridade:', primeiraVaga.escolaridade);
+          console.log('- Tipo:', typeof primeiraVaga.escolaridade);
+          console.log('- Comprimento:', primeiraVaga.escolaridade.length);
+          console.log('- Caracteres:', Array.from(primeiraVaga.escolaridade).map(c => `${c}(${c.charCodeAt(0)})`).join(', '));
         } else {
           console.log('Nenhuma vaga encontrada com essa escolaridade');
         }
+        console.log('=== FIM DEBUG FILTRO ESCOLARIDADE ===\n');
       }
     }
 
