@@ -397,20 +397,20 @@
                     <span>Educação</span> <span class="arrow"><img src="/img/setinha.png"></span>
                     <select name="escolaridade">
                         <option value="">Selecione a escolaridade</option>
-                        <option value="Indiferente" <%= escolaridade === 'Indiferente' ? 'selected' : '' %>>Indiferente</option>
-                        <option value="Alfabetizado" <%= escolaridade === 'Alfabetizado' ? 'selected' : '' %>>Alfabetizado</option>
-                        <option value="Ensino fundamental incompleto" <%= escolaridade === 'Ensino fundamental incompleto' ? 'selected' : '' %>>Ensino fundamental incompleto</option>
-                        <option value="Ensino fundamental completo" <%= escolaridade === 'Ensino fundamental completo' ? 'selected' : '' %>>Ensino fundamental completo</option>
-                        <option value="Ensino médio incompleto" <%= escolaridade === 'Ensino médio incompleto' ? 'selected' : '' %>>Ensino médio incompleto</option>
-                        <option value="Ensino médio completo" <%= escolaridade === 'Ensino médio completo' ? 'selected' : '' %>>Ensino médio completo</option>
-                        <option value="Ensino técnico incompleto" <%= escolaridade === 'Ensino técnico incompleto' ? 'selected' : '' %>>Ensino técnico incompleto</option>
-                        <option value="Ensino técnico completo" <%= escolaridade === 'Ensino técnico completo' ? 'selected' : '' %>>Ensino técnico completo</option>
-                        <option value="Ensino superior incompleto" <%= escolaridade === 'Ensino superior incompleto' ? 'selected' : '' %>>Ensino superior incompleto</option>
-                        <option value="Ensino superior completo" <%= escolaridade === 'Ensino superior completo' ? 'selected' : '' %>>Ensino superior completo</option>
-                        <option value="Pós-graduação incompleta" <%= escolaridade === 'Pós-graduação incompleta' ? 'selected' : '' %>>Pós-graduação incompleta</option>
-                        <option value="Pós-graduação completa" <%= escolaridade === 'Pós-graduação completa' ? 'selected' : '' %>>Pós-graduação completa</option>
-                        <option value="Mestrado" <%= escolaridade === 'Mestrado' ? 'selected' : '' %>>Mestrado</option>
-                        <option value="Doutorado" <%= escolaridade === 'Doutorado' ? 'selected' : '' %>>Doutorado</option>
+                        <option value="Indiferente" <%= (typeof escolaridade !== 'undefined' && escolaridade === 'Indiferente') ? 'selected' : '' %>>Indiferente</option>
+                        <option value="Alfabetizado" <%= (typeof escolaridade !== 'undefined' && escolaridade === 'Alfabetizado') ? 'selected' : '' %>>Alfabetizado</option>
+                        <option value="Ensino fundamental incompleto" <%= (typeof escolaridade !== 'undefined' && escolaridade === 'Ensino fundamental incompleto') ? 'selected' : '' %>>Ensino fundamental incompleto</option>
+                        <option value="Ensino fundamental completo" <%= (typeof escolaridade !== 'undefined' && escolaridade === 'Ensino fundamental completo') ? 'selected' : '' %>>Ensino fundamental completo</option>
+                        <option value="Ensino médio incompleto" <%= (typeof escolaridade !== 'undefined' && escolaridade === 'Ensino médio incompleto') ? 'selected' : '' %>>Ensino médio incompleto</option>
+                        <option value="Ensino médio completo" <%= (typeof escolaridade !== 'undefined' && escolaridade === 'Ensino médio completo') ? 'selected' : '' %>>Ensino médio completo</option>
+                        <option value="Ensino técnico incompleto" <%= (typeof escolaridade !== 'undefined' && escolaridade === 'Ensino técnico incompleto') ? 'selected' : '' %>>Ensino técnico incompleto</option>
+                        <option value="Ensino técnico completo" <%= (typeof escolaridade !== 'undefined' && escolaridade === 'Ensino técnico completo') ? 'selected' : '' %>>Ensino técnico completo</option>
+                        <option value="Ensino superior incompleto" <%= (typeof escolaridade !== 'undefined' && escolaridade === 'Ensino superior incompleto') ? 'selected' : '' %>>Ensino superior incompleto</option>
+                        <option value="Ensino superior completo" <%= (typeof escolaridade !== 'undefined' && escolaridade === 'Ensino superior completo') ? 'selected' : '' %>>Ensino superior completo</option>
+                        <option value="Pós-graduação incompleta" <%= (typeof escolaridade !== 'undefined' && escolaridade === 'Pós-graduação incompleta') ? 'selected' : '' %>>Pós-graduação incompleta</option>
+                        <option value="Pós-graduação completa" <%= (typeof escolaridade !== 'undefined' && escolaridade === 'Pós-graduação completa') ? 'selected' : '' %>>Pós-graduação completa</option>
+                        <option value="Mestrado" <%= (typeof escolaridade !== 'undefined' && escolaridade === 'Mestrado') ? 'selected' : '' %>>Mestrado</option>
+                        <option value="Doutorado" <%= (typeof escolaridade !== 'undefined' && escolaridade === 'Doutorado') ? 'selected' : '' %>>Doutorado</option>
                     </select>
                 </div>
             </div>
