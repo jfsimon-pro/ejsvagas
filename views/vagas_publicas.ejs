@@ -341,7 +341,7 @@
 <div class="vagas-publicas">
   <div class="vagas-container">
     <div class="search-section">
-      <form class="search-bar" action="/vagas" method="GET" onsubmit="console.log('Form values:', { escolaridade: document.getElementById('escolaridade').value })">
+      <form class="search-bar" action="/vagas" method="GET">
             <input type="text" id="busca" name="busca" placeholder="Buscar vagas..." value="<%= busca || '' %>">
              <div id="suggestions" class="autocomplete-suggestions"></div>
             <button type="submit">Procurar</button>

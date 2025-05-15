@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     escolaridadeInput.value = '';
                 }
                 console.log('Form submit - escolaridade:', escolaridadeInput.value);
+                console.log('Form values:', { escolaridade: escolaridadeInput.value });
             });
         }
 
