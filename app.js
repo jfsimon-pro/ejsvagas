@@ -128,7 +128,39 @@ app.get('/vagas', async (req, res) => {
       }
 
       if (escolaridade) {
-        where.AND.push({ escolaridade: escolaridade });
+        console.log('Aplicando filtro de escolaridade:', escolaridade);
+        console.log('Valor exato do filtro:', JSON.stringify(escolaridade));
+        console.log('Tipo do valor:', typeof escolaridade);
+        console.log('Comprimento do valor:', escolaridade.length);
+        console.log('Códigos dos caracteres:', Array.from(escolaridade).map(c => c.charCodeAt(0)));
+        
+        where.AND.push({ 
+          escolaridade: { 
+            contains: escolaridade,
+            mode: 'insensitive'
+          } 
+        });
+        
+        // Log da primeira vaga encontrada para comparação
+        const primeiraVaga = await prisma.vaga.findFirst({
+          where: { 
+            escolaridade: { 
+              contains: escolaridade,
+              mode: 'insensitive'
+            } 
+          }
+        });
+        
+        if (primeiraVaga) {
+          console.log('Exemplo de vaga encontrada:');
+          console.log('Título:', primeiraVaga.titulo);
+          console.log('Escolaridade:', primeiraVaga.escolaridade);
+          console.log('Tipo da escolaridade:', typeof primeiraVaga.escolaridade);
+          console.log('Comprimento da escolaridade:', primeiraVaga.escolaridade.length);
+          console.log('Códigos dos caracteres:', Array.from(primeiraVaga.escolaridade).map(c => c.charCodeAt(0)));
+        } else {
+          console.log('Nenhuma vaga encontrada com essa escolaridade');
+        }
       }
     }
 
