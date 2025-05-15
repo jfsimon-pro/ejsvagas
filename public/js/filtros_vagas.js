@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (e.target.tagName === 'LI') {
                 const value = e.target.getAttribute('data-value');
                 escolaridadeInput.value = value;
-                console.log('Escolaridade selecionada:', value);
+                console.log('Escolaridade selecionada:', value); // Debug
                 filterEducacao.querySelector('span:first-child').textContent = e.target.textContent;
                 dropdownEducacao.style.display = 'none';
             }
@@ -29,16 +29,23 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Adicionar evento de submit ao formulário para debug
+        // Adicionar evento de submit ao formulário
         const form = document.querySelector('form.search-bar');
         if (form) {
             form.addEventListener('submit', function(e) {
-                console.log('Valor da escolaridade sendo enviado:', escolaridadeInput.value);
                 // Garantir que o valor da escolaridade seja enviado
                 if (!escolaridadeInput.value) {
                     escolaridadeInput.value = '';
                 }
+                console.log('Form submit - escolaridade:', escolaridadeInput.value);
             });
+        }
+
+        // Inicializar o valor da escolaridade se já existir
+        const currentEscolaridade = filterEducacao.querySelector('span:first-child').textContent;
+        if (currentEscolaridade && currentEscolaridade !== 'Educação') {
+            escolaridadeInput.value = currentEscolaridade;
+            console.log('Escolaridade inicial:', currentEscolaridade);
         }
     }
 

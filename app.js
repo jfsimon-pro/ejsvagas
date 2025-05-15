@@ -87,6 +87,7 @@ app.get('/vagas', async (req, res) => {
     const uf = req.query.uf || '';
     const escolaridade = req.query.escolaridade || '';
 
+    console.log('Query params:', req.query); // Debug completo dos parâmetros
     console.log('Filtros recebidos:', { busca, faixaSalarial, tipoContrato, uf, escolaridade }); // Debug
 
     // Construir where clause baseado nos filtros
@@ -127,6 +128,7 @@ app.get('/vagas', async (req, res) => {
       }
 
       if (escolaridade) {
+        console.log('Aplicando filtro de escolaridade:', escolaridade); // Debug
         where.AND.push({ escolaridade: escolaridade });
       }
     }
@@ -143,6 +145,14 @@ app.get('/vagas', async (req, res) => {
         empresa: true
       }
     });
+
+    console.log('Vagas encontradas:', vagas.length); // Debug
+    if (vagas.length > 0) {
+      console.log('Exemplo de vaga:', {
+        titulo: vagas[0].titulo,
+        escolaridade: vagas[0].escolaridade
+      });
+    }
 
     // Contar total de vagas para paginação
     const totalVagas = await prisma.vaga.count({ where });
