@@ -267,6 +267,27 @@
     width: 100%;
     border-radius: 0px 0px 77px 77px;
   }
+  .content-degrade-header {
+    max-width: 1200px;
+  }
+  .linha-branca {
+    height: 1px;
+    width: 100%;
+    background-color: white;
+  }
+  .links-bread {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+  }
+  .links-bread span {
+    color: #FF5E00;
+  }
+  .degrade-breadcrumb {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   @media (min-width: 768px) {
     .search-section form {
       display: grid;
@@ -294,7 +315,15 @@
   }
 </style>
 <div class="degrade-header">
-
+  <div class="content-degrade-header">
+    <div class="linha-branca"></div>
+    <div class="degrade-breadcrumb">
+      <div class="links-bread">
+        <a href="Início"></a> <span>/</span> <a href="">Vagas</a>
+      </div>
+      <h1>Vagas</h1>
+    </div>
+  </div>
 </div>
 <div class="vagas-publicas">
   <div class="vagas-container">
