@@ -128,10 +128,7 @@ app.get('/vagas', async (req, res) => {
       }
 
       if (escolaridade) {
-        console.log('Aplicando filtro de escolaridade:', escolaridade); // Debug
-        console.log('Valor exato do filtro:', JSON.stringify(escolaridade)); // Debug do valor exato
         where.AND.push({ escolaridade: escolaridade });
-        console.log('Where clause após adicionar escolaridade:', JSON.stringify(where, null, 2)); // Debug da where clause
       }
     }
 
