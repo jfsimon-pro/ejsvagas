@@ -394,23 +394,24 @@
                     </select>
                 </div>
                 <div class="filter" tabindex="0" id="filter-educacao">
-                    <span><%= typeof escolaridade !== 'undefined' ? escolaridade : 'Educação' %></span> <span class="arrow"><img src="/img/setinha.png"></span>
-                    <ul class="dropdown" id="dropdown-educacao">
-                        <li data-value="Indiferente">Indiferente</li>
-                        <li data-value="Alfabetizado">Alfabetizado</li>
-                        <li data-value="Ensino fundamental incompleto">Ensino fundamental incompleto</li>
-                        <li data-value="Ensino fundamental completo">Ensino fundamental completo</li>
-                        <li data-value="Ensino médio incompleto">Ensino médio incompleto</li>
-                        <li data-value="Ensino médio completo">Ensino médio completo</li>
-                        <li data-value="Ensino técnico incompleto">Ensino técnico incompleto</li>
-                        <li data-value="Ensino técnico completo">Ensino técnico completo</li>
-                        <li data-value="Ensino superior incompleto">Ensino superior incompleto</li>
-                        <li data-value="Ensino superior completo">Ensino superior completo</li>
-                        <li data-value="Pós-graduação incompleta">Pós-graduação incompleta</li>
-                        <li data-value="Pós-graduação completa">Pós-graduação completa</li>
-                        <li data-value="Mestrado">Mestrado</li>
-                        <li data-value="Doutorado">Doutorado</li>
-                    </ul>
+                    <span>Educação</span> <span class="arrow"><img src="/img/setinha.png"></span>
+                    <select name="escolaridade">
+                        <option value="">Selecione a escolaridade</option>
+                        <option value="Indiferente" <%= escolaridade === 'Indiferente' ? 'selected' : '' %>>Indiferente</option>
+                        <option value="Alfabetizado" <%= escolaridade === 'Alfabetizado' ? 'selected' : '' %>>Alfabetizado</option>
+                        <option value="Ensino fundamental incompleto" <%= escolaridade === 'Ensino fundamental incompleto' ? 'selected' : '' %>>Ensino fundamental incompleto</option>
+                        <option value="Ensino fundamental completo" <%= escolaridade === 'Ensino fundamental completo' ? 'selected' : '' %>>Ensino fundamental completo</option>
+                        <option value="Ensino médio incompleto" <%= escolaridade === 'Ensino médio incompleto' ? 'selected' : '' %>>Ensino médio incompleto</option>
+                        <option value="Ensino médio completo" <%= escolaridade === 'Ensino médio completo' ? 'selected' : '' %>>Ensino médio completo</option>
+                        <option value="Ensino técnico incompleto" <%= escolaridade === 'Ensino técnico incompleto' ? 'selected' : '' %>>Ensino técnico incompleto</option>
+                        <option value="Ensino técnico completo" <%= escolaridade === 'Ensino técnico completo' ? 'selected' : '' %>>Ensino técnico completo</option>
+                        <option value="Ensino superior incompleto" <%= escolaridade === 'Ensino superior incompleto' ? 'selected' : '' %>>Ensino superior incompleto</option>
+                        <option value="Ensino superior completo" <%= escolaridade === 'Ensino superior completo' ? 'selected' : '' %>>Ensino superior completo</option>
+                        <option value="Pós-graduação incompleta" <%= escolaridade === 'Pós-graduação incompleta' ? 'selected' : '' %>>Pós-graduação incompleta</option>
+                        <option value="Pós-graduação completa" <%= escolaridade === 'Pós-graduação completa' ? 'selected' : '' %>>Pós-graduação completa</option>
+                        <option value="Mestrado" <%= escolaridade === 'Mestrado' ? 'selected' : '' %>>Mestrado</option>
+                        <option value="Doutorado" <%= escolaridade === 'Doutorado' ? 'selected' : '' %>>Doutorado</option>
+                    </select>
                 </div>
             </div>
             <input type="hidden" name="escolaridade" id="escolaridade">
