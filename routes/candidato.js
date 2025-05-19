@@ -75,6 +75,54 @@ router.get('/dashboard', verifyToken, async (req, res) => {
   }
 });
 
+// Nova rota para vagas aprovadas
+router.get('/vagas-aprovadas', verifyToken, async (req, res) => {
+  try {
+    const candidato = await prisma.candidato.findUnique({
+      where: { id: req.user.userId },
+      include: {
+        candidaturas: {
+          include: {
+            vaga: {
+              include: {
+                empresa: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    if (!candidato) {
+      return res.status(404).send('Candidato não encontrado.');
+    }
+
+    // Filtrar as vagas aprovadas
+    const vagasAprovadas = await Promise.all(
+      candidato.candidaturas
+        .filter(c => c.selecionado) // Apenas vagas aprovadas
+        .map(async candidatura => {
+          // Verifica se a empresa já foi avaliada pelo candidato
+          const jaAvaliada = await prisma.avaliacao.findFirst({
+            where: {
+              candidatoId: req.user.userId,
+              empresaId: candidatura.vaga.empresa.id,
+            },
+          });
+
+          return {
+            ...candidatura.vaga,
+            jaAvaliada: !!jaAvaliada,
+          };
+        })
+    );
+
+    res.render('candidato/vagas-aprovadas', { vagasAprovadas });
+  } catch (error) {
+    console.error('Erro ao carregar vagas aprovadas:', error);
+    res.status(500).send('Erro ao carregar vagas aprovadas.');
+  }
+});
 
 router.get('/vagas-candidatadas', verifyToken, async (req, res) => {
   try {
