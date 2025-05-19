@@ -127,14 +127,189 @@
         <h1>Bem-vindo, <%= candidato.nomeCompleto %>!</h1>
       </div>
       <div class="meus-dados-novo">
-        <div class="editar-dados-novo">
-          <a href="/candidato/editar-dados">Editar Meus Dados</a>
-        </div>
+        <form action="/candidato/editar-dados" method="POST">
+          <label for="nomeCompleto">Nome Completo:</label>
+          <input type="text" id="nomeCompleto" name="nomeCompleto" value="<%= candidato.nomeCompleto %>" required>
+        
+          <label for="cpf">CPF:</label>
+          <input type="text" id="cpf" name="cpf" value="<%= candidato.cpf %>" readonly>
+        
+          <label for="telefone">Telefone:</label>
+          <input type="text" id="telefone" name="telefone" value="<%= candidato.telefone %>" required>
+        
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" name="email" value="<%= candidato.email %>" required>
+        
+          <label for="cep">CEP:</label>
+          <input type="text" id="cep" name="cep" value="<%= candidato.cep %>" required>
+        
+          <label for="logradouro">Logradouro:</label>
+          <input type="text" id="logradouro" name="logradouro" value="<%= candidato.logradouro %>" required>
+        
+          <label for="complemento">Complemento:</label>
+          <input type="text" id="complemento" name="complemento" value="<%= candidato.complemento %>">
+        
+          <label for="numero">Número:</label>
+          <input type="text" id="numero" name="numero" value="<%= candidato.numero %>" required>
+        
+          <label for="bairro">Bairro:</label>
+          <input type="text" id="bairro" name="bairro" value="<%= candidato.bairro %>" required>
+        
+          <label for="cidade">Cidade:</label>
+          <input type="text" id="cidade" name="cidade" value="<%= candidato.cidade %>" required>
+        
+          <label for="uf">UF:</label>
+          <select id="uf" name="uf" required>
+            <option value="" <%= candidato.uf === '' ? 'selected' : '' %>>Selecione</option>
+            <option value="AC" <%= candidato.uf === 'AC' ? 'selected' : '' %>>AC</option>
+            <option value="AL" <%= candidato.uf === 'AL' ? 'selected' : '' %>>AL</option>
+            <option value="AM" <%= candidato.uf === 'AM' ? 'selected' : '' %>>AM</option>
+            <option value="AP" <%= candidato.uf === 'AP' ? 'selected' : '' %>>AP</option>
+            <option value="BA" <%= candidato.uf === 'BA' ? 'selected' : '' %>>BA</option>
+            <option value="CE" <%= candidato.uf === 'CE' ? 'selected' : '' %>>CE</option>
+            <option value="DF" <%= candidato.uf === 'DF' ? 'selected' : '' %>>DF</option>
+            <option value="ES" <%= candidato.uf === 'ES' ? 'selected' : '' %>>ES</option>
+            <option value="GO" <%= candidato.uf === 'GO' ? 'selected' : '' %>>GO</option>
+            <option value="MA" <%= candidato.uf === 'MA' ? 'selected' : '' %>>MA</option>
+            <option value="MG" <%= candidato.uf === 'MG' ? 'selected' : '' %>>MG</option>
+            <option value="MS" <%= candidato.uf === 'MS' ? 'selected' : '' %>>MS</option>
+            <option value="MT" <%= candidato.uf === 'MT' ? 'selected' : '' %>>MT</option>
+            <option value="PA" <%= candidato.uf === 'PA' ? 'selected' : '' %>>PA</option>
+            <option value="PB" <%= candidato.uf === 'PB' ? 'selected' : '' %>>PB</option>
+            <option value="PE" <%= candidato.uf === 'PE' ? 'selected' : '' %>>PE</option>
+            <option value="PI" <%= candidato.uf === 'PI' ? 'selected' : '' %>>PI</option>
+            <option value="PR" <%= candidato.uf === 'PR' ? 'selected' : '' %>>PR</option>
+            <option value="RJ" <%= candidato.uf === 'RJ' ? 'selected' : '' %>>RJ</option>
+            <option value="RN" <%= candidato.uf === 'RN' ? 'selected' : '' %>>RN</option>
+            <option value="RO" <%= candidato.uf === 'RO' ? 'selected' : '' %>>RO</option>
+            <option value="RR" <%= candidato.uf === 'RR' ? 'selected' : '' %>>RR</option>
+            <option value="RS" <%= candidato.uf === 'RS' ? 'selected' : '' %>>RS</option>
+            <option value="SC" <%= candidato.uf === 'SC' ? 'selected' : '' %>>SC</option>
+            <option value="SE" <%= candidato.uf === 'SE' ? 'selected' : '' %>>SE</option>
+            <option value="SP" <%= candidato.uf === 'SP' ? 'selected' : '' %>>SP</option>
+            <option value="TO" <%= candidato.uf === 'TO' ? 'selected' : '' %>>TO</option>
+          </select>
+      
+          <label for="idiomas">Idiomas:</label>
+          <select id="idiomas" name="idiomas[]" multiple>
+            <option value="Português" <%= candidato.idiomas.includes('Português') ? 'selected' : '' %>>Português</option>
+            <option value="Inglês" <%= candidato.idiomas.includes('Inglês') ? 'selected' : '' %>>Inglês</option>
+            <option value="Mandarim" <%= candidato.idiomas.includes('Mandarim') ? 'selected' : '' %>>Mandarim</option>
+            <option value="Espanhol" <%= candidato.idiomas.includes('Espanhol') ? 'selected' : '' %>>Espanhol</option>
+            <option value="Francês" <%= candidato.idiomas.includes('Francês') ? 'selected' : '' %>>Francês</option>
+            <option value="Árabe" <%= candidato.idiomas.includes('Árabe') ? 'selected' : '' %>>Árabe</option>
+          </select>
+      
+          <label for="escolaridade">Escolaridade:</label>
+          <select id="escolaridade" name="escolaridade">
+            <option value="" <%= candidato.escolaridade === '' ? 'selected' : '' %>>Selecione</option>
+            <option value="Indiferente" <%= candidato.escolaridade === 'Indiferente' ? 'selected' : '' %>>Indiferente</option>
+            <option value="Ensino fundamental incompleto" <%= candidato.escolaridade === 'Ensino fundamental incompleto' ? 'selected' : '' %>>Ensino fundamental incompleto</option>
+            <option value="Ensino fundamental completo" <%= candidato.escolaridade === 'Ensino fundamental completo' ? 'selected' : '' %>>Ensino fundamental completo</option>
+            <option value="Ensino médio incompleto" <%= candidato.escolaridade === 'Ensino médio incompleto' ? 'selected' : '' %>>Ensino médio incompleto</option>
+            <option value="Ensino médio completo" <%= candidato.escolaridade === 'Ensino médio completo' ? 'selected' : '' %>>Ensino médio completo</option>
+            <option value="Ensino superior incompleto" <%= candidato.escolaridade === 'Ensino superior incompleto' ? 'selected' : '' %>>Ensino superior incompleto</option>
+            <option value="Ensino superior completo" <%= candidato.escolaridade === 'Ensino superior completo' ? 'selected' : '' %>>Ensino superior completo</option>
+            <option value="Pós graduação incompleta" <%= candidato.escolaridade === 'Pós graduação incompleta' ? 'selected' : '' %>>Pós-graduação incompleta</option>
+            <option value="Pós graduação completa" <%= candidato.escolaridade === 'Pós graduação completa' ? 'selected' : '' %>>Pós-graduação completa</option>
+          </select>
+          
+          <div class="form-group">
+            <label>Sou PCD:</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input 
+                  type="radio" 
+                  id="pcd-sim" 
+                  name="pcd" 
+                  value="Sim"
+                  <%= candidato.pcd === 'Sim' ? 'checked' : '' %>
+                >
+                <label for="pcd-sim">Sim</label>
+              </div>
+              <div class="radio-item">
+                <input 
+                  type="radio" 
+                  id="pcd-nao" 
+                  name="pcd" 
+                  value="Não"
+                  <%= candidato.pcd === 'Não' ? 'checked' : '' %>
+                >
+                <label for="pcd-nao">Não</label>
+              </div>
+            </div>
+          </div>
+      
+          <div class="form-group">
+            <label>Minha CNH:</label>
+            <div class="checkbox-group cnh-group">
+              <div class="radio-item">
+                <input 
+                  type="checkbox" 
+                  id="cnh-nao" 
+                  name="cnh[]" 
+                  value="Não tenho"
+                  <%= !candidato.cnh || candidato.cnh.includes('Não tenho') ? 'checked' : '' %>
+                >
+                <label for="cnh-nao">Não tenho</label>
+              </div>
+              <div class="radio-item">
+                <input 
+                  type="checkbox" 
+                  id="cnh-a" 
+                  name="cnh[]" 
+                  value="A"
+                  <%= candidato.cnh && candidato.cnh.includes('A') ? 'checked' : '' %>
+                >
+                <label for="cnh-a">A</label>
+              </div>
+              <div class="radio-item">
+                <input 
+                  type="checkbox" 
+                  id="cnh-b" 
+                  name="cnh[]" 
+                  value="B"
+                  <%= candidato.cnh && candidato.cnh.includes('B') ? 'checked' : '' %>
+                >
+                <label for="cnh-b">B</label>
+              </div>
+              <div class="radio-item">
+                <input 
+                  type="checkbox" 
+                  id="cnh-c" 
+                  name="cnh[]" 
+                  value="C"
+                  <%= candidato.cnh && candidato.cnh.includes('C') ? 'checked' : '' %>
+                >
+                <label for="cnh-c">C</label>
+              </div>
+              <div class="radio-item">
+                <input 
+                  type="checkbox" 
+                  id="cnh-d" 
+                  name="cnh[]" 
+                  value="D"
+                  <%= candidato.cnh && candidato.cnh.includes('D') ? 'checked' : '' %>
+                >
+                <label for="cnh-d">D</label>
+              </div>
+              <div class="radio-item">
+                <input 
+                  type="checkbox" 
+                  id="cnh-e" 
+                  name="cnh[]" 
+                  value="E"
+                  <%= candidato.cnh && candidato.cnh.includes('E') ? 'checked' : '' %>
+                >
+                <label for="cnh-e">E</label>
+              </div>
+            </div>
+          </div>
+      
+          <button type="submit">Salvar Alterações</button>
+        </form>
 
-        <p><strong>CPF:</strong> <%= candidato.cpf %></p>
-        <p><strong>E-mail:</strong> <%= candidato.email %></p>
-        <p><strong>Telefone:</strong> <%= candidato.telefone %></p>
-        <p><strong>Endereço:</strong> <%= candidato.logradouro %>, <%= candidato.complemento %>, <%= candidato.numero %>, <%= candidato.bairro %> - <%= candidato.cep %>, <%= candidato.cidade %> / <%= candidato.uf %></p>
+       
       </div>
 
       <div class="dashboard-actions">
@@ -145,5 +320,29 @@
       </div>
     </div>
   </section>
-
+  <script>
+    // Lógica para os checkboxes de CNH
+    document.addEventListener('DOMContentLoaded', function() {
+      const cnhOptions = document.querySelectorAll('input[name="cnh[]"]:not(#cnh-nao)');
+      const cnhNao = document.querySelector('#cnh-nao');
+  
+      // Quando "Não tenho" é marcado, desmarca as outras opções
+      cnhNao.addEventListener('change', function() {
+        if (this.checked) {
+          cnhOptions.forEach(option => {
+            option.checked = false;
+          });
+        }
+      });
+  
+      // Quando qualquer outra opção é marcada, desmarca "Não tenho"
+      cnhOptions.forEach(option => {
+        option.addEventListener('change', function() {
+          if (this.checked) {
+            cnhNao.checked = false;
+          }
+        });
+      });
+    });
+  </script>
   <%- include('../partials/footer') %>
