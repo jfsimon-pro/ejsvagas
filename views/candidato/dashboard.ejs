@@ -196,9 +196,60 @@
       }
     }
   </style>
+  <style>
+    .degrade-header {
+      background: linear-gradient(to top right, #0d0b0a, #2c1b17, #5a1e12);
+      height: 350px;
+      width: 100%;
+      border-radius: 0px 0px 77px 77px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  .content-degrade-header {
+      max-width: 1200px;
+      padding: 180px 50px;
+      width: 100%;
+  }
+  .linha-branca {
+      height: 1px;
+      width: 100%;
+      background-color: white;
+      margin-bottom: 20px;
+  }
+  .degrade-breadcrumb {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+  .degrade-breadcrumb h1 {
+      color: white;
+      font-size: 47px;
+      font-weight: 300;
+  }
+  .links-bread a {
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+  }
+  .links-bread span {
+      color: #FF5E00;
+  }
+  </style>
+  <div class="degrade-header">
+    <div class="content-degrade-header">
+      <div class="linha-branca"></div>
+      <div class="degrade-breadcrumb">
+        <div class="links-bread">
+          <a href="">Início</a> <span>/</span> <a href="">Sobre</a>
+        </div>
+        <h1>Sobre nós</h1>
+      </div>
+    </div>
+  </div>
   <section class="candidato-superior">
     <div class="main-dashboard-candidato">
-      
+
       <div class="lancar-cursos">
         <a href="/candidato/lancar-experiencia">Lançar Experiência</a>
         <a href="/candidato/lancar-curso">Lançar Curso</a>
