@@ -319,7 +319,81 @@
         </div>
       </div>
       <div class="numeros-sobre-col-2">
-        <p>Form</p>
+        <div class="formulario-de-contato">
+          <form class="form-contato-sobre">
+            <label for="nome">Seu nome</label>
+            <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
+
+            <label for="email">Seu e-mail</label>
+            <input type="email" id="email" name="email" placeholder="Digite o melhor e-mail" required>
+
+            <label for="telefone">Telefone</label>
+            <input type="text" id="telefone" name="telefone" placeholder="Nos informe seu telefone para contato">
+
+            <label for="mensagem">Mensagem</label>
+            <textarea id="mensagem" name="mensagem" placeholder="Escreva sua mensagem aqui" rows="4" required></textarea>
+
+            <button type="submit">Enviar mensagem</button>
+          </form>
+        </div>
+        <style>
+        .formulario-de-contato {
+          background: #181818;
+          border-radius: 22px;
+          padding: 28px 24px 24px 24px;
+          max-width: 400px;
+          margin: 0 auto;
+          box-shadow: 0 2px 16px 0 rgba(0,0,0,0.08);
+        }
+        .form-contato-sobre {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+        .form-contato-sobre label {
+          color: #fff;
+          font-size: 15px;
+          margin-bottom: 2px;
+        }
+        .form-contato-sobre input,
+        .form-contato-sobre textarea {
+          background: transparent;
+          border: 1px solid #7D7D7D;
+          border-radius: 8px;
+          padding: 10px 14px;
+          color: #fff;
+          font-size: 15px;
+          outline: none;
+          transition: border 0.2s;
+        }
+        .form-contato-sobre input::placeholder,
+        .form-contato-sobre textarea::placeholder {
+          color: #7D7D7D;
+        }
+        .form-contato-sobre input:focus,
+        .form-contato-sobre textarea:focus {
+          border: 1.5px solid #FF5E00;
+        }
+        .form-contato-sobre textarea {
+          min-height: 90px;
+          resize: vertical;
+        }
+        .form-contato-sobre button {
+          margin-top: 12px;
+          background: linear-gradient(90deg, #eaeaea 60%, #fff 100%);
+          color: #181818;
+          border: none;
+          border-radius: 22px;
+          padding: 12px 0;
+          font-size: 16px;
+          font-weight: 500;
+          cursor: pointer;
+          transition: background 0.2s;
+        }
+        .form-contato-sobre button:hover {
+          background: linear-gradient(90deg, #fff 60%, #eaeaea 100%);
+        }
+        </style>
       </div>
     </div>
  
