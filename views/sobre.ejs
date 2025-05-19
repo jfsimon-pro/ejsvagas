@@ -38,17 +38,79 @@
 .links-bread span {
     color: #FF5E00;
 }
-
 </style>
 <div class="degrade-header">
   <div class="content-degrade-header">
     <div class="linha-branca"></div>
     <div class="degrade-breadcrumb">
       <div class="links-bread">
-        <a href="">Início</a> <span>/</span> <a href="">Vagas</a>
+        <a href="">Início</a> <span>/</span> <a href="">Sobre</a>
       </div>
-      <h1>Vagas</h1>
+      <h1>Sobre nós</h1>
     </div>
   </div>
 </div>
+
+<style>
+  #numeros-home {
+    background: url(../img/bg-vagas.png);
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: 0% 75%;
+}
+.content-numeros-home {
+    max-width: 1200px;
+    margin: auto;
+    padding: 200px 0px;
+}
+.parceiro-dot {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 23px;
+}
+@media (max-width: 900px) {
+    #numeros-home {
+        background: white;
+    }
+    .content-numeros-home {
+        padding: 120px 10px;
+    }
+}
+
+</style>
+<section id="numeros-home">
+  <div class="content-numeros-home">
+    <div class="numeros-home-1">
+      <div class="parceiro-dot">
+        <img src="/img/dot-orange.png">
+        <p>NÚMEROS</p>
+      </div>
+    </div>
+    <div class="numeros-home-2">
+      <div class="numeros-home-col-1">
+        <p class="trabalhe"><span>Trabalhe com</span> os melhores do mercado!</p>
+      </div>
+      <div class="numeros-home-col-2">
+        <div class="numero-com-info">
+          <p>300+</p>
+          <p><strong>Contratados</strong></p>
+        </div>
+        <div class="numero-com-info">
+          <p>100M+</p>
+          <p><strong>Vagas anunciadas</strong></p>
+        </div>
+        <div class="numero-com-info">
+          <p>600+</p>
+          <p><strong>Empresas</strong></p>
+        </div>
+      </div>
+    </div>
+    <div class="numeros-home-3">
+      <img src="/img/pessoas.png" alt="">
+    </div>
+  </div>
+
+</section>
 <%- include('partials/footer') %> 
