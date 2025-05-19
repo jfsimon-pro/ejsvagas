@@ -107,6 +107,10 @@
   .forgot-password2 a span {
     color: #FF5E01;
   }
+  .duplo {
+    display: flex;
+    gap: 10px;
+  }
   @media (max-width: 980px) {
     .forgot-password {
       flex-direction: column;
@@ -142,7 +146,7 @@
       
       
       <form action="/auth/register_candidato" method="POST">
-        <div class="campodelogin">
+        <div class="campodelogin duplo">
           <input type="text" name="nomeCompleto" placeholder="Nome Completo" required>
           <input type="text" name="cpf" placeholder="CPF" required>
         </div> 
@@ -170,7 +174,7 @@
         <div class="campodelogin">
           <input type="text" id="bairro" name="bairro" placeholder="Bairro" required readonly>
         </div> 
-        <div class="campodelogin">
+        <div class="campodelogin duplo">
           <input type="text" id="cidade" name="cidade" placeholder="Cidade" required readonly>
           <input type="text" id="uf" name="uf" maxlength="2" placeholder="UF" required readonly>
         </div> 
