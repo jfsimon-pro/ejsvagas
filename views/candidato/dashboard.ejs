@@ -51,20 +51,20 @@
       </div>
     </div>
   </div>
-  <section class="candidato-superior">
-    <div class="main-dashboard-candidato">
+  <section class="candidato-superior-novo">
+    <div class="main-dashboard-candidato-novo">
 
-      <div class="lancar-cursos">
+      <div class="lancar-cursos-novo">
         <a href="/candidato/lancar-experiencia">Lançar Experiência</a>
         <a href="/candidato/lancar-curso">Lançar Curso</a>
         <a href="/candidato/metas" class="btn-minhas-metas">Minhas Metas</a>
       </div>
 
-      <div class="cabecalho-candidato">
+      <div class="cabecalho-candidato-novo">
         <h1>Bem-vindo, <%= candidato.nomeCompleto %>!</h1>
       </div>
-      <div class="meus-dados">
-        <div class="editar-dados">
+      <div class="meus-dados-novo">
+        <div class="editar-dados-novo">
           <a href="/candidato/editar-dados">Editar Meus Dados</a>
         </div>
 
@@ -87,7 +87,7 @@
       </div>
 
 
-      <div class="vagas-aprovadas">
+      <div class="vagas-aprovadas-novo">
         <h2>Vagas em que você foi aprovado</h2>
         <% if (vagasAprovadas.length> 0) { %>
           <ul>
@@ -102,12 +102,12 @@
                 <p><strong>Empresa:</strong>
                   <%= vaga.empresa.nomeFantasia %>
                 </p>
-                <div class="buttons-aprovado">
-                  <a href="/empresa/perfil/<%= vaga.empresa.id %>" class="btn btn-info">perfil da empresa</a>
+                <div class="buttons-aprovado-novo">
+                  <a href="/empresa/perfil/<%= vaga.empresa.id %>" class="btn btn-info-novo">perfil da empresa</a>
                   <% if (vaga.jaAvaliada) { %>
-                    <button disabled class="btn btn-secondary">Avaliação enviada</button>
+                    <button disabled class="btn btn-secondary-novo">Avaliação enviada</button>
                     <% } else { %>
-                      <a href="/candidato/vagas/<%= vaga.id %>/avaliar" class="btn btn-success">Avaliar Empresa</a>
+                      <a href="/candidato/vagas/<%= vaga.id %>/avaliar" class="btn btn-success-novo">Avaliar Empresa</a>
                       <% } %>
                 </div>
               </li>
