@@ -225,6 +225,11 @@ app.get('/vagas', async (req, res) => {
   }
 });
 
+// Rota pública para página Sobre
+app.get('/sobre', (req, res) => {
+  res.render('sobre');
+});
+
 // Middleware de erro global
 app.use((err, req, res, next) => {
   console.error('Erro:', err);
