@@ -325,7 +325,21 @@
       align-items: center;
       justify-content: center;
     }
+
   }
+
+  .search-bar button {
+    background: #ff5a17;
+    color: #fff;
+    border: none;
+    border-radius: 9999px;
+    padding: 14px 38px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+    box-shadow: none;
+}
 </style>
 
 <div class="degrade-header">
@@ -363,7 +377,7 @@
                     </select>
                 </div>
                 <div class="filter" tabindex="0" id="filter-local">
-                    
+                    <span>Local</span> <span class="arrow"><img src="/img/setinha.png"></span>
                     <select name="uf">
                         <option value="">Estado</option>
                         <option value="AC" <%= uf === 'AC' ? 'selected' : '' %>>Acre</option>
