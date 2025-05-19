@@ -51,9 +51,72 @@
       </div>
     </div>
   </div>
+
+  <style>
+    .main-dashboard-candidato-novo {
+      max-width: 1200px;
+      margin: auto;
+      padding: 70px 20px;
+    }
+    
+    .lancar-cursos-novo {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .lancar-cursos-novo a {
+      background: #F78E0F;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+    }
+
+    .cabecalho-candidato-novo h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .meus-dados-novo {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .editar-dados-novo {
+      margin-bottom: 20px;
+    }
+
+    .editar-dados-novo a {
+      background: #F78E0F;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+    }
+
+    .meus-dados-novo p {
+      margin-bottom: 10px;
+    }
+
+    .dashboard-actions {
+      margin-top: 30px;
+      display: flex;
+      gap: 20px;
+    }
+
+    .dashboard-actions a {
+      background: #F78E0F;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+    }
+  </style>
   <section class="candidato-superior-novo">
     <div class="main-dashboard-candidato-novo">
-
       <div class="lancar-cursos-novo">
         <a href="/candidato/lancar-experiencia">Lançar Experiência</a>
         <a href="/candidato/lancar-curso">Lançar Curso</a>
@@ -68,56 +131,18 @@
           <a href="/candidato/editar-dados">Editar Meus Dados</a>
         </div>
 
-        <p><strong>CPF:</strong>
-          <%= candidato.cpf %>
-        </p>
-        <p><strong>E-mail:</strong>
-          <%= candidato.email %>
-        </p>
-        <p><strong>Telefone:</strong>
-          <%= candidato.telefone %>
-        </p>
-        <p><strong>Endereço:</strong>
-          <%= candidato.logradouro %>, <%= candidato.complemento %>, <%= candidato.numero %>, <%= candidato.bairro %> -
-                  <%= candidato.cep %>, <%= candidato.cidade %> / <%= candidato.uf %>
-        </p>
-
-        
-        
+        <p><strong>CPF:</strong> <%= candidato.cpf %></p>
+        <p><strong>E-mail:</strong> <%= candidato.email %></p>
+        <p><strong>Telefone:</strong> <%= candidato.telefone %></p>
+        <p><strong>Endereço:</strong> <%= candidato.logradouro %>, <%= candidato.complemento %>, <%= candidato.numero %>, <%= candidato.bairro %> - <%= candidato.cep %>, <%= candidato.cidade %> / <%= candidato.uf %></p>
       </div>
 
-
-      <div class="vagas-aprovadas-novo">
-        <h2>Vagas em que você foi aprovado</h2>
-        <% if (vagasAprovadas.length> 0) { %>
-          <ul>
-            <% vagasAprovadas.forEach(vaga=> { %>
-              <li>
-                <h3>
-                  <%= vaga.titulo %>
-                </h3>
-                <p><strong>Faixa Salarial:</strong>
-                  <%= vaga.faixaSalarial %>
-                </p>
-                <p><strong>Empresa:</strong>
-                  <%= vaga.empresa.nomeFantasia %>
-                </p>
-                <div class="buttons-aprovado-novo">
-                  <a href="/empresa/perfil/<%= vaga.empresa.id %>" class="btn btn-info-novo">perfil da empresa</a>
-                  <% if (vaga.jaAvaliada) { %>
-                    <button disabled class="btn btn-secondary-novo">Avaliação enviada</button>
-                    <% } else { %>
-                      <a href="/candidato/vagas/<%= vaga.id %>/avaliar" class="btn btn-success-novo">Avaliar Empresa</a>
-                      <% } %>
-                </div>
-              </li>
-              <% }); %>
-          </ul>
-          <% } else { %>
-            <p>Você ainda não foi aprovado em nenhuma vaga.</p>
-            <% } %>
+      <div class="dashboard-actions">
+        <a href="/candidato/vagas">Vagas Disponíveis</a>
+        <a href="/candidato/vagas-candidatadas">Minhas Candidaturas</a>
+        <a href="/candidato/vagas-aprovadas">Vagas Aprovadas</a>
+        <a href="/candidato/meu-perfil">Ver sobre mim</a>
       </div>
-
     </div>
   </section>
 

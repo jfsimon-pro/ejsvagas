@@ -1,0 +1,164 @@
+<%- include('./header') %>
+
+<style>
+  .degrade-header {
+    background: linear-gradient(to top right, #0d0b0a, #2c1b17, #5a1e12);
+    height: 350px;
+    width: 100%;
+    border-radius: 0px 0px 77px 77px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .content-degrade-header {
+    max-width: 1200px;
+    padding: 180px 50px;
+    width: 100%;
+  }
+  .linha-branca {
+    height: 1px;
+    width: 100%;
+    background-color: white;
+    margin-bottom: 20px;
+  }
+  .degrade-breadcrumb {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .degrade-breadcrumb h1 {
+    color: white;
+    font-size: 47px;
+    font-weight: 300;
+  }
+  .links-bread a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+  }
+  .links-bread span {
+    color: #FF5E00;
+  }
+
+  .main-content {
+    max-width: 1200px;
+    margin: auto;
+    padding: 70px 20px;
+  }
+
+  .vagas-aprovadas {
+    margin-top: 30px;
+  }
+
+  .vagas-aprovadas h2 {
+    color: #333;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 25px;
+  }
+
+  .vagas-aprovadas ul {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .vagas-aprovadas li {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .vagas-aprovadas h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: #333;
+  }
+
+  .vagas-aprovadas p {
+    margin-bottom: 10px;
+    color: #666;
+  }
+
+  .vagas-aprovadas strong {
+    font-weight: bold;
+    color: #333;
+  }
+
+  .buttons-aprovado {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .btn-info {
+    background-color: #17a2b8;
+    color: white;
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    cursor: not-allowed;
+  }
+
+  .btn-success {
+    background-color: #28a745;
+    color: white;
+  }
+
+  .btn:hover {
+    opacity: 0.9;
+  }
+</style>
+
+<div class="degrade-header">
+  <div class="content-degrade-header">
+    <div class="linha-branca"></div>
+    <div class="degrade-breadcrumb">
+      <div class="links-bread">
+        <a href="/candidato/dashboard">Início</a> <span>/</span> <a href="">Vagas Aprovadas</a>
+      </div>
+      <h1>Vagas Aprovadas</h1>
+    </div>
+  </div>
+</div>
+
+<section class="main-content">
+  <div class="vagas-aprovadas">
+    <h2>Vagas em que você foi aprovado</h2>
+    <% if (vagasAprovadas && vagasAprovadas.length > 0) { %>
+      <ul>
+        <% vagasAprovadas.forEach(vaga => { %>
+          <li>
+            <h3><%= vaga.titulo %></h3>
+            <p><strong>Faixa Salarial:</strong> <%= vaga.faixaSalarial %></p>
+            <p><strong>Empresa:</strong> <%= vaga.empresa.nomeFantasia %></p>
+            <div class="buttons-aprovado">
+              <a href="/empresa/perfil/<%= vaga.empresa.id %>" class="btn btn-info">Perfil da Empresa</a>
+              <% if (vaga.jaAvaliada) { %>
+                <button disabled class="btn btn-secondary">Avaliação enviada</button>
+              <% } else { %>
+                <a href="/candidato/vagas/<%= vaga.id %>/avaliar" class="btn btn-success">Avaliar Empresa</a>
+              <% } %>
+            </div>
+          </li>
+        <% }); %>
+      </ul>
+    <% } else { %>
+      <p>Você ainda não foi aprovado em nenhuma vaga.</p>
+    <% } %>
+  </div>
+</section>
+
+<%- include('../partials/footer') %> 
