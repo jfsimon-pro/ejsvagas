@@ -121,6 +121,7 @@ color: #808080;
   }
   .colunas-info-footer {
         display: flex;
+        flex-wrap: wrap;
     gap: 70px;
   }
   .hero {
