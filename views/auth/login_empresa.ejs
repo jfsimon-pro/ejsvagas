@@ -77,6 +77,9 @@
     padding: 7px;
     margin-bottom: 20px;
   }
+  .bemvindo {
+    margin-bottom: 37px;
+  }
   @media (max-width: 980px) {
     .forgot-password {
       flex-direction: column;
@@ -88,7 +91,7 @@
   <div class="mainlogin-col1">
     <div class="content-main-login2">
       <h1>Login</h1>
-      <p>Bem-vindo de volta! Preencha seus dados.</p>
+      <p class="bemvindo">Bem-vindo de volta! Preencha seus dados.</p>
       <div>
         <% if (message) { %>
           <p class="message"><%= message %></p>
