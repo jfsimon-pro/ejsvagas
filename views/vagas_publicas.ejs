@@ -462,24 +462,18 @@
       <% if (vagas && vagas.length > 0) { %>
         <% vagas.forEach(vaga => { %>
           <div class="vaga-card">
-            <h3 class="vaga-titulo"><%= vaga.titulo %></h3>
-            <div class="vaga-info">
-              <p><strong>Empresa:</strong> <%= vaga.empresa.nomeFantasia %></p>
-              <p><strong>Localização:</strong> <%= vaga.empresa.cidade %>/<%= vaga.empresa.uf %></p>
-              <p><strong>Cargo:</strong> <%= vaga.cargo %></p>
-              <p><strong>Salário:</strong> <%= vaga.faixaSalarial %></p>
-              <p><strong>Tipo de Contrato:</strong> <%= vaga.tipoContrato %></p>
-              <p><strong>Disponibilidade:</strong> <%= vaga.disponibilidade %></p>
-              <p><strong>Tipo de Trabalho:</strong> <%= vaga.tipoTrabalho %></p>
-              <p><strong>Escolaridade:</strong> <%= vaga.escolaridade %></p>
-              <% if (vaga.tags && vaga.tags.length > 0) { %>
-                <p><strong>Tags:</strong> <%= vaga.tags.join(', ') %></p>
-              <% } %>
-              <% if (vaga.beneficios && vaga.beneficios.length > 0) { %>
-                <p><strong>Benefícios:</strong> <%= vaga.beneficios.join(', ') %></p>
-              <% } %>
+              
+            <div class="vaga-info">      
+              <h3><%= vaga.titulo %></h3>          
+              <div class="alinha-card-info-home">
+                <p class="cardinfo-home"><strong><img src="/img/ensino.png" alt=""></strong> <%= vaga.escolaridade %></p>
+                <p class="cardinfo-home"><strong><img src="/img/carteira.png" alt=""></strong> <%= vaga.faixaSalarial %></p>
+                <p class="cardinfo-home"><strong>Inscritos</strong> <%= vaga.inscritos || 0 %></p>
+              </div>
+              
+              
             </div>
-            <a href="/auth/register_candidato" class="btn-candidatar">Candidate-se</a>
+            <p class="cardinfo-home-2"><strong><img src="/img/pin.png" alt=""></strong> <%= vaga.empresa.cidade %>/<%= vaga.empresa.uf %></p>
           </div>
         <% }); %>
       <% } else { %>
