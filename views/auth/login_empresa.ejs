@@ -28,6 +28,9 @@
     font-size: 16px;
     text-decoration: none;
   }
+  .main-login2 {
+    background-color: #0D0D0D;
+  }
   @media (max-width: 980px) {
     .forgot-password {
       flex-direction: column;
@@ -36,23 +39,28 @@
   }
 </style>
 <div class="main-login2">
-  <div class="content-main-login2">
-    <h1>Área da Empresa</h1>
-    <div>
-      <% if (message) { %>
-        <p class="message"><%= message %></p>
-      <% } %>
+  <div class="mainlogin-col1">
+    <div class="content-main-login2">
+      <h1>Área da Empresa</h1>
+      <div>
+        <% if (message) { %>
+          <p class="message"><%= message %></p>
+        <% } %>
+      </div>
+      
+      <form action="/auth/login_empresa" method="POST">
+        <input type="email" name="email" placeholder="E-mail" required>
+        <input type="password" name="senha" placeholder="Senha" required>
+        <button type="submit">Entrar</button>
+      </form>
+      <div class="forgot-password2">
+        <a href="/auth/forgot-password-empresa">Esqueci minha senha</a>
+        <a href="/auth/register_empresa">Criar Conta</a>
+      </div>
     </div>
-    
-    <form action="/auth/login_empresa" method="POST">
-      <input type="email" name="email" placeholder="E-mail" required>
-      <input type="password" name="senha" placeholder="Senha" required>
-      <button type="submit">Entrar</button>
-    </form>
-    <div class="forgot-password2">
-      <a href="/auth/forgot-password-empresa">Esqueci minha senha</a>
-      <a href="/auth/register_empresa">Criar Conta</a>
-    </div>
+  </div>
+  <div class="mainlogin-col2">
+    <img src="/img/login-empresa.png" alt="Login Empresa">
   </div>
 </div>
 
