@@ -87,8 +87,13 @@ app.get('/vagas', async (req, res) => {
     const uf = req.query.uf || '';
     const escolaridade = req.query.escolaridade || '';
 
-    console.log('Query params:', req.query); // Debug completo dos parâmetros
-    console.log('Filtros recebidos:', { busca, faixaSalarial, tipoContrato, uf, escolaridade }); // Debug
+    // DEBUG: Logar todos os parâmetros recebidos
+    console.log('--- DEBUG /vagas ---');
+    console.log('Query params:', req.query);
+    console.log('busca:', busca, '| faixaSalarial:', faixaSalarial, '| tipoContrato:', tipoContrato, '| uf:', uf, '| escolaridade:', escolaridade);
+    if (escolaridade) {
+      console.log('Tipo de escolaridade:', typeof escolaridade, '| Length:', escolaridade.length, '| Chars:', Array.from(escolaridade).map(c => `${c}(${c.charCodeAt(0)})`).join(', '));
+    }
 
     // Construir where clause baseado nos filtros
     const where = {};
@@ -210,7 +215,8 @@ app.get('/vagas', async (req, res) => {
       totalPages,
       totalVagas
     };
-
+    // DEBUG: Logar o valor de escolaridade passado para o template
+    console.log('Valor de escolaridade enviado para o template:', templateData.escolaridade);
     res.render('vagas_publicas', templateData);
 
   } catch (error) {
