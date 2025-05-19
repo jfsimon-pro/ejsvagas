@@ -30,6 +30,15 @@
   }
   .main-login2 {
     background-color: #0D0D0D;
+    display: flex;
+  }
+  .mainlogin-col1, .mainlogin-col2 {
+    width: 50%;
+  }
+  .mainlogin-col2 img {
+    height: max-content;
+    width: max-content;
+    object-fit: cover;
   }
   @media (max-width: 980px) {
     .forgot-password {
@@ -41,7 +50,8 @@
 <div class="main-login2">
   <div class="mainlogin-col1">
     <div class="content-main-login2">
-      <h1>Área da Empresa</h1>
+      <h1>Login</h1>
+      <p>Bem-vindo de volta! Preencha seus dados.</p>
       <div>
         <% if (message) { %>
           <p class="message"><%= message %></p>
@@ -49,13 +59,20 @@
       </div>
       
       <form action="/auth/login_empresa" method="POST">
-        <input type="email" name="email" placeholder="E-mail" required>
-        <input type="password" name="senha" placeholder="Senha" required>
+        <div class="campodelogin">
+          <p>E-mail</p>
+          <input type="email" name="email" placeholder="E-mail" required>
+        </div>
+        <div class="campodelogin">
+          <p>Senha</p>
+          <input type="password" name="senha" placeholder="Senha" required>
+        </div>
+        <a href="/auth/forgot-password-empresa">Esqueci minha senha</a>
         <button type="submit">Entrar</button>
       </form>
       <div class="forgot-password2">
-        <a href="/auth/forgot-password-empresa">Esqueci minha senha</a>
-        <a href="/auth/register_empresa">Criar Conta</a>
+        
+        <a href="/auth/register_empresa">Não tem conta ainda? <span>Cadastre-se</span></a>
       </div>
     </div>
   </div>
