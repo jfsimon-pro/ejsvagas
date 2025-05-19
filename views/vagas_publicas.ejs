@@ -336,6 +336,38 @@
     margin-bottom: 40px;
     margin-top: -90px;
 }
+
+/* --- NOVO CSS PARA FILTROS MAIS BONITOS E ALINHADOS --- */
+.search-bar .filters {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  width: auto;
+}
+
+.search-bar .filter {
+  flex: 1 1 0;
+  min-width: 140px;
+  display: flex;
+  align-items: center;
+  background: #f3f3f3;
+  border-radius: 999px;
+  padding: 0 16px;
+  height: 48px;
+}
+
+.search-bar .filter select {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  color: #222;
+  outline: none;
+  padding: 0;
+  height: 40px;
+  appearance: none;
+  cursor: pointer;
+}
 </style>
 
 <div class="degrade-header">
@@ -359,10 +391,9 @@
             <button type="submit">Procurar</button>
 
             <div class="filters">
-                <div class="filter" tabindex="0" id="filter-tipo">
-                    <span>Tipo</span> <span class="arrow"><img src="/img/setinha.png"></span>
+                <div class="filter">
                     <select name="tipoContrato">
-                        <option value="">Selecione o tipo de contrato</option>
+                        <option value="">Tipo de contrato</option>
                         <option value="CLT" <%= tipoContrato === 'CLT' ? 'selected' : '' %>>CLT</option>
                         <option value="PJ" <%= tipoContrato === 'PJ' ? 'selected' : '' %>>PJ</option>
                         <option value="Estágio" <%= tipoContrato === 'Estágio' ? 'selected' : '' %>>Estágio</option>
@@ -372,8 +403,7 @@
                         <option value="Aprendiz" <%= tipoContrato === 'Aprendiz' ? 'selected' : '' %>>Aprendiz</option>
                     </select>
                 </div>
-                <div class="filter" tabindex="0" id="filter-local">
-                    
+                <div class="filter">
                     <select name="uf">
                         <option value="">Estado</option>
                         <option value="AC" <%= uf === 'AC' ? 'selected' : '' %>>Acre</option>
@@ -405,10 +435,9 @@
                         <option value="TO" <%= uf === 'TO' ? 'selected' : '' %>>Tocantins</option>
                     </select>
                 </div>
-                <div class="filter" tabindex="0" id="filter-educacao">
-                    <span>Educação</span> <span class="arrow"><img src="/img/setinha.png"></span>
-                    <select name="escolaridade" onchange="console.log('Escolaridade selecionada:', this.value)">
-                        <option value="">Selecione a escolaridade</option>
+                <div class="filter">
+                    <select name="escolaridade">
+                        <option value="">Escolaridade</option>
                         <option value="Indiferente" <%= escolaridade === 'Indiferente' ? 'selected' : '' %>>Indiferente</option>
                         <option value="Alfabetizado" <%= escolaridade === 'Alfabetizado' ? 'selected' : '' %>>Alfabetizado</option>
                         <option value="Ensino fundamental incompleto" <%= escolaridade === 'Ensino fundamental incompleto' ? 'selected' : '' %>>Ensino fundamental incompleto</option>
