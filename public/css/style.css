@@ -336,14 +336,7 @@ color: #808080;
   padding: 80px 20px;
 }
 .main-login {
-  padding: 35px 0px;
-  min-height: 74vh;
-  background: url("../img/bg2.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color: #0D0D0D;
 }
 .card-depoimento {
   width: 270px;
