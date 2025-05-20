@@ -974,48 +974,53 @@
           </div>
           
 
-          <div class="label-info">
-            <label for="quantidadeVagas">Quantidade de Vagas:</label>
-            <div class="info-icon">
-              ?
-              <span class="tooltip">Informe quantas vagas estão disponíveis para esta posição. Se houver apenas uma vaga, deixe o valor padrão 1.</span>
-            </div>
+          <div class="campo-dados">
+            <label for="quantidadeVagas">Quantidade de Vagas:
+              <div class="info-icon">
+                ?
+                <span class="tooltip">Informe quantas vagas estão disponíveis para esta posição. Se houver apenas uma vaga, deixe o valor padrão 1.</span>
+              </div>
+            </label>
+            
+            <input type="number" id="quantidadeVagas" name="quantidadeVagas" min="1" value="1" required>
           </div>
-          <input type="number" id="quantidadeVagas" name="quantidadeVagas" min="1" value="1" required>
+          
 
-          <div class="label-info">
-            <label>Precisa de CNH?</label>
-            <div class="info-icon">
-              ?
-              <span class="tooltip">Selecione as categorias de CNH necessárias para a vaga. Se não precisar, marque "Não precisa".</span>
+          <div class="campo-dados-radios">
+            <label>Precisa de CNH?
+              <div class="info-icon">
+                ?
+                <span class="tooltip">Selecione as categorias de CNH necessárias para a vaga. Se não precisar, marque "Não precisa".</span>
+              </div>
+            </label>
+            <div class="checkbox-group required cnh-group">
+              <div class="checkbox-item">
+                <input type="checkbox" id="cnh-a" name="cnh[]" value="A" class="cnh-option">
+                <p for="cnh-a">A</p>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="cnh-b" name="cnh[]" value="B" class="cnh-option">
+                <p for="cnh-b">B</p>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="cnh-c" name="cnh[]" value="C" class="cnh-option">
+                <p for="cnh-c">C</p>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="cnh-d" name="cnh[]" value="D" class="cnh-option">
+                <p for="cnh-d">D</p>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="cnh-e" name="cnh[]" value="E" class="cnh-option">
+                <p for="cnh-e">E</p>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="cnh-nao" name="cnh[]" value="Não precisa" class="cnh-nao">
+                <p for="cnh-nao">Não precisa</p>
+              </div>
             </div>
           </div>
-          <div class="checkbox-group required cnh-group">
-            <div class="checkbox-item">
-              <input type="checkbox" id="cnh-a" name="cnh[]" value="A" class="cnh-option">
-              <label for="cnh-a">A</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" id="cnh-b" name="cnh[]" value="B" class="cnh-option">
-              <label for="cnh-b">B</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" id="cnh-c" name="cnh[]" value="C" class="cnh-option">
-              <label for="cnh-c">C</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" id="cnh-d" name="cnh[]" value="D" class="cnh-option">
-              <label for="cnh-d">D</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" id="cnh-e" name="cnh[]" value="E" class="cnh-option">
-              <label for="cnh-e">E</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" id="cnh-nao" name="cnh[]" value="Não precisa" class="cnh-nao">
-              <label for="cnh-nao">Não precisa</label>
-            </div>
-          </div>
+          
 
           <div class="label-info">
             <label for="dataLimite">Aceitando candidaturas até:</label>
