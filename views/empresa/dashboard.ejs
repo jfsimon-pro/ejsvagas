@@ -285,14 +285,23 @@
         <div class="campo-dados">
           <label>Razão Social:</label> <input readonly value="<%= empresa.razaoSocial %>"></input>
         </div>
-        
-        <p><strong>CNPJ:</strong> <%= empresa.cnpj %></p>
-        <p><strong>Telefone:</strong> <%= empresa.telefone %></p>
-        <p><strong>Whatsapp:</strong> <%= empresa.whatsapp %></p>
-        <p><strong>Endereço:</strong> <%= empresa.logradouro %>, <%= empresa.numero %>, <%= empresa.bairro %>, <%= empresa.cidade %> - <%= empresa.uf %></p>
-      
+        <div class="campo-dados">
+          <label>CNPJ:</label> <input readonly value="<%= empresa.cnpj %>"></input> 
+        </div>
+        <div class="campo-dados">
+          <label>Telefone:</label> <input readonly value="<%= empresa.telefone %>"></input>
+        </div>
+        <div class="campo-dados">
+          <label>Whatsapp:</label> <input readonly value="<%= empresa.whatsapp %>"></input>
+        </div>
+        <div class="campo-dados">
+          <label>Endereço:</label> <input readonly value="<%= empresa.logradouro %>, <%= empresa.numero %>, <%= empresa.bairro %>, <%= empresa.cidade %> - <%= empresa.uf %>"></input>
+        </div>
+
         <% if (empresa.sobre) { %>
-          <p><strong>Sobre:</strong> <%= empresa.sobre %></p>
+          <div class="campo-dados">
+            <label>Sobre:</label> <input readonly value="<%= empresa.sobre %>"></input>
+          </div>
         <% } %>
         <div class="linha"></div>
         <h2>Dados Oficiais de Registro da sua empresa</h2><br>
