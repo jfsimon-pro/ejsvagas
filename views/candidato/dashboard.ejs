@@ -183,6 +183,20 @@
     align-items: center;
     justify-content: center;
     }
+    .alinha-submit {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .alinha-submit button {
+      color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 80px;
+    padding: 5px 10px;
+    background: #FF5E00;
+    cursor: pointer;
+    }
   </style>
   <section class="candidato-superior-novo">
     <div class="main-dashboard-candidato-novo">
@@ -411,7 +425,9 @@
             </div>
           </div>
       
-          <button type="submit">Salvar Alterações</button>
+          <div class="alinha-submit">
+            <button type="submit">Salvar Alterações</button>
+          </div>
         </form>
 
        
