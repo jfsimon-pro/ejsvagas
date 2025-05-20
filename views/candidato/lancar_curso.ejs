@@ -248,27 +248,35 @@
       </form>
       <hr>
 
-      <h2>Meus Cursos</h2>
+      <div class="cursos-lancados">
+        <h2>Meus Cursos</h2>
       <ul>
         <% if (cursos.length> 0) { %>
           <% cursos.forEach(curso=> { %>
             <li>
-              <strong>
-                <%= curso.curso %>
-              </strong> - <%= curso.instituicao %>
-                (<%= curso.dataInicio.toLocaleDateString() %> a
-                  <%= curso.dataConclusao ? curso.dataConclusao.toLocaleDateString() : 'Atual' %>)
+              <div class="alinhamento-curso-lancado">
+                <strong>
+                  <%= curso.curso %>
+                </strong> - <%= curso.instituicao %>
+                  (<%= curso.dataInicio.toLocaleDateString() %> a
+                    <%= curso.dataConclusao ? curso.dataConclusao.toLocaleDateString() : 'Atual' %>)
+              </div>
+
+
                     <form action="/candidato/lancar-curso/excluir/<%= curso.id %>" method="POST"
                       style="display: inline;">
                       <button class="excl" type="submit"
                         onclick="return confirm('Tem certeza que deseja excluir este curso?')">Excluir</button>
                     </form>
+
+
             </li>
             <% }) %>
               <% } else { %>
                 <p>Você ainda não listou nenhum curso.</p>
                 <% } %>
       </ul>
+      </div>
      
     </div>
 
