@@ -677,7 +677,26 @@
         .botoes-vagas-disponiveis {
             padding-top: 20px;
         }
-
+        .vaga-candidatada-status-badge--analise {
+            padding: 7px;
+    border: none;
+    background: #FF5E00;
+    color: white;
+    border-radius: 180px;
+    font-size: 14px;
+        }
+        .vaga-candidatada-status-badge--aprovado {
+            padding: 7px;
+    border: none;
+    background: #2ecc71;
+    color: white;
+    border-radius: 180px;
+    font-size: 14px;
+        }
+        .vaga-candidatada-card {
+            border-top: 2px solid #E6E7E8;
+            padding: 27px 0px;
+        }
         @media (max-width: 768px) {
             .checkbox-group {
                 flex-wrap: wrap;
@@ -726,8 +745,10 @@
                                                     </span>
                                                     <% } %>
                                         </div>
-                                        <a href="/candidato/vagas/<%= vaga.id %>/detalhes"
-                                            class="vaga-candidatada-btn">Ver Detalhes</a>
+                                        <div class="alinha-submit">
+                                            <a href="/candidato/vagas/<%= vaga.id %>/detalhes"
+                                                class="vaga-candidatada-btn">Ver Detalhes</a>
+                                        </div>
                                     </div>
                                     <% }); %>
                                         <% } else { %>
