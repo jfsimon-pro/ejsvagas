@@ -1,172 +1,295 @@
 <%- include('./header') %>
-  <style>
-    .main-metas select,
-    .main-metas input {
-      width: 100%;
-      padding: 10px;
-    }
-
-    #ocupacao {
-      width: 93%;
-    }
-
-    @media (max-width: 768px) {
-      .content-main-login {
-        width: 100%;
-      }
-
-      #ocupacao {
-        width: 91%;
-      }
-    }
-  </style>
-
-  <style>
-    /* Garante que o contêiner do formulário seja responsivo */
-    form {
-      width: 100%;
-      /* Largura total */
-      max-width: 400px;
-      /* Largura máxima */
-      margin: 0 auto;
-      /* Centraliza o formulário */
-      padding: 20px;
-      /* Adiciona espaço interno */
-      box-sizing: border-box;
-      /* Inclui o padding na largura total */
-    }
-
-    /* Estilização dos selects */
-    form select {
-      display: block;
-      /* Garante que ocupe uma linha inteira */
-      width: 100%;
-      /* Ocupará toda a largura do contêiner */
-      max-width: 100%;
-      /* Previne limitações de largura */
-      height: 45px;
-      /* Altura consistente */
-      padding: 10px;
-      /* Adiciona espaçamento interno */
-      font-size: 16px;
-      /* Texto legível */
-      margin-bottom: 15px;
-      /* Espaçamento entre os campos */
-      border: 1px solid #ccc;
-      /* Borda simples */
-      border-radius: 5px;
-      /* Bordas arredondadas */
-      background-color: #fff;
-      /* Fundo branco */
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      /* Sombra para destaque */
-      appearance: none;
-      /* Remove o estilo padrão */
-      -webkit-appearance: none;
-      /* Suporte para WebKit */
-      -moz-appearance: none;
-      /* Suporte para Firefox */
-    }
-
-    /* Ajusta a seta para o select */
-    form select {
-      background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 6"%3E%3Cpath fill="%23999" d="M0 0l5 6 5-6z"/%3E%3C/svg%3E');
-      background-repeat: no-repeat;
-      background-position: right 10px center;
-      background-size: 10px;
-    }
-
-    /* Ajuste adicional para dispositivos móveis */
-    @media (max-width: 768px) {
-      form select {
-        font-size: 18px;
-        /* Texto maior no mobile */
-        height: 50px;
-        /* Altura maior para toque fácil */
-      }
-    }
-
-    /* Garante que o contêiner principal seja visível no mobile */
-    .candidato-superior {
-      display: flex;
-      /* Usa flexbox para centralizar conteúdo */
-      align-items: center;
-      /* Centraliza verticalmente */
-      justify-content: center;
-      /* Centraliza horizontalmente */
-      min-height: 100vh;
-      /* Preenche a altura total da tela */
-      padding: 20px;
-      /* Espaçamento interno */
-      box-sizing: border-box;
-      /* Inclui o padding */
-    }
-  </style>
 
 <style>
-  .autocomplete-suggestions {
-    border: 1px solid #ccc;
-    max-height: 150px;
-    overflow-y: auto;
-    position: absolute;
-    background-color: #fff;
-    z-index: 1000;
+  .degrade-header {
+    background: linear-gradient(to top right, #0d0b0a, #2c1b17, #5a1e12);
+    height: 350px;
+    width: 100%;
+    border-radius: 0px 0px 77px 77px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content-degrade-header {
+    max-width: 1200px;
+    padding: 180px 50px;
+    width: 100%;
+}
+.linha-branca {
+    height: 1px;
+    width: 100%;
+    background-color: white;
+    margin-bottom: 20px;
+}
+.degrade-breadcrumb {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.degrade-breadcrumb h1 {
+    color: white;
+    font-size: 47px;
+    font-weight: 300;
+}
+.links-bread a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+}
+.links-bread span {
+    color: #FF5E00;
+}
+</style>
+<div class="degrade-header">
+  <div class="content-degrade-header">
+    <div class="linha-branca"></div>
+    <div class="degrade-breadcrumb">
+      <div class="links-bread">
+        <a href="">Início</a> <span>/</span> <a href="">Área do Candidato</a>
+      </div>
+      <h1>Área do Candidato</h1>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .main-dashboard-candidato-novo {
+    max-width: 1200px;
+    margin: auto;
+    padding: 70px 20px;
   }
-  .autocomplete-suggestions div {
-    padding: 8px;
-    cursor: pointer;
+  
+  .lancar-cursos-novo {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
   }
-  .autocomplete-suggestions div:hover {
-    background-color: #f0f0f0;
+
+  
+
+  .cabecalho-candidato-novo h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
   }
-  .botoes-vagas-disponiveis {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 20px;
+
+  
+
+  .editar-dados-novo {
+    margin-bottom: 20px;
   }
-  .btn-info {
-      color: black;
+
+  .editar-dados-novo a {
+    background: #F78E0F;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
   }
-  .vagas-disponiveis select {
-      padding: 10px;
+
+  .meus-dados-novo p {
+    margin-bottom: 10px;
   }
-  @media (max-width: 980px) {
-      .vagas-disponiveis input {
-          width: 95%;
-      }
-      .vagas-disponiveis form {
-          margin-bottom: 20px;
-          display: flex;
-          flex-wrap: wrap;
-          flex-direction: column;
-      }
-      .autocomplete-suggestions {
-          position: unset;
-      }
+
+  .dashboard-actions {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+  }
+
+  .dashboard-actions a {
+    background: #F78E0F;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
   }
 </style>
-  <section class="candidato-superior">
-    <div class="main-login">
-      <div class="content-main-login">
-        <div class="main-dashboard-candidato">
-          <div class="cabecalho-candidato">
-            <div class="main-metas">
-              <h1>Minhas Metas</h1>
+<style>
+  .lancar-cursos-novo {
+    border-bottom: 1px solid #E6E7E8;
+  }
+  .lancar-cursos-novo a {
+    text-decoration: none;
+    color: #6E7583;
+    padding-bottom: 10px;
+  }
+  .lancar-cursos-novo a:hover {
+    color: #F78E0F !important;
+  }
+  .vigente {
+    color: #F78E0F !important;
+    border-bottom: 1px solid #F78E0F;
+    margin-bottom: -1px;
+  }
+  .cabecalho-candidato-novo > p:nth-child(1) {
+    font-size: 20px;
+  font-weight: 500;
+  color: #3D4047;
+  margin-bottom: 7px;
+  }
+  .cabecalho-candidato-novo > p:nth-child(2) {
+    font-size: 16px;
+  color: #6E7583;
+  margin-bottom: 23px;
+  }
+
+  .campo-dados {
+    display: flex;
+  border-top: 2px solid #E6E7E8;
+  padding: 27px 0px;
+  }
+
+  .campo-dados label {
+    display: flex;
+    width: 320px;
+  }
+  .campo-dados input {
+    width: 550px;
+    border: 2px solid #E6E7E8;
+  padding: 10px;
+  border-radius: 5px;
+  }
+  .campo-dados textarea {
+    width: 550px;
+    border: 2px solid #E6E7E8;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  .campo-dados select {
+    width: 550px;
+  border: 2px solid #E6E7E8;
+  padding: 10px;
+  border-radius: 5px;
+  }
+  .form-group {
+    display: flex;
+  border-top: 2px solid #E6E7E8;
+  padding: 27px 0px;
+  }
+  .form-group label {
+    display: flex;
+  width: 320px;
+  }
+  .radio-group {
+    display: flex;
+  gap: 20px;
+  }
+  .radio-group label {
+    width: unset;
+  }
+  .checkbox-group .radio-item label {
+    width: unset;
+  }
+  .checkbox-group {
+    display: flex;
+  gap: 50px;
+  }
+  .radio-item {
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  }
+  .alinha-submit {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .alinha-submit button {
+    color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 80px;
+  padding: 5px 10px;
+  background: #FF5E00;
+  cursor: pointer;
+  }
+  .cursos-lancados li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #E6E7E8;
+    padding: 20px 0px;
+  }
+  .cursos-lancados button {
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 80px;
+    padding: 5px 10px;
+    background: #FF5E00;
+    cursor: pointer;
+  }
+  .minhas-exp-registro li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #E6E7E8;
+    padding: 20px 0px;
+  }
+  .minhas-exp-registro button {
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 80px;
+    padding: 5px 10px;
+    background: #FF5E00;
+    cursor: pointer;
+  }
+  .minhas-exp-registro h2 {
+    font-size: 20px;
+    font-weight: 500;
+    color: #3D4047;
+    margin-bottom: 7px;
+  }
+  @media (max-width: 768px) {
+    .checkbox-group {
+      flex-wrap: wrap;
+      gap: 5px;
+        }
+    .degrade-breadcrumb {
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .minhas-exp-registro li {
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .minhas-exp-registro {
+      padding-top: 35px;
+    }
+  }
+</style>
+<section class="candidato-superior-novo">
+  <div class="main-dashboard-candidato-novo">
+    <div class="lancar-cursos-novo">
+      <a href="/candidato/lancar-experiencia" class="vigente">Lançar Experiência</a>
+      <a href="/candidato/lancar-curso">Lançar Curso</a>
+      <a href="/candidato/metas" class="btn-minhas-metas">Minhas Metas</a>
+    </div>
+
+    <div class="cabecalho-candidato-novo">
+      <p>Suas Experiências</p>
+      <p>Atualize suas experiências e permaneça atualizado.</p>
+    </div>
+    <div class="meus-dados-novo">
+              
               <form action="/candidato/metas" method="POST">
                 <div class="form-group">
-                  <label for="tipoContrato">Tipo de Contrato:</label>
-                  <select id="tipoContrato" name="tipoContrato">
-                    <option value="">Selecione</option>
-                    <option value="CLT" <%=candidato.tipoContrato==='CLT' ? 'selected' : '' %>>CLT</option>
-                    <option value="PJ" <%=candidato.tipoContrato==='PJ' ? 'selected' : '' %>>PJ</option>
-                    <option value="Temporário" <%=candidato.tipoContrato==='Temporário' ? 'selected' : '' %>>Temporário</option>
-                    <option value="Autônomo" <%=candidato.tipoContrato==='Autônomo' ? 'selected' : '' %>>Autônomo</option>
-                    <option value="Estágio" <%=candidato.tipoContrato==='Estágio' ? 'selected' : '' %>>Estágio</option>
-                    <option value="Freelancer" <%=candidato.tipoContrato==='Freelancer' ? 'selected' : '' %>>Freelancer</option>
-                    <option value="Aprendiz" <%=candidato.tipoContrato==='Aprendiz' ? 'selected' : '' %>>Aprendiz</option>
-                    <!-- Continue com as opções -->
-                  </select>
+                  <div class="campo-dados">
+                    <label for="tipoContrato">Tipo de Contrato:</label>
+                    <select id="tipoContrato" name="tipoContrato">
+                      <option value="">Selecione</option>
+                      <option value="CLT" <%=candidato.tipoContrato==='CLT' ? 'selected' : '' %>>CLT</option>
+                      <option value="PJ" <%=candidato.tipoContrato==='PJ' ? 'selected' : '' %>>PJ</option>
+                      <option value="Temporário" <%=candidato.tipoContrato==='Temporário' ? 'selected' : '' %>>Temporário</option>
+                      <option value="Autônomo" <%=candidato.tipoContrato==='Autônomo' ? 'selected' : '' %>>Autônomo</option>
+                      <option value="Estágio" <%=candidato.tipoContrato==='Estágio' ? 'selected' : '' %>>Estágio</option>
+                      <option value="Freelancer" <%=candidato.tipoContrato==='Freelancer' ? 'selected' : '' %>>Freelancer</option>
+                      <option value="Aprendiz" <%=candidato.tipoContrato==='Aprendiz' ? 'selected' : '' %>>Aprendiz</option>
+                      <!-- Continue com as opções -->
+                    </select>
+                  </div>
                 </div>
 
                 <div class="form-group">
@@ -217,11 +340,8 @@
 
                 <button type="submit">Salvar Alterações</button>
               </form>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </section>
+  </div>
+</section>
   <script src="/js/autocompletemetas.js"></script>
   <%- include('../partials/footer') %>
