@@ -72,12 +72,7 @@
       margin-bottom: 20px;
     }
 
-    .meus-dados-novo {
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
+    
 
     .editar-dados-novo {
       margin-bottom: 20px;
@@ -152,8 +147,10 @@
       </div>
       <div class="meus-dados-novo">
         <form action="/candidato/editar-dados" method="POST">
-          <label for="nomeCompleto">Nome Completo:</label>
+          <div class="campo-dados">
+            <label for="nomeCompleto">Nome Completo:</label>
           <input type="text" id="nomeCompleto" name="nomeCompleto" value="<%= candidato.nomeCompleto %>" required>
+          </div>
         
           <label for="cpf">CPF:</label>
           <input type="text" id="cpf" name="cpf" value="<%= candidato.cpf %>" readonly>
