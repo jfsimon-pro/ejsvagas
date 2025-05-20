@@ -681,76 +681,78 @@
             <% } else { %>
               <% vagas.forEach(vaga=> { %>
                 <li>
-                  <div class="vaga-card">
-                    <h3>
-                      <%= vaga.titulo %>
-                    </h3>
-                    <div class="vaga-info">
-                      <div class="vaga-status">
-                        <% if (vaga.vagaPcd==='Sim' ) { %>
-                          <span class="badge pcd">Vaga PCD</span>
-                          <% } %>
-                            <span class="badge location"><i class="fas fa-map-marker-alt"></i>
-                              <%= vaga.cidade %>/<%= vaga.uf %>
-                            </span>
+                  <div class="alinha-info-vaga">
+                    <div class="vaga-card">
+                      <h3>
+                        <%= vaga.titulo %>
+                      </h3>
+                      <div class="vaga-info">
+                        <div class="vaga-status">
+                          <% if (vaga.vagaPcd==='Sim' ) { %>
+                            <span class="badge pcd">Vaga PCD</span>
+                            <% } %>
+                              <span class="badge location"><i class="fas fa-map-marker-alt"></i>
+                                <%= vaga.cidade %>/<%= vaga.uf %>
+                              </span>
+                        </div>
+                        <p><strong>Cargo:</strong>
+                          <%= vaga.cargo %>
+                        </p>
+                        <p><strong>Tipo de Contrato:</strong>
+                          <%= vaga.tipoContrato %>
+                        </p>
+                        <p><strong>Faixa Salarial:</strong>
+                          <%= vaga.faixaSalarial %>
+                        </p>
+                        <p><strong>Localização:</strong>
+                          <%= vaga.cidade %>/<%= vaga.uf %>
+                        </p>
+                        <p><strong>Vaga PCD:</strong>
+                          <%= vaga.vagaPcd %>
+                        </p>
+                        <p><strong>Data Limite:</strong>
+                          <%= new Date(vaga.dataLimite).toLocaleDateString('pt-BR') %>
+                        </p>
+                        <p><strong>Quantidade de Vagas:</strong>
+                          <%= vaga.quantidadeVagas %>
+                        </p>
+                        <p><strong>CNH Necessária:</strong>
+                          <%= Array.isArray(vaga.cnh) && vaga.cnh.length> 0 ? vaga.cnh.join(', ') : 'Não informado' %>
+                        </p>
+                        <p><strong>Candidaturas:</strong>
+                          <%= vaga.candidaturas ? vaga.candidaturas.length : 0 %>
+                        </p>
+                        <p><strong>Visualizações:</strong> <span class="visualizacoes"><i class="fas fa-eye"></i>
+                            <%= vaga.visualizacoes %>
+                          </span></p>
                       </div>
-                      <p><strong>Cargo:</strong>
-                        <%= vaga.cargo %>
-                      </p>
-                      <p><strong>Tipo de Contrato:</strong>
-                        <%= vaga.tipoContrato %>
-                      </p>
-                      <p><strong>Faixa Salarial:</strong>
-                        <%= vaga.faixaSalarial %>
-                      </p>
-                      <p><strong>Localização:</strong>
-                        <%= vaga.cidade %>/<%= vaga.uf %>
-                      </p>
-                      <p><strong>Vaga PCD:</strong>
-                        <%= vaga.vagaPcd %>
-                      </p>
-                      <p><strong>Data Limite:</strong>
-                        <%= new Date(vaga.dataLimite).toLocaleDateString('pt-BR') %>
-                      </p>
-                      <p><strong>Quantidade de Vagas:</strong>
-                        <%= vaga.quantidadeVagas %>
-                      </p>
-                      <p><strong>CNH Necessária:</strong>
-                        <%= Array.isArray(vaga.cnh) && vaga.cnh.length> 0 ? vaga.cnh.join(', ') : 'Não informado' %>
-                      </p>
-                      <p><strong>Candidaturas:</strong>
-                        <%= vaga.candidaturas ? vaga.candidaturas.length : 0 %>
-                      </p>
-                      <p><strong>Visualizações:</strong> <span class="visualizacoes"><i class="fas fa-eye"></i>
-                          <%= vaga.visualizacoes %>
-                        </span></p>
                     </div>
-                  </div>
-                  <div class="vaga-info">
-                    <p><strong>Descrição:</strong></p>
-                    <p class="vaga-descrita"><%- vaga.descricao.replace(/\n/g, '<br>' ) %></p>
-                    <p><strong>Disponibilidade:</strong>
-                      <%= vaga.disponibilidade || 'Não especificado' %>
-                    </p>
-                    <div class="horario-trabalho">
-                      <strong>Horário de Trabalho:</strong>
-                      <span><%- (vaga.horarioTrabalho || 'Não especificado' ).replace(/\n/g, '<br>' ) %></span>
+                    <div class="vaga-info">
+                      <p><strong>Descrição:</strong></p>
+                      <p class="vaga-descrita"><%- vaga.descricao.replace(/\n/g, '<br>' ) %></p>
+                      <p><strong>Disponibilidade:</strong>
+                        <%= vaga.disponibilidade || 'Não especificado' %>
+                      </p>
+                      <div class="horario-trabalho">
+                        <strong>Horário de Trabalho:</strong>
+                        <span><%- (vaga.horarioTrabalho || 'Não especificado' ).replace(/\n/g, '<br>' ) %></span>
+                      </div>
+                      <p><strong>Tipo de Trabalho:</strong>
+                        <%= vaga.tipoTrabalho %>
+                      </p>
+                      <p><strong>Escolaridade:</strong>
+                        <%= vaga.escolaridade %>
+                      </p>
+                      <p><strong>Idiomas:</strong>
+                        <%= vaga.idiomas.length> 0 ? vaga.idiomas.join(', ') : 'Não especificado' %>
+                      </p>
+                      <p><strong>Benefícios:</strong>
+                        <%= vaga.beneficios.length> 0 ? vaga.beneficios.join(', ') : 'Não especificado' %>
+                      </p>
+                      <p><strong>Tags:</strong>
+                        <%= vaga.tags.length> 0 ? vaga.tags.join(', ') : 'Não especificado' %>
+                      </p>
                     </div>
-                    <p><strong>Tipo de Trabalho:</strong>
-                      <%= vaga.tipoTrabalho %>
-                    </p>
-                    <p><strong>Escolaridade:</strong>
-                      <%= vaga.escolaridade %>
-                    </p>
-                    <p><strong>Idiomas:</strong>
-                      <%= vaga.idiomas.length> 0 ? vaga.idiomas.join(', ') : 'Não especificado' %>
-                    </p>
-                    <p><strong>Benefícios:</strong>
-                      <%= vaga.beneficios.length> 0 ? vaga.beneficios.join(', ') : 'Não especificado' %>
-                    </p>
-                    <p><strong>Tags:</strong>
-                      <%= vaga.tags.length> 0 ? vaga.tags.join(', ') : 'Não especificado' %>
-                    </p>
                   </div>
                   
 
