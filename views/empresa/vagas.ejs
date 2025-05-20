@@ -726,30 +726,33 @@
                         </span></p>
                     </div>
                   </div>
-                  <p><strong>Descrição:</strong></p>
-                  <p class="vaga-descrita"><%- vaga.descricao.replace(/\n/g, '<br>' ) %></p>
-                  <p><strong>Disponibilidade:</strong>
-                    <%= vaga.disponibilidade || 'Não especificado' %>
-                  </p>
-                  <div class="horario-trabalho">
-                    <strong>Horário de Trabalho:</strong>
-                    <span><%- (vaga.horarioTrabalho || 'Não especificado' ).replace(/\n/g, '<br>' ) %></span>
+                  <div class="vaga-card">
+                    <p><strong>Descrição:</strong></p>
+                    <p class="vaga-descrita"><%- vaga.descricao.replace(/\n/g, '<br>' ) %></p>
+                    <p><strong>Disponibilidade:</strong>
+                      <%= vaga.disponibilidade || 'Não especificado' %>
+                    </p>
+                    <div class="horario-trabalho">
+                      <strong>Horário de Trabalho:</strong>
+                      <span><%- (vaga.horarioTrabalho || 'Não especificado' ).replace(/\n/g, '<br>' ) %></span>
+                    </div>
+                    <p><strong>Tipo de Trabalho:</strong>
+                      <%= vaga.tipoTrabalho %>
+                    </p>
+                    <p><strong>Escolaridade:</strong>
+                      <%= vaga.escolaridade %>
+                    </p>
+                    <p><strong>Idiomas:</strong>
+                      <%= vaga.idiomas.length> 0 ? vaga.idiomas.join(', ') : 'Não especificado' %>
+                    </p>
+                    <p><strong>Benefícios:</strong>
+                      <%= vaga.beneficios.length> 0 ? vaga.beneficios.join(', ') : 'Não especificado' %>
+                    </p>
+                    <p><strong>Tags:</strong>
+                      <%= vaga.tags.length> 0 ? vaga.tags.join(', ') : 'Não especificado' %>
+                    </p>
                   </div>
-                  <p><strong>Tipo de Trabalho:</strong>
-                    <%= vaga.tipoTrabalho %>
-                  </p>
-                  <p><strong>Escolaridade:</strong>
-                    <%= vaga.escolaridade %>
-                  </p>
-                  <p><strong>Idiomas:</strong>
-                    <%= vaga.idiomas.length> 0 ? vaga.idiomas.join(', ') : 'Não especificado' %>
-                  </p>
-                  <p><strong>Benefícios:</strong>
-                    <%= vaga.beneficios.length> 0 ? vaga.beneficios.join(', ') : 'Não especificado' %>
-                  </p>
-                  <p><strong>Tags:</strong>
-                    <%= vaga.tags.length> 0 ? vaga.tags.join(', ') : 'Não especificado' %>
-                  </p>
+                  
 
                   <div class="botoes-gerenciar-vagas">
                     <a class="vercandidato" href="/empresa/vagas/<%= vaga.id %>/candidatos">Ver Candidatos</a>
