@@ -263,9 +263,9 @@
 <section class="candidato-superior-novo">
   <div class="main-dashboard-candidato-novo">
     <div class="lancar-cursos-novo">
-      <a href="/candidato/lancar-experiencia" class="vigente">Lançar Experiência</a>
-      <a href="/candidato/lancar-curso">Lançar Curso</a>
-      <a href="/candidato/metas" class="btn-minhas-metas">Minhas Metas</a>
+      <a href="/empresa/dashboard" class="vigente">Meus Dados</a>
+      <a href="/empresa/vagas/criar">Criar Vaga</a>
+      <a href="/empresa/vagas" class="btn-minhas-metas">Minhas Vagas</a>
     </div>
 
     <div class="cabecalho-candidato-novo">
@@ -274,11 +274,7 @@
     </div>
     <div class="meus-dados-novo">
       <h1>Bem-vindo, <%= empresa.nomeFantasia %>!</h1>
-      <div class="opcoes">
-        <a href="/empresa/vagas">Ver Minhas Vagas</a>
-        <a href="/empresa/vagas/criar">Criar Vaga</a>
-        <a href="/empresa/editar-perfil" class="btn-editar-perfil">Editar Perfil Social</a>
-      </div>
+      
       <div class="seus-dados">
         <% if (empresa.logo) { %>
           <img src="/<%= empresa.logo %>" alt="Logo da empresa" style="max-width: 400px; max-height: 400px;">
