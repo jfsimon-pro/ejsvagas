@@ -1,615 +1,655 @@
 <%- include('./header') %>
-<style>
-  /* Estilizando a caixa de sugestões */
-.autocomplete-suggestions {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  max-height: 200px;
-  overflow-y: auto;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-}
+  <style>
+    /* Estilizando a caixa de sugestões */
+    .autocomplete-suggestions {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      max-height: 200px;
+      overflow-y: auto;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
 
-/* Estilizando cada sugestão */
-.autocomplete-suggestions .suggestion {
-  padding: 10px;
-  cursor: pointer;
-  font-size: 14px;
-  color: #333;
-}
+    /* Estilizando cada sugestão */
+    .autocomplete-suggestions .suggestion {
+      padding: 10px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #333;
+    }
 
-/* Sugestão ao passar o mouse */
-.autocomplete-suggestions .suggestion:hover {
-  background-color: #f0f0f0;
-}
+    /* Sugestão ao passar o mouse */
+    .autocomplete-suggestions .suggestion:hover {
+      background-color: #f0f0f0;
+    }
 
-/* Sugestão selecionada */
-.autocomplete-suggestions .suggestion.active {
-  background-color: #e0e0e0;
-  font-weight: bold;
-}
-.main-login {
-    background: #01162a;
-  }
+    /* Sugestão selecionada */
+    .autocomplete-suggestions .suggestion.active {
+      background-color: #e0e0e0;
+      font-weight: bold;
+    }
 
-.checkbox-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
-}
+    .main-login {
+      background: #01162a;
+    }
 
-.checkbox-item {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  min-width: 150px;
-}
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
 
-.checkbox-item input[type="checkbox"] {
-  width: auto;
-  margin-right: 5px;
-}
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      min-width: 150px;
+    }
 
-.checkbox-item label {
-  margin: 0;
-  font-weight: normal;
-}
+    .checkbox-item input[type="checkbox"] {
+      width: auto;
+      margin-right: 5px;
+    }
 
-.checkbox-group.required {
-  border: 1px solid transparent;
-  padding: 10px;
-  border-radius: 4px;
-}
+    .checkbox-item label {
+      margin: 0;
+      font-weight: normal;
+    }
 
-.checkbox-group.required.error {
-  border-color: #ff0000;
-  background-color: rgba(255, 0, 0, 0.05);
-}
+    .checkbox-group.required {
+      border: 1px solid transparent;
+      padding: 10px;
+      border-radius: 4px;
+    }
 
-/* Estilo para campos obrigatórios não preenchidos */
-select:invalid,
-input:invalid,
-textarea:invalid {
-  border-color: #ff0000;
-}
+    .checkbox-group.required.error {
+      border-color: #ff0000;
+      background-color: rgba(255, 0, 0, 0.05);
+    }
 
-.label-info {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-}
+    /* Estilo para campos obrigatórios não preenchidos */
+    select:invalid,
+    input:invalid,
+    textarea:invalid {
+      border-color: #ff0000;
+    }
 
-.info-icon {
-  position: relative;
-  color: #F78E0F;
-  cursor: help;
-  font-size: 12px;
-  background: #F78E0F;
-  color: white;
-  padding: 2px 8px;
-  border-radius: 4px;
-}
+    .label-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
 
-.info-icon .tooltip {
-  visibility: hidden;
-  width: 250px;
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 10px;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0;
-  transition: opacity 0.3s;
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 1.4;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
+    .info-icon {
+      position: relative;
+      color: #F78E0F;
+      cursor: help;
+      font-size: 12px;
+      background: #F78E0F;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
 
-.info-icon .tooltip::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #333 transparent transparent transparent;
-}
+    .info-icon .tooltip {
+      visibility: hidden;
+      width: 250px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 10px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 14px;
+      font-weight: normal;
+      line-height: 1.4;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
 
-.info-icon:hover .tooltip {
-  visibility: visible;
-  opacity: 1;
-}
+    .info-icon .tooltip::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #333 transparent transparent transparent;
+    }
 
-.whatsapp-support {
-  margin-top: 30px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  text-align: center;
-}
+    .info-icon:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
 
-.whatsapp-support p {
-  color: #fff;
-  margin-bottom: 15px;
-  font-size: 16px;
-}
+    .whatsapp-support {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+    }
 
-.whatsapp-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #25D366;
-  color: white;
-  padding: 12px 24px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(37, 211, 102, 0.2);
-}
+    .whatsapp-support p {
+      color: #fff;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
 
-.whatsapp-button:hover {
-  background: #1fa855;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(37, 211, 102, 0.3);
-}
+    .whatsapp-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #25D366;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(37, 211, 102, 0.2);
+    }
 
-.whatsapp-button:active {
-  transform: translateY(0);
-}
-.whatsapp-support {
-  width: 100%;
-}
+    .whatsapp-button:hover {
+      background: #1fa855;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(37, 211, 102, 0.3);
+    }
 
-.cidade-estado-group {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 10px;
-  margin-bottom: 20px;
-}
+    .whatsapp-button:active {
+      transform: translateY(0);
+    }
 
-.cidade-estado-group input,
-.cidade-estado-group select {
-  margin: 0;
-}
+    .whatsapp-support {
+      width: 100%;
+    }
 
-input[type="date"] {
-  width: 100%;
-  padding: 12px;
-  border: 2px solid #ddd;
-  border-radius: 8px;
-  font-size: 16px;
-  margin-bottom: 20px;
-  color: #333;
-  background-color: white;
-}
+    .cidade-estado-group {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
 
-input[type="date"]:focus {
-  border-color: #F78E0F;
-  outline: none;
-}
-</style>
- 
-<style>
-  .degrade-header {
-    background: linear-gradient(to top right, #0d0b0a, #2c1b17, #5a1e12);
-    height: 350px;
-    width: 100%;
-    border-radius: 0px 0px 77px 77px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.content-degrade-header {
-    max-width: 1200px;
-    padding: 180px 50px;
-    width: 100%;
-}
-.linha-branca {
-    height: 1px;
-    width: 100%;
-    background-color: white;
-    margin-bottom: 20px;
-}
-.degrade-breadcrumb {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.degrade-breadcrumb h1 {
-    color: white;
-    font-size: 47px;
-    font-weight: 300;
-}
-.links-bread a {
-    text-decoration: none;
-    color: white;
-    font-size: 16px;
-}
-.links-bread span {
-    color: #FF5E00;
-}
-</style>
-<div class="degrade-header">
-  <div class="content-degrade-header">
-    <div class="linha-branca"></div>
-    <div class="degrade-breadcrumb">
-      <div class="links-bread">
-        <a href="">Início</a> <span>/</span> <a href="">Área da Empresa</a>
+    .cidade-estado-group input,
+    .cidade-estado-group select {
+      margin: 0;
+    }
+
+    input[type="date"] {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: #333;
+      background-color: white;
+    }
+
+    input[type="date"]:focus {
+      border-color: #F78E0F;
+      outline: none;
+    }
+  </style>
+
+  <style>
+    .degrade-header {
+      background: linear-gradient(to top right, #0d0b0a, #2c1b17, #5a1e12);
+      height: 350px;
+      width: 100%;
+      border-radius: 0px 0px 77px 77px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .content-degrade-header {
+      max-width: 1200px;
+      padding: 180px 50px;
+      width: 100%;
+    }
+
+    .linha-branca {
+      height: 1px;
+      width: 100%;
+      background-color: white;
+      margin-bottom: 20px;
+    }
+
+    .degrade-breadcrumb {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .degrade-breadcrumb h1 {
+      color: white;
+      font-size: 47px;
+      font-weight: 300;
+    }
+
+    .links-bread a {
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+    }
+
+    .links-bread span {
+      color: #FF5E00;
+    }
+  </style>
+  <div class="degrade-header">
+    <div class="content-degrade-header">
+      <div class="linha-branca"></div>
+      <div class="degrade-breadcrumb">
+        <div class="links-bread">
+          <a href="">Início</a> <span>/</span> <a href="">Área da Empresa</a>
+        </div>
+        <h1>Área da Empresa</h1>
       </div>
-      <h1>Área da Empresa</h1>
     </div>
   </div>
-</div>
 
 
-<style>
-  .main-dashboard-candidato-novo {
-    max-width: 1200px;
-    margin: auto;
-    padding: 70px 20px;
-  }
-  
-  .lancar-cursos-novo {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 30px;
-  }
+  <style>
+    .main-dashboard-candidato-novo {
+      max-width: 1200px;
+      margin: auto;
+      padding: 70px 20px;
+    }
 
-  
+    .lancar-cursos-novo {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
 
-  .cabecalho-candidato-novo h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
 
-  
 
-  .editar-dados-novo {
-    margin-bottom: 20px;
-  }
+    .cabecalho-candidato-novo h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
 
-  .editar-dados-novo a {
-    background: #F78E0F;
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-  }
 
-  .meus-dados-novo p {
-    margin-bottom: 10px;
-  }
 
-  .dashboard-actions {
-    margin-top: 30px;
-    display: flex;
-    gap: 20px;
-  }
+    .editar-dados-novo {
+      margin-bottom: 20px;
+    }
 
-  .dashboard-actions a {
-    background: #F78E0F;
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-  }
+    .editar-dados-novo a {
+      background: #F78E0F;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+    }
 
-  /* Novos estilos para os formulários */
-  .linha {
-    height: 1px;
-    background-color: #E6E7E8;
-    margin: 30px 0;
-  }
+    .meus-dados-novo p {
+      margin-bottom: 10px;
+    }
 
-  .conteudo-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-bottom: 30px;
-  }
+    .dashboard-actions {
+      margin-top: 30px;
+      display: flex;
+      gap: 20px;
+    }
 
-  .campo-dados {
-    display: flex;
-    gap: 8px;
-  }
+    .dashboard-actions a {
+      background: #F78E0F;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+    }
 
-  .campo-dados label {
-    font-weight: 500;
-    color: #333;
-  }
+    /* Novos estilos para os formulários */
+    .linha {
+      height: 1px;
+      background-color: #E6E7E8;
+      margin: 30px 0;
+    }
 
-  .campo-dados input,
-  .campo-dados textarea {
-    padding: 10px;
-    border: 2px solid #E6E7E8;
-    border-radius: 5px;
-    font-size: 14px;
-  }
-
-  .campo-dados textarea {
-    min-height: 100px;
-    resize: vertical;
-  }
-
-  .campo-dados input[type="file"] {
-    border: none;
-    padding: 0;
-  }
-
-  button[type="submit"] {
-    background: #F78E0F;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-  }
-
-  button[type="submit"]:hover {
-    background: #e07d0d;
-  }
-
-  .error-message {
-    color: #dc3545;
-    margin-bottom: 20px;
-    padding: 10px;
-    background-color: #f8d7da;
-    border: 1px solid #f5c6cb;
-    border-radius: 5px;
-  }
-
-  .success-message {
-    color: #155724;
-    margin-bottom: 20px;
-    padding: 10px;
-    background-color: #d4edda;
-    border: 1px solid #c3e6cb;
-    border-radius: 5px;
-  }
-
-  @media (max-width: 768px) {
     .conteudo-form {
-      gap: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .campo-dados {
+      display: flex;
+      gap: 8px;
+    }
+
+    .campo-dados label {
+      font-weight: 500;
+      color: #333;
     }
 
     .campo-dados input,
     .campo-dados textarea {
-      font-size: 16px; /* Melhor para mobile */
+      padding: 10px;
+      border: 2px solid #E6E7E8;
+      border-radius: 5px;
+      font-size: 14px;
     }
-  }
-</style>
-<style>
-  .lancar-cursos-novo {
-    border-bottom: 1px solid #E6E7E8;
-  }
-  .lancar-cursos-novo a {
-    text-decoration: none;
-    color: #6E7583;
-    padding-bottom: 10px;
-  }
-  .lancar-cursos-novo a:hover {
-    color: #F78E0F !important;
-  }
-  .vigente {
-    color: #F78E0F !important;
-    border-bottom: 1px solid #F78E0F;
-    margin-bottom: -1px;
-  }
-  .cabecalho-candidato-novo > p:nth-child(1) {
-    font-size: 20px;
-  font-weight: 500;
-  color: #3D4047;
-  margin-bottom: 7px;
-  }
-  .cabecalho-candidato-novo > p:nth-child(2) {
-    font-size: 16px;
-  color: #6E7583;
-  margin-bottom: 23px;
-  }
 
-  .campo-dados {
-    display: flex;
-  border-top: 2px solid #E6E7E8;
-  padding: 27px 0px;
-  }
-
-  .campo-dados label {
-    display: flex;
-    align-items: center;
-    width: 320px;
-  }
-  .campo-dados input {
-    width: 550px;
-    border: 2px solid #E6E7E8;
-  padding: 10px;
-  border-radius: 5px;
-  }
-  .campo-dados textarea {
-    width: 550px;
-    border: 2px solid #E6E7E8;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  .campo-dados select {
-    width: 550px;
-  border: 2px solid #E6E7E8;
-  padding: 10px;
-  border-radius: 5px;
-  }
-  .form-group {
-    display: flex;
-  border-top: 2px solid #E6E7E8;
-  padding: 27px 0px;
-  }
-  .form-group label {
-    display: flex;
-  width: 320px;
-  }
-  .radio-group {
-    display: flex;
-  gap: 20px;
-  }
-  .radio-group label {
-    width: unset;
-  }
-  .checkbox-group .radio-item label {
-    width: unset;
-  }
-  .checkbox-group {
-    display: flex;
-  gap: 50px;
-  }
-  .radio-item {
-    display: flex;
-  align-items: center;
-  justify-content: center;
-  }
-  .alinha-submit {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-  }
-  .alinha-submit button {
-    color: white;
-  font-size: 16px;
-  border: none;
-  border-radius: 80px;
-  padding: 5px 10px;
-  background: #FF5E00;
-  cursor: pointer;
-  }
-  .cursos-lancados li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #E6E7E8;
-    padding: 20px 0px;
-  }
-  .cursos-lancados button {
-    color: white;
-    font-size: 16px;
-    border: none;
-    border-radius: 80px;
-    padding: 5px 10px;
-    background: #FF5E00;
-    cursor: pointer;
-  }
-  .minhas-exp-registro li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #E6E7E8;
-    padding: 20px 0px;
-  }
-  .minhas-exp-registro button {
-    color: white;
-    font-size: 16px;
-    border: none;
-    border-radius: 80px;
-    padding: 5px 10px;
-    background: #FF5E00;
-    cursor: pointer;
-  }
-  .minhas-exp-registro h2 {
-    font-size: 20px;
-    font-weight: 500;
-    color: #3D4047;
-    margin-bottom: 7px;
-  }
-  @media (max-width: 768px) {
-    .checkbox-group {
-      flex-wrap: wrap;
-      gap: 5px;
-        }
-    .degrade-breadcrumb {
-      flex-wrap: wrap;
-      gap: 10px;
+    .campo-dados textarea {
+      min-height: 100px;
+      resize: vertical;
     }
-    .minhas-exp-registro li {
-      flex-wrap: wrap;
+
+    .campo-dados input[type="file"] {
+      border: none;
+      padding: 0;
+    }
+
+    button[type="submit"] {
+      background: #F78E0F;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+      background: #e07d0d;
+    }
+
+    .error-message {
+      color: #dc3545;
+      margin-bottom: 20px;
+      padding: 10px;
+      background-color: #f8d7da;
+      border: 1px solid #f5c6cb;
+      border-radius: 5px;
+    }
+
+    .success-message {
+      color: #155724;
+      margin-bottom: 20px;
+      padding: 10px;
+      background-color: #d4edda;
+      border: 1px solid #c3e6cb;
+      border-radius: 5px;
+    }
+
+    @media (max-width: 768px) {
+      .conteudo-form {
+        gap: 15px;
+      }
+
+      .campo-dados input,
+      .campo-dados textarea {
+        font-size: 16px;
+        /* Melhor para mobile */
+      }
+    }
+  </style>
+  <style>
+    .lancar-cursos-novo {
+      border-bottom: 1px solid #E6E7E8;
+    }
+
+    .lancar-cursos-novo a {
+      text-decoration: none;
+      color: #6E7583;
+      padding-bottom: 10px;
+    }
+
+    .lancar-cursos-novo a:hover {
+      color: #F78E0F !important;
+    }
+
+    .vigente {
+      color: #F78E0F !important;
+      border-bottom: 1px solid #F78E0F;
+      margin-bottom: -1px;
+    }
+
+    .cabecalho-candidato-novo>p:nth-child(1) {
+      font-size: 20px;
+      font-weight: 500;
+      color: #3D4047;
+      margin-bottom: 7px;
+    }
+
+    .cabecalho-candidato-novo>p:nth-child(2) {
+      font-size: 16px;
+      color: #6E7583;
+      margin-bottom: 23px;
+    }
+
+    .campo-dados {
+      display: flex;
+      border-top: 2px solid #E6E7E8;
+      padding: 27px 0px;
+    }
+
+    .campo-dados label {
+      display: flex;
+      align-items: center;
+      width: 320px;
+    }
+
+    .campo-dados input {
+      width: 550px;
+      border: 2px solid #E6E7E8;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .campo-dados textarea {
+      width: 550px;
+      border: 2px solid #E6E7E8;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .campo-dados select {
+      width: 550px;
+      border: 2px solid #E6E7E8;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .form-group {
+      display: flex;
+      border-top: 2px solid #E6E7E8;
+      padding: 27px 0px;
+    }
+
+    .form-group label {
+      display: flex;
+      width: 320px;
+    }
+
+    .radio-group {
+      display: flex;
       gap: 20px;
     }
-    .minhas-exp-registro {
-      padding-top: 35px;
-    }
-  }
-</style>
-<section class="candidato-superior-novo">
-  <div class="main-dashboard-candidato-novo">
-    <div class="lancar-cursos-novo">
-      <a href="/empresa/dashboard" class="vigente">Meus Dados</a>
-      <a href="/empresa/vagas/criar">Criar Vaga</a>
-      <a href="/empresa/vagas" class="btn-minhas-metas">Minhas Vagas</a>
-    </div>
 
-    <div class="cabecalho-candidato-novo">
-      <p>Seus Dados</p>
-    </div>
-    <div class="meus-dados-novo">
-      <form action="/empresa/vagas/criar" method="POST">
-        <div class="campo-dados">
-          <label for="titulo">Título da Vaga:
-              <div class="info-icon">
-              ?
-              <span class="tooltip">Escolha um título claro e objetivo que descreva bem a posição. Ex: "Desenvolvedor Full Stack Senior" ou "Analista Financeiro Jr".</span>
-            </div>
-          </label>
-          <input type="text" id="titulo" name="titulo" required>
-        </div>
-        
-      
-        <div class="campo-dados">
-          <label for="descricao">Descrição: 
-            <div class="info-icon">
-              ?
-              <span class="tooltip">Detalhe as principais responsabilidades, requisitos e o que você espera do candidato. Seja específico e claro.</span>
-          </label>          
-          </div>
-          <textarea id="descricao" name="descricao" required></textarea>
-        </div>
-        
-      
-        <div class="campo-dados">
-          <label for="tags">Tags (separadas por vírgula):
-            <div class="info-icon">
-              ?
-              <span class="tooltip">Adicione palavras-chave relevantes para ajudar na busca por vagas.</span>
-            </div>
-          </label>
-          <input type="text" id="tags" name="tags" required>
-        </div>
-      
+    .radio-group label {
+      width: unset;
+    }
+
+    .checkbox-group .radio-item label {
+      width: unset;
+    }
+
+    .checkbox-group {
+      display: flex;
+      gap: 50px;
+    }
+
+    .radio-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .alinha-submit {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .alinha-submit button {
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 80px;
+      padding: 5px 10px;
+      background: #FF5E00;
+      cursor: pointer;
+    }
+
+    .cursos-lancados li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #E6E7E8;
+      padding: 20px 0px;
+    }
+
+    .cursos-lancados button {
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 80px;
+      padding: 5px 10px;
+      background: #FF5E00;
+      cursor: pointer;
+    }
+
+    .minhas-exp-registro li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #E6E7E8;
+      padding: 20px 0px;
+    }
+
+    .minhas-exp-registro button {
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 80px;
+      padding: 5px 10px;
+      background: #FF5E00;
+      cursor: pointer;
+    }
+
+    .minhas-exp-registro h2 {
+      font-size: 20px;
+      font-weight: 500;
+      color: #3D4047;
+      margin-bottom: 7px;
+    }
+
+    @media (max-width: 768px) {
+      .checkbox-group {
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+
+      .degrade-breadcrumb {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .minhas-exp-registro li {
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .minhas-exp-registro {
+        padding-top: 35px;
+      }
+    }
+  </style>
+  <section class="candidato-superior-novo">
+    <div class="main-dashboard-candidato-novo">
+      <div class="lancar-cursos-novo">
+        <a href="/empresa/dashboard" class="vigente">Meus Dados</a>
+        <a href="/empresa/vagas/criar">Criar Vaga</a>
+        <a href="/empresa/vagas" class="btn-minhas-metas">Minhas Vagas</a>
+      </div>
+
+      <div class="cabecalho-candidato-novo">
+        <p>Seus Dados</p>
+      </div>
+      <div class="meus-dados-novo">
+        <form action="/empresa/vagas/criar" method="POST">
           <div class="campo-dados">
-          <label for="cargo">Cargo/Função:
+            <label for="titulo">Título da Vaga:
               <div class="info-icon">
-              ?
-              <span class="tooltip">Digite o cargo específico da vaga. Comece a digitar para ver sugestões de cargos padronizados.</span>
+                ?
+                <span class="tooltip">Escolha um título claro e objetivo que descreva bem a posição. Ex: "Desenvolvedor
+                  Full Stack Senior" ou "Analista Financeiro Jr".</span>
+              </div>
+            </label>
+            <input type="text" id="titulo" name="titulo" required>
+          </div>
+
+
+          <div class="campo-dados">
+            <label for="descricao">Descrição:
+              <div class="info-icon">
+                ?
+                <span class="tooltip">Detalhe as principais responsabilidades, requisitos e o que você espera do
+                  candidato. Seja específico e claro.</span>
+            </label>
+            <textarea id="descricao" name="descricao" required></textarea>
+          </div>
+
+
+
+
+          <div class="campo-dados">
+            <label for="tags">Tags (separadas por vírgula):
+              <div class="info-icon">
+                ?
+                <span class="tooltip">Adicione palavras-chave relevantes para ajudar na busca por vagas.</span>
+              </div>
+            </label>
+            <input type="text" id="tags" name="tags" required>
+          </div>
+
+          <div class="campo-dados">
+            <label for="cargo">Cargo/Função:
+              <div class="info-icon">
+                ?
+                <span class="tooltip">Digite o cargo específico da vaga. Comece a digitar para ver sugestões de cargos
+                  padronizados.</span>
             </label>
             <input type="text" id="cargo" name="cargo" placeholder="Digite o cargo ou função" required>
             <div id="suggestions" class="autocomplete-suggestions"></div>
           </div>
-        
-        
-        
 
-      
-        <div class="campo-dados">
-          <label for="faixaSalarial">Faixa Salarial:
-            <div class="info-icon">
-              ?
-            <span class="tooltip">Selecione a faixa salarial adequada para a posição. Seja transparente para atrair os candidatos certos.</span>
+
+
+
+
+          <div class="campo-dados">
+            <label for="faixaSalarial">Faixa Salarial:
+              <div class="info-icon">
+                ?
+                <span class="tooltip">Selecione a faixa salarial adequada para a posição. Seja transparente para atrair
+                  os candidatos certos.</span>
             </label>
             <select id="faixaSalarial" name="faixaSalarial" required>
               <option value="">Selecione uma faixa salarial</option>
@@ -626,349 +666,345 @@ input[type="date"]:focus {
               <option value="A partir de R$ 15.000,00">A partir de R$ 15.000,00</option>
               <option value="A partir de R$ 20.000,00">A partir de R$ 20.000,00</option>
             </select>
-        </div>
-        
-        
-      
-        <div class="label-info">
-          <label for="tipoContrato">Tipo de Contrato:</label>
-          <div class="info-icon">
-            ?
-            <span class="tooltip">Escolha o tipo de contratação. Isso ajuda os candidatos a entenderem a natureza do vínculo profissional.</span>
           </div>
-        </div>
-        <select id="tipoContrato" name="tipoContrato" required>
-          <option value="">Selecione o tipo de contrato</option>
-          <option value="CLT">CLT</option>
-          <option value="PJ">PJ</option>
-          <option value="Temporário">Temporário</option>
-          <option value="Autônomo">Autônomo</option>
-          <option value="Estágio">Estágio</option>
-          <option value="Freelancer">Freelancer</option>
-          <option value="Aprendiz">Aprendiz</option>
-        </select>
-      
-        <label>Tipo de Trabalho:</label>
-        <div class="checkbox-group required">
-          <div class="checkbox-item">
-            <input type="radio" id="tipoTrabalho-presencial" name="tipoTrabalho" value="Presencial" required>
-            <label for="tipoTrabalho-presencial">Presencial</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="radio" id="tipoTrabalho-remoto" name="tipoTrabalho" value="Home Office">
-            <label for="tipoTrabalho-remoto">Home Office</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="radio" id="tipoTrabalho-hibrido" name="tipoTrabalho" value="Híbrido">
-            <label for="tipoTrabalho-hibrido">Híbrido</label>
-          </div>
-        </div>
 
-        <label>Vaga Exclusiva PCD?</label>
-        <div class="checkbox-group required">
-          <div class="checkbox-item">
-            <input type="radio" id="pcd-sim" name="vagaPcd" value="Sim" required>
-            <label for="pcd-sim">Sim</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="radio" id="pcd-nao" name="vagaPcd" value="Não">
-            <label for="pcd-nao">Não</label>
-          </div>
-        </div>
 
-        <div class="label-info">
-          <label for="disponibilidade">Disponibilidade:</label>
-          <div class="info-icon">
-            ?
-            <span class="tooltip">Indique se a vaga é para início imediato ou futuro. Seja claro sobre as expectativas de disponibilidade.</span>
+
+          <div class="label-info">
+            <label for="tipoContrato">Tipo de Contrato:</label>
+            <div class="info-icon">
+              ?
+              <span class="tooltip">Escolha o tipo de contratação. Isso ajuda os candidatos a entenderem a natureza do
+                vínculo profissional.</span>
+            </div>
           </div>
-        </div>
-        <div class="checkbox-group required">
-          <div class="checkbox-item">
-            <input type="checkbox" id="disponibilidade-manha" name="disponibilidade[]" value="Manhã">
-            <label for="disponibilidade-manha">Manhã</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="disponibilidade-tarde" name="disponibilidade[]" value="Tarde">
-            <label for="disponibilidade-tarde">Tarde</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="disponibilidade-noite" name="disponibilidade[]" value="Noite">
-            <label for="disponibilidade-noite">Noite</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="disponibilidade-madrugada" name="disponibilidade[]" value="Madrugada">
-            <label for="disponibilidade-madrugada">Madrugada</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="disponibilidade-fds" name="disponibilidade[]" value="Finais de Semana">
-            <label for="disponibilidade-fds">Finais de Semana</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="disponibilidade-feriados" name="disponibilidade[]" value="Feriados">
-            <label for="disponibilidade-feriados">Feriados</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="disponibilidade-viajar" name="disponibilidade[]" value="Viajar">
-            <label for="disponibilidade-viajar">Viajar</label>
-          </div>
-        </div>
-      
-        <div class="label-info">
-          <label for="horarioTrabalho">Horário de Trabalho:</label>
-          <div class="info-icon">
-            ?
-            <span class="tooltip">Especifique o horário de trabalho, incluindo turnos, flexibilidade e carga horária semanal.</span>
-          </div>
-        </div>
-        <textarea 
-          id="horarioTrabalho" 
-          name="horarioTrabalho" 
-          required
-          placeholder="Ex: Segunda a Sexta, das 9h às 18h, com 1h de almoço. Possibilidade de horário flexível."
-          rows="4"
-        ></textarea>
-      
-        <label for="escolaridade">Escolaridade:</label>
-        <select id="escolaridade" name="escolaridade" required>
-          <option value="">Selecione a escolaridade</option>
-          <option value="Indiferente">Indiferente</option>
-          <option value="Alfabetizado">Alfabetizado</option>
-          <option value="Ensino fundamental incompleto">Ensino fundamental incompleto</option>
-          <option value="Ensino fundamental completo">Ensino fundamental completo</option>
-          <option value="Ensino médio incompleto">Ensino médio incompleto</option>
-          <option value="Ensino médio completo">Ensino médio completo</option>
-          <option value="Ensino técnico incompleto">Ensino técnico incompleto</option>
-          <option value="Ensino técnico completo">Ensino técnico completo</option>
-          <option value="Ensino superior incompleto">Ensino superior incompleto</option>
-          <option value="Ensino superior completo">Ensino superior completo</option>
-          <option value="Pós-graduação incompleta">Pós-graduação incompleta</option>
-          <option value="Pós-graduação completa">Pós-graduação completa</option>
-          <option value="Mestrado">Mestrado</option>
-          <option value="Doutorado">Doutorado</option>
-        </select>
-      
-        <label for="idiomas">Idiomas:</label>
-        <div class="checkbox-group required">
-          <div class="checkbox-item">
-            <input type="checkbox" id="idioma-portugues" name="idiomas[]" value="Português">
-            <label for="idioma-portugues">Português</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="idioma-ingles" name="idiomas[]" value="Inglês">
-            <label for="idioma-ingles">Inglês</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="idioma-espanhol" name="idiomas[]" value="Espanhol">
-            <label for="idioma-espanhol">Espanhol</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="idioma-frances" name="idiomas[]" value="Francês">
-            <label for="idioma-frances">Francês</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="idioma-alemao" name="idiomas[]" value="Alemão">
-            <label for="idioma-alemao">Alemão</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="idioma-mandarim" name="idiomas[]" value="Mandarim">
-            <label for="idioma-mandarim">Mandarim</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="idioma-japones" name="idiomas[]" value="Japonês">
-            <label for="idioma-japones">Japonês</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="idioma-italiano" name="idiomas[]" value="Italiano">
-            <label for="idioma-italiano">Italiano</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="idioma-russo" name="idiomas[]" value="Russo">
-            <label for="idioma-russo">Russo</label>
-          </div>
-        </div>
-      
-        <label for="beneficios">Benefícios:</label>
-        <div class="checkbox-group required">
-          <div class="checkbox-item">
-            <input type="checkbox" id="beneficio-va" name="beneficios[]" value="Vale alimentação">
-            <label for="beneficio-va">Vale alimentação</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="beneficio-vr" name="beneficios[]" value="Vale refeição">
-            <label for="beneficio-vr">Vale refeição</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="beneficio-vt" name="beneficios[]" value="Vale transporte">
-            <label for="beneficio-vt">Vale transporte</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="beneficio-plano-medico" name="beneficios[]" value="Plano médico">
-            <label for="beneficio-plano-medico">Plano médico</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="beneficio-plano-odonto" name="beneficios[]" value="Plano odontológico">
-            <label for="beneficio-plano-odonto">Plano odontológico</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="beneficio-seguro" name="beneficios[]" value="Seguro de vida">
-            <label for="beneficio-seguro">Seguro de vida</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="beneficio-creche" name="beneficios[]" value="Auxílio creche">
-            <label for="beneficio-creche">Auxílio creche</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="beneficio-plr" name="beneficios[]" value="Participação nos lucros">
-            <label for="beneficio-plr">Participação nos lucros</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="beneficio-gympass" name="beneficios[]" value="Gym pass">
-            <label for="beneficio-gympass">Gym pass</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="beneficio-educacao" name="beneficios[]" value="Auxílio educação">
-            <label for="beneficio-educacao">Auxílio educação</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="beneficio-bonus" name="beneficios[]" value="Bônus por desempenho">
-            <label for="beneficio-bonus">Bônus por desempenho</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="beneficio-dayoff" name="beneficios[]" value="Day off no aniversário">
-            <label for="beneficio-dayoff">Day off no aniversário</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="beneficio-cesta" name="beneficios[]" value="Cesta básica">
-            <label for="beneficio-cesta">Cesta básica</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="beneficio-desconto" name="beneficios[]" value="Desconto em produtos">
-            <label for="beneficio-desconto">Desconto em produtos</label>
-          </div>
-        </div>
-      
-        <div class="label-info">
-          <label for="localVaga">Cidade/Estado da Vaga:</label>
-          <div class="info-icon">
-            ?
-            <span class="tooltip">Informe a cidade e estado onde a vaga está disponível. Para vagas remotas, você pode indicar "Remoto - Brasil" ou similar.</span>
-          </div>
-        </div>
-        <div class="cidade-estado-group">
-          <input type="text" id="cidade" name="cidade" placeholder="Cidade" required>
-          <select id="uf" name="uf" required>
-            <option value="">UF</option>
-            <option value="AC">AC</option>
-            <option value="AL">AL</option>
-            <option value="AP">AP</option>
-            <option value="AM">AM</option>
-            <option value="BA">BA</option>
-            <option value="CE">CE</option>
-            <option value="DF">DF</option>
-            <option value="ES">ES</option>
-            <option value="GO">GO</option>
-            <option value="MA">MA</option>
-            <option value="MT">MT</option>
-            <option value="MS">MS</option>
-            <option value="MG">MG</option>
-            <option value="PA">PA</option>
-            <option value="PB">PB</option>
-            <option value="PR">PR</option>
-            <option value="PE">PE</option>
-            <option value="PI">PI</option>
-            <option value="RJ">RJ</option>
-            <option value="RN">RN</option>
-            <option value="RS">RS</option>
-            <option value="RO">RO</option>
-            <option value="RR">RR</option>
-            <option value="SC">SC</option>
-            <option value="SP">SP</option>
-            <option value="SE">SE</option>
-            <option value="TO">TO</option>
+          <select id="tipoContrato" name="tipoContrato" required>
+            <option value="">Selecione o tipo de contrato</option>
+            <option value="CLT">CLT</option>
+            <option value="PJ">PJ</option>
+            <option value="Temporário">Temporário</option>
+            <option value="Autônomo">Autônomo</option>
+            <option value="Estágio">Estágio</option>
+            <option value="Freelancer">Freelancer</option>
+            <option value="Aprendiz">Aprendiz</option>
           </select>
-        </div>
 
-        <div class="label-info">
-          <label for="quantidadeVagas">Quantidade de Vagas:</label>
-          <div class="info-icon">
-            ?
-            <span class="tooltip">Informe quantas vagas estão disponíveis para esta posição. Se houver apenas uma vaga, deixe o valor padrão 1.</span>
+          <label>Tipo de Trabalho:</label>
+          <div class="checkbox-group required">
+            <div class="checkbox-item">
+              <input type="radio" id="tipoTrabalho-presencial" name="tipoTrabalho" value="Presencial" required>
+              <label for="tipoTrabalho-presencial">Presencial</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="radio" id="tipoTrabalho-remoto" name="tipoTrabalho" value="Home Office">
+              <label for="tipoTrabalho-remoto">Home Office</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="radio" id="tipoTrabalho-hibrido" name="tipoTrabalho" value="Híbrido">
+              <label for="tipoTrabalho-hibrido">Híbrido</label>
+            </div>
           </div>
-        </div>
-        <input 
-          type="number" 
-          id="quantidadeVagas" 
-          name="quantidadeVagas" 
-          min="1" 
-          value="1" 
-          required
-        >
 
-        <div class="label-info">
-          <label>Precisa de CNH?</label>
-          <div class="info-icon">
-            ?
-            <span class="tooltip">Selecione as categorias de CNH necessárias para a vaga. Se não precisar, marque "Não precisa".</span>
+          <label>Vaga Exclusiva PCD?</label>
+          <div class="checkbox-group required">
+            <div class="checkbox-item">
+              <input type="radio" id="pcd-sim" name="vagaPcd" value="Sim" required>
+              <label for="pcd-sim">Sim</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="radio" id="pcd-nao" name="vagaPcd" value="Não">
+              <label for="pcd-nao">Não</label>
+            </div>
           </div>
-        </div>
-        <div class="checkbox-group required cnh-group">
-          <div class="checkbox-item">
-            <input type="checkbox" id="cnh-a" name="cnh[]" value="A" class="cnh-option">
-            <label for="cnh-a">A</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="cnh-b" name="cnh[]" value="B" class="cnh-option">
-            <label for="cnh-b">B</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="cnh-c" name="cnh[]" value="C" class="cnh-option">
-            <label for="cnh-c">C</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="cnh-d" name="cnh[]" value="D" class="cnh-option">
-            <label for="cnh-d">D</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="cnh-e" name="cnh[]" value="E" class="cnh-option">
-            <label for="cnh-e">E</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="cnh-nao" name="cnh[]" value="Não precisa" class="cnh-nao">
-            <label for="cnh-nao">Não precisa</label>
-          </div>
-        </div>
 
-        <div class="label-info">
-          <label for="dataLimite">Aceitando candidaturas até:</label>
-          <div class="info-icon">
-            ?
-            <span class="tooltip">Defina uma data limite para receber candidaturas. Após esta data, a vaga não aceitará mais inscrições.</span>
+          <div class="label-info">
+            <label for="disponibilidade">Disponibilidade:</label>
+            <div class="info-icon">
+              ?
+              <span class="tooltip">Indique se a vaga é para início imediato ou futuro. Seja claro sobre as expectativas
+                de disponibilidade.</span>
+            </div>
           </div>
+          <div class="checkbox-group required">
+            <div class="checkbox-item">
+              <input type="checkbox" id="disponibilidade-manha" name="disponibilidade[]" value="Manhã">
+              <label for="disponibilidade-manha">Manhã</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="disponibilidade-tarde" name="disponibilidade[]" value="Tarde">
+              <label for="disponibilidade-tarde">Tarde</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="disponibilidade-noite" name="disponibilidade[]" value="Noite">
+              <label for="disponibilidade-noite">Noite</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="disponibilidade-madrugada" name="disponibilidade[]" value="Madrugada">
+              <label for="disponibilidade-madrugada">Madrugada</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="disponibilidade-fds" name="disponibilidade[]" value="Finais de Semana">
+              <label for="disponibilidade-fds">Finais de Semana</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="disponibilidade-feriados" name="disponibilidade[]" value="Feriados">
+              <label for="disponibilidade-feriados">Feriados</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="disponibilidade-viajar" name="disponibilidade[]" value="Viajar">
+              <label for="disponibilidade-viajar">Viajar</label>
+            </div>
+          </div>
+
+          <div class="label-info">
+            <label for="horarioTrabalho">Horário de Trabalho:</label>
+            <div class="info-icon">
+              ?
+              <span class="tooltip">Especifique o horário de trabalho, incluindo turnos, flexibilidade e carga horária
+                semanal.</span>
+            </div>
+          </div>
+          <textarea id="horarioTrabalho" name="horarioTrabalho" required
+            placeholder="Ex: Segunda a Sexta, das 9h às 18h, com 1h de almoço. Possibilidade de horário flexível."
+            rows="4"></textarea>
+
+          <label for="escolaridade">Escolaridade:</label>
+          <select id="escolaridade" name="escolaridade" required>
+            <option value="">Selecione a escolaridade</option>
+            <option value="Indiferente">Indiferente</option>
+            <option value="Alfabetizado">Alfabetizado</option>
+            <option value="Ensino fundamental incompleto">Ensino fundamental incompleto</option>
+            <option value="Ensino fundamental completo">Ensino fundamental completo</option>
+            <option value="Ensino médio incompleto">Ensino médio incompleto</option>
+            <option value="Ensino médio completo">Ensino médio completo</option>
+            <option value="Ensino técnico incompleto">Ensino técnico incompleto</option>
+            <option value="Ensino técnico completo">Ensino técnico completo</option>
+            <option value="Ensino superior incompleto">Ensino superior incompleto</option>
+            <option value="Ensino superior completo">Ensino superior completo</option>
+            <option value="Pós-graduação incompleta">Pós-graduação incompleta</option>
+            <option value="Pós-graduação completa">Pós-graduação completa</option>
+            <option value="Mestrado">Mestrado</option>
+            <option value="Doutorado">Doutorado</option>
+          </select>
+
+          <label for="idiomas">Idiomas:</label>
+          <div class="checkbox-group required">
+            <div class="checkbox-item">
+              <input type="checkbox" id="idioma-portugues" name="idiomas[]" value="Português">
+              <label for="idioma-portugues">Português</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="idioma-ingles" name="idiomas[]" value="Inglês">
+              <label for="idioma-ingles">Inglês</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="idioma-espanhol" name="idiomas[]" value="Espanhol">
+              <label for="idioma-espanhol">Espanhol</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="idioma-frances" name="idiomas[]" value="Francês">
+              <label for="idioma-frances">Francês</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="idioma-alemao" name="idiomas[]" value="Alemão">
+              <label for="idioma-alemao">Alemão</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="idioma-mandarim" name="idiomas[]" value="Mandarim">
+              <label for="idioma-mandarim">Mandarim</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="idioma-japones" name="idiomas[]" value="Japonês">
+              <label for="idioma-japones">Japonês</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="idioma-italiano" name="idiomas[]" value="Italiano">
+              <label for="idioma-italiano">Italiano</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="idioma-russo" name="idiomas[]" value="Russo">
+              <label for="idioma-russo">Russo</label>
+            </div>
+          </div>
+
+          <label for="beneficios">Benefícios:</label>
+          <div class="checkbox-group required">
+            <div class="checkbox-item">
+              <input type="checkbox" id="beneficio-va" name="beneficios[]" value="Vale alimentação">
+              <label for="beneficio-va">Vale alimentação</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="beneficio-vr" name="beneficios[]" value="Vale refeição">
+              <label for="beneficio-vr">Vale refeição</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="beneficio-vt" name="beneficios[]" value="Vale transporte">
+              <label for="beneficio-vt">Vale transporte</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="beneficio-plano-medico" name="beneficios[]" value="Plano médico">
+              <label for="beneficio-plano-medico">Plano médico</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="beneficio-plano-odonto" name="beneficios[]" value="Plano odontológico">
+              <label for="beneficio-plano-odonto">Plano odontológico</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="beneficio-seguro" name="beneficios[]" value="Seguro de vida">
+              <label for="beneficio-seguro">Seguro de vida</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="beneficio-creche" name="beneficios[]" value="Auxílio creche">
+              <label for="beneficio-creche">Auxílio creche</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="beneficio-plr" name="beneficios[]" value="Participação nos lucros">
+              <label for="beneficio-plr">Participação nos lucros</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="beneficio-gympass" name="beneficios[]" value="Gym pass">
+              <label for="beneficio-gympass">Gym pass</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="beneficio-educacao" name="beneficios[]" value="Auxílio educação">
+              <label for="beneficio-educacao">Auxílio educação</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="beneficio-bonus" name="beneficios[]" value="Bônus por desempenho">
+              <label for="beneficio-bonus">Bônus por desempenho</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="beneficio-dayoff" name="beneficios[]" value="Day off no aniversário">
+              <label for="beneficio-dayoff">Day off no aniversário</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="beneficio-cesta" name="beneficios[]" value="Cesta básica">
+              <label for="beneficio-cesta">Cesta básica</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="beneficio-desconto" name="beneficios[]" value="Desconto em produtos">
+              <label for="beneficio-desconto">Desconto em produtos</label>
+            </div>
+          </div>
+
+          <div class="label-info">
+            <label for="localVaga">Cidade/Estado da Vaga:</label>
+            <div class="info-icon">
+              ?
+              <span class="tooltip">Informe a cidade e estado onde a vaga está disponível. Para vagas remotas, você pode
+                indicar "Remoto - Brasil" ou similar.</span>
+            </div>
+          </div>
+          <div class="cidade-estado-group">
+            <input type="text" id="cidade" name="cidade" placeholder="Cidade" required>
+            <select id="uf" name="uf" required>
+              <option value="">UF</option>
+              <option value="AC">AC</option>
+              <option value="AL">AL</option>
+              <option value="AP">AP</option>
+              <option value="AM">AM</option>
+              <option value="BA">BA</option>
+              <option value="CE">CE</option>
+              <option value="DF">DF</option>
+              <option value="ES">ES</option>
+              <option value="GO">GO</option>
+              <option value="MA">MA</option>
+              <option value="MT">MT</option>
+              <option value="MS">MS</option>
+              <option value="MG">MG</option>
+              <option value="PA">PA</option>
+              <option value="PB">PB</option>
+              <option value="PR">PR</option>
+              <option value="PE">PE</option>
+              <option value="PI">PI</option>
+              <option value="RJ">RJ</option>
+              <option value="RN">RN</option>
+              <option value="RS">RS</option>
+              <option value="RO">RO</option>
+              <option value="RR">RR</option>
+              <option value="SC">SC</option>
+              <option value="SP">SP</option>
+              <option value="SE">SE</option>
+              <option value="TO">TO</option>
+            </select>
+          </div>
+
+          <div class="label-info">
+            <label for="quantidadeVagas">Quantidade de Vagas:</label>
+            <div class="info-icon">
+              ?
+              <span class="tooltip">Informe quantas vagas estão disponíveis para esta posição. Se houver apenas uma
+                vaga, deixe o valor padrão 1.</span>
+            </div>
+          </div>
+          <input type="number" id="quantidadeVagas" name="quantidadeVagas" min="1" value="1" required>
+
+          <div class="label-info">
+            <label>Precisa de CNH?</label>
+            <div class="info-icon">
+              ?
+              <span class="tooltip">Selecione as categorias de CNH necessárias para a vaga. Se não precisar, marque "Não
+                precisa".</span>
+            </div>
+          </div>
+          <div class="checkbox-group required cnh-group">
+            <div class="checkbox-item">
+              <input type="checkbox" id="cnh-a" name="cnh[]" value="A" class="cnh-option">
+              <label for="cnh-a">A</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="cnh-b" name="cnh[]" value="B" class="cnh-option">
+              <label for="cnh-b">B</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="cnh-c" name="cnh[]" value="C" class="cnh-option">
+              <label for="cnh-c">C</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="cnh-d" name="cnh[]" value="D" class="cnh-option">
+              <label for="cnh-d">D</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="cnh-e" name="cnh[]" value="E" class="cnh-option">
+              <label for="cnh-e">E</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="cnh-nao" name="cnh[]" value="Não precisa" class="cnh-nao">
+              <label for="cnh-nao">Não precisa</label>
+            </div>
+          </div>
+
+          <div class="label-info">
+            <label for="dataLimite">Aceitando candidaturas até:</label>
+            <div class="info-icon">
+              ?
+              <span class="tooltip">Defina uma data limite para receber candidaturas. Após esta data, a vaga não
+                aceitará mais inscrições.</span>
+            </div>
+          </div>
+          <input type="date" id="dataLimite" name="dataLimite" required>
+
+          <button type="submit">Criar Vaga</button>
+        </form>
+
+        <div class="whatsapp-support">
+          <p>Está tendo problemas em criar sua vaga?</p>
+          <a href="https://wa.me/554135423456" target="_blank" class="whatsapp-button">
+            Nos chame no WhatsApp
+          </a>
         </div>
-        <input type="date" id="dataLimite" name="dataLimite" required>
-      
-        <button type="submit">Criar Vaga</button>
-      </form>
-      
-      <div class="whatsapp-support">
-        <p>Está tendo problemas em criar sua vaga?</p>
-        <a href="https://wa.me/554135423456" target="_blank" class="whatsapp-button">
-          Nos chame no WhatsApp
-        </a>
       </div>
     </div>
-  </div>
   </section>
   <script src="/js/autocompleteempresa.js"></script>
   <script>
     // Lógica para os checkboxes de CNH
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       const cnhOptions = document.querySelectorAll('.cnh-option');
       const cnhNao = document.querySelector('.cnh-nao');
 
       // Quando "Não precisa" é marcado, desmarca as outras opções
-      cnhNao.addEventListener('change', function() {
+      cnhNao.addEventListener('change', function () {
         if (this.checked) {
           cnhOptions.forEach(option => {
             option.checked = false;
@@ -978,7 +1014,7 @@ input[type="date"]:focus {
 
       // Quando qualquer outra opção é marcada, desmarca "Não precisa"
       cnhOptions.forEach(option => {
-        option.addEventListener('change', function() {
+        option.addEventListener('change', function () {
           if (this.checked) {
             cnhNao.checked = false;
           }
@@ -986,7 +1022,7 @@ input[type="date"]:focus {
       });
     });
 
-    document.querySelector('form').addEventListener('submit', function(e) {
+    document.querySelector('form').addEventListener('submit', function (e) {
       // Verificar checkboxes
       const checkboxGroups = document.querySelectorAll('.checkbox-group.required');
       let isValid = true;
@@ -994,7 +1030,7 @@ input[type="date"]:focus {
       checkboxGroups.forEach(group => {
         const checkboxes = group.querySelectorAll('input[type="checkbox"]');
         const checked = Array.from(checkboxes).some(cb => cb.checked);
-        
+
         if (!checked) {
           isValid = false;
           // Adicionar classe de erro ao grupo
