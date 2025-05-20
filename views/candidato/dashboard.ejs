@@ -221,38 +221,41 @@
             <label for="cidade">Cidade:</label>
           <input type="text" id="cidade" name="cidade" value="<%= candidato.cidade %>" required>
           </div>
-        
-          <label for="uf">UF:</label>
-          <select id="uf" name="uf" required>
-            <option value="" <%= candidato.uf === '' ? 'selected' : '' %>>Selecione</option>
-            <option value="AC" <%= candidato.uf === 'AC' ? 'selected' : '' %>>AC</option>
-            <option value="AL" <%= candidato.uf === 'AL' ? 'selected' : '' %>>AL</option>
-            <option value="AM" <%= candidato.uf === 'AM' ? 'selected' : '' %>>AM</option>
-            <option value="AP" <%= candidato.uf === 'AP' ? 'selected' : '' %>>AP</option>
-            <option value="BA" <%= candidato.uf === 'BA' ? 'selected' : '' %>>BA</option>
-            <option value="CE" <%= candidato.uf === 'CE' ? 'selected' : '' %>>CE</option>
-            <option value="DF" <%= candidato.uf === 'DF' ? 'selected' : '' %>>DF</option>
-            <option value="ES" <%= candidato.uf === 'ES' ? 'selected' : '' %>>ES</option>
-            <option value="GO" <%= candidato.uf === 'GO' ? 'selected' : '' %>>GO</option>
-            <option value="MA" <%= candidato.uf === 'MA' ? 'selected' : '' %>>MA</option>
-            <option value="MG" <%= candidato.uf === 'MG' ? 'selected' : '' %>>MG</option>
-            <option value="MS" <%= candidato.uf === 'MS' ? 'selected' : '' %>>MS</option>
-            <option value="MT" <%= candidato.uf === 'MT' ? 'selected' : '' %>>MT</option>
-            <option value="PA" <%= candidato.uf === 'PA' ? 'selected' : '' %>>PA</option>
-            <option value="PB" <%= candidato.uf === 'PB' ? 'selected' : '' %>>PB</option>
-            <option value="PE" <%= candidato.uf === 'PE' ? 'selected' : '' %>>PE</option>
-            <option value="PI" <%= candidato.uf === 'PI' ? 'selected' : '' %>>PI</option>
-            <option value="PR" <%= candidato.uf === 'PR' ? 'selected' : '' %>>PR</option>
-            <option value="RJ" <%= candidato.uf === 'RJ' ? 'selected' : '' %>>RJ</option>
-            <option value="RN" <%= candidato.uf === 'RN' ? 'selected' : '' %>>RN</option>
-            <option value="RO" <%= candidato.uf === 'RO' ? 'selected' : '' %>>RO</option>
-            <option value="RR" <%= candidato.uf === 'RR' ? 'selected' : '' %>>RR</option>
-            <option value="RS" <%= candidato.uf === 'RS' ? 'selected' : '' %>>RS</option>
-            <option value="SC" <%= candidato.uf === 'SC' ? 'selected' : '' %>>SC</option>
-            <option value="SE" <%= candidato.uf === 'SE' ? 'selected' : '' %>>SE</option>
-            <option value="SP" <%= candidato.uf === 'SP' ? 'selected' : '' %>>SP</option>
-            <option value="TO" <%= candidato.uf === 'TO' ? 'selected' : '' %>>TO</option>
-          </select>
+
+          <div class="campo-dados">
+            <label for="uf">UF:</label>
+            <select id="uf" name="uf" required>
+              <option value="" <%= candidato.uf === '' ? 'selected' : '' %>>Selecione</option>
+              <option value="AC" <%= candidato.uf === 'AC' ? 'selected' : '' %>>AC</option>
+              <option value="AL" <%= candidato.uf === 'AL' ? 'selected' : '' %>>AL</option>
+              <option value="AM" <%= candidato.uf === 'AM' ? 'selected' : '' %>>AM</option>
+              <option value="AP" <%= candidato.uf === 'AP' ? 'selected' : '' %>>AP</option>
+              <option value="BA" <%= candidato.uf === 'BA' ? 'selected' : '' %>>BA</option>
+              <option value="CE" <%= candidato.uf === 'CE' ? 'selected' : '' %>>CE</option>
+              <option value="DF" <%= candidato.uf === 'DF' ? 'selected' : '' %>>DF</option>
+              <option value="ES" <%= candidato.uf === 'ES' ? 'selected' : '' %>>ES</option>
+              <option value="GO" <%= candidato.uf === 'GO' ? 'selected' : '' %>>GO</option>
+              <option value="MA" <%= candidato.uf === 'MA' ? 'selected' : '' %>>MA</option>
+              <option value="MG" <%= candidato.uf === 'MG' ? 'selected' : '' %>>MG</option>
+              <option value="MS" <%= candidato.uf === 'MS' ? 'selected' : '' %>>MS</option>
+              <option value="MT" <%= candidato.uf === 'MT' ? 'selected' : '' %>>MT</option>
+              <option value="PA" <%= candidato.uf === 'PA' ? 'selected' : '' %>>PA</option>
+              <option value="PB" <%= candidato.uf === 'PB' ? 'selected' : '' %>>PB</option>
+              <option value="PE" <%= candidato.uf === 'PE' ? 'selected' : '' %>>PE</option>
+              <option value="PI" <%= candidato.uf === 'PI' ? 'selected' : '' %>>PI</option>
+              <option value="PR" <%= candidato.uf === 'PR' ? 'selected' : '' %>>PR</option>
+              <option value="RJ" <%= candidato.uf === 'RJ' ? 'selected' : '' %>>RJ</option>
+              <option value="RN" <%= candidato.uf === 'RN' ? 'selected' : '' %>>RN</option>
+              <option value="RO" <%= candidato.uf === 'RO' ? 'selected' : '' %>>RO</option>
+              <option value="RR" <%= candidato.uf === 'RR' ? 'selected' : '' %>>RR</option>
+              <option value="RS" <%= candidato.uf === 'RS' ? 'selected' : '' %>>RS</option>
+              <option value="SC" <%= candidato.uf === 'SC' ? 'selected' : '' %>>SC</option>
+              <option value="SE" <%= candidato.uf === 'SE' ? 'selected' : '' %>>SE</option>
+              <option value="SP" <%= candidato.uf === 'SP' ? 'selected' : '' %>>SP</option>
+              <option value="TO" <%= candidato.uf === 'TO' ? 'selected' : '' %>>TO</option>
+            </select>
+          </div>
+          
       
           <label for="idiomas">Idiomas:</label>
           <select id="idiomas" name="idiomas[]" multiple>
