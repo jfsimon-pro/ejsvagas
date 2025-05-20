@@ -884,8 +884,7 @@ font-size: 16px;
           <div style="display: flex; align-items: center; margin-bottom: 20px;">
             <!-- Searchbar -->
             <input type="text" name="busca" placeholder="Buscar candidaturas..." value="<%= busca || '' %>" />
-            <button type="submit" style="margin-left: 10px;">Buscar</button>
-            <a href="/empresa/vagas" class="btn btn-secondary" style="margin-left: 10px;">Voltar</a>
+            
           </div>
 
           <!-- Filtro de Faixa Salarial -->
@@ -962,6 +961,8 @@ font-size: 16px;
             <option value="Italiano" <%=idiomas && idiomas.includes('Italiano') ? 'selected' : '' %>>Italiano</option>
             <option value="Russo" <%=idiomas && idiomas.includes('Russo') ? 'selected' : '' %>>Russo</option>
           </select>
+          <button type="submit" style="margin-left: 10px;">Buscar</button>
+            <a href="/empresa/vagas" class="btn btn-secondary" style="margin-left: 10px;">Voltar</a>
         </form>
 
         <% if (candidaturas.length> 0) { %>
