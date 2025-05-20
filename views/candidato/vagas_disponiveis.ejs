@@ -510,6 +510,23 @@
       background: #FF5E00;
       cursor: pointer;
     }
+    .botoes-vagas-disponiveis button {
+      padding: 10px;
+    border: none;
+    background: #FF5E00;
+    color: white;
+    font-size: 16px; 
+    }
+    .botoes-vagas-disponiveis a {
+      padding: 10px;
+    border: none;
+    background: #afaeae;
+    color: white;
+    font-size: 16px;
+    }
+    .botoes-vagas-disponiveis {
+      padding-top: 20px;
+    }
     @media (max-width: 768px) {
       .checkbox-group {
         flex-wrap: wrap;
@@ -642,7 +659,7 @@
                                       <span class="prazo urgente">Último dia para se candidatar!</span>
                                   <% } %>
                               </div>
-                                <div class="botoes-vagas-disponiveis">
+                                <div class="botoes-vagas-disponiveis alinha-submit">
                                     <form action="/candidato/candidatar" method="POST">
                                         <input type="hidden" name="vagaId" value="<%= vaga.id %>">
                                         <% if (vagasCandidatadasIds.includes(vaga.id)) { %>
