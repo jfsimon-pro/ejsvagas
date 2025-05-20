@@ -863,6 +863,27 @@ font-size: 16px;
     padding: 10px;
     border-radius: 5px;
   }
+  .busca {
+    max-width: 350px;
+  }
+  .faixaSalarial {
+    max-width: 200px;
+  }
+  .tipoContrato {
+    max-width: 125px;
+  }
+  .disponibilidade {
+    max-width: 170px;
+  }
+  .escolaridade {
+    max-width: 255px;
+  }
+  #ocupacao {
+    max-width: 370px;
+  }
+  .idiomas {
+    max-width: 125px;
+  }
   @media (max-width: 768px) {
       .checkbox-group {
           flex-wrap: wrap;
@@ -888,13 +909,13 @@ font-size: 16px;
         <form action="/empresa/vagas/<%= vagaId %>/candidatos" method="GET" style="margin-bottom: 20px;">
           <div style="display: flex; align-items: center; margin-bottom: 20px;">
             <!-- Searchbar -->
-            <input type="text" name="busca" placeholder="Buscar candidaturas..." value="<%= busca || '' %>" />
+            <input type="text" name="busca" placeholder="Buscar candidaturas..." value="<%= busca || '' %>" class="busca" />
             
           </div>
 
           <!-- Filtro de Faixa Salarial -->
           <div class="alinhamento-filtros">
-            <select name="faixaSalarial">
+            <select name="faixaSalarial" class="faixaSalarial">
               <option value="">Selecione a faixa salarial</option>
               <option value="Até 2.000" <%=faixaSalarial==='Até 2.000' ? 'selected' : '' %>>Até 2.000</option>
               <option value="A partir de R$ 2.000,00" <%=faixaSalarial==='A partir de R$ 2.000,00' ? 'selected' : '' %>>A partir de R$ 2.000,00</option>
@@ -908,8 +929,8 @@ font-size: 16px;
               <option value="A partir de R$ 10.000,00" <%=faixaSalarial==='A partir de R$ 10.000,00' ? 'selected' : '' %>>A partir de R$ 10.000,00</option>
             </select>
             
-            <select name="tipoContrato">
-              <option value="">Selecione o tipo de contrato</option>
+            <select name="tipoContrato" class="tipoContrato">
+              <option value="">Contrato</option>
               <option value="CLT" <%=tipoContrato==='CLT' ? 'selected' : '' %>>CLT</option>
               <option value="PJ" <%=tipoContrato==='PJ' ? 'selected' : '' %>>PJ</option>
               <option value="Temporário" <%=tipoContrato==='Temporário' ? 'selected' : '' %>>Temporário</option>
@@ -919,7 +940,7 @@ font-size: 16px;
               <option value="Aprendiz" <%=tipoContrato==='Aprendiz' ? 'selected' : '' %>>Aprendiz</option>
             </select>
             
-            <select name="disponibilidade">
+            <select name="disponibilidade" class="disponibilidade">
               <option value="">Selecione a disponibilidade</option>
               <option value="manha" <%=disponibilidade==='manha' ? 'selected' : '' %>>Manhã</option>
               <option value="tarde" <%=disponibilidade==='tarde' ? 'selected' : '' %>>Tarde</option>
@@ -930,7 +951,7 @@ font-size: 16px;
               <option value="viajar" <%=disponibilidade==='viajar' ? 'selected' : '' %>>Viajar</option>
             </select>
             
-            <select name="escolaridade">
+            <select name="escolaridade" class="escolaridade">
               <option value="">Selecione a escolaridade</option>
               <option value="Indiferente" <%=escolaridade==='Indiferente' ? 'selected' : '' %>>Indiferente</option>
               <option value="Alfabetizado" <%=escolaridade==='Alfabetizado' ? 'selected' : '' %>>Alfabetizado</option>
@@ -950,7 +971,7 @@ font-size: 16px;
           </div>
 
           <!-- Autocomplete para Ocupações -->
-          <input type="text" id="ocupacao" name="ocupacao" placeholder="Digite a ocupação"
+          <input type="text" id="ocupacao" name="ocupacao" placeholder="Digite a ocupação" class="ocupacao"
             value="<%= ocupacao || '' %>" />
           <ul id="suggestions" class="suggestions"></ul>
 
