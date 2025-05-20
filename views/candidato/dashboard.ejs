@@ -262,7 +262,7 @@
             </select>
           </div>
           
-          <div class="campos-dados">
+          <div class="campo-dados">
             <label for="idiomas">Idiomas:</label>
             <select id="idiomas" name="idiomas[]" multiple>
               <option value="Português" <%= candidato.idiomas.includes('Português') ? 'selected' : '' %>>Português</option>
@@ -274,7 +274,7 @@
             </select>
           </div>
           
-          <div class="campos-dados">
+          <div class="campo-dados">
             <label for="escolaridade">Escolaridade:</label>
             <select id="escolaridade" name="escolaridade">
               <option value="" <%= candidato.escolaridade === '' ? 'selected' : '' %>>Selecione</option>
