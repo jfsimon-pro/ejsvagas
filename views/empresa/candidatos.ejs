@@ -968,6 +968,19 @@ font-size: 16px;
               <option value="Mestrado" <%=escolaridade==='Mestrado' ? 'selected' : '' %>>Mestrado</option>
               <option value="Doutorado" <%=escolaridade==='Doutorado' ? 'selected' : '' %>>Doutorado</option>
             </select>
+
+            <select name="idiomas[]" class="idiomas">
+              <option value="Português" <%=idiomas && idiomas.includes('Português') ? 'selected' : '' %>>Português</option>
+              <option value="Inglês" <%=idiomas && idiomas.includes('Inglês') ? 'selected' : '' %>>Inglês</option>
+              <option value="Espanhol" <%=idiomas && idiomas.includes('Espanhol') ? 'selected' : '' %>>Espanhol</option>
+              <option value="Francês" <%=idiomas && idiomas.includes('Francês') ? 'selected' : '' %>>Francês</option>
+              <option value="Alemão" <%=idiomas && idiomas.includes('Alemão') ? 'selected' : '' %>>Alemão</option>
+              <option value="Mandarim" <%=idiomas && idiomas.includes('Mandarim') ? 'selected' : '' %>>Mandarim</option>
+              <option value="Japonês" <%=idiomas && idiomas.includes('Japonês') ? 'selected' : '' %>>Japonês</option>
+              <option value="Italiano" <%=idiomas && idiomas.includes('Italiano') ? 'selected' : '' %>>Italiano</option>
+              <option value="Russo" <%=idiomas && idiomas.includes('Russo') ? 'selected' : '' %>>Russo</option>
+            </select>
+            
           </div>
 
           <!-- Autocomplete para Ocupações -->
@@ -976,17 +989,7 @@ font-size: 16px;
           <ul id="suggestions" class="suggestions"></ul>
 
           <!-- Filtro de Idiomas -->
-          <select name="idiomas[]" class="idiomas">
-            <option value="Português" <%=idiomas && idiomas.includes('Português') ? 'selected' : '' %>>Português</option>
-            <option value="Inglês" <%=idiomas && idiomas.includes('Inglês') ? 'selected' : '' %>>Inglês</option>
-            <option value="Espanhol" <%=idiomas && idiomas.includes('Espanhol') ? 'selected' : '' %>>Espanhol</option>
-            <option value="Francês" <%=idiomas && idiomas.includes('Francês') ? 'selected' : '' %>>Francês</option>
-            <option value="Alemão" <%=idiomas && idiomas.includes('Alemão') ? 'selected' : '' %>>Alemão</option>
-            <option value="Mandarim" <%=idiomas && idiomas.includes('Mandarim') ? 'selected' : '' %>>Mandarim</option>
-            <option value="Japonês" <%=idiomas && idiomas.includes('Japonês') ? 'selected' : '' %>>Japonês</option>
-            <option value="Italiano" <%=idiomas && idiomas.includes('Italiano') ? 'selected' : '' %>>Italiano</option>
-            <option value="Russo" <%=idiomas && idiomas.includes('Russo') ? 'selected' : '' %>>Russo</option>
-          </select>
+          
           <button type="submit" style="margin-left: 10px;">Buscar</button>
             <a href="/empresa/vagas" class="btn btn-secondary" style="margin-left: 10px;">Voltar</a>
         </form>
