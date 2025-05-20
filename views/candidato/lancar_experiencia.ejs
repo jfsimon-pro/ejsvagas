@@ -150,6 +150,12 @@
   padding: 10px;
   border-radius: 5px;
   }
+  .campo-dados textarea {
+    width: 550px;
+    border: 2px solid #E6E7E8;
+    padding: 10px;
+    border-radius: 5px;
+  }
   .campo-dados select {
     width: 550px;
   border: 2px solid #E6E7E8;
@@ -214,6 +220,13 @@
     background: #FF5E00;
     cursor: pointer;
   }
+  .minhas-exp-registro {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #E6E7E8;
+    padding: 20px 0px;
+  }
   @media (max-width: 768px) {
     .checkbox-group {
       flex-wrap: wrap;
@@ -273,18 +286,21 @@
            
           </form>
 
-          <h2>Minhas Experiências Profissionais</h2>
+          <div class="minhas-exp-registro">
+            <h2>Minhas Experiências Profissionais</h2>
           <ul>
             <% if (experiencias.length> 0) { %>
               <% experiencias.forEach(experiencia=> { %>
                 <li>
-                  <strong>
-                    <%= experiencia.cargo %>
-                  </strong> - <%= experiencia.empresa %>
-                    (<%= experiencia.dataEntrada.toLocaleDateString() %> a
-                      <%= experiencia.dataSaida ? experiencia.dataSaida.toLocaleDateString() : 'Atual' %>)
-                        <br><br><strong>Motivo da saída:</strong> <%= experiencia.motivo || 'Não especificado' %>
-                        <br><br>
+                  <div class="info-registro-exp">
+                    <strong>
+                      <%= experiencia.cargo %>
+                    </strong> - <%= experiencia.empresa %>
+                      (<%= experiencia.dataEntrada.toLocaleDateString() %> a
+                        <%= experiencia.dataSaida ? experiencia.dataSaida.toLocaleDateString() : 'Atual' %>)
+                          <br><br><strong>Motivo da saída:</strong> <%= experiencia.motivo || 'Não especificado' %>
+                  </div>
+                        
                           <form action="/candidato/lancar-experiencia/excluir/<%= experiencia.id %>" method="POST"
                             style="display: inline;">
                             <button class="excl" type="submit"
@@ -296,6 +312,7 @@
                     <p>Você ainda não listou nenhuma experiência profissional.</p>
                     <% } %>
           </ul>
+          </div>
 
       </div>
   </div>
