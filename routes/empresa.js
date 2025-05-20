@@ -149,14 +149,14 @@ module.exports = (prisma) => {
     }
   });
 
-  // Rota para editar dados da empresa
+  // Rota para editar dados da empresa (com validação completa)
   router.post(
-    '/editar',
+    '/editar-completo',
     [
       body('razaoSocial').notEmpty().trim().escape().withMessage('Razão Social é obrigatória.'),
       body('nomeFantasia').notEmpty().trim().escape().withMessage('Nome Fantasia é obrigatória.'),
       body('cnpj').isLength({ min: 14 }).trim().escape().withMessage('CNPJ inválido.'),
-      body('ie').optional().trim().escape(), // Removido .withMessage()
+      body('ie').optional().trim().escape(),
       body('cep').notEmpty().trim().escape().withMessage('CEP é obrigatório.'),
       body('logradouro').notEmpty().trim().escape().withMessage('Logradouro é obrigatório.'),
       body('numero').notEmpty().trim().escape().withMessage('Número é obrigatório.'),
@@ -219,6 +219,65 @@ module.exports = (prisma) => {
       }
     }
   );
+
+  // Rota para editar dados básicos da empresa (do dashboard)
+  router.post('/editar', async (req, res) => {
+    try {
+      const { telefone, whatsapp, responsavel, email } = req.body;
+
+      await prisma.empresa.update({
+        where: { id: req.user.userId },
+        data: {
+          telefone,
+          whatsapp,
+          responsavel,
+          email
+        }
+      });
+
+      res.redirect('/empresa/dashboard');
+    } catch (error) {
+      console.error('Erro ao atualizar dados da empresa:', error);
+      res.render('empresa/dashboard', { 
+        empresa: await prisma.empresa.findUnique({ where: { id: req.user.userId } }),
+        error: 'Erro ao atualizar dados. Tente novamente.'
+      });
+    }
+  });
+
+  // Rota para editar perfil social da empresa (do dashboard)
+  router.post('/editar-perfil', upload.single('logo'), async (req, res) => {
+    try {
+      const { sobre, twitter, instagram, facebook, linkedin } = req.body;
+      let logo = null;
+
+      if (req.file) {
+        const compressedPath = path.join(req.file.destination, `compressed-${req.file.filename}`);
+        await compressImage(req.file.path, compressedPath);
+        logo = `uploads/compressed-${req.file.filename}`;
+      }
+
+      await prisma.empresa.update({
+        where: { id: req.user.userId },
+        data: {
+          ...(logo && { logo }),
+          sobre,
+          twitter: twitter || null,
+          instagram: instagram || null,
+          facebook: facebook || null,
+          linkedin: linkedin || null
+        }
+      });
+
+      res.redirect('/empresa/dashboard');
+    } catch (error) {
+      console.error('Erro ao atualizar perfil social:', error);
+      res.render('empresa/dashboard', { 
+        empresa: await prisma.empresa.findUnique({ where: { id: req.user.userId } }),
+        error: 'Erro ao atualizar perfil social. Tente novamente.'
+      });
+    }
+  });
 
   // Rota de logout
   router.get('/logout', (req, res) => {
