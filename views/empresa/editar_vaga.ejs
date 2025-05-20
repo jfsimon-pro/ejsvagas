@@ -699,21 +699,23 @@
       </div>
 
       
-
-      <label>Disponibilidade:</label>
-      <div class="checkbox-group">
-        <% const disponibilidades = ["Manhã", "Tarde", "Noite", "Madrugada", "Finais de Semana", "Feriados", "Viajar"] %>
-        <% disponibilidades.forEach(disp => { %>
-          <div class="checkbox-item">
-            <input type="checkbox" 
-                   id="disponibilidade-<%= disp.toLowerCase().replace(/ /g, '-') %>" 
-                   name="disponibilidade[]" 
-                   value="<%= disp %>"
-                   <%= vaga.disponibilidade.includes(disp) ? 'checked' : '' %>>
-            <label for="disponibilidade-<%= disp.toLowerCase().replace(/ /g, '-') %>"><%= disp %></label>
-          </div>
-        <% }) %>
+      <div class="campo-dados-radios">
+        <label>Disponibilidade:</label>
+        <div class="checkbox-group">
+          <% const disponibilidades = ["Manhã", "Tarde", "Noite", "Madrugada", "Finais de Semana", "Feriados", "Viajar"] %>
+          <% disponibilidades.forEach(disp => { %>
+            <div class="checkbox-item">
+              <input type="checkbox" 
+                     id="disponibilidade-<%= disp.toLowerCase().replace(/ /g, '-') %>" 
+                     name="disponibilidade[]" 
+                     value="<%= disp %>"
+                     <%= vaga.disponibilidade.includes(disp) ? 'checked' : '' %>>
+              <p for="disponibilidade-<%= disp.toLowerCase().replace(/ /g, '-') %>"><%= disp %></p>
+            </div>
+          <% }) %>
+        </div>
       </div>
+     
     
      <div class="campo-dados">
       <label for="horarioTrabalho">Horário de Trabalho:</label>
@@ -744,23 +746,27 @@
         <% }) %>
       </select>
       </div>
-    
-      <label>Idiomas:</label>
-      <div class="checkbox-group">
-        <% const idiomas = ["Português", "Inglês", "Espanhol", "Francês", "Alemão", "Mandarim", "Japonês", "Italiano", "Russo"] %>
-        <% idiomas.forEach(idioma => { %>
-          <div class="checkbox-item">
-            <input type="checkbox" 
-                   id="idioma-<%= idioma.toLowerCase() %>" 
-                   name="idiomas[]" 
-                   value="<%= idioma %>"
-                   <%= vaga.idiomas.includes(idioma) ? 'checked' : '' %>>
-            <label for="idioma-<%= idioma.toLowerCase() %>"><%= idioma %></label>
-          </div>
-        <% }) %>
+      
+      <div class="campo-dados-radios">
+        <label>Idiomas:</label>
+        <div class="checkbox-group">
+          <% const idiomas = ["Português", "Inglês", "Espanhol", "Francês", "Alemão", "Mandarim", "Japonês", "Italiano", "Russo"] %>
+          <% idiomas.forEach(idioma => { %>
+            <div class="checkbox-item">
+              <input type="checkbox" 
+                     id="idioma-<%= idioma.toLowerCase() %>" 
+                     name="idiomas[]" 
+                     value="<%= idioma %>"
+                     <%= vaga.idiomas.includes(idioma) ? 'checked' : '' %>>
+              <p for="idioma-<%= idioma.toLowerCase() %>"><%= idioma %></p>
+            </div>
+          <% }) %>
+        </div>
       </div>
-    
-      <label>Benefícios:</label>
+     
+    <div class="campo-dados-radios">
+      <div class="campo-dados-radios">
+        <label>Benefícios:</label>
       <div class="checkbox-group">
         <% const beneficios = [
           "Vale alimentação",
@@ -785,10 +791,12 @@
                    name="beneficios[]" 
                    value="<%= beneficio %>"
                    <%= vaga.beneficios.includes(beneficio) ? 'checked' : '' %>>
-            <label for="beneficio-<%= beneficio.toLowerCase().replace(/ /g, '-') %>"><%= beneficio %></label>
+            <p for="beneficio-<%= beneficio.toLowerCase().replace(/ /g, '-') %>"><%= beneficio %></p>
           </div>
         <% }) %>
       </div>
+    </div>
+      
     
       <button type="submit">Salvar Alterações</button>
     </form>
