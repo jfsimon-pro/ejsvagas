@@ -633,17 +633,24 @@
         <label for="titulo">Título da Vaga:</label>
         <input type="text" id="titulo" name="titulo" value="<%= vaga.titulo %>" required>
       </div>
-    
-      <label for="descricao">Descrição:</label>
-      <textarea id="descricao" name="descricao" required><%= vaga.descricao %></textarea>
-    
+      <div class="campo-dados">
+        <label for="descricao">Descrição:</label>
+        <textarea id="descricao" name="descricao" required><%= vaga.descricao %></textarea>
+      </div>
+      
+    <div class="campo-dados">
       <label for="tags">Tags (separadas por vírgula):</label>
       <input type="text" id="tags" name="tags" value="<%= vaga.tags.join(', ') %>">
-    
+    </div>
+      
+    <div class="campo-dados">
       <label for="cargo">Cargo/Função:</label>
       <input type="text" id="cargo" name="cargo" value="<%= vaga.cargo %>" required>
+    </div>
+      
     
-      <label for="faixaSalarial">Faixa Salarial:</label>
+      <div class="campo-dados">
+        <label for="faixaSalarial">Faixa Salarial:</label>
       <select id="faixaSalarial" name="faixaSalarial" required>
         <% const faixas = [
           "Até 2.000",
@@ -663,14 +670,17 @@
           <option value="<%= faixa %>" <%= vaga.faixaSalarial === faixa ? 'selected' : '' %>><%= faixa %></option>
         <% }) %>
       </select>
+      </div>
     
-      <label for="tipoContrato">Tipo de Contrato:</label>
+      <div class="campo-dados">
+        <label for="tipoContrato">Tipo de Contrato:</label>
       <select id="tipoContrato" name="tipoContrato" required>
         <% const tiposContrato = ["CLT", "PJ", "Temporário", "Autônomo", "Estágio", "Freelancer", "Aprendiz"] %>
         <% tiposContrato.forEach(tipo => { %>
           <option value="<%= tipo %>" <%= vaga.tipoContrato === tipo ? 'selected' : '' %>><%= tipo %></option>
         <% }) %>
       </select>
+      </div>
     
       <label>Tipo de Trabalho:</label>
       <div class="checkbox-group">
@@ -702,10 +712,13 @@
         <% }) %>
       </div>
     
+     <div class="campo-dados">
       <label for="horarioTrabalho">Horário de Trabalho:</label>
       <input type="text" id="horarioTrabalho" name="horarioTrabalho" value="<%= vaga.horarioTrabalho %>" required>
+     </div>
     
-      <label for="escolaridade">Escolaridade:</label>
+      <div class="campo-dados">
+        <label for="escolaridade">Escolaridade:</label>
       <select id="escolaridade" name="escolaridade" required>
         <% const escolaridades = [
           "Indiferente",
@@ -727,6 +740,7 @@
           <option value="<%= esc %>" <%= vaga.escolaridade === esc ? 'selected' : '' %>><%= esc %></option>
         <% }) %>
       </select>
+      </div>
     
       <label>Idiomas:</label>
       <div class="checkbox-group">
