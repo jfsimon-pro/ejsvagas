@@ -600,7 +600,23 @@
       padding: 10px;
       border-radius: 5px;
     }
-
+    .botoes-gerenciar-vagas a {
+      color: #F2F2F2;
+    border-radius: 9999px;
+    border: none;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+    .excluirvaga {
+      border-color: red;
+    }
+    .vercandidato {
+      background: #858785;
+    }
     @media (max-width: 768px) {
       .checkbox-group {
         flex-wrap: wrap;
@@ -712,10 +728,10 @@
                   </p>
 
                   <div class="botoes-gerenciar-vagas">
-                    <a href="/empresa/vagas/<%= vaga.id %>/candidatos">Ver Candidatos</a>
-                    <a href="/empresa/vagas/<%= vaga.id %>/editar">Editar</a>
+                    <a class="vercandidato" href="/empresa/vagas/<%= vaga.id %>/candidatos">Ver Candidatos</a>
+                    <a class="editarvaga" href="/empresa/vagas/<%= vaga.id %>/editar">Editar</a>
                     <form action="/empresa/vagas/excluir/<%= vaga.id %>" method="POST">
-                      <button type="submit">Excluir</button>
+                      <button class="excluirvaga" type="submit">Excluir</button>
                     </form>
                   </div>
                 </li>
