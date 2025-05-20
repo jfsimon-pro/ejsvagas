@@ -239,25 +239,38 @@
     </div>
     <div class="meus-dados-novo">
           <form action="/candidato/lancar-experiencia" method="POST">
-            <label for="empresa">Empresa:</label>
-            <input type="text" id="empresa" name="empresa" required>
-
-            <label for="cargo">Cargo:</label>
-            <input type="text" id="cargo" name="cargo" required>
-
-            <label for="funcao">Função:</label>
+            <div class="campo-dados">
+              <label for="empresa">Empresa:</label>
+              <input type="text" id="empresa" name="empresa" required>
+            </div>
+            <div class="campo-dados">
+              <label for="cargo">Cargo:</label>
+              <input type="text" id="cargo" name="cargo" required>
+            </div>
+            <div class="campo-dados">
+              <label for="funcao">Função:</label>
             <input type="text" id="funcao" name="funcao" required>
+            </div>
+            <div class="campo-dados">
+              <label for="dataEntrada">Data de Entrada:</label>
+              <input type="date" id="dataEntrada" name="dataEntrada" required>
+            </div>
+            <div class="campo-dados">
+              <label for="dataSaida">Data de Saída:</label>
+              <input type="date" id="dataSaida" name="dataSaida">
+            </div>
+            <div class="campo-dados">
+              <label for="motivo">Motivo da Saída:</label>
+              <textarea id="motivo" name="motivo"></textarea>
+            </div>
+            <div class="alinha-submit">
+              <button type="submit">Salvar Experiência</button>
+            </div>
 
-            <label for="dataEntrada">Data de Entrada:</label>
-            <input type="date" id="dataEntrada" name="dataEntrada" required>
 
-            <label for="dataSaida">Data de Saída:</label>
-            <input type="date" id="dataSaida" name="dataSaida">
+            
 
-            <label for="motivo">Motivo da Saída:</label>
-            <textarea id="motivo" name="motivo"></textarea>
-
-            <button type="submit">Salvar Experiência</button>
+           
           </form>
 
           <h2>Minhas Experiências Profissionais</h2>
