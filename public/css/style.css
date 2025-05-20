@@ -1096,6 +1096,9 @@ justify-content: center;
 .dropdown.show {
   display: block;
 }
+.menuoficial {
+  z-index: 99999;
+}
 @media (min-width: 769px) {
   .nav-links, .itens-menu {
     width: 100%;
