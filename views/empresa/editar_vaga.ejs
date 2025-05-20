@@ -681,21 +681,24 @@
         <% }) %>
       </select>
       </div>
-    
-      <label>Tipo de Trabalho:</label>
-      <div class="checkbox-group">
-        <% const tiposTrabalho = ["Presencial", "Home Office", "Híbrido"] %>
-        <% tiposTrabalho.forEach(tipo => { %>
-          <div class="checkbox-item">
-            <input type="checkbox" 
-                   id="tipoTrabalho-<%= tipo.toLowerCase() %>" 
-                   name="tipoTrabalho[]" 
-                   value="<%= tipo %>"
-                   <%= vaga.tipoTrabalho.includes(tipo) ? 'checked' : '' %>>
-            <label for="tipoTrabalho-<%= tipo.toLowerCase() %>"><%= tipo %></label>
-          </div>
-        <% }) %>
+      <div class="campo-dados-radios">
+        <label>Tipo de Trabalho:</label>
+        <div class="checkbox-group">
+          <% const tiposTrabalho = ["Presencial", "Home Office", "Híbrido"] %>
+          <% tiposTrabalho.forEach(tipo => { %>
+            <div class="checkbox-item">
+              <input type="checkbox" 
+                     id="tipoTrabalho-<%= tipo.toLowerCase() %>" 
+                     name="tipoTrabalho[]" 
+                     value="<%= tipo %>"
+                     <%= vaga.tipoTrabalho.includes(tipo) ? 'checked' : '' %>>
+              <p for="tipoTrabalho-<%= tipo.toLowerCase() %>"><%= tipo %></p>
+            </div>
+          <% }) %>
+        </div>
       </div>
+
+      
 
       <label>Disponibilidade:</label>
       <div class="checkbox-group">
