@@ -910,7 +910,11 @@ font-size: 16px;
           <div style="display: flex; align-items: center; margin-bottom: 20px;">
             <!-- Searchbar -->
             <input type="text" name="busca" placeholder="Buscar candidaturas..." value="<%= busca || '' %>" class="busca" />
-            
+            <div class="ocupacao-alinhamento">
+              <input type="text" id="ocupacao" name="ocupacao" placeholder="Digite a ocupação" class="ocupacao"
+            value="<%= ocupacao || '' %>" />
+          <ul id="suggestions" class="suggestions"></ul>
+            </div>
           </div>
 
           <!-- Filtro de Faixa Salarial -->
@@ -980,13 +984,11 @@ font-size: 16px;
               <option value="Italiano" <%=idiomas && idiomas.includes('Italiano') ? 'selected' : '' %>>Italiano</option>
               <option value="Russo" <%=idiomas && idiomas.includes('Russo') ? 'selected' : '' %>>Russo</option>
             </select>
-            
+
           </div>
 
           <!-- Autocomplete para Ocupações -->
-          <input type="text" id="ocupacao" name="ocupacao" placeholder="Digite a ocupação" class="ocupacao"
-            value="<%= ocupacao || '' %>" />
-          <ul id="suggestions" class="suggestions"></ul>
+          
 
           <!-- Filtro de Idiomas -->
           
