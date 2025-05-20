@@ -180,6 +180,56 @@
     border-radius: 5px;
   }
 
+  .info-icon {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    background-color: #F78E0F;
+    color: white;
+    border-radius: 50%;
+    font-size: 12px;
+    margin-left: 5px;
+    cursor: help;
+    position: relative;
+  }
+
+  .tooltip {
+    visibility: hidden;
+    width: 200px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 12px;
+    font-weight: normal;
+  }
+
+  .info-icon:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+  }
+
   @media (max-width: 768px) {
     .conteudo-form {
       gap: 15px;
@@ -405,26 +455,41 @@
         <form action="/empresa/editar" method="POST">
           <div class="conteudo-form">
             <div class="campo-dados">
-              <label>Telefone:</label>
-              <input type="text" name="telefone" value="<%= empresa.telefone %>" required>
+              <label for="telefone">Telefone:
+                <div class="info-icon">
+                  ?
+                </div>
+              </label>
+              <input type="text" id="telefone" name="telefone" value="<%= empresa.telefone %>" required>
             </div>    
             <div class="campo-dados">
-              <label>Whatsapp:</label>
-              <input type="text" name="whatsapp" value="<%= empresa.whatsapp %>" required>
+              <label for="whatsapp">Whatsapp:
+                <div class="info-icon">
+                  ?
+                </div>
+              </label>
+              <input type="text" id="whatsapp" name="whatsapp" value="<%= empresa.whatsapp %>" required>
             </div>
             <div class="campo-dados">
-              <label>Responsável:</label>
-              <input type="text" name="responsavel" value="<%= empresa.responsavel %>" required>
+              <label for="responsavel">Responsável:
+                <div class="info-icon">
+                  ?
+                </div>
+              </label>
+              <input type="text" id="responsavel" name="responsavel" value="<%= empresa.responsavel %>" required>
             </div>    
             <div class="campo-dados">
-              <label>E-mail:</label>
-              <input type="email" name="email" value="<%= empresa.email %>" required>
+              <label for="email">E-mail:
+                <div class="info-icon">
+                  ?
+                </div>
+              </label>
+              <input type="email" id="email" name="email" value="<%= empresa.email %>" required>
             </div>
           </div>
           <div class="alinha-submit">
             <button type="submit">Salvar Alterações</button>
           </div>
-          
         </form>
 
         <div class="linha"></div>
@@ -432,18 +497,30 @@
         <form action="/empresa/editar-perfil" method="POST" enctype="multipart/form-data">
           <div class="conteudo-form">
             <div class="campo-dados">
-              <label for="logo">Logo da Empresa</label>
+              <label for="logo">Logo da Empresa:
+                <div class="info-icon">
+                  ?
+                </div>
+              </label>
               <input type="file" id="logo" name="logo" accept="image/*">
               <% if (empresa.logo) { %>
                 <img src="/<%= empresa.logo %>" alt="Logo atual" style="max-width: 200px; margin-top: 10px;">
               <% } %>
             </div>
             <div class="campo-dados">
-              <label for="sobre">Sobre a Empresa</label>
+              <label for="sobre">Sobre a Empresa:
+                <div class="info-icon">
+                  ?
+                </div>
+              </label>
               <textarea id="sobre" name="sobre" rows="4"><%= empresa.sobre || '' %></textarea>
             </div>
             <div class="campo-dados">
-              <label for="twitter">Twitter:</label>
+              <label for="twitter">Twitter:
+                <div class="info-icon">
+                  ?
+                </div>
+              </label>
               <input
                 type="url"
                 id="twitter"
@@ -455,7 +532,11 @@
               >
             </div>
             <div class="campo-dados">
-              <label for="instagram">Instagram:</label>
+              <label for="instagram">Instagram:
+                <div class="info-icon">
+                  ?
+                </div>
+              </label>
               <input
                 type="url"
                 id="instagram"
@@ -467,7 +548,11 @@
               >
             </div>
             <div class="campo-dados">
-              <label for="facebook">Facebook:</label>
+              <label for="facebook">Facebook:
+                <div class="info-icon">
+                  ?
+                </div>
+              </label>
               <input
                 type="url"
                 id="facebook"
@@ -479,7 +564,11 @@
               >
             </div>
             <div class="campo-dados">
-              <label for="linkedin">LinkedIn:</label>
+              <label for="linkedin">LinkedIn:
+                <div class="info-icon">
+                  ?
+                </div>
+              </label>
               <input
                 type="url"
                 id="linkedin"
