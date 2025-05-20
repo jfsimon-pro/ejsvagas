@@ -149,6 +149,12 @@
     padding: 10px;
     border-radius: 5px;
     }
+    .campo-dados select {
+      width: 550px;
+    border: 2px solid #E6E7E8;
+    padding: 10px;
+    border-radius: 5px;
+    }
   </style>
   <section class="candidato-superior-novo">
     <div class="main-dashboard-candidato-novo">
@@ -256,30 +262,34 @@
             </select>
           </div>
           
-      
-          <label for="idiomas">Idiomas:</label>
-          <select id="idiomas" name="idiomas[]" multiple>
-            <option value="Português" <%= candidato.idiomas.includes('Português') ? 'selected' : '' %>>Português</option>
-            <option value="Inglês" <%= candidato.idiomas.includes('Inglês') ? 'selected' : '' %>>Inglês</option>
-            <option value="Mandarim" <%= candidato.idiomas.includes('Mandarim') ? 'selected' : '' %>>Mandarim</option>
-            <option value="Espanhol" <%= candidato.idiomas.includes('Espanhol') ? 'selected' : '' %>>Espanhol</option>
-            <option value="Francês" <%= candidato.idiomas.includes('Francês') ? 'selected' : '' %>>Francês</option>
-            <option value="Árabe" <%= candidato.idiomas.includes('Árabe') ? 'selected' : '' %>>Árabe</option>
-          </select>
-      
-          <label for="escolaridade">Escolaridade:</label>
-          <select id="escolaridade" name="escolaridade">
-            <option value="" <%= candidato.escolaridade === '' ? 'selected' : '' %>>Selecione</option>
-            <option value="Indiferente" <%= candidato.escolaridade === 'Indiferente' ? 'selected' : '' %>>Indiferente</option>
-            <option value="Ensino fundamental incompleto" <%= candidato.escolaridade === 'Ensino fundamental incompleto' ? 'selected' : '' %>>Ensino fundamental incompleto</option>
-            <option value="Ensino fundamental completo" <%= candidato.escolaridade === 'Ensino fundamental completo' ? 'selected' : '' %>>Ensino fundamental completo</option>
-            <option value="Ensino médio incompleto" <%= candidato.escolaridade === 'Ensino médio incompleto' ? 'selected' : '' %>>Ensino médio incompleto</option>
-            <option value="Ensino médio completo" <%= candidato.escolaridade === 'Ensino médio completo' ? 'selected' : '' %>>Ensino médio completo</option>
-            <option value="Ensino superior incompleto" <%= candidato.escolaridade === 'Ensino superior incompleto' ? 'selected' : '' %>>Ensino superior incompleto</option>
-            <option value="Ensino superior completo" <%= candidato.escolaridade === 'Ensino superior completo' ? 'selected' : '' %>>Ensino superior completo</option>
-            <option value="Pós graduação incompleta" <%= candidato.escolaridade === 'Pós graduação incompleta' ? 'selected' : '' %>>Pós-graduação incompleta</option>
-            <option value="Pós graduação completa" <%= candidato.escolaridade === 'Pós graduação completa' ? 'selected' : '' %>>Pós-graduação completa</option>
-          </select>
+          <div class="campos-dados">
+            <label for="idiomas">Idiomas:</label>
+            <select id="idiomas" name="idiomas[]" multiple>
+              <option value="Português" <%= candidato.idiomas.includes('Português') ? 'selected' : '' %>>Português</option>
+              <option value="Inglês" <%= candidato.idiomas.includes('Inglês') ? 'selected' : '' %>>Inglês</option>
+              <option value="Mandarim" <%= candidato.idiomas.includes('Mandarim') ? 'selected' : '' %>>Mandarim</option>
+              <option value="Espanhol" <%= candidato.idiomas.includes('Espanhol') ? 'selected' : '' %>>Espanhol</option>
+              <option value="Francês" <%= candidato.idiomas.includes('Francês') ? 'selected' : '' %>>Francês</option>
+              <option value="Árabe" <%= candidato.idiomas.includes('Árabe') ? 'selected' : '' %>>Árabe</option>
+            </select>
+          </div>
+          
+          <div class="campos-dados">
+            <label for="escolaridade">Escolaridade:</label>
+            <select id="escolaridade" name="escolaridade">
+              <option value="" <%= candidato.escolaridade === '' ? 'selected' : '' %>>Selecione</option>
+              <option value="Indiferente" <%= candidato.escolaridade === 'Indiferente' ? 'selected' : '' %>>Indiferente</option>
+              <option value="Ensino fundamental incompleto" <%= candidato.escolaridade === 'Ensino fundamental incompleto' ? 'selected' : '' %>>Ensino fundamental incompleto</option>
+              <option value="Ensino fundamental completo" <%= candidato.escolaridade === 'Ensino fundamental completo' ? 'selected' : '' %>>Ensino fundamental completo</option>
+              <option value="Ensino médio incompleto" <%= candidato.escolaridade === 'Ensino médio incompleto' ? 'selected' : '' %>>Ensino médio incompleto</option>
+              <option value="Ensino médio completo" <%= candidato.escolaridade === 'Ensino médio completo' ? 'selected' : '' %>>Ensino médio completo</option>
+              <option value="Ensino superior incompleto" <%= candidato.escolaridade === 'Ensino superior incompleto' ? 'selected' : '' %>>Ensino superior incompleto</option>
+              <option value="Ensino superior completo" <%= candidato.escolaridade === 'Ensino superior completo' ? 'selected' : '' %>>Ensino superior completo</option>
+              <option value="Pós graduação incompleta" <%= candidato.escolaridade === 'Pós graduação incompleta' ? 'selected' : '' %>>Pós-graduação incompleta</option>
+              <option value="Pós graduação completa" <%= candidato.escolaridade === 'Pós graduação completa' ? 'selected' : '' %>>Pós-graduação completa</option>
+            </select>
+          </div>
+          
           
           <div class="form-group">
             <label>Sou PCD:</label>
