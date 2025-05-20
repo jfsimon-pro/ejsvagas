@@ -914,6 +914,14 @@ font-size: 16px;
           </div>
 
           <!-- Filtro de Faixa Salarial -->
+         
+
+          <!-- Autocomplete para Ocupações -->
+          <div class="ocupacao-alinhamento">
+            <input type="text" id="ocupacao" name="ocupacao" placeholder="Digite a ocupação" class="ocupacao"
+          value="<%= ocupacao || '' %>" />
+        <ul id="suggestions" class="suggestions"></ul>
+          </div>
           <div class="alinhamento-filtros">
             <select name="faixaSalarial" class="faixaSalarial">
               <option value="">Selecione a faixa salarial</option>
@@ -982,14 +990,6 @@ font-size: 16px;
             </select>
 
           </div>
-
-          <!-- Autocomplete para Ocupações -->
-          <div class="ocupacao-alinhamento">
-            <input type="text" id="ocupacao" name="ocupacao" placeholder="Digite a ocupação" class="ocupacao"
-          value="<%= ocupacao || '' %>" />
-        <ul id="suggestions" class="suggestions"></ul>
-          </div>
-
           <!-- Filtro de Idiomas -->
           
           <button type="submit" style="margin-left: 10px;">Buscar</button>
