@@ -988,12 +988,14 @@ font-size: 16px;
               <option value="Italiano" <%=idiomas && idiomas.includes('Italiano') ? 'selected' : '' %>>Italiano</option>
               <option value="Russo" <%=idiomas && idiomas.includes('Russo') ? 'selected' : '' %>>Russo</option>
             </select>
-
+            <div class="botoes-controla">
+              <button type="submit" style="margin-left: 10px;">Buscar</button>
+            <a href="/empresa/vagas" class="btn btn-secondary" style="margin-left: 10px;">Voltar</a>
+            </div>
           </div>
           <!-- Filtro de Idiomas -->
           
-          <button type="submit" style="margin-left: 10px;">Buscar</button>
-            <a href="/empresa/vagas" class="btn btn-secondary" style="margin-left: 10px;">Voltar</a>
+          
         </form>
 
         <% if (candidaturas.length> 0) { %>
