@@ -61,7 +61,7 @@
       padding: 0;
       margin: 0;
       background-color: white;
-      border: 1px solid #ccc;
+      border: none;
       max-height: 200px;
       overflow-y: auto;
       width: 95%;
@@ -908,6 +908,42 @@ font-size: 16px;
   .idiomas {
     max-width: 125px;
   }
+  .ocupacao-alinhamento {
+    margin-bottom: 15px;
+  }
+  .btn-success {
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 80px;
+    padding: 5px 10px;
+    background: #075E54;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .btnselecionar {
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 80px;
+    padding: 5px 10px;
+    background: #FF5E00;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .btvermais {
+    color: #F2F2F2;
+    border-radius: 9999px;
+    border: none;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #858785;
+    padding: 10px;
+  }
   @media (max-width: 768px) {
       .checkbox-group {
           flex-wrap: wrap;
@@ -1054,7 +1090,7 @@ font-size: 16px;
                     </a>
                   </td>
                   <td>
-                    <a href="/empresa/candidatos/<%= candidatura.candidato.id %>">Ver mais</a>
+                    <a href="/empresa/candidatos/<%= candidatura.candidato.id %>" class="btvermais">Ver mais</a>
                   </td>
                   <td>
                     <% if (candidatura.selecionado) { %>
@@ -1065,7 +1101,7 @@ font-size: 16px;
                     <% } else { %>
                       <form action="/empresa/vagas/<%= vagaId %>/candidatos/<%= candidatura.candidato.id %>/toggle-selecao"
                             method="POST">
-                        <button type="submit" class="btn btn-success btnselecionar">Selecionar</button>
+                        <button type="submit" class="btn btnselecionar">Selecionar</button>
                       </form>
                     <% } %>
                   </td>
