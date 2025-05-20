@@ -571,6 +571,7 @@ router.get('/vagas', verifyToken, async (req, res) => {
 
         // Pegar o ID do candidato logado
         const candidatoId = req.user.userId;
+        console.log('Candidato ID:', candidatoId);
 
         // Buscar as vagas que o candidato já se candidatou
         const candidaturas = await prisma.candidatura.findMany({
@@ -583,6 +584,7 @@ router.get('/vagas', verifyToken, async (req, res) => {
         });
 
         const vagasCandidatadasIds = candidaturas.map(c => c.vagaId);
+        console.log('Vagas já candidatadas:', vagasCandidatadasIds);
 
         // Construir o objeto where para a busca
         let where = {
@@ -615,6 +617,8 @@ router.get('/vagas', verifyToken, async (req, res) => {
             where.uf = uf;
         }
 
+        console.log('Filtros aplicados:', where);
+
         // Buscar vagas com paginação
         const vagas = await prisma.vaga.findMany({
             skip,
@@ -625,8 +629,13 @@ router.get('/vagas', verifyToken, async (req, res) => {
             }
         });
 
+        console.log('Vagas encontradas:', vagas.length);
+        console.log('Primeira vaga (se houver):', vagas[0]);
+
         // Contar total de vagas para paginação
         const totalVagas = await prisma.vaga.count({ where });
+        console.log('Total de vagas:', totalVagas);
+        
         const totalPages = Math.ceil(totalVagas / perPage);
 
         res.render('candidato/vagas_disponiveis', {
