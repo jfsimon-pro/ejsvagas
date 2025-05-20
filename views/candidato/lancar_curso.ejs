@@ -1,38 +1,56 @@
 <%- include('./header') %>
-  <style>
-    .main-dashboard-candidato h1 {
-      color: white;
-      font-size: 30px;
-      margin-bottom: 25px;
-    }
 
-    .content-main-login form {
-      width: 100%;
-    }
-    .main-dashboard-candidato  ul {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .main-dashboard-candidato li {
-      background: white;
-      padding: 10px;
-    }
-    .excl {
-      font-size: 14px !important;
-      background: red !important;
-    }
-    .main-dashboard-candidato h2 {
-      color: white;
-    font-size: 30px;
-    margin: 25px 0px;
-    }
-  </style>
-  <section class="candidato-superior">
-    <div class="main-login">
-      <div class="content-main-login">
-        <div class="main-dashboard-candidato">
-          <h1>Lançar Novo Curso</h1>
+<style>
+  .degrade-header {
+    background: linear-gradient(to top right, #0d0b0a, #2c1b17, #5a1e12);
+    height: 350px;
+    width: 100%;
+    border-radius: 0px 0px 77px 77px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content-degrade-header {
+    max-width: 1200px;
+    padding: 180px 50px;
+    width: 100%;
+}
+.linha-branca {
+    height: 1px;
+    width: 100%;
+    background-color: white;
+    margin-bottom: 20px;
+}
+.degrade-breadcrumb {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.degrade-breadcrumb h1 {
+    color: white;
+    font-size: 47px;
+    font-weight: 300;
+}
+.links-bread a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+}
+.links-bread span {
+    color: #FF5E00;
+}
+</style>
+<div class="degrade-header">
+  <div class="content-degrade-header">
+    <div class="linha-branca"></div>
+    <div class="degrade-breadcrumb">
+      <div class="links-bread">
+        <a href="">Início</a> <span>/</span> <a href="">Área do Candidato</a>
+      </div>
+      <h1>Área do Candidato</h1>
+    </div>
+  </div>
+</div>
 
           <form action="/candidato/lancar-curso" method="POST">
             <label for="instituicao">Instituição:</label>
