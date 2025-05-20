@@ -116,8 +116,460 @@
   }
 </style>
 
-<div class="candidatos-container">
-  <h2>Todos os Candidatoss</h2>
+<style>
+  .perfil-candidato-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    min-height: calc(100vh - 100px);
+  }
+
+  .perfil-candidato-content {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 800px;
+    width: 100%;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+  }
+
+  .perfil-candidato-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #F78E0F;
+  }
+
+  .perfil-candidato-header h1 {
+    color: #2c3e50;
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  .perfil-candidato-section {
+    margin-bottom: 30px;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .perfil-candidato-section h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .perfil-candidato-section h2 i {
+    color: #F78E0F;
+  }
+
+  .perfil-candidato-item {
+    margin-bottom: 10px;
+    padding: 5px 0;
+  }
+
+  .perfil-candidato-lista {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px;
+  }
+
+  .perfil-candidato-lista-item {
+    background: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border-left: 4px solid #F78E0F;
+    transition: transform 0.2s ease;
+  }
+
+  .perfil-candidato-lista-item:hover {
+    transform: translateX(5px);
+  }
+
+  .perfil-candidato-info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .perfil-candidato-info-item i {
+    color: #F78E0F;
+    width: 20px;
+  }
+
+  .perfil-candidato-btn-voltar {
+    background-color: #F78E0F;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    border: none;
+    font-weight: 500;
+  }
+
+  .perfil-candidato-btn-voltar:hover {
+    background-color: #e07d0d;
+    text-decoration: none;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .perfil-candidato-content {
+      margin: 10px;
+      padding: 20px;
+    }
+
+    .perfil-candidato-lista {
+      grid-template-columns: 1fr;
+    }
+
+    .perfil-candidato-header h1 {
+      font-size: 1.5rem;
+    }
+  }
+
+  .experiencia-item {
+    background: #f5f5f5;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border-left: 4px solid #F78E0F;
+  }
+
+  .experiencia-item p {
+    margin: 5px 0;
+  }
+
+  h3 {
+    margin-top: 20px;
+    color: #333;
+    border-bottom: 2px solid #F78E0F;
+    padding-bottom: 5px;
+  }
+</style>
+
+
+<style>
+  .degrade-header {
+    background: linear-gradient(to top right, #0d0b0a, #2c1b17, #5a1e12);
+    height: 350px;
+    width: 100%;
+    border-radius: 0px 0px 77px 77px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .content-degrade-header {
+    max-width: 1200px;
+    padding: 180px 50px;
+    width: 100%;
+  }
+
+  .linha-branca {
+    height: 1px;
+    width: 100%;
+    background-color: white;
+    margin-bottom: 20px;
+  }
+
+  .degrade-breadcrumb {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .degrade-breadcrumb h1 {
+    color: white;
+    font-size: 47px;
+    font-weight: 300;
+  }
+
+  .links-bread a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+  }
+
+  .links-bread span {
+    color: #FF5E00;
+  }
+</style>
+<div class="degrade-header">
+  <div class="content-degrade-header">
+    <div class="linha-branca"></div>
+    <div class="degrade-breadcrumb">
+      <div class="links-bread">
+        <a href="">Início</a> <span>/</span> <a href="">Área do Candidato</a>
+      </div>
+      <h1>Área do Candidato</h1>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .main-dashboard-candidato-novo {
+    max-width: 1200px;
+    margin: auto;
+    padding: 70px 20px;
+  }
+
+  .lancar-cursos-novo {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+
+
+
+  .cabecalho-candidato-novo h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+
+
+  .editar-dados-novo {
+    margin-bottom: 20px;
+  }
+
+  .editar-dados-novo a {
+    background: #F78E0F;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+  }
+
+  .meus-dados-novo p {
+    margin-bottom: 10px;
+  }
+
+  .dashboard-actions {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+  }
+
+  .dashboard-actions a {
+    background: #F78E0F;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+  }
+</style>
+<style>
+  .lancar-cursos-novo {
+    border-bottom: 1px solid #E6E7E8;
+  }
+
+  .lancar-cursos-novo a {
+    text-decoration: none;
+    color: #6E7583;
+    padding-bottom: 10px;
+  }
+
+  .lancar-cursos-novo a:hover {
+    color: #F78E0F !important;
+  }
+
+  .vigente {
+    color: #F78E0F !important;
+    border-bottom: 1px solid #F78E0F;
+    margin-bottom: -1px;
+  }
+
+  .cabecalho-candidato-novo>p:nth-child(1) {
+    font-size: 20px;
+    font-weight: 500;
+    color: #3D4047;
+    margin-bottom: 7px;
+  }
+
+  .cabecalho-candidato-novo>p:nth-child(2) {
+    font-size: 16px;
+    color: #6E7583;
+    margin-bottom: 23px;
+  }
+
+  .campo-dados {
+    display: flex;
+    border-top: 2px solid #E6E7E8;
+    padding: 27px 0px;
+  }
+
+  .campo-dados label {
+    display: flex;
+    width: 320px;
+  }
+
+  .campo-dados input {
+    width: 550px;
+    border: 2px solid #E6E7E8;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .campo-dados textarea {
+    width: 550px;
+    border: 2px solid #E6E7E8;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .campo-dados select {
+    width: 550px;
+    border: 2px solid #E6E7E8;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .form-group {
+    display: flex;
+    border-top: 2px solid #E6E7E8;
+    padding: 27px 0px;
+  }
+
+  .form-group label {
+    display: flex;
+    width: 320px;
+  }
+
+  .radio-group {
+    display: flex;
+    gap: 20px;
+  }
+
+  .radio-group label {
+    width: unset;
+  }
+
+  .checkbox-group .radio-item label {
+    width: unset;
+  }
+
+  .checkbox-group {
+    display: flex;
+    gap: 50px;
+  }
+
+  .radio-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .alinha-submit {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .alinha-submit button {
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 80px;
+    padding: 5px 10px;
+    background: #FF5E00;
+    cursor: pointer;
+  }
+
+  .cursos-lancados li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #E6E7E8;
+    padding: 20px 0px;
+  }
+
+  .cursos-lancados button {
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 80px;
+    padding: 5px 10px;
+    background: #FF5E00;
+    cursor: pointer;
+  }
+
+  .minhas-exp-registro li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #E6E7E8;
+    padding: 20px 0px;
+  }
+
+  .minhas-exp-registro button {
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 80px;
+    padding: 5px 10px;
+    background: #FF5E00;
+    cursor: pointer;
+  }
+
+  .minhas-exp-registro h2 {
+    font-size: 20px;
+    font-weight: 500;
+    color: #3D4047;
+    margin-bottom: 7px;
+  }
+
+  @media (max-width: 768px) {
+    .checkbox-group {
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .degrade-breadcrumb {
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .minhas-exp-registro li {
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .minhas-exp-registro {
+      padding-top: 35px;
+    }
+    .main-dashboard-candidato-novo, .perfil-candidato-container {
+      padding: 0px;
+    }
+    .perfil-candidato-content {
+      padding: 20px 0px;
+    }
+  }
+</style>
+<section class="candidato-superior-novo">
+  <div class="main-dashboard-candidato-novo">
+    
+
+    
+    <div class="meus-dados-novo">
+  <h2>Todos os Candidatos</h2>
 
   <div class="filtros">
     <form action="/empresa/todos-candidatos" method="GET" class="form-filtros">
@@ -283,5 +735,7 @@
     </div>
   <% } %>
 </div>
+  </div>
+</section>
 
 <%- include('../partials/footer') %> 
