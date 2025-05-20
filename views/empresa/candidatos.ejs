@@ -863,7 +863,7 @@ font-size: 16px;
   }
   .busca {
     max-width: 500px;
-    width: 100%;
+    width: 500px;
   }
   .faixaSalarial {
     max-width: 200px;
@@ -879,7 +879,7 @@ font-size: 16px;
   }
   #ocupacao {
     max-width: 500px;
-    width: 100%;
+    width: 500px;
   }
   .idiomas {
     max-width: 125px;
@@ -910,11 +910,7 @@ font-size: 16px;
           <div style="display: flex; align-items: center; margin-bottom: 20px;">
             <!-- Searchbar -->
             <input type="text" name="busca" placeholder="Buscar candidaturas..." value="<%= busca || '' %>" class="busca" />
-            <div class="ocupacao-alinhamento">
-              <input type="text" id="ocupacao" name="ocupacao" placeholder="Digite a ocupação" class="ocupacao"
-            value="<%= ocupacao || '' %>" />
-          <ul id="suggestions" class="suggestions"></ul>
-            </div>
+            
           </div>
 
           <!-- Filtro de Faixa Salarial -->
@@ -988,7 +984,11 @@ font-size: 16px;
           </div>
 
           <!-- Autocomplete para Ocupações -->
-          
+          <div class="ocupacao-alinhamento">
+            <input type="text" id="ocupacao" name="ocupacao" placeholder="Digite a ocupação" class="ocupacao"
+          value="<%= ocupacao || '' %>" />
+        <ul id="suggestions" class="suggestions"></ul>
+          </div>
 
           <!-- Filtro de Idiomas -->
           
