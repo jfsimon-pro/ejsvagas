@@ -559,11 +559,13 @@ input[type="date"]:focus {
     <div class="meus-dados-novo">
       <form action="/empresa/vagas/criar" method="POST">
         <div class="label-info">
-          <label for="titulo">Título da Vaga:</label>
-          <div class="info-icon">
-            Informação
-            <span class="tooltip">Escolha um título claro e objetivo que descreva bem a posição. Ex: "Desenvolvedor Full Stack Senior" ou "Analista Financeiro Jr".</span>
-          </div>
+          <label for="titulo">Título da Vaga:
+              <div class="info-icon">
+              Informação
+              <span class="tooltip">Escolha um título claro e objetivo que descreva bem a posição. Ex: "Desenvolvedor Full Stack Senior" ou "Analista Financeiro Jr".</span>
+            </div>
+          </label>
+          
         </div>
         <input type="text" id="titulo" name="titulo" required>
       
