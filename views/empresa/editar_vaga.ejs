@@ -629,8 +629,10 @@
 
 
     <form action="/empresa/vagas/<%= vaga.id %>/editar" method="POST">
-      <label for="titulo">Título da Vaga:</label>
+      <div class="campo">
+        <label for="titulo">Título da Vaga:</label>
       <input type="text" id="titulo" name="titulo" value="<%= vaga.titulo %>" required>
+      </div>
     
       <label for="descricao">Descrição:</label>
       <textarea id="descricao" name="descricao" required><%= vaga.descricao %></textarea>
