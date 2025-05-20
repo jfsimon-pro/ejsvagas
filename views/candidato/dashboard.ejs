@@ -145,6 +145,9 @@
     }
     .campo-dados input {
       width: 550px;
+      border: 2px solid #E6E7E8;
+    padding: 10px;
+    border-radius: 5px;
     }
   </style>
   <section class="candidato-superior-novo">
@@ -165,33 +168,59 @@
             <label for="nomeCompleto">Nome Completo:</label>
           <input type="text" id="nomeCompleto" name="nomeCompleto" value="<%= candidato.nomeCompleto %>" required>
           </div>
+          <div class="campo-dados">
+            <label for="cpf">CPF:</label>
+            <input type="text" id="cpf" name="cpf" value="<%= candidato.cpf %>" readonly>
+          </div>
         
-          <label for="cpf">CPF:</label>
-          <input type="text" id="cpf" name="cpf" value="<%= candidato.cpf %>" readonly>
-        
-          <label for="telefone">Telefone:</label>
+ 
+          
+          <div class="campo-dados">
+            <label for="telefone">Telefone:</label>
           <input type="text" id="telefone" name="telefone" value="<%= candidato.telefone %>" required>
+          </div>
         
-          <label for="email">E-mail:</label>
+          
+          <div class="campo-dados">
+            <label for="email">E-mail:</label>
           <input type="email" id="email" name="email" value="<%= candidato.email %>" required>
+          </div>
         
-          <label for="cep">CEP:</label>
+          
+          <div class="campo-dados">
+            <label for="cep">CEP:</label>
           <input type="text" id="cep" name="cep" value="<%= candidato.cep %>" required>
+          </div>
         
-          <label for="logradouro">Logradouro:</label>
+          
+          <div class="campo-dados">
+            <label for="logradouro">Logradouro:</label>
           <input type="text" id="logradouro" name="logradouro" value="<%= candidato.logradouro %>" required>
+          </div>
         
-          <label for="complemento">Complemento:</label>
+          
+          <div class="campo-dados">
+            <label for="complemento">Complemento:</label>
           <input type="text" id="complemento" name="complemento" value="<%= candidato.complemento %>">
+          </div>
         
-          <label for="numero">Número:</label>
+          
+          <div class="campo-dados">
+            <label for="numero">Número:</label>
           <input type="text" id="numero" name="numero" value="<%= candidato.numero %>" required>
+          </div>
         
-          <label for="bairro">Bairro:</label>
+          
+          <div class="campo-dados">
+            <label for="bairro">Bairro:</label>
           <input type="text" id="bairro" name="bairro" value="<%= candidato.bairro %>" required>
+          </div>
         
-          <label for="cidade">Cidade:</label>
+          
+          <div class="campo-dados">
+            <label for="cidade">Cidade:</label>
           <input type="text" id="cidade" name="cidade" value="<%= candidato.cidade %>" required>
+          </div>
         
           <label for="uf">UF:</label>
           <select id="uf" name="uf" required>
