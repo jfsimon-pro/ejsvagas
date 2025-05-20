@@ -595,32 +595,30 @@
       <div class="meus-dados-novo">
         <form action="/empresa/vagas/criar" method="POST">
           <div class="campo-dados">
-            <label for="titulo">Título da Vaga:
+            <label for="titulo">
+              Título da Vaga:
               <div class="info-icon">
                 ?
-                <span class="tooltip">Escolha um título claro e objetivo que descreva bem a posição. Ex: "Desenvolvedor
-                  Full Stack Senior" ou "Analista Financeiro Jr".</span>
+                <span class="tooltip">Escolha um título claro e objetivo que descreva bem a posição. Ex: "Desenvolvedor Full Stack Senior" ou "Analista Financeiro Jr".</span>
               </div>
             </label>
             <input type="text" id="titulo" name="titulo" required>
           </div>
 
-
           <div class="campo-dados">
-            <label for="descricao">Descrição:
+            <label for="descricao">
+              Descrição:
               <div class="info-icon">
                 ?
-                <span class="tooltip">Detalhe as principais responsabilidades, requisitos e o que você espera do
-                  candidato. Seja específico e claro.</span>
+                <span class="tooltip">Detalhe as principais responsabilidades, requisitos e o que você espera do candidato. Seja específico e claro.</span>
+              </div>
             </label>
             <textarea id="descricao" name="descricao" required></textarea>
           </div>
 
-
-
-
           <div class="campo-dados">
-            <label for="tags">Tags (separadas por vírgula):
+            <label for="tags">
+              Tags (separadas por vírgula):
               <div class="info-icon">
                 ?
                 <span class="tooltip">Adicione palavras-chave relevantes para ajudar na busca por vagas.</span>
@@ -630,26 +628,24 @@
           </div>
 
           <div class="campo-dados">
-            <label for="cargo">Cargo/Função:
+            <label for="cargo">
+              Cargo/Função:
               <div class="info-icon">
                 ?
-                <span class="tooltip">Digite o cargo específico da vaga. Comece a digitar para ver sugestões de cargos
-                  padronizados.</span>
+                <span class="tooltip">Digite o cargo específico da vaga. Comece a digitar para ver sugestões de cargos padronizados.</span>
+              </div>
             </label>
             <input type="text" id="cargo" name="cargo" placeholder="Digite o cargo ou função" required>
             <div id="suggestions" class="autocomplete-suggestions"></div>
           </div>
 
-
-
-
-
           <div class="campo-dados">
-            <label for="faixaSalarial">Faixa Salarial:
+            <label for="faixaSalarial">
+              Faixa Salarial:
               <div class="info-icon">
                 ?
-                <span class="tooltip">Selecione a faixa salarial adequada para a posição. Seja transparente para atrair
-                  os candidatos certos.</span>
+                <span class="tooltip">Selecione a faixa salarial adequada para a posição. Seja transparente para atrair os candidatos certos.</span>
+              </div>
             </label>
             <select id="faixaSalarial" name="faixaSalarial" required>
               <option value="">Selecione uma faixa salarial</option>
@@ -668,14 +664,11 @@
             </select>
           </div>
 
-
-
           <div class="label-info">
             <label for="tipoContrato">Tipo de Contrato:</label>
             <div class="info-icon">
               ?
-              <span class="tooltip">Escolha o tipo de contratação. Isso ajuda os candidatos a entenderem a natureza do
-                vínculo profissional.</span>
+              <span class="tooltip">Escolha o tipo de contratação. Isso ajuda os candidatos a entenderem a natureza do vínculo profissional.</span>
             </div>
           </div>
           <select id="tipoContrato" name="tipoContrato" required>
@@ -721,8 +714,7 @@
             <label for="disponibilidade">Disponibilidade:</label>
             <div class="info-icon">
               ?
-              <span class="tooltip">Indique se a vaga é para início imediato ou futuro. Seja claro sobre as expectativas
-                de disponibilidade.</span>
+              <span class="tooltip">Indique se a vaga é para início imediato ou futuro. Seja claro sobre as expectativas de disponibilidade.</span>
             </div>
           </div>
           <div class="checkbox-group required">
@@ -760,8 +752,7 @@
             <label for="horarioTrabalho">Horário de Trabalho:</label>
             <div class="info-icon">
               ?
-              <span class="tooltip">Especifique o horário de trabalho, incluindo turnos, flexibilidade e carga horária
-                semanal.</span>
+              <span class="tooltip">Especifique o horário de trabalho, incluindo turnos, flexibilidade e carga horária semanal.</span>
             </div>
           </div>
           <textarea id="horarioTrabalho" name="horarioTrabalho" required
@@ -891,8 +882,7 @@
             <label for="localVaga">Cidade/Estado da Vaga:</label>
             <div class="info-icon">
               ?
-              <span class="tooltip">Informe a cidade e estado onde a vaga está disponível. Para vagas remotas, você pode
-                indicar "Remoto - Brasil" ou similar.</span>
+              <span class="tooltip">Informe a cidade e estado onde a vaga está disponível. Para vagas remotas, você pode indicar "Remoto - Brasil" ou similar.</span>
             </div>
           </div>
           <div class="cidade-estado-group">
@@ -933,8 +923,7 @@
             <label for="quantidadeVagas">Quantidade de Vagas:</label>
             <div class="info-icon">
               ?
-              <span class="tooltip">Informe quantas vagas estão disponíveis para esta posição. Se houver apenas uma
-                vaga, deixe o valor padrão 1.</span>
+              <span class="tooltip">Informe quantas vagas estão disponíveis para esta posição. Se houver apenas uma vaga, deixe o valor padrão 1.</span>
             </div>
           </div>
           <input type="number" id="quantidadeVagas" name="quantidadeVagas" min="1" value="1" required>
@@ -943,8 +932,7 @@
             <label>Precisa de CNH?</label>
             <div class="info-icon">
               ?
-              <span class="tooltip">Selecione as categorias de CNH necessárias para a vaga. Se não precisar, marque "Não
-                precisa".</span>
+              <span class="tooltip">Selecione as categorias de CNH necessárias para a vaga. Se não precisar, marque "Não precisa".</span>
             </div>
           </div>
           <div class="checkbox-group required cnh-group">
@@ -978,8 +966,7 @@
             <label for="dataLimite">Aceitando candidaturas até:</label>
             <div class="info-icon">
               ?
-              <span class="tooltip">Defina uma data limite para receber candidaturas. Após esta data, a vaga não
-                aceitará mais inscrições.</span>
+              <span class="tooltip">Defina uma data limite para receber candidaturas. Após esta data, a vaga não aceitará mais inscrições.</span>
             </div>
           </div>
           <input type="date" id="dataLimite" name="dataLimite" required>
