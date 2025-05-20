@@ -633,6 +633,15 @@
                                 <p><strong>Salário:</strong>
                                     <%= vaga.faixaSalarial %>
                                 </p>
+                                <div class="prazo-info">
+                                  <% if (diasRestantes > 7) { %>
+                                      <span class="prazo normal">Prazo: <%= dataLimite.toLocaleDateString('pt-BR') %></span>
+                                  <% } else if (diasRestantes > 1) { %>
+                                      <span class="prazo urgente">Últimos <%= diasRestantes %> dias para se candidatar!</span>
+                                  <% } else if (diasRestantes === 1) { %>
+                                      <span class="prazo urgente">Último dia para se candidatar!</span>
+                                  <% } %>
+                              </div>
                                 <div class="botoes-vagas-disponiveis">
                                     <form action="/candidato/candidatar" method="POST">
                                         <input type="hidden" name="vagaId" value="<%= vaga.id %>">
@@ -644,15 +653,7 @@
                                       </form>
                                       <a href="/candidato/vagas/<%= vaga.id %>/detalhes" class="btn btn-info">Ver mais detalhes</a>
                                 </div>
-                                <div class="prazo-info">
-                                    <% if (diasRestantes > 7) { %>
-                                        <span class="prazo normal">Prazo: <%= dataLimite.toLocaleDateString('pt-BR') %></span>
-                                    <% } else if (diasRestantes > 1) { %>
-                                        <span class="prazo urgente">Últimos <%= diasRestantes %> dias para se candidatar!</span>
-                                    <% } else if (diasRestantes === 1) { %>
-                                        <span class="prazo urgente">Último dia para se candidatar!</span>
-                                    <% } %>
-                                </div>
+                                
                             </li>
                             <% }); %>
                     </ul>
