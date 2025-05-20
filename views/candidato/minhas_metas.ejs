@@ -162,15 +162,7 @@
   padding: 10px;
   border-radius: 5px;
   }
-  .form-group {
-    display: flex;
-  border-top: 2px solid #E6E7E8;
-  padding: 27px 0px;
-  }
-  .form-group label {
-    display: flex;
-  width: 320px;
-  }
+  
   .radio-group {
     display: flex;
   gap: 20px;
@@ -292,14 +284,14 @@
                   </div>
                 </div>
 
-                <div class="form-group">
+                <div class="campo-dados">
                   <label for="ocupacao">Ocupação:</label>
                   <input type="text" id="ocupacao" name="ocupacao" value="<%= candidato.ocupacao || '' %>"
                     placeholder="Digite sua ocupação" />
                     <div id="suggestions" class="autocomplete-suggestions"></div>
                 </div>
 
-                <div class="form-group">
+                <div class="campo-dados">
                   <label for="disponibilidade">Disponibilidade:</label>
                   <select id="disponibilidade" name="disponibilidade">
                     <option value="">Selecione</option>                  
@@ -314,7 +306,7 @@
                   </select>
                 </div>
 
-                <div class="form-group">
+                <div class="campo-dados">
                   <label for="faixaSalarial">Faixa Salarial:</label>
                   <select id="faixaSalarial" name="faixaSalarial">
                     <option value="">Selecione</option>
@@ -338,7 +330,9 @@
 
 
 
-                <button type="submit">Salvar Alterações</button>
+                <div class="alinha-submit">
+                  <button type="submit">Salvar Alterações</button>
+                </div>
               </form>
     </div>
   </div>
