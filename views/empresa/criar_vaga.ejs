@@ -664,39 +664,44 @@
             </select>
           </div>
 
-          <div class="label-info">
-            <label for="tipoContrato">Tipo de Contrato:</label>
-            <div class="info-icon">
-              ?
-              <span class="tooltip">Escolha o tipo de contratação. Isso ajuda os candidatos a entenderem a natureza do vínculo profissional.</span>
+          <div class="campo-dados">
+            <label for="tipoContrato">Tipo de Contrato:
+              <div class="info-icon">
+                ?
+                <span class="tooltip">Escolha o tipo de contratação. Isso ajuda os candidatos a entenderem a natureza do vínculo profissional.</span>
+              </div>
+            </label>
+            <select id="tipoContrato" name="tipoContrato" required>
+              <option value="">Selecione o tipo de contrato</option>
+              <option value="CLT">CLT</option>
+              <option value="PJ">PJ</option>
+              <option value="Temporário">Temporário</option>
+              <option value="Autônomo">Autônomo</option>
+              <option value="Estágio">Estágio</option>
+              <option value="Freelancer">Freelancer</option>
+              <option value="Aprendiz">Aprendiz</option>
+            </select>
+          </div>
+          
+          <div class="campo-dados">
+            <label>Tipo de Trabalho:</label>
+            <div class="checkbox-group required">
+              <div class="checkbox-item">
+                <input type="radio" id="tipoTrabalho-presencial" name="tipoTrabalho" value="Presencial" required>
+                <label for="tipoTrabalho-presencial">Presencial</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="radio" id="tipoTrabalho-remoto" name="tipoTrabalho" value="Home Office">
+                <label for="tipoTrabalho-remoto">Home Office</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="radio" id="tipoTrabalho-hibrido" name="tipoTrabalho" value="Híbrido">
+                <label for="tipoTrabalho-hibrido">Híbrido</label>
+              </div>
             </div>
           </div>
-          <select id="tipoContrato" name="tipoContrato" required>
-            <option value="">Selecione o tipo de contrato</option>
-            <option value="CLT">CLT</option>
-            <option value="PJ">PJ</option>
-            <option value="Temporário">Temporário</option>
-            <option value="Autônomo">Autônomo</option>
-            <option value="Estágio">Estágio</option>
-            <option value="Freelancer">Freelancer</option>
-            <option value="Aprendiz">Aprendiz</option>
-          </select>
-
-          <label>Tipo de Trabalho:</label>
-          <div class="checkbox-group required">
-            <div class="checkbox-item">
-              <input type="radio" id="tipoTrabalho-presencial" name="tipoTrabalho" value="Presencial" required>
-              <label for="tipoTrabalho-presencial">Presencial</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="radio" id="tipoTrabalho-remoto" name="tipoTrabalho" value="Home Office">
-              <label for="tipoTrabalho-remoto">Home Office</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="radio" id="tipoTrabalho-hibrido" name="tipoTrabalho" value="Híbrido">
-              <label for="tipoTrabalho-hibrido">Híbrido</label>
-            </div>
-          </div>
+         
+         
 
           <label>Vaga Exclusiva PCD?</label>
           <div class="checkbox-group required">
