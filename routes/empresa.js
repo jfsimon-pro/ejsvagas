@@ -269,11 +269,22 @@ module.exports = (prisma) => {
         }
       });
 
-      res.redirect('/empresa/dashboard');
+      // Buscar a empresa atualizada para mostrar os dados atualizados
+      const empresa = await prisma.empresa.findUnique({
+        where: { id: req.user.userId }
+      });
+
+      res.render('empresa/dashboard', { 
+        empresa,
+        success: 'Perfil social atualizado com sucesso!'
+      });
     } catch (error) {
       console.error('Erro ao atualizar perfil social:', error);
+      const empresa = await prisma.empresa.findUnique({ 
+        where: { id: req.user.userId } 
+      });
       res.render('empresa/dashboard', { 
-        empresa: await prisma.empresa.findUnique({ where: { id: req.user.userId } }),
+        empresa,
         error: 'Erro ao atualizar perfil social. Tente novamente.'
       });
     }

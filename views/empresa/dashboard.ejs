@@ -172,6 +172,15 @@
     border-radius: 5px;
   }
 
+  .success-message {
+    color: #155724;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+  }
+
   @media (max-width: 768px) {
     .conteudo-form {
       gap: 15px;
@@ -358,6 +367,12 @@
         </div>
       <% } %>
 
+      <% if (typeof success !== 'undefined' && success) { %>
+        <div class="success-message">
+          <%= success %>
+        </div>
+      <% } %>
+
       <div class="seus-dados">
         <% if (empresa.logo) { %>
           <img src="/<%= empresa.logo %>" alt="Logo da empresa" style="max-width: 400px; max-height: 400px;">
@@ -416,14 +431,14 @@
           <div class="conteudo-form">
             <div class="campo-dados">
               <label for="logo">Logo da Empresa</label>
-              <input type="file" id="logo" name="logo">
+              <input type="file" id="logo" name="logo" accept="image/*">
               <% if (empresa.logo) { %>
                 <img src="/<%= empresa.logo %>" alt="Logo atual" style="max-width: 200px; margin-top: 10px;">
               <% } %>
             </div>
             <div class="campo-dados">
               <label for="sobre">Sobre a Empresa</label>
-              <textarea id="sobre" name="sobre"><%= empresa.sobre || '' %></textarea>
+              <textarea id="sobre" name="sobre" rows="4"><%= empresa.sobre || '' %></textarea>
             </div>
             <div class="campo-dados">
               <label for="twitter">Twitter:</label>
@@ -474,7 +489,9 @@
               >
             </div>
           </div>
-          <button type="submit">Salvar Perfil Social</button>
+          <div class="alinha-submit">
+            <button type="submit">Salvar Perfil Social</button>
+          </div>
         </form>
       </div>
 
