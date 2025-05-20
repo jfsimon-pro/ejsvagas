@@ -282,8 +282,10 @@
           <p>Sem logo disponível</p>
         <% } %>
         
+        <div class="campo-dados">
+          <label>Razão Social:</label> <input readonly><%= empresa.razaoSocial %></input>
+        </div>
         
-        <p><strong>Razão Social:</strong> <%= empresa.razaoSocial %></p>
         <p><strong>CNPJ:</strong> <%= empresa.cnpj %></p>
         <p><strong>Telefone:</strong> <%= empresa.telefone %></p>
         <p><strong>Whatsapp:</strong> <%= empresa.whatsapp %></p>
