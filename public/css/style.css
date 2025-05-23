@@ -1100,8 +1100,9 @@ justify-content: center;
   z-index: 99999;
 }
 .sobre-homepage {
-  background: url(../img/bg-sobre.png) no-repeat center center;
+  background-image: url(../img/bg-sobre.png) no-repeat center center;
   background-size: cover;
+  background-color: black;
 }
 @media (min-width: 769px) {
   .nav-links, .itens-menu {
