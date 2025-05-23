@@ -1099,6 +1099,10 @@ justify-content: center;
 .menuoficial {
   z-index: 99999;
 }
+.sobre-homepage {
+  background: url(../img/bg-sobre.png) no-repeat center center;
+  background-size: cover;
+}
 @media (min-width: 769px) {
   .nav-links, .itens-menu {
     width: 100%;
