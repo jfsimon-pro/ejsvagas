@@ -1104,6 +1104,11 @@ justify-content: center;
   background-size: cover;
   background-color: black;
 }
+.depoimento-sec-home img {
+  display: flex;
+    align-items: center;
+    gap: 8px;
+}
 @media (min-width: 769px) {
   .nav-links, .itens-menu {
     width: 100%;
